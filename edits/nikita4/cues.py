@@ -21,13 +21,13 @@ EDL = json.load(open(HERE / "edl.json"))
 # ------------------------------------------------------------------------------------------------ CONTENT
 HOOK_CLIP, SIT_CLIP = "n41", "n42"
 HOOK = {
-    "question": "Grammar rules <m>ratta</m> maar ke? 📚",  # <m>..</m> = mustard marker
-    "book": "GRAMMAR<br/>RULES", "stamp": "✗ NAHI",
-    "board": ["SITUATIONS", "MEIN", "COMMUNICATE"],      # felt letter board, one row per spoken word
-    "board_note": "karke seekho 🗣️",
-    "today": "Aaj seekhenge 👇", "neon": "Restaurant", "neon_sub": "ENGLISH 🍽️",
-    # source times of the words each beat lands on
-    "t": {"book": 1.48, "stamp": 3.00, "rows": [4.50, 5.20, 5.78], "note": 6.16, "today": 7.50, "neon": 8.68},
+    "series": "🍽️ RESTAURANT ENGLISH",                    # top banner for the whole series video
+    "lines": [  # chest captions, word by word; **..** = highlight; t = source time the line starts
+        {"t": 0.80, "text": "Grammar rules ka **ratta?**", "x_t": 3.00},   # x_t: red ✗ stamp lands ("nahi")
+        {"t": 4.50, "text": "**Situations** mein", "sub": "communicate karke seekho ✅", "sub_t": 5.78},
+        {"t": 7.50, "text": "Aaj seekhenge 👇"},
+    ],
+    "neon": "Restaurant", "neon_sub": "ENGLISH 🍽️", "neon_t": 8.68,
 }
 # en uses **...** for the key words; "please" gets the polite stamp. icon = a key of ICONS in build_overlay.py
 # (table, menu, spoon, water, bill) or any emoji. start = Hindi need, q = "English mein kaise bologe?",
@@ -45,18 +45,15 @@ SITUATIONS = [
     {"icon": "bill", "hi": "Bill maangna hai", "en": "Can I get the **bill**, please?",
      "start": 27.02, "q": 27.98, "en_t": 29.74, "key": 30.46, "pl": 30.72, "kaching": True},
 ]
-RECAP = {"t": 32.37, "title": "Today's Menu", "sub": "restaurant English 🍽️ · save karo 📌",
+RECAP = {"t": 32.37, "title": "Save karo 📌", "sub": "5 restaurant lines",
          "say_t": 35.88, "say": "Real life mein bol kar dekhiye! 🗣️"}
-CTA = {"t": 38.62, "head": "Aur <m>situations</m> chahiye? 🤔", "more_t": 39.98, "comment_t": 42.56, "ideas_t": 44.10,
+CTA = {"t": 38.62, "head": "Next <m>situation</m> kaunsi? 🤔", "more_t": 39.98, "comment_t": 42.56, "ideas_t": 44.10,
        "tap_t": 48.70, "ideas": ["✈️ Airport", "🏥 Hospital", "🏦 Bank", "🛍️ Shopping", "💼 Interview", "🏨 Hotel"],
        "bar": "Aapki situation… comment karo"}
 # English line stays up until this far into the next situation (she starts the next Hindi need meanwhile)
 READ_HOLD = 0.7
 # ---------------------------------------------------------------------------------------------------------
 
-# Calm punch-ins (raw framing otherwise): two on the hook, one on each English line. (clip, source time, kind)
-PUNCHES = ([(HOOK_CLIP, HOOK["t"]["rows"][0], "small"), (HOOK_CLIP, HOOK["t"]["neon"], "small")]
-           + [(SIT_CLIP, s["en_t"], "small") for s in SITUATIONS])
 
 
 def at(clip, src):
@@ -77,15 +74,18 @@ def section_end(clip):
 
 def build():
     caps, sfx = [], []
-    h = HOOK["t"]
     hook_end = section_end(HOOK_CLIP)
-    caps.append({"type": "hook", "start": 0.0, "end": hook_end, "text": {k: v for k, v in HOOK.items() if k != "t"},
-                 "beats": {"book": at(HOOK_CLIP, h["book"]), "stamp": at(HOOK_CLIP, h["stamp"]),
-                           "rows": [at(HOOK_CLIP, r) for r in h["rows"]], "note": at(HOOK_CLIP, h["note"]),
-                           "today": at(HOOK_CLIP, h["today"]), "neon": at(HOOK_CLIP, h["neon"])}})
-    sfx += [("stamp", at(HOOK_CLIP, h["stamp"]), -2.0, "assets/sfx/stamp.wav"),
-            ("click-soft", at(HOOK_CLIP, h["rows"][0]), -4.0, None),
-            ("neon", at(HOOK_CLIP, h["neon"]) - 0.05, -4.0, "assets/sfx/neon.wav")]
+    lines = [dict(ln, t=at(HOOK_CLIP, ln["t"]), **({"x_t": at(HOOK_CLIP, ln["x_t"])} if "x_t" in ln else {}),
+                  **({"sub_t": at(HOOK_CLIP, ln["sub_t"])} if "sub_t" in ln else {})) for ln in HOOK["lines"]]
+    neon_t = at(HOOK_CLIP, HOOK["neon_t"])
+    caps.append({"type": "hook", "start": 0.0, "end": hook_end, "lines": lines, "neon": HOOK["neon"],
+                 "neon_sub": HOOK["neon_sub"], "neon_t": neon_t})
+    shots = [{"t": 0.0, "kind": "close"}, {"t": lines[1]["t"], "kind": "mid"}, {"t": neon_t, "kind": "close"}]
+    for ln in lines:
+        if "x_t" in ln:
+            sfx.append(("stamp", ln["x_t"], -3.0, "assets/sfx/stamp.wav"))
+    sfx.append(("whoosh-short", lines[1]["t"] - 0.08, -5.0, None))
+    sfx.append(("neon", neon_t - 0.05, -5.0, "assets/sfx/neon.wav"))
 
     recap = at(SIT_CLIP, RECAP["t"]) + READ_HOLD
     starts = [hook_end] + [at(SIT_CLIP, s["start"]) + READ_HOLD for s in SITUATIONS[1:]]
@@ -93,15 +93,17 @@ def build():
     for i, s in enumerate(SITUATIONS):
         pl = at(SIT_CLIP, s["pl"])
         key = at(SIT_CLIP, s["key"])
-        caps.append({"type": "situation", "n": i + 1, "icon": s["icon"], "hi": s["hi"], "en": s["en"],
+        caps.append({"type": "situation", "n": i + 1, "of": len(SITUATIONS), "icon": s["icon"], "hi": s["hi"], "en": s["en"],
                      "start": starts[i], "hi_t": max(starts[i], at(SIT_CLIP, s["start"])), "q": at(SIT_CLIP, s["q"]),
                      "en_t": at(SIT_CLIP, s["en_t"]), "key": key, "pl": pl, "end": ends[i]})
+        shots += [{"t": starts[i], "kind": "mid"}, {"t": at(SIT_CLIP, s["q"]) - 0.04, "kind": "ask"},
+                  {"t": at(SIT_CLIP, s["en_t"]) - 0.04, "kind": "close"}]
         if i:
-            sfx.append(("whoosh-short", starts[i] - 0.1, -4.0, None))  # ticket swipe
+            sfx.append(("whoosh-short", starts[i] - 0.1, -5.0, None))  # card swipe
         if s.get("kaching"):
             sfx.append(("kaching", key - 0.02, -5.0, "assets/sfx/kaching.wav"))  # money for the bill
         else:
-            sfx.append(("pop", pl + 0.12, -4.0, None))  # polite stamp
+            sfx.append(("pop", at(SIT_CLIP, s["en_t"]) - 0.02, -4.0, None))  # English card lands
 
     cta = at(SIT_CLIP, CTA["t"])
     caps.append({"type": "recap", "start": recap, "end": cta, "items": [s["en"] for s in SITUATIONS],
@@ -112,24 +114,24 @@ def build():
     caps.append({"type": "cta", "start": cta, "end": round(end, 3), "head": CTA["head"], "ideas": CTA["ideas"],
                  "bar": CTA["bar"], "more": at(SIT_CLIP, CTA["more_t"]), "comment": at(SIT_CLIP, CTA["comment_t"]),
                  "ideas_t": at(SIT_CLIP, CTA["ideas_t"]), "tap": tap})
-    sfx += [("pop", at(SIT_CLIP, CTA["comment_t"]), -4.0, None), ("click", tap, -1.0, None)]
+    sfx += [("pop", at(SIT_CLIP, CTA["comment_t"]), -5.0, None), ("click", tap, -1.0, None)]
+    shots += [{"t": recap, "kind": "mid"}, {"t": cta, "kind": "mid"}, {"t": tap - 1.6, "kind": "close"}]
 
     flashes = [hook_end, recap]  # candle-glow bloom + whoosh: into the situations, into the recap
     for t in flashes:
-        sfx.append(("whoosh", t - 0.12, -2.0, None))
+        sfx.append(("whoosh", t - 0.12, -4.0, None))
 
     # Approved riser treatment: first 2 s voice only, riser crest at 0:02-0:03, last 2 s at the end
     risers = [(2.0, 2.0, 1.1), (tap - 1.85, 1.1, 2.0)]
 
-    punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
-           "punches": punches,
+           "series": HOOK["series"], "shots": sorted(shots, key=lambda x: x["t"]),
            "sfx": [dict({"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu}, **({"file": f} if f else {}))
                    for n, t, lu, f in sfx]
            + [{"name": "riser_user", "file": "../../assets/shared/riser_user.mp3", "t": round(t, 3), "gain": 0.45,
                "lu": 1.0, "from": a, "dur": d} for t, a, d in risers]}
     json.dump(out, open(HERE / "cues.json", "w"), ensure_ascii=False, indent=1)
-    print(f"{len(caps)} captions, {len(punches)} punches, {len(out['sfx'])} sfx")
+    print(f"{len(caps)} captions, {len(shots)} shots, {len(out['sfx'])} sfx")
     for c in caps:
         if c["type"] == "situation":
             print(f"  situation {c['n']}: English up {c['en_t']:.2f} -> {c['end']:.2f}"

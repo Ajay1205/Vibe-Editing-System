@@ -68,23 +68,24 @@ Each video gets a NEW presentation style; only the core rules above carry over. 
 - Readable on a phone but not oversized: modest sizes, contrast from shadows rather than big fonts.
 - Manisha's Drive folder: not shared yet; she gets the master from chat.
 
-## Template: "Situation Series" (`edits/nikita4`, restaurant English)
+## Template: "Situation Series" (`edits/nikita4`, v3 "Close & Bold")
 
 The user wants this as the reusable template for all situation-based videos (restaurant, airport, hospital...).
 New video: copy `edits/nikita4`, point `edl.py` at the new footage (CLIPS, EXCLUDE, HOLD_AFTER), then edit only
-the CONTENT block of `cues.py` (hook texts, situations with word times, recap, CTA ideas) and run `build_all.sh`.
-- Look: tomato #E8452C / mustard #F4B63F / cream #FFF4E0 / charcoal; DM Serif Display titles, Outfit English,
-  Kalam for Hinglish (58-60 px with a heavy shadow, the user found 48 px unreadable), Pacifico neon sign.
-- Hook: myth book stamped "✗ NAHI" -> felt letter board, letters pop in per spoken word -> neon topic sign.
-  (Chat bubbles there were called boring; don't bring them back.)
-- Each situation, one after another: animated icon on a dinner plate (or any emoji), "SITUATION n/N" chip, Hindi
-  need on the wall, then the English line written word by word on an order ticket; key words get a mustard
-  marker; "please" gets a "✨ polite!" stamp. Paper-ticket swipe between situations, candle-glow bloom between sections.
-- Reading time: keep her whole pause after each English line (HOLD_AFTER) and hold the ticket READ_HOLD
-  (0.7 s) into the next situation. The user flagged a line that was gone half a second after she finished.
-- Recap "Today's Menu" card with all lines, then a comment CTA with floating idea chips and a tapped button.
-- Sound: no long or bright rings. The desk bell and receipt printer were "unbearable". Use short, soft effects
-  well under her voice: pop on the polite stamp, a soft synthesised cha-ching on money moments, quiet whooshes.
+the CONTENT block of `cues.py` (series banner, hook lines, situations with word times and sticker emoji, recap,
+CTA ideas) and run `build_all.sh`.
+- The v2 "restaurant menu/ticket" look (wide shot, small text on the wall far above her head, cream tickets,
+  letter board) was called boring and unappealing. Kept only as `build_overlay_v2_menu.py`; don't go back to it.
+- Picture: shots from `cues.json` cut between mid (1.30x), ask (1.46x, on "English mein kaise bologe?") and
+  close (1.68x, on every English line), each slowly pushing in 3.5%; warm edge flash on close cut-ins.
+- Captions big and bold at CHEST level (y 1100-1600), like the reference reels; banner "🍽️ SERIES" + progress
+  dots at the top; a big emoji sticker pops beside her head for each situation.
+- Hindi need: big white Outfit 64 px, heavy shadow, NO panel (the user dislikes panels behind Hinglish).
+  English line: butter-yellow card, maroon Outfit 900, key words on a tomato pill, "please" green + "🙏 polite".
+- Reading time: keep her whole pause after each English line (HOLD_AFTER) and hold the card READ_HOLD (0.7 s)
+  into the next situation. The user flagged a line that was gone half a second after she finished.
+- Sound: no long or bright rings (the desk bell and receipt printer were "unbearable"). Pop when the English
+  card lands, a soft synthesised cha-ching plus flying 💸 on money moments, quiet whooshes, the riser rules as before.
 
 ## Working rules (from the guide)
 

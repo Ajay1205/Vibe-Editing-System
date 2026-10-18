@@ -26,9 +26,9 @@ W, H = 2160, 3840
 FACE = (0.48, 0.53)  # Nikita's face centre in the raw frame (x, y as a fraction)
 
 VERSIONS = {
-    #       base zoom, punch zoom (small, big), punch in/hold/out seconds, how far the face is lifted when zoomed
-    # Raw framing (approved Nikita style) with calm punch-ins on each English line; the face is never lifted.
-    "v1": {"base": 1.00, "small": 1.08, "big": 1.11, "tin": 0.35, "hold": 1.4, "tout": 0.6, "lift": 0.0},
+    # v1 (v3 look, "Close & Bold"): shots from cues.json alternate a medium and a close framing with a hard
+    # cut-in on every English line, each shot slowly pushing in by `drift`. ft = where her face sits (0 = top).
+    "v1": {"mid": (1.30, 0.40), "ask": (1.46, 0.385), "close": (1.68, 0.36), "drift": 0.035},
 }
 
 
@@ -43,30 +43,19 @@ def ease_out(x):
 
 
 def zoom_at(t, v):
-    z = v["base"]
-    for p in CUES["punches"]:
-        target = v[p["kind"]]
-        d = t - p["t"]
-        if -0.0 <= d < v["tin"]:
-            z = max(z, v["base"] + (target - v["base"]) * ease_out(d / v["tin"]))
-        elif v["tin"] <= d < v["tin"] + v["hold"]:
-            z = max(z, target)
-        elif v["tin"] + v["hold"] <= d < v["tin"] + v["hold"] + v["tout"]:
-            k = ease((d - v["tin"] - v["hold"]) / v["tout"])
-            z = max(z, target + (v["base"] - target) * k)
-    # section flashes: a quick zoom snap that settles back
-    for f in CUES["flashes"]:
-        d = t - f
-        if 0 <= d < 0.5:
-            z = max(z, v["base"] + 0.05 * (1 - ease_out(d / 0.5)))
-    return z
+    """Zoom and face height for output time t: the current shot's framing, slowly pushing in."""
+    shots = CUES["shots"]
+    k = max(i for i, sh in enumerate(shots) if sh["t"] <= t + 1e-6) if t >= shots[0]["t"] else 0
+    sh = shots[k]
+    t1 = shots[k + 1]["t"] if k + 1 < len(shots) else EDL["duration"]
+    z, ft = v[sh["kind"]]
+    p = ease((t - sh["t"]) / max(0.5, t1 - sh["t"]))
+    return z * (1 + v["drift"] * p), ft
 
 
-def window(z, lift):
-    """Crop window centre for zoom z: optionally pulls the face up (by `lift` of the frame) as we zoom in."""
-    k = min(1.0, (z - 1.0) / 0.25)
-    face_target = 0.54 - lift * k
-    cy = FACE[1] + (0.5 - face_target) / z
+def window(z, ft):
+    """Crop window centre for zoom z with her face at height ft of the output frame."""
+    cy = FACE[1] + (0.5 - ft) / z
     cx = FACE[0]
     half_w, half_h = 0.5 / z, 0.5 / z
     cx = min(max(cx, half_w), 1 - half_w)
@@ -110,8 +99,8 @@ def render_video(name, preview):
                     raise SystemExit(f"no frames decoded for {seg}")
             last = buf
             t = frame_no / FPS
-            z = zoom_at(t, v)
-            cx, cy = window(z, v["lift"])
+            z, ft = zoom_at(t, v)
+            cx, cy = window(z, ft)
             y = np.frombuffer(buf, np.uint8, ysz).reshape(H, W)
             u = np.frombuffer(buf, np.uint8, csz, ysz).reshape(H // 2, W // 2)
             vv = np.frombuffer(buf, np.uint8, csz, ysz + csz).reshape(H // 2, W // 2)
