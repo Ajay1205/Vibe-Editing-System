@@ -146,7 +146,7 @@ def build():
               <div class="boost" id="{cid}-x"><div class="b1">Better +</div><div class="b2">Confident English 🚀</div></div>"""))
             js.append(f"""
               tl.fromTo("#{cid} .b1", {{scale: 0.4, opacity: 0}}, {{scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)"}}, {s});
-              tl.fromTo("#{cid} .b2", {{scale: 0.4, opacity: 0}}, {{scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)"}}, {s + 0.35});
+              tl.fromTo("#{cid} .b2", {{scale: 0.4, opacity: 0}}, {{scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)"}}, {c['confident']});
               tl.to("#{cid}-x", {{opacity: 0, duration: 0.18}}, {e - 0.2});""")
         elif c["type"] == "cta":
             els.append(clip(cid, s, e, 3, f"""
