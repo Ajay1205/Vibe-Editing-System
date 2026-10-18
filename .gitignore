@@ -4,3 +4,10 @@ __pycache__/
 *.mov
 *.webm
 footage/
+edits/*/build/
+edits/*/renders/
+edits/*/assets/
+edits/*/overlay/fonts/
+edits/*/overlay/vendor/
+edits/*/overlay/snaps/
+edits/*/overlay/.hyperframes/

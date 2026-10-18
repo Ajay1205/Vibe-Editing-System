@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=2160, height=3840" />
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Anton"; src: url(fonts/anton.woff2) format("woff2"); font-weight: 400; }
+@font-face { font-family: "Poppins"; src: url(fonts/poppins-700.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Poppins"; src: url(fonts/poppins-800.woff2) format("woff2"); font-weight: 800; }
+@font-face { font-family: "Poppins"; src: url(fonts/poppins-600i.woff2) format("woff2"); font-weight: 600; font-style: italic; }
+@font-face { font-family: "Caveat"; src: url(fonts/caveat-700.woff2) format("woff2"); font-weight: 700; }
+:root { --cream: #FFF7EC; --plum: #4A1530; --berry: #9B2C5C; --amber: #FFB547; --ink: #22101A; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 2160px; height: 3840px; overflow: hidden; background: transparent; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.clip { width: 2160px; height: 3840px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: scale(2); }
+.layer > div { position: absolute; }
+
+/* hook */
+.hook { left: 60px; top: 250px; width: 860px; height: 560px; }
+.hook-num { position: absolute; left: 0; top: 0; width: 300px; height: 380px; font: 400 380px/1 Anton; color: var(--amber);
+  text-shadow: 0 10px 0 var(--plum), 0 18px 40px rgba(0,0,0,.35); }
+.hook-words { position: absolute; left: 250px; top: 70px; width: 600px; height: 300px; font: 400 140px/1.02 Anton; color: var(--cream);
+  text-transform: uppercase; overflow: hidden; text-shadow: 0 6px 0 var(--plum), 0 14px 30px rgba(0,0,0,.35); }
+.hook-words span { display: block; }
+.chip { display: block; font: 800 40px/1 Poppins; padding: 22px 34px; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.chip-cream { position: absolute; left: 240px; top: 410px; width: max-content; background: var(--cream); color: var(--plum); }
+
+/* promise */
+.promise { left: 70px; top: 1170px; width: 830px; height: 420px; }
+.pill { position: absolute; width: max-content; font: 800 74px/1 Poppins; padding: 26px 46px; border-radius: 80px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.3); }
+.pill-a { left: 0; top: 0; background: var(--amber); color: var(--plum); }
+.pill-b { right: 0; top: 170px; background: var(--plum); color: var(--cream); }
+.plus { position: absolute; left: 380px; top: 100px; width: 90px; height: 90px; font: 400 90px/90px Anton; color: var(--cream);
+  text-align: center; text-shadow: 0 6px 18px rgba(0,0,0,.4); }
+.promise-sub { position: absolute; left: 0; top: 330px; width: 830px; text-align: center; font: 700 italic 64px/1 Caveat;
+  color: var(--cream); text-shadow: 0 4px 14px rgba(0,0,0,.55); }
+
+/* word title */
+.title { left: 70px; top: 250px; width: 830px; height: 470px; transform-origin: 0 0; }
+.title-badge { position: absolute; left: 6px; top: 0; width: max-content; font: 800 34px/1 Poppins; letter-spacing: 6px; color: var(--plum);
+  background: var(--amber); padding: 14px 24px; border-radius: 14px; }
+.title-badge i { font-style: normal; opacity: .55; }
+.title-word { position: absolute; left: 0; top: 60px; width: 830px; height: 240px; font: 400 230px/1.05 Anton; color: var(--cream);
+  letter-spacing: 4px; overflow: hidden; white-space: nowrap; text-shadow: 0 8px 0 var(--plum), 0 20px 50px rgba(0,0,0,.4); }
+.title-word span { display: inline-block; }
+.swoosh { position: absolute; left: 0; top: 300px; width: 640px; height: 46px; overflow: visible; }
+.swoosh path { fill: none; stroke: var(--amber); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 640; }
+.meaning { position: absolute; left: 0; top: 370px; width: max-content; max-width: 830px; font: 800 52px/1.1 Poppins; color: var(--cream);
+  background: var(--berry); padding: 20px 34px; border-radius: 22px; box-shadow: 0 12px 30px rgba(0,0,0,.3); }
+.meaning b { color: var(--amber); font-weight: 800; margin-right: 10px; }
+.dock { left: 54px; top: 236px; width: max-content; font: 400 52px/1 Anton; letter-spacing: 2px; color: var(--cream);
+  background: rgba(34,16,26,.78); padding: 16px 26px 16px 18px; border-radius: 18px; border-left: 10px solid var(--amber); }
+.dock b { color: var(--amber); font-weight: 400; margin-right: 8px; }
+.dock span { font: 700 34px/1 Poppins; color: var(--cream); opacity: .85; margin-left: 8px; }
+
+/* example */
+.ex { left: 64px; top: 1190px; width: 830px; height: 470px; }
+.ex-card { position: absolute; left: 0; top: 0; width: 830px; background: var(--cream); border-radius: 40px; padding: 70px 46px 46px;
+  box-shadow: 0 22px 50px rgba(0,0,0,.35); border-bottom: 10px solid var(--amber); }
+.ex-emoji { position: absolute; right: -24px; top: -54px; width: 128px; height: 128px; border-radius: 64px; background: var(--amber);
+  font-size: 70px; line-height: 128px; text-align: center; box-shadow: 0 10px 24px rgba(0,0,0,.3); }
+.ex-label { position: absolute; left: 46px; top: 26px; width: 300px; font: 800 26px/1 Poppins; letter-spacing: 8px; color: var(--berry); }
+.ex-en { width: 738px; font: 800 62px/1.22 Poppins; color: var(--plum); }
+.hl { background-image: linear-gradient(var(--amber), var(--amber)); background-repeat: no-repeat; background-position: 0 88%;
+  background-size: 0% 42%; padding: 0 4px; }
+.ex-hi { position: absolute; left: 30px; top: 100%; margin-top: 26px; width: 780px; font: 600 italic 44px/1.3 Poppins; color: var(--cream);
+  background: rgba(74,21,48,.86); padding: 18px 30px; border-radius: 22px; }
+
+/* tip */
+.tip { left: 64px; top: 1180px; width: 830px; height: 520px; }
+.tip-head { position: absolute; left: 0; top: 0; width: max-content; font: 800 46px/1 Poppins; color: var(--plum); background: var(--amber);
+  padding: 20px 32px; border-radius: 20px; box-shadow: 0 10px 26px rgba(0,0,0,.3); }
+.tip-panel { position: absolute; left: 0; top: 112px; width: 830px; background: rgba(34,16,26,.82); border-radius: 34px; padding: 34px 42px;
+  transform-origin: 50% 0; }
+.tip-line { font: 800 48px/1.25 Poppins; color: var(--cream); margin: 6px 0; }
+.hl-dark { color: var(--amber); }
+
+/* recap */
+.recap { left: 64px; top: 1090px; width: 830px; height: 560px; }
+.rc-head { position: absolute; left: 0; top: 0; width: 830px; font: 700 italic 64px/1 Caveat; color: var(--cream);
+  text-shadow: 0 4px 14px rgba(0,0,0,.6); }
+.rc-row { position: relative; top: 90px; display: flex; align-items: center; width: 830px; height: 112px; margin-bottom: 16px;
+  background: var(--cream); border-radius: 30px; padding: 0 34px; box-shadow: 0 14px 30px rgba(0,0,0,.3); }
+.rc-n { font: 400 54px/1 Anton; color: var(--berry); width: 90px; }
+.rc-w { font: 800 56px/1 Poppins; color: var(--plum); width: 300px; }
+.rc-a { font: 800 50px/1 Poppins; color: var(--amber); width: 70px; }
+.rc-m { font: 700 46px/1 Poppins; color: var(--berry); }
+
+/* boost */
+.boost { left: 64px; top: 1220px; width: 830px; height: 300px; text-align: center; }
+.b1 { font: 400 120px/1.05 Anton; color: var(--amber); text-shadow: 0 6px 0 var(--plum), 0 14px 30px rgba(0,0,0,.4); }
+.b2 { font: 800 70px/1.2 Poppins; color: var(--cream); text-shadow: 0 6px 22px rgba(0,0,0,.55); }
+
+/* cta */
+.cta { left: 64px; top: 1220px; width: 830px; height: 420px; }
+.cta-line { position: absolute; left: 0; top: 0; width: 830px; text-align: center; font: 700 italic 66px/1 Caveat; color: var(--cream);
+  text-shadow: 0 4px 14px rgba(0,0,0,.6); }
+.btn { position: absolute; top: 110px; width: 380px; height: 130px; border-radius: 70px; font: 800 54px/130px Poppins; text-align: center;
+  box-shadow: 0 16px 36px rgba(0,0,0,.35); }
+.btn-follow { left: 20px; background: var(--amber); color: var(--plum); }
+.btn-comment { left: 430px; background: var(--cream); color: var(--plum); }
+.hand { position: absolute; left: 0; top: 0; width: 140px; height: 140px; font-size: 120px; line-height: 140px; }
+
+.flash { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px;
+  background: radial-gradient(circle at 50% 45%, #FFFDF8 0%, #FFE7C2 60%, #FFD39A 100%); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="93.100" data-width="2160" data-height="3840" data-fps="30">
+<div id="c0" class="clip" data-start="0.000" data-duration="2.294" data-track-index="1"><div class="layer">
+              <div class="hook">
+                <div class="hook-num" id="c0-num">3</div>
+                <div class="hook-words" id="c0-words"><span>English</span><span>Words</span></div>
+                <div class="chip chip-cream" id="c0-sub">for your vocabulary 📚</div>
+              </div></div></div>
+<div id="c1" class="clip" data-start="7.044" data-duration="2.339" data-track-index="1"><div class="layer">
+              <div class="promise">
+                <div class="pill pill-a" id="c1-a">✨ Natural</div>
+                <div class="plus" id="c1-p">+</div>
+                <div class="pill pill-b" id="c1-b">💪 Confident</div>
+                <div class="promise-sub" id="c1-s">English</div>
+              </div></div></div>
+<div id="c2" class="clip" data-start="10.095" data-duration="24.222" data-track-index="2"><div class="layer">
+              <div class="title" id="c2-t">
+                <div class="title-badge" id="c2-badge">WORD 01 <i>/ 03</i></div>
+                <div class="title-word" id="c2-w"><span>A</span><span>C</span><span>T</span><span>U</span><span>A</span><span>L</span><span>L</span><span>Y</span></div>
+                <svg class="swoosh" viewBox="0 0 600 40" preserveAspectRatio="none"><path id="c2-sw" d="M8 28 C 160 6, 420 6, 592 22" /></svg>
+                <div class="meaning" id="c2-m"><b>Matlab</b> Asal mein</div>
+              </div>
+              <div class="dock" id="c2-d"><b>01</b> ACTUALLY <span>= Asal mein</span></div></div></div>
+<div id="c3" class="clip" data-start="16.887" data-duration="4.709" data-track-index="3"><div class="layer">
+              <div class="ex" id="c3-x">
+                <div class="ex-card" id="c3-card">
+                  <div class="ex-emoji" id="c3-em">☕</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en"><span class="hl">Actually</span>, I don&#x27;t like coffee.</div>
+                </div>
+                <div class="ex-hi" id="c3-hi">Asal mein mujhe coffee pasand nahi hai</div>
+              </div></div></div>
+<div id="c4" class="clip" data-start="22.541" data-duration="3.871" data-track-index="3"><div class="layer">
+              <div class="ex" id="c4-x">
+                <div class="ex-card" id="c4-card">
+                  <div class="ex-emoji" id="c4-em">📍</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en"><span class="hl">Actually</span>, I am from Delhi.</div>
+                </div>
+                <div class="ex-hi" id="c4-hi">Asal mein main Delhi se hoon</div>
+              </div></div></div>
+<div id="c5" class="clip" data-start="26.492" data-duration="7.825" data-track-index="3"><div class="layer">
+              <div class="tip" id="c5-x">
+                <div class="tip-head" id="c5-h">💡 Yaad rakhiye</div>
+                <div class="tip-panel" id="c5-p"><div class="tip-line" id="c5-l0">Koi baat clarify karni ho</div><div class="tip-line" id="c5-l1">ya sach kehna ho</div><div class="tip-line" id="c5-l2">→ shuru karo <span class="hl-dark">Actually</span> se</div></div>
+              </div></div></div>
+<div id="c6" class="clip" data-start="35.088" data-duration="25.262" data-track-index="2"><div class="layer">
+              <div class="title" id="c6-t">
+                <div class="title-badge" id="c6-badge">WORD 02 <i>/ 03</i></div>
+                <div class="title-word" id="c6-w"><span>I</span><span>N</span><span>S</span><span>T</span><span>E</span><span>A</span><span>D</span></div>
+                <svg class="swoosh" viewBox="0 0 600 40" preserveAspectRatio="none"><path id="c6-sw" d="M8 28 C 160 6, 420 6, 592 22" /></svg>
+                <div class="meaning" id="c6-m"><b>Matlab</b> Iske bajaye / Uski jagah</div>
+              </div>
+              <div class="dock" id="c6-d"><b>02</b> INSTEAD <span>= Iske bajaye / Uski jagah</span></div></div></div>
+<div id="c7" class="clip" data-start="41.830" data-duration="4.812" data-track-index="3"><div class="layer">
+              <div class="ex" id="c7-x">
+                <div class="ex-card" id="c7-card">
+                  <div class="ex-emoji" id="c7-em">🍵</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en">Let&#x27;s have tea <span class="hl">instead of</span> coffee.</div>
+                </div>
+                <div class="ex-hi" id="c7-hi">Coffee ki bajaye chai peete hain</div>
+              </div></div></div>
+<div id="c8" class="clip" data-start="47.603" data-duration="5.436" data-track-index="3"><div class="layer">
+              <div class="ex" id="c8-x">
+                <div class="ex-card" id="c8-card">
+                  <div class="ex-emoji" id="c8-em">🚶‍♀️</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en">I walked <span class="hl">instead of</span> taking a taxi.</div>
+                </div>
+                <div class="ex-hi" id="c8-hi">Taxi lene ki bajaye main paidal chali gayi</div>
+              </div></div></div>
+<div id="c9" class="clip" data-start="53.400" data-duration="6.950" data-track-index="3"><div class="layer">
+              <div class="tip" id="c9-x">
+                <div class="tip-head" id="c9-h">💡 Yaad rakhiye</div>
+                <div class="tip-panel" id="c9-p"><div class="tip-line" id="c9-l0">2 options mein se 1 choose karna ho</div><div class="tip-line" id="c9-l1">→ bolo <span class="hl-dark">Instead</span> / <span class="hl-dark">Instead of</span></div></div>
+              </div></div></div>
+<div id="c10" class="clip" data-start="61.044" data-duration="20.810" data-track-index="2"><div class="layer">
+              <div class="title" id="c10-t">
+                <div class="title-badge" id="c10-badge">WORD 03 <i>/ 03</i></div>
+                <div class="title-word" id="c10-w"><span>F</span><span>I</span><span>N</span><span>A</span><span>L</span><span>L</span><span>Y</span></div>
+                <svg class="swoosh" viewBox="0 0 600 40" preserveAspectRatio="none"><path id="c10-sw" d="M8 28 C 160 6, 420 6, 592 22" /></svg>
+                <div class="meaning" id="c10-m"><b>Matlab</b> Aakhirkaar / Ant mein</div>
+              </div>
+              <div class="dock" id="c10-d"><b>03</b> FINALLY <span>= Aakhirkaar / Ant mein</span></div></div></div>
+<div id="c11" class="clip" data-start="65.942" data-duration="4.511" data-track-index="3"><div class="layer">
+              <div class="ex" id="c11-x">
+                <div class="ex-card" id="c11-card">
+                  <div class="ex-emoji" id="c11-em">✅</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en"><span class="hl">Finally</span>, I finished my work.</div>
+                </div>
+                <div class="ex-hi" id="c11-hi">Aakhirkaar maine apna kaam poora kar diya</div>
+              </div></div></div>
+<div id="c12" class="clip" data-start="71.622" data-duration="3.895" data-track-index="3"><div class="layer">
+              <div class="ex" id="c12-x">
+                <div class="ex-card" id="c12-card">
+                  <div class="ex-emoji" id="c12-em">🚌</div>
+                  <div class="ex-label">EXAMPLE</div>
+                  <div class="ex-en"><span class="hl">Finally</span>, the bus arrived.</div>
+                </div>
+                <div class="ex-hi" id="c12-hi">Aakhirkaar bus aa gayi</div>
+              </div></div></div>
+<div id="c13" class="clip" data-start="75.577" data-duration="6.277" data-track-index="3"><div class="layer">
+              <div class="tip" id="c13-x">
+                <div class="tip-head" id="c13-h">💡 Yaad rakhiye</div>
+                <div class="tip-panel" id="c13-p"><div class="tip-line" id="c13-l0">Lamba intezaar khatam ho jaaye</div><div class="tip-line" id="c13-l1">→ bolo <span class="hl-dark">Finally</span></div></div>
+              </div></div></div>
+<div id="c14" class="clip" data-start="81.867" data-duration="6.034" data-track-index="3"><div class="layer">
+              <div class="recap" id="c14-x">
+                <div class="rc-head" id="c14-h">Daily conversation mein use karo 🗣️</div>
+                <div class="rc-row" id="c14-r0"><span class="rc-n">01</span><span class="rc-w">Actually</span><span class="rc-a">→</span><span class="rc-m">Asal mein</span></div><div class="rc-row" id="c14-r1"><span class="rc-n">02</span><span class="rc-w">Instead</span><span class="rc-a">→</span><span class="rc-m">Iske bajaye</span></div><div class="rc-row" id="c14-r2"><span class="rc-n">03</span><span class="rc-w">Finally</span><span class="rc-a">→</span><span class="rc-m">Aakhirkaar</span></div>
+              </div></div></div>
+<div id="c15" class="clip" data-start="87.941" data-duration="1.920" data-track-index="3"><div class="layer">
+              <div class="boost" id="c15-x"><div class="b1">Better +</div><div class="b2">Confident English 🚀</div></div></div></div>
+<div id="c16" class="clip" data-start="89.881" data-duration="3.219" data-track-index="3"><div class="layer">
+              <div class="cta" id="c16-x">
+                <div class="cta-line">aise aur videos ke liye</div>
+                <div class="btn btn-follow" id="c16-f">➕ Follow</div>
+                <div class="btn btn-comment" id="c16-c">💬 Comment</div>
+                <div class="hand" id="c16-hand">👆</div>
+              </div></div></div>
+<div id="fl0" class="clip" data-start="9.313" data-duration="0.520" data-track-index="9"><div class="layer"><div class="flash"></div></div></div>
+<div id="fl1" class="clip" data-start="34.247" data-duration="0.520" data-track-index="9"><div class="layer"><div class="flash"></div></div></div>
+<div id="fl2" class="clip" data-start="60.280" data-duration="0.520" data-track-index="9"><div class="layer"><div class="flash"></div></div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  
+              tl.fromTo("#c0-num", {scale: 2.6, rotation: -14, opacity: 0}, {scale: 1, rotation: -6, opacity: 1, duration: 0.42, ease: "back.out(2.2)"}, 0.344);
+              tl.fromTo("#c0-words span", {yPercent: 110, opacity: 0}, {yPercent: 0, opacity: 1, duration: 0.38, stagger: 0.09, ease: "power3.out"}, 0.604);
+              tl.fromTo("#c0-sub", {y: 30, opacity: 0, scale: 0.8}, {y: 0, opacity: 1, scale: 1, duration: 0.32, ease: "back.out(2)"}, 1.304);
+              tl.to("#c0 .hook", {y: -40, opacity: 0, duration: 0.22, ease: "power2.in"}, 2.0540000000000003);
+              tl.fromTo("#c1-a", {x: -260, opacity: 0, rotation: -8}, {x: 0, opacity: 1, rotation: -3, duration: 0.4, ease: "back.out(1.8)"}, 7.044);
+              tl.fromTo("#c1-s", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 7.194);
+              tl.fromTo("#c1-p", {scale: 0}, {scale: 1, duration: 0.25, ease: "back.out(3)"}, 7.818);
+              tl.fromTo("#c1-b", {x: 260, opacity: 0, rotation: 8}, {x: 0, opacity: 1, rotation: 3, duration: 0.4, ease: "back.out(1.8)"}, 7.938);
+              tl.to("#c1 .promise", {scale: 0.9, opacity: 0, duration: 0.2}, 9.162999999999998);
+              tl.fromTo("#c2-badge", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.25, ease: "power2.out"}, 10.045);
+              tl.fromTo("#c2-w span", {yPercent: 120, rotation: 12, opacity: 0}, {yPercent: 0, rotation: 0, opacity: 1, duration: 0.42, stagger: 0.035, ease: "back.out(2.4)"}, 10.095);
+              tl.fromTo("#c2-sw", {strokeDashoffset: 640}, {strokeDashoffset: 0, duration: 0.45, ease: "power2.out"}, 10.395000000000001);
+              tl.fromTo("#c2-m", {scale: 0.6, opacity: 0, y: 20}, {scale: 1, opacity: 1, y: 0, duration: 0.35, ease: "back.out(2.2)"}, 12.079);
+              tl.to("#c2-t", {y: -60, scale: 0.55, opacity: 0, duration: 0.35, ease: "power3.in"}, 15.987);
+              tl.fromTo("#c2-d", {x: -120, opacity: 0}, {x: 0, opacity: 1, duration: 0.35, ease: "power3.out"}, 16.287);
+              tl.to("#c2-d", {x: -80, opacity: 0, duration: 0.25, ease: "power2.in"}, 34.037);
+              tl.fromTo("#c3-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 16.887);
+              tl.fromTo("#c3-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 17.087);
+              tl.fromTo("#c3 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 17.337);
+              tl.fromTo("#c3-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 18.767);
+              tl.to("#c3-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 21.326);
+              tl.fromTo("#c4-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 22.541);
+              tl.fromTo("#c4-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 22.741);
+              tl.fromTo("#c4 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 22.991);
+              tl.fromTo("#c4-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 24.367);
+              tl.to("#c4-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 26.142);
+              tl.fromTo("#c5-h", {scale: 0.5, opacity: 0, rotation: -6}, {scale: 1, opacity: 1, rotation: -3, duration: 0.35, ease: "back.out(2.5)"}, 26.492);
+              tl.fromTo("#c5-p", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power3.out"}, 28.482000000000003);
+              tl.fromTo("#c5-l0", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 28.632);
+              tl.fromTo("#c5-l1", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 30.132);
+              tl.fromTo("#c5-l2", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 31.682);
+              tl.to("#c5-x", {y: 60, opacity: 0, duration: 0.25, ease: "power2.in"}, 34.047);
+              tl.fromTo("#c6-badge", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.25, ease: "power2.out"}, 35.038000000000004);
+              tl.fromTo("#c6-w span", {yPercent: 120, rotation: 12, opacity: 0}, {yPercent: 0, rotation: 0, opacity: 1, duration: 0.42, stagger: 0.035, ease: "back.out(2.4)"}, 35.088);
+              tl.fromTo("#c6-sw", {strokeDashoffset: 640}, {strokeDashoffset: 0, duration: 0.45, ease: "power2.out"}, 35.388);
+              tl.fromTo("#c6-m", {scale: 0.6, opacity: 0, y: 20}, {scale: 1, opacity: 1, y: 0, duration: 0.35, ease: "back.out(2.2)"}, 36.73);
+              tl.to("#c6-t", {y: -60, scale: 0.55, opacity: 0, duration: 0.35, ease: "power3.in"}, 41.48);
+              tl.fromTo("#c6-d", {x: -120, opacity: 0}, {x: 0, opacity: 1, duration: 0.35, ease: "power3.out"}, 41.78);
+              tl.to("#c6-d", {x: -80, opacity: 0, duration: 0.25, ease: "power2.in"}, 60.07);
+              tl.fromTo("#c7-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 41.83);
+              tl.fromTo("#c7-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 42.03);
+              tl.fromTo("#c7 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 42.28);
+              tl.fromTo("#c7-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 44.167);
+              tl.to("#c7-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 46.372);
+              tl.fromTo("#c8-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 47.603);
+              tl.fromTo("#c8-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 47.803000000000004);
+              tl.fromTo("#c8 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 48.053000000000004);
+              tl.fromTo("#c8-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 50.123);
+              tl.to("#c8-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 52.769);
+              tl.fromTo("#c9-h", {scale: 0.5, opacity: 0, rotation: -6}, {scale: 1, opacity: 1, rotation: -3, duration: 0.35, ease: "back.out(2.5)"}, 53.4);
+              tl.fromTo("#c9-p", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power3.out"}, 54.288000000000004);
+              tl.fromTo("#c9-l0", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 54.438);
+              tl.fromTo("#c9-l1", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 58.29);
+              tl.to("#c9-x", {y: 60, opacity: 0, duration: 0.25, ease: "power2.in"}, 60.08);
+              tl.fromTo("#c10-badge", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.25, ease: "power2.out"}, 60.994);
+              tl.fromTo("#c10-w span", {yPercent: 120, rotation: 12, opacity: 0}, {yPercent: 0, rotation: 0, opacity: 1, duration: 0.42, stagger: 0.035, ease: "back.out(2.4)"}, 61.044);
+              tl.fromTo("#c10-sw", {strokeDashoffset: 640}, {strokeDashoffset: 0, duration: 0.45, ease: "power2.out"}, 61.343999999999994);
+              tl.fromTo("#c10-m", {scale: 0.6, opacity: 0, y: 20}, {scale: 1, opacity: 1, y: 0, duration: 0.35, ease: "back.out(2.2)"}, 63.244);
+              tl.to("#c10-t", {y: -60, scale: 0.55, opacity: 0, duration: 0.35, ease: "power3.in"}, 65.492);
+              tl.fromTo("#c10-d", {x: -120, opacity: 0}, {x: 0, opacity: 1, duration: 0.35, ease: "power3.out"}, 65.792);
+              tl.to("#c10-d", {x: -80, opacity: 0, duration: 0.25, ease: "power2.in"}, 81.574);
+              tl.fromTo("#c11-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 65.942);
+              tl.fromTo("#c11-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 66.142);
+              tl.fromTo("#c11 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 66.392);
+              tl.fromTo("#c11-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 67.833);
+              tl.to("#c11-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 70.183);
+              tl.fromTo("#c12-card", {y: 120, scale: 0.7, rotation: -4, opacity: 0}, {y: 0, scale: 1, rotation: -1.5, opacity: 1, duration: 0.42, ease: "back.out(1.7)"}, 71.622);
+              tl.fromTo("#c12-em", {scale: 0, rotation: -40}, {scale: 1, rotation: 8, duration: 0.4, ease: "back.out(3)"}, 71.822);
+              tl.fromTo("#c12 .hl", {backgroundSize: "0% 42%"}, {backgroundSize: "100% 42%", duration: 0.4, ease: "power2.out"}, 72.072);
+              tl.fromTo("#c12-hi", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 73.472);
+              tl.to("#c12-x", {y: 80, opacity: 0, duration: 0.25, ease: "power2.in"}, 75.247);
+              tl.fromTo("#c13-h", {scale: 0.5, opacity: 0, rotation: -6}, {scale: 1, opacity: 1, rotation: -3, duration: 0.35, ease: "back.out(2.5)"}, 75.577);
+              tl.fromTo("#c13-p", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power3.out"}, 77.42699999999999);
+              tl.fromTo("#c13-l0", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 77.577);
+              tl.fromTo("#c13-l1", {x: -40, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 79.474);
+              tl.to("#c13-x", {y: 60, opacity: 0, duration: 0.25, ease: "power2.in"}, 81.584);
+              tl.fromTo("#c14-h", {y: -30, opacity: 0}, {y: 0, opacity: 1, duration: 0.3, ease: "power2.out"}, 81.867);
+              tl.fromTo("#c14 .rc-row", {x: 200, opacity: 0}, {x: 0, opacity: 1, duration: 0.35, stagger: 0.32, ease: "back.out(1.6)"}, 82.362);
+              tl.to("#c14-x", {scale: 0.92, opacity: 0, duration: 0.22, ease: "power2.in"}, 87.661);
+              tl.fromTo("#c15 .b1", {scale: 0.4, opacity: 0}, {scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)"}, 87.941);
+              tl.fromTo("#c15 .b2", {scale: 0.4, opacity: 0}, {scale: 1, opacity: 1, duration: 0.3, ease: "back.out(2.5)"}, 88.291);
+              tl.to("#c15-x", {opacity: 0, duration: 0.18}, 89.661);
+              tl.fromTo("#c16 .cta-line", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 89.881);
+              tl.fromTo("#c16-f", {scale: 0, rotation: -10}, {scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2.5)"}, 89.981);
+              tl.fromTo("#c16-c", {scale: 0, rotation: 10}, {scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2.5)"}, 90.131);
+              tl.fromTo("#c16-hand", {x: 520, y: 260, opacity: 0}, {x: 300, y: 70, opacity: 1, duration: 0.35, ease: "power2.out"}, 89.981);
+              tl.to("#c16-f", {scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}, 90.381);
+              tl.set("#c16-f", {backgroundColor: "#4A1530", color: "#FFF7EC"}, 90.461);
+              tl.set("#c16-f", {textContent: "✓ Following"}, 90.461);
+              tl.to("#c16-hand", {x: 560, y: 70, duration: 0.3, ease: "power2.inOut"}, 90.661);
+              tl.to("#c16-c", {scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}, 90.981);
+              tl.to("#c16-hand", {opacity: 0, duration: 0.3}, 91.58099999999999);
+              tl.fromTo("#fl0 .flash", {opacity: 0}, {opacity: 0.9, duration: 0.1, ease: "power1.in"}, 9.313);
+              tl.to("#fl0 .flash", {opacity: 0, duration: 0.32, ease: "power2.out"}, 9.433);
+              tl.fromTo("#fl1 .flash", {opacity: 0}, {opacity: 0.9, duration: 0.1, ease: "power1.in"}, 34.247);
+              tl.to("#fl1 .flash", {opacity: 0, duration: 0.32, ease: "power2.out"}, 34.367);
+              tl.fromTo("#fl2 .flash", {opacity: 0}, {opacity: 0.9, duration: 0.1, ease: "power1.in"}, 60.28);
+              tl.to("#fl2 .flash", {opacity: 0, duration: 0.32, ease: "power2.out"}, 60.4);
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
