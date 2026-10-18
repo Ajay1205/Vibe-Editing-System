@@ -239,12 +239,6 @@
  ],
  "sfx": [
   {
-   "name": "impact-bass-1",
-   "t": 0.344,
-   "gain": 0.5,
-   "lu": 0.0
-  },
-  {
    "name": "whoosh",
    "t": 9.313,
    "gain": 0.55,
@@ -319,16 +313,20 @@
   {
    "name": "riser_user",
    "file": "assets/user/riser_user.mp3",
-   "t": 0.0,
+   "t": 2.0,
    "gain": 0.45,
-   "lu": 1.0
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
   },
   {
    "name": "riser_user",
    "file": "assets/user/riser_user.mp3",
-   "t": 88.031,
+   "t": 89.131,
    "gain": 0.45,
-   "lu": 1.0
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
   }
  ]
 }
