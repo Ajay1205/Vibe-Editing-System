@@ -1,0 +1,203 @@
+{
+ "duration": 31.5333,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "hook",
+   "start": 0.0,
+   "end": 8.149999999999999,
+   "beats": {
+    "notif": 0.052,
+    "hi": 1.452,
+    "seen": 1.952,
+    "noreply": 2.252,
+    "swap": 3.967,
+    "today": 5.923
+   }
+  },
+  {
+   "type": "reply",
+   "n": 1,
+   "en": "I will **talk to you later**.",
+   "hi": "Main **baad mein** baat karti hoon",
+   "emoji": "⏰",
+   "start": 8.282,
+   "en_t": 8.802,
+   "seen": 9.982,
+   "hi_t": 10.522,
+   "end": 12.502
+  },
+  {
+   "type": "reply",
+   "n": 2,
+   "en": "I am **a bit busy** now.",
+   "hi": "Main **bahut busy** hoon",
+   "emoji": "💼",
+   "start": 12.502,
+   "en_t": 12.647,
+   "seen": 13.547,
+   "hi_t": 14.1,
+   "end": 15.817
+  },
+  {
+   "type": "reply",
+   "n": 3,
+   "en": "See you tomorrow **for sure**.",
+   "hi": "Main kal **pakka** milungi",
+   "emoji": "🤝",
+   "start": 15.817,
+   "en_t": 15.867,
+   "seen": 17.283,
+   "hi_t": 17.483,
+   "end": 19.683
+  },
+  {
+   "type": "reply",
+   "n": 4,
+   "en": "I **didn't see** your message.",
+   "hi": "Maine aapka message **nahi dekha**",
+   "emoji": "🙈",
+   "start": 19.867,
+   "en_t": 19.87,
+   "seen": 21.08,
+   "hi_t": 21.3,
+   "end": 23.54
+  },
+  {
+   "type": "challenge",
+   "start": 23.567,
+   "q_t": 28.206,
+   "box_t": 29.614,
+   "tap": 30.478,
+   "end": 31.533
+  }
+ ],
+ "flashes": [
+  8.2,
+  23.567
+ ],
+ "punches": [
+  {
+   "t": 1.452,
+   "kind": "small"
+  },
+  {
+   "t": 8.802,
+   "kind": "small"
+  },
+  {
+   "t": 12.647,
+   "kind": "small"
+  },
+  {
+   "t": 15.867,
+   "kind": "small"
+  },
+  {
+   "t": 19.87,
+   "kind": "small"
+  },
+  {
+   "t": 28.206,
+   "kind": "big"
+  }
+ ],
+ "sfx": [
+  {
+   "name": "whoosh",
+   "t": 3.887,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "whoosh",
+   "t": 8.08,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "whoosh",
+   "t": 23.447,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "pop",
+   "t": 8.802,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 10.522,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "pop",
+   "t": 12.647,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 14.1,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "pop",
+   "t": 15.867,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 17.483,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "pop",
+   "t": 19.87,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 21.3,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "notification",
+   "t": 28.206,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "click",
+   "t": 30.478,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "riser_user",
+   "file": "assets/user/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "assets/user/riser_user.mp3",
+   "t": 28.628,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}
