@@ -183,7 +183,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .chip-app { left: 0; top: 0; width: max-content; padding: 14px 26px; border-radius: 30px; background: var(--green); color: #fff; font: 800 38px/1 Jak; }
 .headline { left: 0; top: 84px; width: 800px; font: 800 108px/1.04 Jak; color: #fff; letter-spacing: -3px; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
 .hl-pink { padding: 0 10px; border-radius: 16px; background-image: linear-gradient(var(--pink), var(--pink)); background-repeat: no-repeat; background-size: 0% 100%; }
-.subline { left: 0; top: 340px; width: max-content; max-width: 800px; padding: 14px 24px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 44px/1.25 Jak; color: #fff; white-space: nowrap; }
+.subline { left: 0; top: 340px; width: 800px; font: 800 italic 46px/1.25 Jak; color: #fff; white-space: nowrap; text-shadow: 0 2px 3px rgba(0,0,0,.55), 0 4px 18px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.4); }
 
 /* reply card (one at a time) */
 .card { left: 140px; top: 280px; width: 800px; padding: 22px 32px 26px; border-radius: 34px; background: rgba(255,248,236,.97);
@@ -201,14 +201,14 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .c-ticks { position: absolute; right: 30px; bottom: 18px; }
 .mean { left: 140px; top: 552px; width: 800px; }
 .m-label { font: 700 54px/1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); margin-bottom: 6px; }
-.m-text { width: max-content; max-width: 800px; padding: 12px 22px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 52px/1.2 Jak; color: #fff; }
+.m-text { width: 800px; font: 800 italic 54px/1.22 Jak; color: #fff; text-shadow: 0 2px 3px rgba(0,0,0,.55), 0 4px 18px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.4); }
 .hl-hi { padding: 0 10px; border-radius: 12px; color: #fff; text-shadow: none; background-image: linear-gradient(var(--pink), var(--pink));
   background-repeat: no-repeat; background-size: 0% 100%; }
 
 /* challenge */
 .ch-head { left: 140px; top: 276px; width: 800px; font: 800 100px/1 Jak; color: var(--pink); letter-spacing: -2px;
   text-shadow: 0 6px 24px rgba(0,0,0,.4); }
-.ch-sub { left: 140px; top: 392px; width: 800px; padding: 16px 26px; border-radius: 24px; background: rgba(11,59,54,.85); font: 800 46px/1.25 Jak; color: #fff; }
+.ch-sub { left: 140px; top: 396px; width: 800px; font: 800 48px/1.25 Jak; color: #fff; text-shadow: 0 2px 3px rgba(0,0,0,.55), 0 4px 18px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.4); }
 .ch-sub b { color: #FF9EC2; }
 .inputbar { left: 140px; top: 664px; width: 800px; height: 96px; display: flex; align-items: center; justify-content: space-between;
   padding: 0 14px 0 32px; border-radius: 50px; background: rgba(255,248,236,.97); box-shadow: 0 8px 16px rgba(0,0,0,.28); }

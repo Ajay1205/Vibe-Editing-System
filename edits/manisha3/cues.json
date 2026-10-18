@@ -1,18 +1,18 @@
 {
- "duration": 33.8,
+ "duration": 32.2333,
  "fps": 30,
  "captions": [
   {
    "type": "hook",
    "start": 0.0,
-   "end": 8.716999999999999,
+   "end": 7.817,
    "beats": {
     "notif": 0.052,
     "hi": 1.452,
     "seen": 1.952,
     "noreply": 2.252,
-    "swap": 4.189,
-    "today": 6.309
+    "swap": 3.4,
+    "today": 5.4
    }
   },
   {
@@ -21,11 +21,11 @@
    "en": "I will **talk to you later**.",
    "hi": "Main **baad mein** baat karti hoon",
    "emoji": "⏰",
-   "start": 8.849,
-   "en_t": 9.369,
-   "seen": 10.549,
-   "hi_t": 11.089,
-   "end": 13.069
+   "start": 7.949,
+   "en_t": 8.469,
+   "seen": 9.649,
+   "hi_t": 10.189,
+   "end": 12.169
   },
   {
    "type": "reply",
@@ -33,11 +33,11 @@
    "en": "I am **a bit busy** now.",
    "hi": "Main **bahut busy** hoon",
    "emoji": "💼",
-   "start": 13.069,
-   "en_t": 13.449,
-   "seen": 14.349,
-   "hi_t": 14.929,
-   "end": 16.749
+   "start": 12.169,
+   "en_t": 12.549,
+   "seen": 13.449,
+   "hi_t": 14.029,
+   "end": 15.849
   },
   {
    "type": "reply",
@@ -45,11 +45,11 @@
    "en": "See you tomorrow **for sure**.",
    "hi": "Main kal **pakka** milungi",
    "emoji": "🤝",
-   "start": 16.749,
-   "en_t": 16.929,
-   "seen": 18.349,
-   "hi_t": 18.549,
-   "end": 20.749
+   "start": 15.849,
+   "en_t": 16.029,
+   "seen": 17.449,
+   "hi_t": 17.649,
+   "end": 19.849
   },
   {
    "type": "reply",
@@ -57,30 +57,30 @@
    "en": "I **didn't see** your message.",
    "hi": "Maine aapka message **nahi dekha**",
    "emoji": "🙈",
-   "start": 21.54,
-   "en_t": 21.63,
-   "seen": 22.84,
-   "hi_t": 23.06,
-   "end": 25.3
+   "start": 20.033,
+   "en_t": 20.053,
+   "seen": 21.263,
+   "hi_t": 21.483,
+   "end": 23.723
   },
   {
    "type": "challenge",
-   "start": 25.333,
-   "q_t": 29.972,
-   "box_t": 31.552,
-   "tap": 32.572,
-   "end": 33.8
+   "start": 23.767,
+   "q_t": 28.406,
+   "box_t": 29.986,
+   "tap": 31.006,
+   "end": 32.233
   }
  ],
  "flashes": [
-  8.767,
-  25.333
+  7.867,
+  23.767
  ],
  "soft": [
-  4.189,
-  13.069,
-  16.749,
-  21.54
+  3.4,
+  12.169,
+  15.849,
+  20.033
  ],
  "punches": [
   {
@@ -88,102 +88,102 @@
    "kind": "small"
   },
   {
-   "t": 9.369,
+   "t": 8.469,
    "kind": "small"
   },
   {
-   "t": 13.449,
+   "t": 12.549,
    "kind": "small"
   },
   {
-   "t": 16.929,
+   "t": 16.029,
    "kind": "small"
   },
   {
-   "t": 21.63,
+   "t": 20.053,
    "kind": "small"
   },
   {
-   "t": 29.972,
+   "t": 28.406,
    "kind": "big"
   }
  ],
  "sfx": [
   {
    "name": "whoosh",
-   "t": 4.109,
+   "t": 3.32,
    "gain": 0.5,
    "lu": 0.0
   },
   {
    "name": "whoosh",
-   "t": 8.647,
+   "t": 7.747,
    "gain": 0.5,
    "lu": 0.0
   },
   {
    "name": "whoosh",
-   "t": 25.213,
+   "t": 23.647,
    "gain": 0.5,
    "lu": 0.0
   },
   {
    "name": "pop",
-   "t": 9.369,
+   "t": 8.469,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "ping",
-   "t": 11.089,
+   "t": 10.189,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "pop",
-   "t": 13.449,
+   "t": 12.549,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "ping",
-   "t": 14.929,
+   "t": 14.029,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "pop",
-   "t": 16.929,
+   "t": 16.029,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "ping",
-   "t": 18.549,
+   "t": 17.649,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "pop",
-   "t": 21.63,
+   "t": 20.053,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "ping",
-   "t": 23.06,
+   "t": 21.483,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "notification",
-   "t": 29.972,
+   "t": 28.406,
    "gain": 0.5,
    "lu": -1.0
   },
   {
    "name": "click",
-   "t": 32.572,
+   "t": 31.006,
    "gain": 0.5,
    "lu": 0.0
   },
@@ -199,7 +199,7 @@
   {
    "name": "riser_user",
    "file": "assets/user/riser_user.mp3",
-   "t": 30.722,
+   "t": 29.156,
    "gain": 0.45,
    "lu": 1.0,
    "from": 1.1,

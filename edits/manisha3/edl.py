@@ -30,6 +30,8 @@ TAIL = 0.35
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = [
     ("m32", 17.90, 99),     # silence and handling noise after "I didn't see your message"
+    ("m31", 3.56, 4.56),    # she looks down between the hook question and "WhatsApp pe..." (user note, 0:03)
+    ("m32", 12.50, 14.17),  # she looks away between reply 3 and reply 4 (user note, 0:21)
 ]
 
 
