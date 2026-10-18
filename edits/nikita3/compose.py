@@ -15,9 +15,9 @@ RENDERS = HERE / "renders"
 GRADE = "eq=contrast=1.05:saturation=1.08:gamma=0.98,vignette=angle=PI/5:mode=forward"
 
 
-def main(version):
+def main(version, suffix=""):
     RENDERS.mkdir(exist_ok=True)
-    out = RENDERS / f"nikita3_{version}_4k.mp4"
+    out = RENDERS / f"nikita3_{version}_4k{suffix}.mp4"
     subprocess.run([
         "ffmpeg", "-v", "error", "-stats", "-y",
         "-i", str(BUILD / f"base_{version}.mp4"),
@@ -32,4 +32,4 @@ def main(version):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else "")
