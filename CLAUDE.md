@@ -56,6 +56,18 @@ The reference for future reels in this account.
   first 2 s voice only.
 - Build: `edits/nikita3/build_all.sh` (preview, then 4K master).
 
+## Approved style: Manisha 3 "Chat Pop" (`edits/manisha3`)
+
+Each video gets a NEW presentation style; only the core rules above carry over. Learned from this one:
+- Chat theme for a WhatsApp-replies lesson: notification cards (typing dots, ticks turning blue), ONE reply at a time,
+  Hinglish meaning OUTSIDE the card with key words on pink pills; Plus Jakarta Sans + Caveat; mint/teal/cream + pink.
+- Text sits straight on the wall with a strong soft shadow. The user disliked solid coloured panels behind Hinglish.
+- Pink-peach light-leak bloom transitions (light-style transitions are liked).
+- Pacing: keep natural pauses for learners (shorten only long ones), but cut moments where the speaker looks
+  down or away, and end right after the last word. Never cut into a word to hit an exact time.
+- Readable on a phone but not oversized: modest sizes, contrast from shadows rather than big fonts.
+- Manisha's Drive folder: not shared yet; she gets the master from chat.
+
 ## Working rules (from the guide)
 
 - Plan with a beat sheet and wait for approval before building.
