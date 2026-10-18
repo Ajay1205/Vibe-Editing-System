@@ -5,11 +5,13 @@
   {
    "type": "hook",
    "start": 0.0,
-   "end": 2.294,
+   "end": 7.024,
    "beats": {
     "num": 0.344,
     "words": 0.604,
-    "sub": 1.304
+    "sub": 1.304,
+    "teaser": 3.224,
+    "today": 4.044
    }
   },
   {

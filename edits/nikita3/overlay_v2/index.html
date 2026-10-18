@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=2160, height=3840" />
+<meta name="viewport" content="width=1080, height=1920" />
 <script src="vendor/gsap.min.js"></script>
 <style>
 @font-face { font-family: "Brico"; src: url(fonts/brico-600.woff2) format("woff2"); font-weight: 600; }
@@ -13,10 +13,10 @@
 @font-face { font-family: "PoppinsI"; src: url(fonts/poppins-600i.woff2) format("woff2"); font-weight: 600; font-style: italic; }
 :root { --lime: #D7FF3F; --coral: #FF7A59; --peach: #FFE2CF; --ink: #10131F; --glass: rgba(12,15,28,.55); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 2160px; height: 3840px; overflow: hidden; background: transparent; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
 #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
-.clip { width: 2160px; height: 3840px; }
-.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: scale(2); }
+.clip { width: 1080px; height: 1920px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: none; }
 .layer > div { position: absolute; }
 .serif { font-family: Playfair; font-style: italic; font-weight: 600; }
 .hin { font-family: PoppinsI; font-style: italic; font-weight: 600; letter-spacing: 0; }  /* Hinglish lines: readable italic */
@@ -24,7 +24,12 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .shadow, .hook-words, .pr-1, .pr-2, .t-word, .ex-en, .tip-line, .b1, .b2 { text-shadow: 0 4px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.6); }
 
 /* hook */
-.hook { left: 140px; top: 290px; width: 800px; height: 360px; }
+.hook { left: 140px; top: 290px; width: 800px; height: 540px; }
+.teaser { position: absolute; left: 0; top: 352px; width: 800px; display: flex; gap: 16px; }
+.teaser span { display: inline-block; padding: 14px 26px; border-radius: 40px; font: 800 44px/1 Brico; color: #fff;
+  background: var(--glass); border: 3px solid var(--lime); }
+.hook-today { position: absolute; left: 4px; top: 452px; width: 800px; font-size: 40px; color: var(--peach);
+  text-shadow: 0 3px 14px rgba(0,0,0,.6); }
 .hook-num { position: absolute; left: 0; top: 0; width: 200px; height: 300px; font: 800 300px/1 Brico; color: var(--lime);
   text-shadow: 0 0 40px rgba(215,255,63,.45), 0 6px 20px rgba(0,0,0,.4); }
 .hook-words { position: absolute; left: 200px; top: 34px; width: 600px; font: 800 104px/1 Brico; color: #fff; letter-spacing: -2px; }
@@ -105,12 +110,14 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="93.100" data-width="2160" data-height="3840" data-fps="30">
-<div id="c0" class="clip" data-start="0.000" data-duration="2.294" data-track-index="1"><div class="layer">
+<div id="root" data-composition-id="main" data-start="0" data-duration="93.100" data-width="1080" data-height="1920" data-fps="30">
+<div id="c0" class="clip" data-start="0.000" data-duration="7.024" data-track-index="1"><div class="layer">
               <div class="hook" id="c0-x">
                 <div class="hook-num" id="c0-n">3</div>
                 <div class="hook-words" id="c0-w"><span class="w">English</span> <span class="w">Words</span></div>
                 <div class="serif hook-sub" id="c0-s">for your vocabulary</div>
+                <div class="teaser" id="c0-tz"><span>🔒 #1 ???</span><span>🔒 #2 ???</span><span>🔒 #3 ???</span></div>
+                <div class="hin hook-today" id="c0-td">aaj se hi use karna start karo ✓</div>
               </div></div></div>
 <div id="c1" class="clip" data-start="7.044" data-duration="2.339" data-track-index="1"><div class="layer">
               <div class="promise" id="c1-x">
@@ -217,7 +224,11 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
               tl.fromTo("#c0-n", {scale: 0.2, opacity: 0, filter: "blur(20px)"}, {scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out"}, 0.344);
               tl.fromTo("#c0-w .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.12, ease: "power3.out"}, 0.604);
               tl.fromTo("#c0-s", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.35, ease: "power2.out"}, 1.304);
-              tl.to("#c0-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 1.994);
+              tl.fromTo("#c0-tz span", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.18, ease: "power3.out"}, 3.224);
+              tl.to("#c0-tz span", {backgroundColor: "rgba(215,255,63,1)", color: "#10131F", duration: 0.2, stagger: 0.35}, 4.1240000000000006);
+              tl.fromTo("#c0-td", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 4.044);
+              tl.to("#c0-n", {scale: 1.08, duration: 0.6, yoyo: true, repeat: 3, ease: "sine.inOut"}, 3.224);
+              tl.to("#c0-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 6.724);
               tl.fromTo("#c1-a", {opacity: 0, x: -80, filter: "blur(12px)"}, {opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out"}, 7.044);
               tl.fromTo("#c1-b", {opacity: 0, x: 80, filter: "blur(12px)"}, {opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out"}, 7.938);
               tl.fromTo("#c1-s", {opacity: 0}, {opacity: 1, duration: 0.3}, 8.138);

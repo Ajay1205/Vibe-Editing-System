@@ -32,8 +32,11 @@ def section_end(clip):
 
 CAPTIONS = [
     # Hook
-    {"type": "hook", "start": at("n31", 0.0), "end": at("n31", 3.05),
-     "beats": {"num": at("n31", 1.10), "words": at("n31", 1.36), "sub": at("n31", 2.06)}},
+    # The hook stays up until "Natural & Confident" takes over, so 0:03-0:07 is never empty:
+    # three locked "???" chips land on "teen words" (the words stay a surprise), then "aaj se ..." on "aaj se use karna".
+    {"type": "hook", "start": at("n31", 0.0), "end": at("n31", 7.78),
+     "beats": {"num": at("n31", 1.10), "words": at("n31", 1.36), "sub": at("n31", 2.06),
+               "teaser": at("n31", 3.98), "today": at("n31", 4.80)}},
     {"type": "promise", "start": at("n31", 7.80), "end": section_end("n31") - 0.05,
      "lines": [{"t": at("n31", 7.80), "text": "Natural"}, {"t": at("n31", 8.85), "text": "Confident"}]},
 ]

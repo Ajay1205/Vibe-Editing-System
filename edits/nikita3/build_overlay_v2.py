@@ -68,11 +68,17 @@ def build(res=2160):
                 <div class="hook-num" id="{cid}-n">3</div>
                 <div class="hook-words" id="{cid}-w"><span class="w">English</span> <span class="w">Words</span></div>
                 <div class="serif hook-sub" id="{cid}-s">for your vocabulary</div>
+                <div class="teaser" id="{cid}-tz"><span>🔒 #1 ???</span><span>🔒 #2 ???</span><span>🔒 #3 ???</span></div>
+                <div class="hin hook-today" id="{cid}-td">aaj se hi use karna start karo ✓</div>
               </div>"""))
             js.append(f"""
               tl.fromTo("#{cid}-n", {{scale: 0.2, opacity: 0, filter: "blur(20px)"}}, {{scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out"}}, {b['num']});
               tl.fromTo("#{cid}-w .w", {BLUR_IN.format(st=0.12)}, {b['words']});
               tl.fromTo("#{cid}-s", {{opacity: 0, x: -30}}, {{opacity: 1, x: 0, duration: 0.35, ease: "power2.out"}}, {b['sub']});
+              tl.fromTo("#{cid}-tz span", {BLUR_IN.format(st=0.18)}, {b['teaser']});
+              tl.to("#{cid}-tz span", {{backgroundColor: "rgba(215,255,63,1)", color: "#10131F", duration: 0.2, stagger: 0.35}}, {b['teaser'] + 0.9});
+              tl.fromTo("#{cid}-td", {{opacity: 0, y: 20, filter: "blur(10px)"}}, {{opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}}, {b['today']});
+              tl.to("#{cid}-n", {{scale: 1.08, duration: 0.6, yoyo: true, repeat: 3, ease: "sine.inOut"}}, {b['teaser']});
               tl.to("#{cid}-x", {BLUR_OUT}, {e - 0.3});""")
         elif c["type"] == "promise":
             l1, l2 = c["lines"]
@@ -222,7 +228,12 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .shadow, .hook-words, .pr-1, .pr-2, .t-word, .ex-en, .tip-line, .b1, .b2 { text-shadow: 0 4px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.6); }
 
 /* hook */
-.hook { left: 140px; top: 290px; width: 800px; height: 360px; }
+.hook { left: 140px; top: 290px; width: 800px; height: 540px; }
+.teaser { position: absolute; left: 0; top: 352px; width: 800px; display: flex; gap: 16px; }
+.teaser span { display: inline-block; padding: 14px 26px; border-radius: 40px; font: 800 44px/1 Brico; color: #fff;
+  background: var(--glass); border: 3px solid var(--lime); }
+.hook-today { position: absolute; left: 4px; top: 452px; width: 800px; font-size: 40px; color: var(--peach);
+  text-shadow: 0 3px 14px rgba(0,0,0,.6); }
 .hook-num { position: absolute; left: 0; top: 0; width: 200px; height: 300px; font: 800 300px/1 Brico; color: var(--lime);
   text-shadow: 0 0 40px rgba(215,255,63,.45), 0 6px 20px rgba(0,0,0,.4); }
 .hook-words { position: absolute; left: 200px; top: 34px; width: 600px; font: 800 104px/1 Brico; color: #fff; letter-spacing: -2px; }
