@@ -63,6 +63,12 @@ def main():
             snd = decode(SFX_DIR / f"{s['name']}.mp3")
             cache[s["name"]] = (snd, float(window_db(snd).max()))
         snd, peak_db = cache[s["name"]]
+        if "from" in s:  # use a slice of a long effect (e.g. the last 3 s of the riser, which crests at its end)
+            a, b = int(s["from"] * SR), int((s["from"] + s["dur"]) * SR)
+            snd = snd[a:b].copy()
+            fi, fo = int(0.25 * SR), int(0.06 * SR)
+            snd[:fi] *= np.linspace(0, 1, fi)[:, None]
+            snd[-fo:] *= np.linspace(1, 0, fo)[:, None]
         trim_db = max(-2.0, min(0.0, 20 * np.log10(s["gain"] / 0.55)))  # per-cue emphasis, never above the cap
         g = 10 ** ((speaking_db - SFX_UNDER_DB + trim_db - peak_db) / 20)
         i = int(s["t"] * SR)

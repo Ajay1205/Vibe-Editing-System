@@ -213,7 +213,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .chip-cream { position: absolute; left: 240px; top: 410px; width: max-content; background: var(--cream); color: var(--plum); }
 
 /* promise */
-.promise { left: 140px; top: 1150px; width: 800px; height: 420px; }
+.promise { left: 140px; top: 1190px; width: 800px; height: 420px; }
 .pill { position: absolute; width: max-content; font: 800 74px/1 Poppins; padding: 26px 46px; border-radius: 80px;
   box-shadow: 0 14px 36px rgba(0,0,0,.3); }
 .pill-a { left: 0; top: 0; background: var(--amber); color: var(--plum); }
@@ -242,7 +242,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .dock span { font: 700 34px/1 Poppins; color: var(--cream); opacity: .85; margin-left: 8px; }
 
 /* example */
-.ex { left: 140px; top: 1130px; width: 800px; height: 420px; }
+.ex { left: 140px; top: 1160px; width: 800px; height: 420px; }
 .ex-card { position: absolute; left: 0; top: 0; width: 800px; background: var(--cream); border-radius: 40px; padding: 64px 40px 34px;
   box-shadow: 0 22px 50px rgba(0,0,0,.35); border-bottom: 10px solid var(--amber); }
 .ex-emoji { position: absolute; right: 20px; top: -54px; width: 128px; height: 128px; border-radius: 64px; background: var(--amber);
@@ -255,7 +255,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   font: 600 italic 40px/1.3 Poppins; color: var(--berry); }
 
 /* tip */
-.tip { left: 140px; top: 1140px; width: 800px; height: 520px; }
+.tip { left: 140px; top: 1175px; width: 800px; height: 520px; }
 .tip-head { position: absolute; left: 0; top: 0; width: max-content; font: 800 46px/1 Poppins; color: var(--plum); background: var(--amber);
   padding: 20px 32px; border-radius: 20px; box-shadow: 0 10px 26px rgba(0,0,0,.3); }
 .tip-panel { position: absolute; left: 0; top: 112px; width: 800px; background: rgba(34,16,26,.82); border-radius: 34px; padding: 34px 42px;
@@ -264,10 +264,10 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .hl-dark { color: var(--amber); }
 
 /* recap */
-.recap { left: 140px; top: 1050px; width: 800px; height: 560px; }
+.recap { left: 140px; top: 1150px; width: 800px; height: 560px; }
 .rc-head { position: absolute; left: 0; top: 0; width: 800px; font: 700 italic 64px/1 Caveat; color: var(--cream);
   text-shadow: 0 4px 14px rgba(0,0,0,.6); }
-.rc-row { position: relative; top: 90px; display: flex; align-items: center; width: 800px; height: 112px; margin-bottom: 16px;
+.rc-row { position: relative; top: 80px; display: flex; align-items: center; width: 800px; height: 104px; margin-bottom: 12px;
   background: var(--cream); border-radius: 30px; padding: 0 34px; box-shadow: 0 14px 30px rgba(0,0,0,.3); }
 .rc-n { font: 400 54px/1 Anton; color: var(--berry); width: 90px; }
 .rc-w { font: 800 52px/1 Poppins; color: var(--plum); width: 270px; }
