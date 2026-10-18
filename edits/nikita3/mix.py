@@ -91,7 +91,7 @@ def main():
         bed[i:j] += snd[: j - i] * g
     write(BUILD / "sfx.wav", bed)
 
-    master = "alimiter=limit=0.78:attack=2:release=50:level=disabled,aresample=48000[out]"
+    master = "alimiter=limit=0.72:attack=2:release=50:level=disabled,aresample=48000[out]"
     if MUSIC:
         graph = ("[0]asplit=2[v][k1];"
                  f"[1]aresample=48000,aformat=channel_layouts=stereo,volume={MUSIC_DB}dB,"
