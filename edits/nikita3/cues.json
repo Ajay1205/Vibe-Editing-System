@@ -286,237 +286,22 @@
   {
    "name": "impact-bass-1",
    "t": 0.344,
-   "gain": 0.55
-  },
-  {
-   "name": "whoosh-short",
-   "t": 0.554,
    "gain": 0.5
-  },
-  {
-   "name": "pop",
-   "t": 1.304,
-   "gain": 0.45
-  },
-  {
-   "name": "pop",
-   "t": 7.044,
-   "gain": 0.45
-  },
-  {
-   "name": "sparkle",
-   "t": 7.938,
-   "gain": 0.35
   },
   {
    "name": "whoosh",
    "t": 9.313,
-   "gain": 0.6
-  },
-  {
-   "name": "impact-bass-2",
-   "t": 10.095,
-   "gain": 0.4
-  },
-  {
-   "name": "pop",
-   "t": 12.079,
-   "gain": 0.45
-  },
-  {
-   "name": "whoosh-short",
-   "t": 16.847,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 17.337,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 18.767,
-   "gain": 0.5
-  },
-  {
-   "name": "whoosh-short",
-   "t": 22.501,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 22.991,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 24.367,
-   "gain": 0.5
-  },
-  {
-   "name": "ping",
-   "t": 26.492,
-   "gain": 0.3
-  },
-  {
-   "name": "click-soft",
-   "t": 28.632,
-   "gain": 0.45
-  },
-  {
-   "name": "click-soft",
-   "t": 30.132,
-   "gain": 0.45
-  },
-  {
-   "name": "click-soft",
-   "t": 31.682,
-   "gain": 0.45
+   "gain": 0.55
   },
   {
    "name": "whoosh",
    "t": 34.247,
-   "gain": 0.6
-  },
-  {
-   "name": "impact-bass-1",
-   "t": 35.088,
-   "gain": 0.4
-  },
-  {
-   "name": "pop",
-   "t": 36.73,
-   "gain": 0.45
-  },
-  {
-   "name": "whoosh-short",
-   "t": 41.79,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 42.28,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 44.167,
-   "gain": 0.5
-  },
-  {
-   "name": "whoosh-short",
-   "t": 47.563,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 48.053,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 50.123,
-   "gain": 0.5
-  },
-  {
-   "name": "ping",
-   "t": 53.4,
-   "gain": 0.3
-  },
-  {
-   "name": "click-soft",
-   "t": 54.438,
-   "gain": 0.45
-  },
-  {
-   "name": "click-soft",
-   "t": 58.29,
-   "gain": 0.45
+   "gain": 0.55
   },
   {
    "name": "whoosh",
    "t": 60.28,
-   "gain": 0.6
-  },
-  {
-   "name": "impact-bass-1",
-   "t": 61.044,
-   "gain": 0.4
-  },
-  {
-   "name": "pop",
-   "t": 63.244,
-   "gain": 0.45
-  },
-  {
-   "name": "whoosh-short",
-   "t": 65.902,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 66.392,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 67.833,
-   "gain": 0.5
-  },
-  {
-   "name": "whoosh-short",
-   "t": 71.582,
-   "gain": 0.4
-  },
-  {
-   "name": "sparkle",
-   "t": 72.072,
-   "gain": 0.25
-  },
-  {
-   "name": "click-soft",
-   "t": 73.472,
-   "gain": 0.5
-  },
-  {
-   "name": "ping",
-   "t": 75.577,
-   "gain": 0.3
-  },
-  {
-   "name": "click-soft",
-   "t": 77.577,
-   "gain": 0.45
-  },
-  {
-   "name": "click-soft",
-   "t": 79.474,
-   "gain": 0.45
-  },
-  {
-   "name": "whoosh-short",
-   "t": 81.867,
-   "gain": 0.45
-  },
-  {
-   "name": "pop",
-   "t": 82.362,
-   "gain": 0.45
-  },
-  {
-   "name": "pop",
-   "t": 82.682,
-   "gain": 0.45
-  },
-  {
-   "name": "pop",
-   "t": 83.002,
-   "gain": 0.45
-  },
-  {
-   "name": "sparkle",
-   "t": 87.941,
-   "gain": 0.4
+   "gain": 0.55
   },
   {
    "name": "pop",
@@ -525,18 +310,8 @@
   },
   {
    "name": "click",
-   "t": 90.235,
+   "t": 90.981,
    "gain": 0.6
-  },
-  {
-   "name": "click",
-   "t": 90.915,
-   "gain": 0.6
-  },
-  {
-   "name": "chime",
-   "t": 91.415,
-   "gain": 0.35
   }
  ]
 }

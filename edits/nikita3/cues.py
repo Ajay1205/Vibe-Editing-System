@@ -90,41 +90,33 @@ PUNCHES = [("n31", 1.10, "big"), ("n31", 7.84, "small"), ("n31", 8.88, "small"),
 
 def build():
     caps = list(CAPTIONS)
-    sfx = [("impact-bass-1", caps[0]["beats"]["num"], 0.55), ("whoosh-short", caps[0]["beats"]["words"] - 0.05, 0.5),
-           ("pop", caps[0]["beats"]["sub"], 0.45),
-           ("pop", caps[1]["lines"][0]["t"], 0.45), ("sparkle", caps[1]["lines"][1]["t"], 0.35)]
+    # Sound effects are kept sparse on purpose (the references use 5-6 per reel):
+    # hook hit, one whoosh per word transition, and the comment tap at the end.
+    sfx = [("impact-bass-1", caps[0]["beats"]["num"], 0.5)]
     flashes = []
     for sec in SECTIONS:
         c = sec["clip"]
         start = at(c, 0)
         end = section_end(c) - 0.05
         flashes.append(start)
-        sfx.append(("whoosh", start - 0.12, 0.6))
+        sfx.append(("whoosh", start - 0.12, 0.55))
         tip_end = at(c, sec["tip_end"]) if "tip_end" in sec else end
         caps.append({"type": "title", "num": sec["num"], "word": sec["word"], "start": at(c, sec["title"]),
                      "meaning": sec["meaning"], "meaning_t": at(c, sec["meaning_t"]), "dock": at(c, sec["dock"]),
                      "end": tip_end})
-        sfx += [("impact-bass-2" if sec["num"] == "01" else "impact-bass-1", at(c, sec["title"]), 0.4),
-                ("pop", at(c, sec["meaning_t"]), 0.45)]
         for ex in sec["examples"]:
             caps.append({"type": "example", "en": ex["en"], "hi": ex["hi"], "emoji": ex["emoji"],
                          "start": at(c, ex["t"]), "hi_t": at(c, ex["hi_t"]), "end": at(c, ex["end"])})
-            sfx += [("whoosh-short", at(c, ex["t"]) - 0.04, 0.4), ("sparkle", at(c, ex["t"]) + 0.45, 0.25),
-                    ("click-soft", at(c, ex["hi_t"]), 0.5)]
         tip = sec["tip"]
         caps.append({"type": "tip", "start": at(c, tip["t"]), "end": tip_end,
                      "lines": [{"t": at(c, t), "text": s} for t, s in tip["lines"]]})
-        sfx.append(("ping", at(c, tip["t"]), 0.3))
-        sfx += [("click-soft", at(c, t), 0.45) for t, _ in tip["lines"]]
 
     r, b, cta = OUTRO["recap"], OUTRO["boost"], OUTRO["cta"]
     caps.append({"type": "recap", "start": r["t"], "rows_t": r["rows_t"], "end": r["end"]})
     caps.append({"type": "boost", "start": b["t"], "end": b["end"]})
     caps.append({"type": "cta", "start": cta["t"], "follow": cta["follow"], "comment": cta["comment"],
                  "end": round(cta["end"], 3)})
-    sfx += [("whoosh-short", r["t"], 0.45)] + [("pop", r["rows_t"] + i * 0.32, 0.45) for i in range(3)]
-    sfx += [("sparkle", b["t"], 0.4), ("pop", cta["t"], 0.4), ("click", cta["follow"], 0.6),
-            ("click", cta["comment"], 0.6), ("chime", cta["comment"] + 0.5, 0.35)]
+    sfx += [("pop", cta["t"], 0.4), ("click", max(cta["comment"], cta["t"] + 1.1), 0.6)]
 
     punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
