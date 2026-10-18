@@ -1,5 +1,5 @@
 {
- "duration": 56.2667,
+ "duration": 56.2,
  "fps": 30,
  "captions": [
   {
@@ -100,12 +100,12 @@
    "en_t": 37.55,
    "key": 38.27,
    "pl": 38.53,
-   "end": 40.437000000000005
+   "end": 40.377
   },
   {
    "type": "recap",
-   "start": 40.437000000000005,
-   "end": 45.271,
+   "start": 40.377,
+   "end": 45.204,
    "items": [
     "A **table for two**, please.",
     "Can I get the **menu**, please?",
@@ -123,12 +123,12 @@
    "title": "Save karo 📌",
    "sub": "5 restaurant lines",
    "say": "Real life mein bol kar dekhiye! 🗣️",
-   "say_t": 42.747
+   "say_t": 42.687
   },
   {
    "type": "cta",
-   "start": 45.271,
-   "end": 56.267,
+   "start": 45.204,
+   "end": 56.2,
    "head": "Next <m>situation</m> kaunsi? 🤔",
    "ideas": [
     "✈️ Airport",
@@ -139,10 +139,10 @@
     "🏨 Hotel"
    ],
    "bar": "Aapki situation… comment karo",
-   "more": 46.631,
-   "comment": 49.211,
-   "ideas_t": 50.751,
-   "tap": 55.351
+   "more": 46.564,
+   "comment": 49.144,
+   "ideas_t": 50.684,
+   "tap": 55.284
   }
  ],
  "flashes": [
@@ -220,11 +220,11 @@
    "kind": "close"
   },
   {
-   "t": 40.437000000000005,
+   "t": 40.377,
    "kind": "mid"
   },
   {
-   "t": 53.751,
+   "t": 53.684,
    "kind": "close"
   }
  ],
@@ -314,13 +314,13 @@
   },
   {
    "name": "pop",
-   "t": 49.211,
+   "t": 49.144,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "click",
-   "t": 55.351,
+   "t": 55.284,
    "gain": 0.5,
    "lu": -1.0
   },
@@ -348,7 +348,7 @@
   {
    "name": "riser_user",
    "file": "../../assets/shared/riser_user.mp3",
-   "t": 53.501,
+   "t": 53.434,
    "gain": 0.45,
    "lu": 1.0,
    "from": 1.1,

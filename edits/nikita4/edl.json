@@ -1,7 +1,7 @@
 {
  "fps": 30,
- "frames": 1688,
- "duration": 56.2667,
+ "frames": 1686,
+ "duration": 56.2,
  "segments": [
   {
    "clip": "n41",
@@ -47,16 +47,16 @@
   },
   {
    "clip": "n42",
-   "in": 32.3,
-   "out": 38.3,
+   "in": 32.36,
+   "out": 38.2933,
    "start": 39.1667,
-   "frames": 180
+   "frames": 178
   },
   {
    "clip": "n42",
    "in": 38.516,
    "out": 49.616,
-   "start": 45.1667,
+   "start": 45.1,
    "frames": 333
   }
  ]

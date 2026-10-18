@@ -35,7 +35,7 @@ HOLD_KEEP = 0.32
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = [
     ("n41", 11.30, 99),     # after "...baat ki jaaye": she says "okay" and turns away lifting the mic
-    ("n42", 31.58, 32.30),  # she looks down after "Can I get the bill, please?" (fine until 31.55)
+    ("n42", 31.58, 32.36),  # she looks down after the bill line (fine until 31.55; the take jumps back up at 32.36)
     ("n42", 49.62, 99),     # end right after her last word "banaungi", before she tilts her head away
 ]
 
