@@ -33,11 +33,14 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
   text-shadow: 0 0 6px #fff, 0 0 16px #FFC94D, 0 0 34px #F4B63F, 0 0 64px #F4A53F; }
 
 /* banner */
-.banner { left: 50%; top: 262px; transform: translateX(-50%); width: max-content; display: flex; align-items: center; gap: 16px;
-  padding: 12px 24px; border-radius: 40px; background: rgba(20,14,12,.55); color: #fff; font: 800 30px/1 Outfit; letter-spacing: 2px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.3); }
-.bdots { display: flex; gap: 8px; }
-.bdots i { width: 14px; height: 14px; border-radius: 7px; background: rgba(255,255,255,.35); display: block; }
+/* series title (user chose option B: a question title rather than a label pill) */
+.banner { left: 50%; top: 262px; transform: translateX(-50%); width: 840px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  color: #FFFBF4; text-align: center; }
+.banner > span:first-child { font: 900 64px/1.05 Outfit; letter-spacing: -1px;
+  text-shadow: 0 3px 3px rgba(0,0,0,.6), 0 4px 14px rgba(0,0,0,.55), 0 8px 34px rgba(0,0,0,.45); }
+.banner .hl { color: var(--ink); padding: 0 14px; border-radius: 14px; background: var(--peach); text-shadow: none; }
+.bdots { display: flex; gap: 10px; }
+.bdots i { width: 16px; height: 16px; border-radius: 8px; background: rgba(255,255,255,.45); display: block; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
 
 /* situation */
 .stk { left: 790px; top: 560px; font-size: 130px; line-height: 1;
@@ -156,7 +159,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
               <div class="cbar" id="c7-cb"><span class="ph">Aapki situation… comment karo<i class="cursor">|</i></span>
                 <span class="send" id="c7-btn">💬 Comment</span></div>
               <div class="burst" id="c7-bu">❤️</div></div></div>
-<div id="ban" class="clip" data-start="10.567" data-duration="45.700" data-track-index="6"><div class="layer"><div class="banner" id="ban-b"><span>🍽️ RESTAURANT ENGLISH</span><span class="bdots"><i id="bd0"></i><i id="bd1"></i><i id="bd2"></i><i id="bd3"></i><i id="bd4"></i></span></div></div></div>
+<div id="ban" class="clip" data-start="10.567" data-duration="45.700" data-track-index="6"><div class="layer"><div class="banner" id="ban-b"><span>Restaurant mein<br/><span class="hl">English kaise bolein?</span></span><span class="bdots"><i id="bd0"></i><i id="bd1"></i><i id="bd2"></i><i id="bd3"></i><i id="bd4"></i></span></div></div></div>
 <div id="fl2" class="clip" data-start="7.956" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
 <div id="fl5" class="clip" data-start="15.983" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
 <div id="fl8" class="clip" data-start="21.490" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>

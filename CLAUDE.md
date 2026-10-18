@@ -78,7 +78,7 @@ CTA ideas) and run `build_all.sh`.
   letter board) was called boring and unappealing. Kept only as `build_overlay_v2_menu.py`; don't go back to it.
 - Picture: shots from `cues.json` cut between mid (1.30x), ask (1.46x, on "English mein kaise bologe?") and
   close (1.68x, on every English line), each slowly pushing in 3.5%; warm edge flash on close cut-ins.
-- Captions big and bold at CHEST level (y 1100-1600), like the reference reels; banner "🍽️ SERIES" + progress
+- Captions big and bold at CHEST level (y 1100-1600), like the reference reels; question title ("Restaurant mein / English kaise bolein?", user picked it over a label pill) + progress
   dots at the top; a big emoji sticker pops beside her head for each situation.
 - Hindi need: big white Outfit 64 px, heavy shadow, NO panel (the user dislikes panels behind Hinglish).
   English line: butter-yellow card, maroon Outfit 900, key words on a tomato pill, "please" green + "🙏 polite".

@@ -3,7 +3,7 @@
 Rebuilt after the user found the menu/ticket version (build_overlay_v2_menu.py) boring: the picture now cuts
 between medium and close shots (render_base.py), and the captions sit big and bold at CHEST level, right under
 her face, like the reference reels -- never on her face, never on an empty wall far away.
-  - top: a small series banner ("🍽️ RESTAURANT ENGLISH") with progress dots,
+  - top: the series question title ("Restaurant mein / English kaise bolein?") with progress dots,
   - each situation: a big emoji sticker pops beside her head, "SITUATION n" tag, the Hindi need in big white
     words with a heavy shadow (no panel), then the English line slams in on a warm-white card (espresso text,
     key words in burnt sienna on a peach marker, a small "✓ polite" tag),
@@ -184,7 +184,7 @@ def build(res=2160):
     # series banner with progress dots, from the first situation to the end
     b0 = sits[0]["start"]
     dots = "".join(f'<i id="bd{k}"></i>' for k in range(n_sit))
-    els.append(clip("ban", b0, CUES["duration"], 6, f'<div class="banner" id="ban-b"><span>{CUES["series"]}</span><span class="bdots">{dots}</span></div>'))
+    els.append(clip("ban", b0, CUES["duration"], 6, f'<div class="banner" id="ban-b"><span>{marks(CUES["series"])}</span><span class="bdots">{dots}</span></div>'))
     js.append(f'tl.fromTo("#ban-b", {{opacity: 0, y: -30}}, {{opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}}, {b0 + 0.1});')
     for k, c in enumerate(sits):
         js.append(f'tl.to("#bd{k}", {{backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}}, {c["hi_t"]});')
@@ -250,11 +250,14 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   text-shadow: 0 0 6px #fff, 0 0 16px #FFC94D, 0 0 34px #F4B63F, 0 0 64px #F4A53F; }
 
 /* banner */
-.banner { left: 50%; top: 262px; transform: translateX(-50%); width: max-content; display: flex; align-items: center; gap: 16px;
-  padding: 12px 24px; border-radius: 40px; background: rgba(20,14,12,.55); color: #fff; font: 800 30px/1 Outfit; letter-spacing: 2px;
-  box-shadow: 0 6px 18px rgba(0,0,0,.3); }
-.bdots { display: flex; gap: 8px; }
-.bdots i { width: 14px; height: 14px; border-radius: 7px; background: rgba(255,255,255,.35); display: block; }
+/* series title (user chose option B: a question title rather than a label pill) */
+.banner { left: 50%; top: 262px; transform: translateX(-50%); width: 840px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  color: #FFFBF4; text-align: center; }
+.banner > span:first-child { font: 900 64px/1.05 Outfit; letter-spacing: -1px;
+  text-shadow: 0 3px 3px rgba(0,0,0,.6), 0 4px 14px rgba(0,0,0,.55), 0 8px 34px rgba(0,0,0,.45); }
+.banner .hl { color: var(--ink); padding: 0 14px; border-radius: 14px; background: var(--peach); text-shadow: none; }
+.bdots { display: flex; gap: 10px; }
+.bdots i { width: 16px; height: 16px; border-radius: 8px; background: rgba(255,255,255,.45); display: block; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
 
 /* situation */
 .stk { left: 790px; top: 560px; font-size: 130px; line-height: 1;

@@ -21,7 +21,7 @@ EDL = json.load(open(HERE / "edl.json"))
 # ------------------------------------------------------------------------------------------------ CONTENT
 HOOK_CLIP, SIT_CLIP = "n41", "n42"
 HOOK = {
-    "series": "🍽️ RESTAURANT ENGLISH",                    # top banner for the whole series video
+    "series": "Restaurant mein<br/><m>English kaise bolein?</m>",  # top title for the whole video (<m> = peach marker)
     "lines": [  # chest captions, word by word; **..** = highlight; t = source time the line starts
         {"t": 0.80, "text": "Grammar rules ka **ratta?**", "x_t": 3.00},   # x_t: red ✗ stamp lands ("nahi")
         {"t": 4.50, "text": "**Situations** mein", "sub": "communicate karke seekho ✅", "sub_t": 5.78},
