@@ -35,6 +35,14 @@ No compromise on video quality, sound, transitions, captions or sound effects.
 - Before sending any render: decode the whole file, check loudness and peaks, and look at frames at every caption beat.
 - Never let two encodes write the same output file; wait loops must not `pgrep` their own command line.
 
+## Where final videos go
+
+Final masters go, untouched (no re-encode, no size reduction), into the speaker's Google Drive folder:
+- Nikita: https://drive.google.com/drive/folders/18O_CX2kY7W_qWNL5P_cW8LlSi1v1QAod (folder id 18O_CX2kY7W_qWNL5P_cW8LlSi1v1QAod)
+- Manisha: folder link to come from the user.
+The Drive connector only uploads content passed inline (fine for small files, not for 4K videos of hundreds of MB), so
+send the master in chat and the user drags it into the folder. Never shrink a master to make it fit an upload path.
+
 ## Approved style: Nikita 3 "version 2" (`edits/nikita3`)
 
 The reference for future reels in this account.
