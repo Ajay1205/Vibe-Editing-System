@@ -1,6 +1,6 @@
-"""Final composite: base video (v1/v2) + light grade + caption layer + audio mix -> renders/*.mp4 (4K).
+"""Final composite: base video (v1/v2) + light grade + caption layer + audio mix -> renders/*.mp4.
 
-Usage: python3 -I compose.py v1|v2
+Usage: python3 -I compose.py v1|v2 [--preview]   (--preview = fast 1080p review copy)
 """
 
 import pathlib
@@ -15,21 +15,23 @@ RENDERS = HERE / "renders"
 GRADE = "eq=contrast=1.05:saturation=1.08:gamma=0.98,vignette=angle=PI/5:mode=forward"
 
 
-def main(version, suffix=""):
+def main(version, preview=False):
     RENDERS.mkdir(exist_ok=True)
-    out = RENDERS / f"nikita3_{version}_4k{suffix}.mp4"
+    out = RENDERS / f"nikita3_{version}_{'preview_1080p' if preview else '4k'}.mp4"
+    scale = "scale=1080:1920:flags=lanczos," if preview else ""
     subprocess.run([
         "ffmpeg", "-v", "error", "-stats", "-y",
         "-i", str(BUILD / f"base_{version}.mp4"),
         "-c:v", "libvpx-vp9", "-i", str(BUILD / "overlay.webm"),
         "-i", str(BUILD / "mix.wav"),
-        "-filter_complex", f"[0:v]{GRADE},format=yuv420p[b];[1:v]format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
+        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]{scale}format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
         "-map", "[v]", "-map", "2:a",
-        "-c:v", "libx264", "-preset", "slow", "-crf", "15", "-profile:v", "high", "-level", "5.2",
+        "-c:v", "libx264", *(["-preset", "veryfast", "-crf", "20"] if preview else
+                             ["-preset", "medium", "-crf", "15", "-profile:v", "high", "-level", "5.2"]),
         "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
         "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-movflags", "+faststart", "-shortest", str(out)], check=True)
     print(out)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else "")
+    main(sys.argv[1], "--preview" in sys.argv)

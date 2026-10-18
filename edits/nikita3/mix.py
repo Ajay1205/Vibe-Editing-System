@@ -17,7 +17,7 @@ BUILD = HERE / "build"
 SFX_DIR = pathlib.Path.home() / ".claude/skills/media-use/audio/assets/sfx"
 CUES = json.load(open(HERE / "cues.json"))
 SR = 48000
-SFX_UNDER_DB = 12  # loudest part of any effect sits this far under her speaking level
+SFX_UNDER_DB = 6  # loudest part of any effect sits this far under her speaking level
 MUSIC = False  # off for now (user request); set True to lay assets/music.wav under the voice
 MUSIC_DB = -10  # music bed ~ -30 LUFS, ~16 dB under the voice before ducking
 
@@ -63,14 +63,14 @@ def main():
             snd = decode(SFX_DIR / f"{s['name']}.mp3")
             cache[s["name"]] = (snd, float(window_db(snd).max()))
         snd, peak_db = cache[s["name"]]
-        trim_db = max(-6.0, min(0.0, 20 * np.log10(s["gain"] / 0.55)))  # per-cue emphasis, never above the cap
+        trim_db = max(-3.0, min(0.0, 20 * np.log10(s["gain"] / 0.55)))  # per-cue emphasis, never above the cap
         g = 10 ** ((speaking_db - SFX_UNDER_DB + trim_db - peak_db) / 20)
         i = int(s["t"] * SR)
         j = min(n, i + len(snd))
         bed[i:j] += snd[: j - i] * g
     write(BUILD / "sfx.wav", bed)
 
-    duck = "sidechaincompress=threshold=0.04:ratio=4:attack=10:release=250:makeup=1"
+    duck = "sidechaincompress=threshold=0.06:ratio=2:attack=10:release=200:makeup=1"
     master = "alimiter=limit=0.84:attack=3:release=50:level=disabled,aresample=48000[out]"
     if MUSIC:
         graph = ("[0]asplit=3[v][k1][k2];"
