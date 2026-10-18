@@ -1,17 +1,35 @@
 {
- "duration": 57.2,
+ "duration": 58.9667,
  "fps": 30,
  "captions": [
   {
    "type": "hook",
    "start": 0.0,
    "end": 10.567,
+   "text": {
+    "question": "Grammar rules <m>ratta</m> maar ke? 📚",
+    "book": "GRAMMAR<br/>RULES",
+    "stamp": "✗ NAHI",
+    "board": [
+     "SITUATIONS",
+     "MEIN",
+     "COMMUNICATE"
+    ],
+    "board_note": "karke seekho 🗣️",
+    "today": "Aaj seekhenge 👇",
+    "neon": "Restaurant",
+    "neon_sub": "ENGLISH 🍽️"
+   },
    "beats": {
     "book": 0.756,
     "stamp": 2.276,
-    "sit": 3.776,
-    "talk": 5.056,
-    "aaj": 6.776,
+    "rows": [
+     3.776,
+     4.476,
+     5.056
+    ],
+    "note": 5.436,
+    "today": 6.776,
     "neon": 7.956
    }
   },
@@ -27,7 +45,7 @@
    "en_t": 16.023,
    "key": 16.203,
    "pl": 16.963,
-   "end": 17.814
+   "end": 19.043
   },
   {
    "type": "situation",
@@ -35,13 +53,13 @@
    "icon": "menu",
    "hi": "Kya mujhe menu mil sakta hai?",
    "en": "Can I get the **menu**, please?",
-   "start": 17.814,
-   "hi_t": 18.014,
-   "q": 19.794,
-   "en_t": 21.694,
-   "key": 22.274,
-   "pl": 22.574,
-   "end": 23.647000000000002
+   "start": 19.043,
+   "hi_t": 19.043,
+   "q": 20.123,
+   "en_t": 22.023,
+   "key": 22.603,
+   "pl": 22.903,
+   "end": 25.282999999999998
   },
   {
    "type": "situation",
@@ -49,13 +67,13 @@
    "icon": "spoon",
    "hi": "Khaane ke liye chammach chahiye",
    "en": "Can I get a **spoon**, please?",
-   "start": 23.647000000000002,
-   "hi_t": 23.847,
-   "q": 25.887,
-   "en_t": 27.647,
-   "key": 28.187,
-   "pl": 28.467,
-   "end": 29.618000000000002
+   "start": 25.282999999999998,
+   "hi_t": 25.282999999999998,
+   "q": 26.623,
+   "en_t": 28.383,
+   "key": 28.923,
+   "pl": 29.203,
+   "end": 31.673
   },
   {
    "type": "situation",
@@ -63,13 +81,13 @@
    "icon": "water",
    "hi": "Kya mujhe ek glass paani mil sakta hai?",
    "en": "Can I get a **glass of water**, please?",
-   "start": 29.618000000000002,
-   "hi_t": 29.818,
-   "q": 31.528,
-   "en_t": 33.428,
-   "key": 33.868,
-   "pl": 34.688,
-   "end": 35.611
+   "start": 31.673,
+   "hi_t": 31.673,
+   "q": 32.683,
+   "en_t": 34.583,
+   "key": 35.023,
+   "pl": 35.843,
+   "end": 38.003
   },
   {
    "type": "situation",
@@ -77,18 +95,18 @@
    "icon": "bill",
    "hi": "Bill maangna hai",
    "en": "Can I get the **bill**, please?",
-   "start": 35.611,
-   "hi_t": 35.811,
-   "q": 36.771,
-   "en_t": 38.531,
-   "key": 39.251,
-   "pl": 39.511,
-   "end": 40.17
+   "start": 38.003,
+   "hi_t": 38.003,
+   "q": 38.263,
+   "en_t": 40.023,
+   "key": 40.743,
+   "pl": 41.003,
+   "end": 42.637
   },
   {
    "type": "recap",
-   "start": 40.17,
-   "end": 46.204,
+   "start": 42.637,
+   "end": 47.971,
    "items": [
     "A **table for two**, please.",
     "Can I get the **menu**, please?",
@@ -103,21 +121,34 @@
     "water",
     "bill"
    ],
-   "say": 43.68
+   "title": "Today's Menu",
+   "sub": "restaurant English 🍽️ · save karo 📌",
+   "say": "Real life mein bol kar dekhiye! 🗣️",
+   "say_t": 45.447
   },
   {
    "type": "cta",
-   "start": 46.204,
-   "end": 57.2,
-   "more": 47.564,
-   "comment": 50.144,
-   "ideas": 51.684,
-   "tap": 56.284
+   "start": 47.971,
+   "end": 58.967,
+   "head": "Aur <m>situations</m> chahiye? 🤔",
+   "ideas": [
+    "✈️ Airport",
+    "🏥 Hospital",
+    "🏦 Bank",
+    "🛍️ Shopping",
+    "💼 Interview",
+    "🏨 Hotel"
+   ],
+   "bar": "Aapki situation… comment karo",
+   "more": 49.331,
+   "comment": 51.911,
+   "ideas_t": 53.451,
+   "tap": 58.051
   }
  ],
  "flashes": [
   10.567,
-  40.17
+  42.637
  ],
  "punches": [
   {
@@ -133,19 +164,19 @@
    "kind": "small"
   },
   {
-   "t": 21.694,
+   "t": 22.023,
    "kind": "small"
   },
   {
-   "t": 27.647,
+   "t": 28.383,
    "kind": "small"
   },
   {
-   "t": 33.428,
+   "t": 34.583,
    "kind": "small"
   },
   {
-   "t": 38.531,
+   "t": 40.023,
    "kind": "small"
   }
  ],
@@ -154,111 +185,100 @@
    "name": "stamp",
    "t": 2.276,
    "gain": 0.5,
-   "lu": 0.0,
+   "lu": -2.0,
    "file": "assets/sfx/stamp.wav"
   },
   {
-   "name": "pop",
+   "name": "click-soft",
    "t": 3.776,
    "gain": 0.5,
-   "lu": -1.0
+   "lu": -4.0
   },
   {
    "name": "neon",
    "t": 7.906,
    "gain": 0.5,
-   "lu": -2.0,
+   "lu": -4.0,
    "file": "assets/sfx/neon.wav"
   },
   {
-   "name": "bell",
-   "t": 17.283,
+   "name": "pop",
+   "t": 17.083,
    "gain": 0.5,
-   "lu": -1.0,
-   "file": "assets/sfx/bell.wav"
+   "lu": -4.0
   },
   {
    "name": "whoosh-short",
-   "t": 17.764,
+   "t": 18.943,
    "gain": 0.5,
-   "lu": -2.0
-  },
-  {
-   "name": "bell",
-   "t": 22.894,
-   "gain": 0.5,
-   "lu": -1.0,
-   "file": "assets/sfx/bell.wav"
-  },
-  {
-   "name": "whoosh-short",
-   "t": 23.597,
-   "gain": 0.5,
-   "lu": -2.0
-  },
-  {
-   "name": "bell",
-   "t": 28.787,
-   "gain": 0.5,
-   "lu": -1.0,
-   "file": "assets/sfx/bell.wav"
-  },
-  {
-   "name": "whoosh-short",
-   "t": 29.568,
-   "gain": 0.5,
-   "lu": -2.0
-  },
-  {
-   "name": "bell",
-   "t": 35.008,
-   "gain": 0.5,
-   "lu": -1.0,
-   "file": "assets/sfx/bell.wav"
-  },
-  {
-   "name": "whoosh-short",
-   "t": 35.561,
-   "gain": 0.5,
-   "lu": -2.0
-  },
-  {
-   "name": "bell",
-   "t": 39.831,
-   "gain": 0.5,
-   "lu": -1.0,
-   "file": "assets/sfx/bell.wav"
-  },
-  {
-   "name": "printer",
-   "t": 39.151,
-   "gain": 0.5,
-   "lu": -4.0,
-   "file": "assets/sfx/printer.wav"
+   "lu": -4.0
   },
   {
    "name": "pop",
-   "t": 50.144,
+   "t": 23.023,
    "gain": 0.5,
-   "lu": -2.0
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 25.183,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "pop",
+   "t": 29.323,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 31.573,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "pop",
+   "t": 35.963,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 37.903,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "kaching",
+   "t": 40.723,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/kaching.wav"
+  },
+  {
+   "name": "pop",
+   "t": 51.911,
+   "gain": 0.5,
+   "lu": -4.0
   },
   {
    "name": "click",
-   "t": 56.284,
+   "t": 58.051,
    "gain": 0.5,
-   "lu": 0.0
+   "lu": -1.0
   },
   {
    "name": "whoosh",
    "t": 10.447,
    "gain": 0.5,
-   "lu": 0.0
+   "lu": -2.0
   },
   {
    "name": "whoosh",
-   "t": 40.05,
+   "t": 42.517,
    "gain": 0.5,
-   "lu": 0.0
+   "lu": -2.0
   },
   {
    "name": "riser_user",
@@ -272,7 +292,7 @@
   {
    "name": "riser_user",
    "file": "../../assets/shared/riser_user.mp3",
-   "t": 54.434,
+   "t": 56.201,
    "gain": 0.45,
    "lu": 1.0,
    "from": 1.1,

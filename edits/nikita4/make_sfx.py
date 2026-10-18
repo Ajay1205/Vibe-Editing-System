@@ -1,7 +1,6 @@
 """Synthesise the restaurant sound effects the bundled library doesn't have -> assets/sfx/*.wav.
 
-bell    : desk service bell "ding" (struck metal: inharmonic partials, slight beating, long ring)
-printer : receipt printer feeding paper (fast thermal-head chatter + motor hum, ~0.9 s)
+kaching : small, soft cash-register "cha-ching" for the bill (drawer click + two light coin rings, ~0.7 s)
 stamp   : rubber stamp slammed on paper (low thud + paper slap)
 neon    : neon sign switching on (two quick flickers, then a short buzzing hum)
 Deterministic (fixed seed), so the build is reproducible.
@@ -31,29 +30,21 @@ def lowpass(x, fc):
     return y
 
 
-def bell():
-    t = t_axis(2.2)
-    f0 = 2093.0
-    parts = [(1.0, 1.0, 1.6), (1.0021, 0.6, 1.5), (2.76, 0.45, 0.8), (5.40, 0.22, 0.35), (8.93, 0.08, 0.15),
-             (0.52, 0.10, 0.9)]
-    x = sum(a * np.exp(-t / d) * np.sin(2 * np.pi * f0 * r * t + rng.uniform(0, 6.3)) for r, a, d in parts)
-    strike = rng.standard_normal(len(t)) * np.exp(-t / 0.002) * 0.6
-    x = x + strike - lowpass(strike, 3000)
-    x *= np.minimum(1, t / 0.0015)
-    return x
-
-
-def printer():
-    t = t_axis(0.95)
-    chatter = rng.standard_normal(len(t))
-    chatter = chatter - lowpass(chatter, 1800)
-    gate = (np.sin(2 * np.pi * 38 * t) > 0.15).astype(float)  # head steps
-    gate = lowpass(gate, 400)
-    hum = 0.25 * np.sign(np.sin(2 * np.pi * 110 * t)) * 0.5
-    hum = lowpass(hum, 900)
-    env = np.minimum(1, t / 0.03) * np.minimum(1, (t[-1] - t) / 0.06)
-    tear = np.zeros_like(t)
-    return (0.5 * chatter * gate + hum) * env + tear
+def kaching():
+    """Short and soft on purpose (user note: the long bell ring was unbearable): mellow coin rings, no ring-out."""
+    t = t_axis(0.75)
+    click = rng.standard_normal(len(t)) * np.exp(-t / 0.006)
+    click = lowpass(click, 5000) - lowpass(click, 900)
+    thunk = 0.5 * np.sin(2 * np.pi * 160 * t) * np.exp(-t / 0.03)
+    x = click + thunk
+    for start, f0, amp in [(0.085, 1568.0, 0.55), (0.165, 1975.5, 0.42)]:
+        tt = np.clip(t - start, 0, None)
+        on = (t >= start) * np.minimum(1, tt / 0.002)
+        ring = sum(a * np.exp(-tt / d) * np.sin(2 * np.pi * f0 * r * tt)
+                   for r, a, d in [(1.0, 1.0, 0.16), (2.0, 0.3, 0.08), (2.76, 0.25, 0.05)])
+        x = x + amp * on * ring
+    x = lowpass(x, 7000)
+    return x * np.minimum(1, (t[-1] - t) / 0.05)
 
 
 def stamp():
@@ -82,7 +73,7 @@ def neon():
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    for name, fn in [("bell", bell), ("printer", printer), ("stamp", stamp), ("neon", neon)]:
+    for name, fn in [("kaching", kaching), ("stamp", stamp), ("neon", neon)]:
         x = fn()
         x = 0.9 * x / np.abs(x).max()
         st = np.stack([x, x], 1).astype(np.float32)

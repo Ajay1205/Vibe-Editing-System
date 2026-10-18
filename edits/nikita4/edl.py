@@ -26,11 +26,15 @@ MIN_GAP = 0.45
 KEEP_SHARE, KEEP_MIN, KEEP_MAX = 0.6, 0.42, 0.85
 HEAD = 0.06
 TAIL = 0.35
+# Pauses right after each taught English line are kept whole (up to HOLD_MAX) so viewers can read the line
+# (user note: the English line was gone half a second after she finished). (clip, end of the English line)
+HOLD_AFTER = [("n42", 7.34), ("n42", 13.27), ("n42", 19.64), ("n42", 26.15), ("n42", 31.16)]
+HOLD_MAX = 1.2
 
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = [
     ("n41", 11.30, 99),     # after "...baat ki jaaye": she says "okay" and turns away lifting the mic
-    ("n42", 31.30, 32.30),  # she looks down after "Can I get the bill, please?"
+    ("n42", 31.58, 32.30),  # she looks down after "Can I get the bill, please?" (fine until 31.55)
     ("n42", 49.62, 99),     # end right after her last word "banaungi", before she tilts her head away
 ]
 
@@ -88,6 +92,8 @@ def keep_ranges(clip):
             ranges[-1][1] = en
             continue
         keep = min(KEEP_MAX, max(KEEP_MIN, KEEP_SHARE * gap))
+        if any(c == clip and abs(ranges[-1][1] - t) < 0.15 for c, t in HOLD_AFTER):
+            keep = min(gap, HOLD_MAX)
         if gap - keep < 0.12:  # cutting out a sliver would only add a jump cut
             ranges[-1][1] = en
             continue

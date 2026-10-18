@@ -1,7 +1,7 @@
 {
  "fps": 30,
- "frames": 1716,
- "duration": 57.2,
+ "frames": 1769,
+ "duration": 58.9667,
  "segments": [
   {
    "clip": "n41",
@@ -13,50 +13,22 @@
   {
    "clip": "n42",
    "in": 0.284,
-   "out": 7.6173,
+   "out": 31.584,
    "start": 10.5667,
-   "frames": 220
-  },
-  {
-   "clip": "n42",
-   "in": 7.946,
-   "out": 13.646,
-   "start": 17.9,
-   "frames": 171
-  },
-  {
-   "clip": "n42",
-   "in": 14.053,
-   "out": 20.0197,
-   "start": 23.6,
-   "frames": 179
-  },
-  {
-   "clip": "n42",
-   "in": 20.439,
-   "out": 26.4723,
-   "start": 29.5667,
-   "frames": 181
-  },
-  {
-   "clip": "n42",
-   "in": 26.809,
-   "out": 31.309,
-   "start": 35.6,
-   "frames": 135
+   "frames": 939
   },
   {
    "clip": "n42",
    "in": 32.3,
    "out": 38.3,
-   "start": 40.1,
+   "start": 41.8667,
    "frames": 180
   },
   {
    "clip": "n42",
    "in": 38.516,
    "out": 49.616,
-   "start": 46.1,
+   "start": 47.8667,
    "frames": 333
   }
  ]

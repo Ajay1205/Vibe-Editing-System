@@ -68,6 +68,24 @@ Each video gets a NEW presentation style; only the core rules above carry over. 
 - Readable on a phone but not oversized: modest sizes, contrast from shadows rather than big fonts.
 - Manisha's Drive folder: not shared yet; she gets the master from chat.
 
+## Template: "Situation Series" (`edits/nikita4`, restaurant English)
+
+The user wants this as the reusable template for all situation-based videos (restaurant, airport, hospital...).
+New video: copy `edits/nikita4`, point `edl.py` at the new footage (CLIPS, EXCLUDE, HOLD_AFTER), then edit only
+the CONTENT block of `cues.py` (hook texts, situations with word times, recap, CTA ideas) and run `build_all.sh`.
+- Look: tomato #E8452C / mustard #F4B63F / cream #FFF4E0 / charcoal; DM Serif Display titles, Outfit English,
+  Kalam for Hinglish (58-60 px with a heavy shadow, the user found 48 px unreadable), Pacifico neon sign.
+- Hook: myth book stamped "✗ NAHI" -> felt letter board, letters pop in per spoken word -> neon topic sign.
+  (Chat bubbles there were called boring; don't bring them back.)
+- Each situation, one after another: animated icon on a dinner plate (or any emoji), "SITUATION n/N" chip, Hindi
+  need on the wall, then the English line written word by word on an order ticket; key words get a mustard
+  marker; "please" gets a "✨ polite!" stamp. Paper-ticket swipe between situations, candle-glow bloom between sections.
+- Reading time: keep her whole pause after each English line (HOLD_AFTER) and hold the ticket READ_HOLD
+  (0.7 s) into the next situation. The user flagged a line that was gone half a second after she finished.
+- Recap "Today's Menu" card with all lines, then a comment CTA with floating idea chips and a tapped button.
+- Sound: no long or bright rings. The desk bell and receipt printer were "unbearable". Use short, soft effects
+  well under her voice: pop on the polite stamp, a soft synthesised cha-ching on money moments, quiet whooshes.
+
 ## Working rules (from the guide)
 
 - Plan with a beat sheet and wait for approval before building.

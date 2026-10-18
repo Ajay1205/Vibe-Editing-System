@@ -56,9 +56,31 @@ ICONS = {
         <g stroke="#9A8F80" stroke-width="3" stroke-linecap="round"><line x1="58" y1="64" x2="100" y2="64"/><line x1="58" y1="76" x2="92" y2="76"/><line x1="58" y1="88" x2="100" y2="88"/></g>
         <text x="80" y="106" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="15" fill="#E8452C">TOTAL ₹</text></g></g>
       <rect x="34" y="30" width="92" height="22" rx="8" fill="#2B2522"/><rect x="44" y="46" width="72" height="5" rx="2" fill="#111"/>
-      <circle cx="114" cy="41" r="4" fill="#5BE37D"/>""",
+      <circle cx="114" cy="41" r="4" fill="#5BE37D"/>
+      <g class="i-coin"><circle cx="128" cy="34" r="16" fill="#F4B63F" stroke="#C98F1C" stroke-width="3"/>
+        <text x="128" y="41" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="19" fill="#7A5310">₹</text></g>""",
 }
 EMOJI = {"table": "🪑", "menu": "📖", "spoon": "🥄", "water": "🥛", "bill": "🧾"}
+
+
+def icon_svg(kind):
+    """Animated icon from ICONS, or any emoji sitting on the plate (for new situations without a drawn icon)."""
+    if kind in ICONS:
+        return ICONS[kind]
+    return f'<text class="i-emoji" x="80" y="104" text-anchor="middle" font-size="64">{html.escape(kind)}</text>'
+
+
+def marks(text):
+    """<m>word</m> in content text -> mustard marker span."""
+    return text.replace("<m>", '<span class="mus">').replace("</m>", "</span>")
+
+
+def board_js(cid, times, rows):
+    """Letter-board rows: each letter pops onto the felt as she says that word."""
+    return "".join(
+        f'tl.fromTo("#{cid}-r{k} .lt", {{opacity: 0, y: -26, scale: 1.4}}, {{opacity: 1, y: 0, scale: 1, duration: 0.16, '
+        f'ease: "back.out(3)", stagger: {min(0.05, 0.45 / max(1, len(r))):.3f}}}, {t - 0.05});'
+        for k, (t, r) in enumerate(zip(times, rows)))
 
 
 def words_html(text):
@@ -113,12 +135,18 @@ def icon_js(cid, kind, c):
           tl.fromTo("{p} .i-water", {{attr: {{y: 130}}}}, {{attr: {{y: 54}}, duration: 1.6, ease: "power1.inOut"}}, {s + 0.3});
           tl.fromTo("{p} .i-bub", {{attr: {{cy: 126}}, opacity: 0}}, {{attr: {{cy: 60}}, opacity: 1, duration: 1.1, stagger: 0.3, repeat: 2, ease: "none"}}, {s + 0.9});
           tl.to("{p} svg", {{rotation: 6, duration: 0.15, yoyo: true, repeat: 3, transformOrigin: "50% 80%"}}, {k});"""
+    if kind not in ICONS:
+        return f"""
+          tl.fromTo("{p} .i-emoji", {{scale: 0.2, rotation: -40, transformOrigin: "80px 80px"}}, {{scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2.4)"}}, {s + 0.2});
+          tl.to("{p} .i-emoji", {{scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, transformOrigin: "80px 80px"}}, {k});"""
     if kind == "bill":
         return f"""
           tl.fromTo("{p} .i-receipt", {{y: 0}}, {{y: 0, duration: 0.01}}, {s});
           tl.to("{p} .i-receipt", {{y: 36, duration: 0.5, ease: "steps(6)"}}, {s + 0.4});
           tl.to("{p} .i-receipt", {{y: 84, duration: 0.85, ease: "steps(10)"}}, {k - 0.1});
-          tl.to("{p} .i-receipt", {{y: 92, duration: 0.25, ease: "back.out(2)"}}, {k + 0.8});"""
+          tl.to("{p} .i-receipt", {{y: 92, duration: 0.25, ease: "back.out(2)"}}, {k + 0.8});
+          tl.fromTo("{p} .i-coin", {{opacity: 0, y: 30, scale: 0.3, transformOrigin: "128px 34px"}}, {{opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(3)"}}, {k});
+          tl.to("{p} .i-coin", {{rotationY: 360, duration: 0.6, ease: "power2.out"}}, {k + 0.3});"""
     return ""
 
 
@@ -134,36 +162,36 @@ def build(res=2160):
         s, e = c["start"], c["end"]
         cid = f"c{i}"
         if c["type"] == "hook":
-            b = c["beats"]
+            b, tx = c["beats"], c["text"]
+            rows = "".join(f'<div class="lb-row" id="{cid}-r{k}">' + "".join(
+                f'<span class="lt" style="transform: rotate({((j * 7 + k * 3) % 5 - 2) * 1.2:.1f}deg)">{ch if ch != " " else "&nbsp;"}</span>'
+                for j, ch in enumerate(row)) + "</div>" for k, row in enumerate(tx["board"]))
             els.append(clip(cid, s, e, 1, f"""
               <div class="scene" id="{cid}-a">
-                <div class="h-q" id="{cid}-q">Grammar rules <span class="mus">ratta</span> maar ke? 📚</div>
-                <div class="book" id="{cid}-book"><div class="b-spine"></div><div class="b-title">GRAMMAR<br/>RULES</div><div class="b-lines"><i></i><i></i><i></i></div></div>
-                <div class="stamp" id="{cid}-st" data-layout-allow-overlap>✗ NAHI</div>
+                <div class="h-q" id="{cid}-q">{marks(tx['question'])}</div>
+                <div class="book" id="{cid}-book"><div class="b-spine"></div><div class="b-title">{tx['book']}</div><div class="b-lines"><i></i><i></i><i></i></div></div>
+                <div class="stamp" id="{cid}-st" data-layout-allow-overlap>{tx['stamp']}</div>
               </div>
               <div class="scene" id="{cid}-b">
-                <div class="h-big" id="{cid}-sit">Situations <span class="tick">✓</span></div>
-                <div class="bub bA" id="{cid}-b1">Hello! 👋</div>
-                <div class="bub bB" id="{cid}-b2">Excuse me…</div>
-                <div class="bub bC" id="{cid}-b3">Thank you 🙏</div>
-                <div class="h-note" id="{cid}-talk">mein communicate karke seekho</div>
+                <div class="board" id="{cid}-board"><div class="lb-felt">{rows}</div><div class="lb-check" id="{cid}-ck">✓</div></div>
+                <div class="h-note" id="{cid}-talk">{tx['board_note']}</div>
               </div>
               <div class="scene" id="{cid}-c">
-                <div class="h-note top" id="{cid}-aaj">Aaj seekhenge 👇</div>
-                <div class="neon" id="{cid}-neon"><div class="n-a">Restaurant</div><div class="n-b">ENGLISH 🍽️</div></div>
+                <div class="h-note top" id="{cid}-aaj">{tx['today']}</div>
+                <div class="neon" id="{cid}-neon"><div class="n-a">{tx['neon']}</div><div class="n-b">{tx['neon_sub']}</div></div>
               </div>"""))
             js.append(f"""
               tl.fromTo("#{cid}-q", {{opacity: 0, y: -20}}, {{opacity: 1, y: 0, duration: 0.4, ease: "power2.out"}}, 0.15);
               tl.fromTo("#{cid}-book", {{opacity: 0, y: 60, rotation: -8}}, {{opacity: 1, y: 0, rotation: -3, duration: 0.5, ease: "back.out(1.7)"}}, {b['book']});
               tl.fromTo("#{cid}-st", {{opacity: 0, scale: 2.6, rotation: -24}}, {{opacity: 1, scale: 1, rotation: -12, duration: 0.22, ease: "power4.in"}}, {b['stamp'] - 0.22});
               tl.to("#{cid}-book", {{x: 10, duration: 0.05, yoyo: true, repeat: 5}}, {b['stamp']});
-              tl.to("#{cid}-a", {{x: -700, rotation: -8, opacity: 0, duration: 0.4, ease: "power2.in"}}, {b['sit'] - 0.35});
-              tl.fromTo("#{cid}-sit", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)"}}, {b['sit']});
-              tl.fromTo("#{cid}-sit .tick", {{scale: 0, rotation: -40}}, {{scale: 1, rotation: 0, duration: 0.35, ease: "back.out(3)"}}, {b['sit'] + 0.35});
-              tl.fromTo("#{cid}-b .bub", {{opacity: 0, scale: 0.3}}, {{opacity: 1, scale: 1, duration: 0.35, stagger: 0.28, ease: "back.out(2.2)"}}, {b['talk'] - 0.1});
-              tl.fromTo("#{cid}-talk", {{opacity: 0, y: 16}}, {{opacity: 1, y: 0, duration: 0.35}}, {b['talk'] + 0.2});
-              tl.to("#{cid}-b", {{y: -80, opacity: 0, duration: 0.35, ease: "power2.in"}}, {b['aaj'] - 0.3});
-              tl.fromTo("#{cid}-aaj", {{opacity: 0, y: 16}}, {{opacity: 1, y: 0, duration: 0.35}}, {b['aaj']});
+              tl.to("#{cid}-a", {{x: -700, rotation: -8, opacity: 0, duration: 0.4, ease: "power2.in"}}, {b['rows'][0] - 0.55});
+              tl.fromTo("#{cid}-board", {{opacity: 0, y: -260, rotation: -6}}, {{opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: "bounce.out"}}, {b['rows'][0] - 0.45});
+              {board_js(cid, b['rows'], tx['board'])}
+              tl.fromTo("#{cid}-ck", {{opacity: 0, scale: 2.4, rotation: -30}}, {{opacity: 1, scale: 1, rotation: 8, duration: 0.25, ease: "power4.in"}}, {b['note'] - 0.1});
+              tl.fromTo("#{cid}-talk", {{opacity: 0, y: 16}}, {{opacity: 1, y: 0, duration: 0.35}}, {b['note']});
+              tl.to("#{cid}-b", {{y: -80, opacity: 0, duration: 0.35, ease: "power2.in"}}, {b['today'] - 0.3});
+              tl.fromTo("#{cid}-aaj", {{opacity: 0, y: 16}}, {{opacity: 1, y: 0, duration: 0.35}}, {b['today']});
               tl.set("#{cid}-neon", {{opacity: 0}}, 0);
               tl.set("#{cid}-neon", {{opacity: 1}}, {b['neon']});
               tl.set("#{cid}-neon", {{opacity: 0.15}}, {b['neon'] + 0.07});
@@ -178,7 +206,7 @@ def build(res=2160):
             dots = "".join(f'<i class="{"on" if k < n else ""}"></i>' for k in range(n_sit))
             els.append(clip(cid, s, e, 2, f"""
               <div class="sit" id="{cid}-all">
-                <div class="plate" id="{cid}-ic"><svg viewBox="0 0 160 160" width="150" height="150">{PLATE}{ICONS[c['icon']]}</svg></div>
+                <div class="plate" id="{cid}-ic"><svg viewBox="0 0 160 160" width="150" height="150">{PLATE}{icon_svg(c['icon'])}</svg></div>
                 <div class="chip" id="{cid}-chip">SITUATION {n}/{n_sit}<span class="dots">{dots}</span></div>
                 <div class="hi" id="{cid}-hi">“{html.escape(c['hi'])}”</div>
                 <div class="ticket" id="{cid}-tk">
@@ -203,29 +231,28 @@ def build(res=2160):
               {icon_js(cid, c['icon'], c)}
               tl.to("#{cid}-all", {{x: -420, y: -40, rotation: -7, opacity: 0, duration: 0.32, ease: "power2.in"}}, {e - 0.32});""")
         elif c["type"] == "recap":
-            items = "".join(f'<div class="r-item"><span class="r-ic">{EMOJI[k]}</span><span class="r-t">{rich(t, "r-k")}</span><span class="r-tick">✓</span></div>'
+            items = "".join(f'<div class="r-item"><span class="r-ic">{EMOJI.get(k, k)}</span><span class="r-t">{rich(t, "r-k")}</span><span class="r-tick">✓</span></div>'
                             for t, k in zip(c["items"], c["icons"]))
             els.append(clip(cid, s, e, 3, f"""
               <div class="menu" id="{cid}-m">
-                <div class="m-title">Today's Menu</div>
-                <div class="m-sub">restaurant English 🍽️ · save karo 📌</div>
+                <div class="m-title">{c['title']}</div>
+                <div class="m-sub">{c['sub']}</div>
                 <div class="m-rule"></div>
                 {items}
-                <div class="m-foot" id="{cid}-say">Real life mein bol kar dekhiye! 🗣️</div>
+                <div class="m-foot" id="{cid}-say">{c['say']}</div>
               </div>"""))
             js.append(f"""
               tl.fromTo("#{cid}-m", {{opacity: 0, y: 60, rotationX: 40, transformPerspective: 900}}, {{opacity: 1, y: 0, rotationX: 0, duration: 0.55, ease: "back.out(1.4)"}}, {s + 0.05});
               tl.fromTo("#{cid}-m .r-item", {{opacity: 0, x: -30}}, {{opacity: 1, x: 0, duration: 0.3, stagger: 0.32, ease: "power2.out"}}, {s + 0.45});
               tl.fromTo("#{cid}-m .r-tick", {{opacity: 0, scale: 2}}, {{opacity: 1, scale: 1, duration: 0.18, stagger: 0.32, ease: "power3.in"}}, {s + 0.7});
-              tl.fromTo("#{cid}-say", {{opacity: 0, y: 12}}, {{opacity: 1, y: 0, duration: 0.35}}, {c['say']});
+              tl.fromTo("#{cid}-say", {{opacity: 0, y: 12}}, {{opacity: 1, y: 0, duration: 0.35}}, {c['say_t']});
               tl.to("#{cid}-m", {{opacity: 0, y: -60, duration: 0.3, ease: "power2.in"}}, {e - 0.3});""")
         elif c["type"] == "cta":
-            ideas = ["✈️ Airport", "🏥 Hospital", "🏦 Bank", "🛍️ Shopping", "💼 Interview", "🏨 Hotel"]
-            chips = "".join(f'<span class="idea">{t}</span>' for t in ideas)
+            chips = "".join(f'<span class="idea">{t}</span>' for t in c["ideas"])
             els.append(clip(cid, s, e, 4, f"""
-              <div class="cta-h" id="{cid}-h">Aur <span class="mus">situations</span> chahiye? 🤔</div>
+              <div class="cta-h" id="{cid}-h">{marks(c['head'])}</div>
               <div class="ideas" id="{cid}-i">{chips}</div>
-              <div class="cbar" id="{cid}-cb"><span class="ph">Aapki situation… comment karo<i class="cursor">|</i></span>
+              <div class="cbar" id="{cid}-cb"><span class="ph">{c['bar']}<i class="cursor">|</i></span>
                 <span class="send" id="{cid}-btn">💬 Comment</span></div>
               <div class="burst" id="{cid}-bu">❤️</div>"""))
             js.append(f"""
@@ -233,8 +260,8 @@ def build(res=2160):
               tl.fromTo("#{cid}-h .mus", {{backgroundSize: "0% 42%"}}, {{backgroundSize: "100% 42%", duration: 0.35}}, {c['more']});
               tl.fromTo("#{cid}-cb", {{opacity: 0, y: 40}}, {{opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)"}}, {c['comment']});
               tl.fromTo("#{cid} .cursor", {{opacity: 1}}, {{opacity: 0, duration: 0.25, yoyo: true, repeat: 15}}, {c['comment']});
-              tl.fromTo("#{cid}-i .idea", {{opacity: 0, y: 50, scale: 0.6}}, {{opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.2, ease: "back.out(2)"}}, {c['ideas']});
-              tl.to("#{cid}-i .idea", {{y: -8, duration: 0.9, yoyo: true, repeat: 5, stagger: 0.15, ease: "sine.inOut"}}, {c['ideas'] + 1.4});
+              tl.fromTo("#{cid}-i .idea", {{opacity: 0, y: 50, scale: 0.6}}, {{opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.2, ease: "back.out(2)"}}, {c['ideas_t']});
+              tl.to("#{cid}-i .idea", {{y: -8, duration: 0.9, yoyo: true, repeat: 5, stagger: 0.15, ease: "sine.inOut"}}, {c['ideas_t'] + 1.4});
               tl.to("#{cid}-btn", {{scale: 0.86, duration: 0.08, yoyo: true, repeat: 1}}, {c['tap']});
               tl.fromTo("#{cid}-bu", {{opacity: 0, scale: 0.3, y: 0}}, {{opacity: 1, scale: 1.3, y: -70, duration: 0.45, ease: "back.out(2)"}}, {c['tap'] + 0.05});
               tl.to("#{cid}-bu", {{opacity: 0, duration: 0.3}}, {c['tap'] + 0.6});""")
@@ -304,6 +331,16 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .b-lines i { display: block; height: 8px; border-radius: 4px; background: rgba(255,244,224,.55); margin-bottom: 16px; }
 .stamp { left: 210px; top: 210px; width: max-content; padding: 10px 30px; border: 8px solid #D21F1F; border-radius: 16px;
   font: 800 92px/1 Outfit; letter-spacing: 4px; color: #D21F1F; background: rgba(255,244,224,.9); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.board { left: 70px; top: 0; width: 700px; padding: 16px; border-radius: 16px; background: linear-gradient(160deg, #A06A45, #6E4429);
+  box-shadow: 0 20px 44px rgba(0,0,0,.45); }
+.lb-felt { padding: 22px 10px 18px; border-radius: 8px; text-align: center;
+  background: repeating-linear-gradient(180deg, #1F1C1B 0 10px, #171514 10px 12px); box-shadow: inset 0 4px 14px rgba(0,0,0,.6); }
+.lb-row { height: 92px; display: flex; justify-content: center; align-items: center; }
+.lt { display: inline-block; margin: 0 4px; font: 800 64px/1 Outfit; color: #F7F3EA;
+  text-shadow: 0 2px 0 #bdb6a8, 0 4px 6px rgba(0,0,0,.6); }
+.lb-check { right: -22px; top: -26px; width: 88px; height: 88px; border-radius: 44px; background: var(--mustard); color: var(--ink);
+  font: 800 56px/88px Outfit; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,.4); }
+.board > div.lb-check { position: absolute; }
 .h-big { left: 0; top: 40px; width: 840px; text-align: center; font: 400 112px/1 "DM Serif Display"; color: #fff; text-shadow: 0 6px 24px rgba(0,0,0,.5); }
 .tick { display: inline-block; color: var(--mustard); font: 800 100px/1 Outfit; }
 .bub { font: 700 40px/1 Outfit; color: var(--ink); background: var(--cream); padding: 18px 28px; border-radius: 30px; width: max-content;
@@ -311,7 +348,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .bA { left: 20px; top: 210px; border-bottom-left-radius: 6px; }
 .bB { left: 300px; top: 300px; background: var(--mustard); }
 .bC { right: 10px; top: 210px; border-bottom-right-radius: 6px; }
-.h-note { left: 0; top: 420px; width: 840px; text-align: center; font: 700 54px/1.2 Kalam; color: var(--cream); text-shadow: var(--wall); }
+.h-note { left: 0; top: 400px; width: 840px; text-align: center; font: 700 60px/1.2 Kalam; color: var(--cream); text-shadow: var(--wall); }
 .h-note.top { top: 10px; }
 .neon { left: 0; top: 110px; width: 840px; text-align: center; }
 .n-a { font: 400 132px/1.25 Pacifico; color: #FFE9E2;
@@ -329,8 +366,9 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .dots { display: flex; gap: 6px; }
 .dots i { width: 10px; height: 10px; border-radius: 5px; background: rgba(43,37,34,.25); display: block; }
 .dots i.on { background: var(--tomato); }
-.hi { left: 172px; top: 60px; width: 668px; font: 700 48px/1.18 Kalam; color: var(--cream); text-shadow: var(--wall); }
-.ticket { left: 0; top: 196px; width: 840px; padding: 18px 34px 28px; background: var(--cream); border-radius: 18px 18px 0 0;
+.hi { left: 172px; top: 58px; width: 668px; font: 700 58px/1.14 Kalam; color: #FFFDF6;
+  text-shadow: 0 2px 2px rgba(0,0,0,.75), 0 3px 10px rgba(0,0,0,.7), 0 6px 26px rgba(0,0,0,.55), 0 0 2px rgba(0,0,0,.6); }
+.ticket { left: 0; top: 232px; width: 840px; padding: 18px 34px 28px; background: var(--cream); border-radius: 18px 18px 0 0;
   box-shadow: 0 18px 40px rgba(0,0,0,.32); border-top: 10px solid var(--tomato); }
 .ticket::after { content: ""; position: absolute; left: 0; right: 0; bottom: -16px; height: 16px;
   background: linear-gradient(135deg, var(--cream) 50%, transparent 50%) 0 0 / 32px 16px repeat-x,
