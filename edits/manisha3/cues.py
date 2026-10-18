@@ -57,7 +57,8 @@ def build():
                            "noreply": at("m31", 2.40), "swap": at("m31", 4.44), "today": at("m31", 6.56)}})
     sfx.append(("whoosh", at("m31", 4.44) - 0.08, 0.0))
 
-    flashes = [at("m32", 0.0), at("m33", 0.0)]
+    flashes = [at("m32", 0.0), at("m33", 0.0)]  # section changes (with a whoosh)
+    soft = [at("m31", 4.44)] + [at("m32", r["card"]) for r in REPLIES[1:]]  # light-only, between replies
     for t in flashes:
         sfx.append(("whoosh", t - 0.12, 0.0))
 
@@ -78,7 +79,7 @@ def build():
     risers = [(2.0, 2.0, 1.1), (comment_tap - 1.85, 1.1, 2.0)]
 
     punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
-    out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
+    out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes, "soft": soft,
            "punches": punches,
            "sfx": [{"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu} for n, t, lu in sfx]
            + [{"name": "riser_user", "file": "assets/user/riser_user.mp3", "t": round(t, 3), "gain": 0.45,

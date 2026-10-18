@@ -3,7 +3,7 @@
 A chat world for a WhatsApp-replies lesson: notification cards with typing dots and ticks that turn blue,
 an outgoing "Hi" that gets left on seen, then each reply arrives ONE AT A TIME as a chat notification with the
 English line inside and its Hinglish meaning outside, then swipes away before the next. Plus Jakarta Sans +
-Caveat; mint / deep teal / cream with a hot-pink accent; bubble-burst transitions.
+Caveat; mint / deep teal / cream with a hot-pink accent; pink light-leak bloom transitions.
 
 Everything sits in the wall above her head: y 262-770 on the 1080x1920 stage, x 140-940 (Reels safe box,
 face never covered). Usage: python3 -I build_overlay.py [--preview]   (--preview = 1080p)
@@ -117,19 +117,20 @@ def build(res=2160):
             js.append(f"""
               tl.fromTo("#{cid}-h", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)"}}, {s});
               tl.fromTo("#{cid}-s", {{opacity: 0, y: 16}}, {{opacity: 1, y: 0, duration: 0.35}}, {s + 0.35});
-              tl.fromTo("#{cid}-q", {{opacity: 0, x: -80, scale: 0.8, transformOrigin: "0% 100%"}}, {{opacity: 1, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}}, {c['q_t']});
+              tl.fromTo("#{cid}-q", {{opacity: 0, x: -20, scale: 0.8, transformOrigin: "0% 100%"}}, {{opacity: 1, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}}, {c['q_t']});
               tl.fromTo("#{cid}-ib", {{opacity: 0, y: 30}}, {{opacity: 1, y: 0, duration: 0.35, ease: "power2.out"}}, {c['box_t']});
               tl.fromTo("#{cid} .cursor", {{opacity: 1}}, {{opacity: 0, duration: 0.25, yoyo: true, repeat: 7}}, {c['box_t']});
               tl.to("#{cid}-btn", {{scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}}, {c['tap']});
               tl.to("#{cid}-btn", {{scale: 1.08, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut"}}, {c['tap'] + 0.25});""")
 
-    for j, f in enumerate(CUES["flashes"]):
-        els.append(clip(f"tr{j}", max(0, f - 0.15), f + 0.65, 9,
-                        '<div class="burst"></div><div class="mini m1">💬</div><div class="mini m2">✓✓</div><div class="mini m3">💬</div>'))
+    lights = [(f, 1.0) for f in CUES["flashes"]] + [(f, 0.6) for f in CUES.get("soft", [])]
+    for j, (f, k) in enumerate(sorted(lights)):
+        els.append(clip(f"tr{j}", max(0, f - 0.25), f + 0.45, 9, '<div class="leak"></div><div class="core"></div>'))
         js.append(f"""
-              tl.fromTo("#tr{j} .burst", {{scale: 0, opacity: 0.85}}, {{scale: 3.2, opacity: 0, duration: 0.55, ease: "power2.out"}}, {max(0, f - 0.15)});
-              tl.fromTo("#tr{j} .mini", {{y: 60, opacity: 0}}, {{y: -140, opacity: 1, duration: 0.45, stagger: 0.05, ease: "power2.out"}}, {max(0, f - 0.12)});
-              tl.to("#tr{j} .mini", {{opacity: 0, duration: 0.15}}, {f + 0.45});""")
+              tl.fromTo("#tr{j} .leak", {{xPercent: 70, opacity: 0}}, {{xPercent: -70, opacity: {0.75 * k:.2f}, duration: 0.42, ease: "power2.inOut"}}, {max(0, f - 0.25)});
+              tl.to("#tr{j} .leak", {{opacity: 0, duration: 0.25}}, {f + 0.17});
+              tl.fromTo("#tr{j} .core", {{opacity: 0, scale: 0.6}}, {{opacity: {0.55 * k:.2f}, scale: 1.4, duration: 0.2, ease: "power2.out"}}, {max(0, f - 0.1)});
+              tl.to("#tr{j} .core", {{opacity: 0, duration: 0.28}}, {f + 0.1});""")
 
     dur = CUES["duration"]
     page = TEMPLATE.replace("%DUR%", f"{dur:.3f}").replace("%ELS%", "\n".join(els)).replace("%JS%", "".join(js))
@@ -168,58 +169,58 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .scene > div { position: absolute; }
 
 /* hook */
-.notif { left: 0; top: 0; width: 800px; height: 128px; display: flex; align-items: center; gap: 20px; padding: 0 28px;
+.notif { left: 0; top: 0; width: 800px; height: 140px; display: flex; align-items: center; gap: 20px; padding: 0 28px;
   background: rgba(255,248,236,.97); border-radius: 30px; box-shadow: 0 16px 40px rgba(0,0,0,.3); }
 .avatar { width: 76px; height: 76px; border-radius: 38px; background: var(--teal); color: #fff; font: 800 38px/76px Jak; text-align: center; flex: none; }
-.n-name { font: 800 30px/1.2 Jak; color: var(--ink); }
+.n-name { font: 800 34px/1.2 Jak; color: var(--ink); }
 .n-name span { font: 700 22px/1 Jak; color: #7d8b88; margin-left: 10px; }
-.n-text { font: 700 36px/1.25 Jak; color: #2f4743; }
+.n-text { font: 700 42px/1.25 Jak; color: #2f4743; }
 .bubble { font: 800 58px/1.2 Jak; padding: 22px 34px; border-radius: 34px; box-shadow: 0 12px 30px rgba(0,0,0,.28); width: max-content; max-width: 800px; }
-.bubble.out { right: 0; top: 168px; background: var(--mint); color: var(--ink); border-bottom-right-radius: 8px; }
-.bubble.in { left: 140px; top: 520px; background: var(--cream); color: var(--ink); border-bottom-left-radius: 8px; font-size: 50px; white-space: nowrap; }
+.bubble.out { right: 0; top: 176px; background: var(--mint); color: var(--ink); border-bottom-right-radius: 8px; }
+.bubble.in { left: 140px; top: 548px; background: var(--cream); color: var(--ink); border-bottom-left-radius: 8px; font-size: 50px; white-space: nowrap; }
 .ticks { font: 800 30px/1 Jak; color: #8a9a97; margin-left: 10px; letter-spacing: -6px; }
-.note { right: 0; top: 300px; width: 800px; text-align: right; font: 700 54px/1.1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); }
-.chip-app { left: 0; top: 0; width: max-content; padding: 12px 24px; border-radius: 30px; background: var(--green); color: #fff; font: 800 32px/1 Jak; }
-.headline { left: 0; top: 74px; width: 800px; font: 800 104px/1.04 Jak; color: #fff; letter-spacing: -3px; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
+.note { right: 0; top: 312px; width: 800px; text-align: right; font: 700 64px/1.1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); }
+.chip-app { left: 0; top: 0; width: max-content; padding: 14px 26px; border-radius: 30px; background: var(--green); color: #fff; font: 800 38px/1 Jak; }
+.headline { left: 0; top: 84px; width: 800px; font: 800 108px/1.04 Jak; color: #fff; letter-spacing: -3px; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
 .hl-pink { padding: 0 10px; border-radius: 16px; background-image: linear-gradient(var(--pink), var(--pink)); background-repeat: no-repeat; background-size: 0% 100%; }
-.subline { left: 0; top: 330px; width: 800px; font: 700 italic 46px/1.25 Jak; color: var(--cream); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+.subline { left: 0; top: 340px; width: max-content; max-width: 800px; padding: 14px 24px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 44px/1.25 Jak; color: #fff; white-space: nowrap; }
 
 /* reply card (one at a time) */
 .card { left: 140px; top: 280px; width: 800px; padding: 22px 32px 26px; border-radius: 34px; background: rgba(255,248,236,.97);
   box-shadow: 0 18px 44px rgba(0,0,0,.32); border-top: 10px solid var(--green); }
-.c-head { display: flex; align-items: center; gap: 12px; font: 700 26px/1 Jak; color: #6f7e7b; margin-bottom: 14px; }
+.c-head { display: flex; align-items: center; gap: 12px; font: 700 32px/1 Jak; color: #6f7e7b; margin-bottom: 14px; }
 .c-head b { font-weight: 800; color: var(--teal); letter-spacing: 1px; }
 .c-icon { width: 44px; height: 44px; border-radius: 22px; background: var(--green); text-align: center; font-size: 24px; line-height: 44px; }
 .c-time { margin-left: auto; }
 .typing { height: 40px; display: flex; gap: 10px; align-items: center; padding-left: 4px; overflow: hidden; }
 .typing i { width: 16px; height: 16px; border-radius: 8px; background: #9fb1ad; display: block; }
-.c-en { font: 800 60px/1.18 Jak; color: var(--ink); letter-spacing: -1px; }
+.c-en { font: 800 66px/1.16 Jak; color: var(--ink); letter-spacing: -1px; }
 .c-emoji { font-size: 50px; }
 .hl-en { background-image: linear-gradient(rgba(255,77,141,.45), rgba(255,77,141,.45)); background-repeat: no-repeat;
   background-position: 0 88%; background-size: 0% 40%; }
 .c-ticks { position: absolute; right: 30px; bottom: 18px; }
-.mean { left: 140px; top: 578px; width: 800px; }
-.m-label { font: 700 46px/1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); margin-bottom: 8px; }
-.m-text { font: 800 italic 52px/1.25 Jak; color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,.6); }
+.mean { left: 140px; top: 552px; width: 800px; }
+.m-label { font: 700 54px/1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); margin-bottom: 6px; }
+.m-text { width: max-content; max-width: 800px; padding: 12px 22px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 52px/1.2 Jak; color: #fff; }
 .hl-hi { padding: 0 10px; border-radius: 12px; color: #fff; text-shadow: none; background-image: linear-gradient(var(--pink), var(--pink));
   background-repeat: no-repeat; background-size: 0% 100%; }
 
 /* challenge */
-.ch-head { left: 140px; top: 280px; width: 800px; font: 800 96px/1 Jak; color: var(--pink); letter-spacing: -2px;
+.ch-head { left: 140px; top: 276px; width: 800px; font: 800 100px/1 Jak; color: var(--pink); letter-spacing: -2px;
   text-shadow: 0 6px 24px rgba(0,0,0,.4); }
-.ch-sub { left: 140px; top: 396px; width: 800px; font: 700 italic 40px/1.3 Jak; color: var(--cream); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
-.ch-sub b { color: #FFD3E2; }
-.inputbar { left: 140px; top: 660px; width: 800px; height: 100px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 14px 0 32px; border-radius: 50px; background: rgba(255,248,236,.97); box-shadow: 0 12px 30px rgba(0,0,0,.3); }
-.ph { font: 700 36px/1 Jak; color: #8a9a97; }
+.ch-sub { left: 140px; top: 392px; width: 800px; padding: 16px 26px; border-radius: 24px; background: rgba(11,59,54,.85); font: 800 46px/1.25 Jak; color: #fff; }
+.ch-sub b { color: #FF9EC2; }
+.inputbar { left: 140px; top: 664px; width: 800px; height: 96px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px 0 32px; border-radius: 50px; background: rgba(255,248,236,.97); box-shadow: 0 8px 16px rgba(0,0,0,.28); }
+.ph { font: 700 38px/1 Jak; color: #6f7e7b; }
 .cursor { font-style: normal; color: var(--ink); margin-left: 4px; }
-.send { padding: 18px 30px; border-radius: 40px; background: var(--green); color: #fff; font: 800 36px/1 Jak; }
+.send { padding: 18px 30px; border-radius: 40px; background: var(--green); color: #fff; font: 800 38px/1 Jak; }
 
-/* transition: chat bubble burst */
-.burst { position: absolute; left: 390px; top: 420px; width: 300px; height: 300px; border-radius: 150px;
-  background: radial-gradient(circle, rgba(217,253,211,.95), rgba(37,194,110,.55) 60%, rgba(37,194,110,0) 72%); }
-.mini { position: absolute; font: 800 54px/1 Jak; color: #fff; text-shadow: 0 4px 14px rgba(0,0,0,.4); }
-.m1 { left: 300px; top: 640px; } .m2 { left: 520px; top: 680px; color: var(--blue); } .m3 { left: 720px; top: 640px; }
+/* transition: pink-peach light leak that blooms across the frame with a warm white core */
+.leak { position: absolute; left: -540px; top: -200px; width: 2160px; height: 2320px;
+  background: radial-gradient(ellipse 38% 30% at 55% 35%, rgba(255,240,230,.95), rgba(255,140,170,.75) 35%, rgba(255,77,141,.35) 60%, rgba(255,77,141,0) 75%); }
+.core { position: absolute; left: 240px; top: 300px; width: 600px; height: 600px; border-radius: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,1), rgba(255,236,220,.6) 45%, rgba(255,236,220,0) 70%); }
 </style>
 </head>
 <body>

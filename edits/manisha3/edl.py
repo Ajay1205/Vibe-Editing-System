@@ -1,7 +1,7 @@
 """Build the rough-cut edit list for the Manisha 3 reel (WhatsApp replies in English).
 
 Cuts only inside measured silence, so no word is ever clipped:
-  - silence longer than MIN_GAP is shrunk to KEEP_BEFORE + KEEP_AFTER around the speech,
+  - pauses under MIN_GAP stay whole; longer ones shrink to KEEP_SHARE of their length (learner-friendly),
   - the user-requested removals (EXCLUDE) are dropped,
   - each clip is trimmed to its first and last speech.
 
@@ -20,11 +20,12 @@ OUT = pathlib.Path(__file__).resolve().parent
 CLIPS = ["m31", "m32", "m33"]
 FPS = 30
 SILENCE_DB = -38
-MIN_GAP = 0.30      # shorter pauses are left alone
-KEEP_BEFORE = 0.10  # kept after the last word before a pause
-KEEP_AFTER = 0.08   # kept before the next word
+# Learner-friendly pacing (user note: viewers must have time to read): natural pauses under MIN_GAP are kept
+# whole; longer ones are only shortened to 60% of their length, never below KEEP_MIN or above KEEP_MAX.
+MIN_GAP = 0.45
+KEEP_SHARE, KEEP_MIN, KEEP_MAX = 0.6, 0.42, 0.85
 HEAD = 0.06
-TAIL = 0.18
+TAIL = 0.35
 
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = [
@@ -74,16 +75,21 @@ def keep_ranges(clip):
     for c, a, b in EXCLUDE:
         if c == clip:
             speech = subtract(speech, a, b)
-    # pad and merge
+    # keep natural pauses, shorten only the long ones
     ranges = []
-    for i, (s, e) in enumerate(speech):
-        s = s - (HEAD if i == 0 else KEEP_AFTER)
-        e = e + (TAIL if i == len(speech) - 1 else KEEP_BEFORE)
-        s, e = max(0.0, s), min(dur, e)
-        if ranges and s - ranges[-1][1] < MIN_GAP - KEEP_BEFORE - KEEP_AFTER:
-            ranges[-1][1] = e
-        else:
-            ranges.append([s, e])
+    for i, (st, en) in enumerate(speech):
+        if not ranges:
+            ranges.append([max(0.0, st - HEAD), en])
+            continue
+        gap = st - ranges[-1][1]
+        if gap < MIN_GAP:
+            ranges[-1][1] = en
+            continue
+        keep = min(KEEP_MAX, max(KEEP_MIN, KEEP_SHARE * gap))
+        ranges[-1][1] += 0.6 * keep
+        ranges.append([st - 0.4 * keep, en])
+    if ranges:
+        ranges[-1][1] = min(dur, ranges[-1][1] + TAIL)
     for c, a, b in EXCLUDE:  # padding must never reach back into an excluded span
         if c == clip:
             ranges = subtract(ranges, a, b)

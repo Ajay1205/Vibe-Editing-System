@@ -80,463 +80,481 @@
  {
   "clip": "m31",
   "text": "वाटसब",
-  "start": 4.033,
-  "end": 4.263
+  "start": 4.189,
+  "end": 4.649
  },
  {
   "clip": "m31",
   "text": "पे",
-  "start": 4.263,
-  "end": 4.403
+  "start": 4.649,
+  "end": 4.789
  },
  {
   "clip": "m31",
   "text": "यूज़",
-  "start": 4.403,
-  "end": 4.663
+  "start": 4.789,
+  "end": 5.049
  },
  {
   "clip": "m31",
   "text": "होने",
-  "start": 4.663,
-  "end": 4.883
+  "start": 5.049,
+  "end": 5.269
  },
  {
   "clip": "m31",
   "text": "वाले",
-  "start": 4.883,
-  "end": 5.263
+  "start": 5.269,
+  "end": 5.649
  },
  {
   "clip": "m31",
   "text": "रिप्लाइस",
-  "start": 5.263,
-  "end": 5.923
+  "start": 5.649,
+  "end": 6.309
  },
  {
   "clip": "m31",
   "text": "आज",
-  "start": 5.923,
-  "end": 6.303
+  "start": 6.309,
+  "end": 6.689
  },
  {
   "clip": "m31",
   "text": "अब",
-  "start": 6.303,
-  "end": 6.463
+  "start": 6.689,
+  "end": 6.849
  },
  {
   "clip": "m31",
   "text": "अपनी",
-  "start": 6.463,
-  "end": 6.563
+  "start": 6.849,
+  "end": 6.949
  },
  {
   "clip": "m31",
   "text": "वोक्याबिलेरी",
-  "start": 6.563,
-  "end": 7.163
+  "start": 6.949,
+  "end": 7.549
  },
  {
   "clip": "m31",
   "text": "में",
-  "start": 7.163,
-  "end": 7.323
+  "start": 7.549,
+  "end": 7.709
  },
  {
   "clip": "m31",
   "text": "आड़",
-  "start": 7.323,
-  "end": 7.663
+  "start": 7.709,
+  "end": 8.049
  },
  {
   "clip": "m31",
   "text": "कर",
-  "start": 7.663,
-  "end": 7.843
+  "start": 8.049,
+  "end": 8.229
  },
  {
   "clip": "m31",
   "text": "लो.",
-  "start": 7.843,
-  "end": 7.983
+  "start": 8.229,
+  "end": 8.369
  },
  {
   "clip": "m32",
   "text": "Example,",
-  "start": 8.2,
-  "end": 8.782
+  "start": 8.767,
+  "end": 9.349
  },
  {
   "clip": "m32",
   "text": "I",
-  "start": 8.802,
-  "end": 9.282
+  "start": 9.369,
+  "end": 9.849
  },
  {
   "clip": "m32",
   "text": "will",
-  "start": 9.282,
-  "end": 9.462
+  "start": 9.849,
+  "end": 10.029
  },
  {
   "clip": "m32",
   "text": "talk",
-  "start": 9.462,
-  "end": 9.722
+  "start": 10.029,
+  "end": 10.289
  },
  {
   "clip": "m32",
   "text": "to",
-  "start": 9.722,
-  "end": 9.842
+  "start": 10.289,
+  "end": 10.409
  },
  {
   "clip": "m32",
   "text": "you",
-  "start": 9.842,
-  "end": 9.962
+  "start": 10.409,
+  "end": 10.529
  },
  {
   "clip": "m32",
   "text": "later.",
-  "start": 9.962,
-  "end": 10.302
+  "start": 10.529,
+  "end": 10.869
  },
  {
   "clip": "m32",
   "text": "मतलब",
-  "start": 10.522,
-  "end": 11.042
+  "start": 11.089,
+  "end": 11.609
  },
  {
   "clip": "m32",
   "text": "मैं",
-  "start": 11.042,
-  "end": 11.282
+  "start": 11.609,
+  "end": 11.849
  },
  {
   "clip": "m32",
   "text": "बाद",
-  "start": 11.282,
-  "end": 11.542
+  "start": 11.849,
+  "end": 12.109
  },
  {
   "clip": "m32",
   "text": "में",
-  "start": 11.542,
-  "end": 11.702
+  "start": 12.109,
+  "end": 12.269
  },
  {
   "clip": "m32",
   "text": "बात",
-  "start": 11.702,
-  "end": 11.862
+  "start": 12.269,
+  "end": 12.429
  },
  {
   "clip": "m32",
   "text": "करती",
-  "start": 11.862,
-  "end": 12.242
+  "start": 12.429,
+  "end": 12.809
  },
  {
   "clip": "m32",
   "text": "हूँ.",
-  "start": 12.242,
-  "end": 12.422
- },
- {
-  "clip": "m32",
-  "text": "am",
-  "start": 12.687,
-  "end": 12.827
- },
- {
-  "clip": "m32",
-  "text": "a",
-  "start": 12.827,
-  "end": 12.967
- },
- {
-  "clip": "m32",
-  "text": "bit",
-  "start": 12.967,
-  "end": 13.127
- },
- {
-  "clip": "m32",
-  "text": "busy",
-  "start": 13.127,
-  "end": 13.487
- },
- {
-  "clip": "m32",
-  "text": "now.",
-  "start": 13.487,
-  "end": 13.767
- },
- {
-  "clip": "m32",
-  "text": "मतलब",
-  "start": 14.1,
-  "end": 14.517
- },
- {
-  "clip": "m32",
-  "text": "मैं",
-  "start": 14.517,
-  "end": 14.777
- },
- {
-  "clip": "m32",
-  "text": "बहुत",
-  "start": 14.777,
-  "end": 15.017
- },
- {
-  "clip": "m32",
-  "text": "busy",
-  "start": 15.017,
-  "end": 15.337
- },
- {
-  "clip": "m32",
-  "text": "हूँ.",
-  "start": 15.337,
-  "end": 15.677
- },
- {
-  "clip": "m32",
-  "text": "you",
-  "start": 16.023,
-  "end": 16.183
- },
- {
-  "clip": "m32",
-  "text": "tomorrow",
-  "start": 16.183,
-  "end": 16.563
- },
- {
-  "clip": "m32",
-  "text": "for",
-  "start": 16.563,
-  "end": 16.823
- },
- {
-  "clip": "m32",
-  "text": "sure.",
-  "start": 16.823,
-  "end": 17.163
- },
- {
-  "clip": "m32",
-  "text": "मतलब",
-  "start": 17.483,
-  "end": 18.003
- },
- {
-  "clip": "m32",
-  "text": "मैं",
-  "start": 18.003,
-  "end": 18.523
- },
- {
-  "clip": "m32",
-  "text": "कल",
-  "start": 18.523,
-  "end": 18.743
- },
- {
-  "clip": "m32",
-  "text": "पक्का",
-  "start": 18.743,
-  "end": 19.123
- },
- {
-  "clip": "m32",
-  "text": "मिलूंगी.",
-  "start": 19.123,
-  "end": 19.583
+  "start": 12.809,
+  "end": 12.989
  },
  {
   "clip": "m32",
   "text": "I",
-  "start": 19.867,
-  "end": 20.18
+  "start": 12.989,
+  "end": 13.489
  },
  {
   "clip": "m32",
-  "text": "didn't",
-  "start": 20.18,
-  "end": 20.5
+  "text": "am",
+  "start": 13.489,
+  "end": 13.629
  },
  {
   "clip": "m32",
-  "text": "see",
-  "start": 20.5,
-  "end": 20.6
+  "text": "a",
+  "start": 13.629,
+  "end": 13.769
  },
  {
   "clip": "m32",
-  "text": "your",
-  "start": 20.6,
-  "end": 20.76
+  "text": "bit",
+  "start": 13.769,
+  "end": 13.929
  },
  {
   "clip": "m32",
-  "text": "message.",
-  "start": 20.76,
-  "end": 21.12
+  "text": "busy",
+  "start": 13.929,
+  "end": 14.289
+ },
+ {
+  "clip": "m32",
+  "text": "now.",
+  "start": 14.289,
+  "end": 14.569
  },
  {
   "clip": "m32",
   "text": "मतलब",
-  "start": 21.3,
-  "end": 21.82
+  "start": 14.929,
+  "end": 15.449
  },
  {
   "clip": "m32",
-  "text": "मैंने",
-  "start": 21.82,
-  "end": 22.1
+  "text": "मैं",
+  "start": 15.449,
+  "end": 15.709
  },
  {
   "clip": "m32",
-  "text": "आपका",
-  "start": 22.1,
+  "text": "बहुत",
+  "start": 15.709,
+  "end": 15.949
+ },
+ {
+  "clip": "m32",
+  "text": "busy",
+  "start": 15.949,
+  "end": 16.269
+ },
+ {
+  "clip": "m32",
+  "text": "हूँ.",
+  "start": 16.269,
+  "end": 16.609
+ },
+ {
+  "clip": "m32",
+  "text": "See",
+  "start": 16.609,
+  "end": 17.089
+ },
+ {
+  "clip": "m32",
+  "text": "you",
+  "start": 17.089,
+  "end": 17.249
+ },
+ {
+  "clip": "m32",
+  "text": "tomorrow",
+  "start": 17.249,
+  "end": 17.629
+ },
+ {
+  "clip": "m32",
+  "text": "for",
+  "start": 17.629,
+  "end": 17.889
+ },
+ {
+  "clip": "m32",
+  "text": "sure.",
+  "start": 17.889,
+  "end": 18.229
+ },
+ {
+  "clip": "m32",
+  "text": "मतलब",
+  "start": 18.549,
+  "end": 19.069
+ },
+ {
+  "clip": "m32",
+  "text": "मैं",
+  "start": 19.069,
+  "end": 19.589
+ },
+ {
+  "clip": "m32",
+  "text": "कल",
+  "start": 19.589,
+  "end": 19.809
+ },
+ {
+  "clip": "m32",
+  "text": "पक्का",
+  "start": 19.809,
+  "end": 20.189
+ },
+ {
+  "clip": "m32",
+  "text": "मिलूंगी.",
+  "start": 20.189,
+  "end": 20.649
+ },
+ {
+  "clip": "m32",
+  "text": "I",
+  "start": 21.42,
+  "end": 21.94
+ },
+ {
+  "clip": "m32",
+  "text": "didn't",
+  "start": 21.94,
+  "end": 22.26
+ },
+ {
+  "clip": "m32",
+  "text": "see",
+  "start": 22.26,
   "end": 22.36
  },
  {
   "clip": "m32",
-  "text": "message",
+  "text": "your",
   "start": 22.36,
-  "end": 22.64
+  "end": 22.52
+ },
+ {
+  "clip": "m32",
+  "text": "message.",
+  "start": 22.52,
+  "end": 22.88
+ },
+ {
+  "clip": "m32",
+  "text": "मतलब",
+  "start": 23.06,
+  "end": 23.58
+ },
+ {
+  "clip": "m32",
+  "text": "मैंने",
+  "start": 23.58,
+  "end": 23.86
+ },
+ {
+  "clip": "m32",
+  "text": "आपका",
+  "start": 23.86,
+  "end": 24.12
+ },
+ {
+  "clip": "m32",
+  "text": "message",
+  "start": 24.12,
+  "end": 24.4
  },
  {
   "clip": "m32",
   "text": "नहीं",
-  "start": 22.64,
-  "end": 23.04
+  "start": 24.4,
+  "end": 24.8
  },
  {
   "clip": "m32",
   "text": "देखा.",
-  "start": 23.04,
-  "end": 23.38
+  "start": 24.8,
+  "end": 25.14
  },
  {
   "clip": "m33",
   "text": "मैं",
-  "start": 23.686,
-  "end": 23.926
+  "start": 25.452,
+  "end": 25.692
  },
  {
   "clip": "m33",
   "text": "आपको",
-  "start": 23.926,
-  "end": 24.246
+  "start": 25.692,
+  "end": 26.012
  },
  {
   "clip": "m33",
   "text": "एक",
-  "start": 24.246,
-  "end": 24.386
+  "start": 26.012,
+  "end": 26.152
  },
  {
   "clip": "m33",
   "text": "हिंदी",
-  "start": 24.386,
-  "end": 24.546
+  "start": 26.152,
+  "end": 26.312
  },
  {
   "clip": "m33",
   "text": "सेंटेंस",
-  "start": 24.546,
-  "end": 25.046
+  "start": 26.312,
+  "end": 26.812
  },
  {
   "clip": "m33",
   "text": "दूँगी,",
-  "start": 25.046,
-  "end": 25.366
+  "start": 26.812,
+  "end": 27.132
  },
  {
   "clip": "m33",
   "text": "उसका",
-  "start": 25.386,
-  "end": 25.846
+  "start": 27.152,
+  "end": 27.612
  },
  {
   "clip": "m33",
   "text": "English",
-  "start": 25.846,
-  "end": 26.086
+  "start": 27.612,
+  "end": 27.852
  },
  {
   "clip": "m33",
   "text": "translation",
-  "start": 26.086,
-  "end": 26.586
+  "start": 27.852,
+  "end": 28.352
  },
  {
   "clip": "m33",
   "text": "आप",
-  "start": 26.586,
-  "end": 27.366
+  "start": 28.352,
+  "end": 29.132
  },
  {
   "clip": "m33",
   "text": "कमेंट",
-  "start": 27.366,
-  "end": 27.826
+  "start": 29.132,
+  "end": 29.592
  },
  {
   "clip": "m33",
   "text": "कीजिए,",
-  "start": 27.826,
-  "end": 28.126
+  "start": 29.592,
+  "end": 29.892
+ },
+ {
+  "clip": "m33",
+  "text": "मैं",
+  "start": 29.972,
+  "end": 30.512
  },
  {
   "clip": "m33",
   "text": "पहुँचने",
-  "start": 28.574,
-  "end": 29.034
+  "start": 30.512,
+  "end": 30.972
  },
  {
   "clip": "m33",
   "text": "वाली",
-  "start": 29.034,
-  "end": 29.334
+  "start": 30.972,
+  "end": 31.272
  },
  {
   "clip": "m33",
   "text": "हूँ,",
-  "start": 29.334,
-  "end": 29.614
+  "start": 31.272,
+  "end": 31.552
  },
  {
   "clip": "m33",
   "text": "इसका",
-  "start": 29.767,
-  "end": 30.118
+  "start": 31.552,
+  "end": 32.212
  },
  {
   "clip": "m33",
   "text": "आंसर",
-  "start": 30.118,
-  "end": 30.478
+  "start": 32.212,
+  "end": 32.572
  },
  {
   "clip": "m33",
   "text": "कमेंट",
-  "start": 30.478,
-  "end": 30.958
+  "start": 32.572,
+  "end": 33.052
  },
  {
   "clip": "m33",
   "text": "कीजिए.",
-  "start": 30.958,
-  "end": 31.298
+  "start": 33.052,
+  "end": 33.392
  }
 ]

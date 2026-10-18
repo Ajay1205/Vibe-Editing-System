@@ -21,63 +21,63 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
 .scene > div { position: absolute; }
 
 /* hook */
-.notif { left: 0; top: 0; width: 800px; height: 128px; display: flex; align-items: center; gap: 20px; padding: 0 28px;
+.notif { left: 0; top: 0; width: 800px; height: 140px; display: flex; align-items: center; gap: 20px; padding: 0 28px;
   background: rgba(255,248,236,.97); border-radius: 30px; box-shadow: 0 16px 40px rgba(0,0,0,.3); }
 .avatar { width: 76px; height: 76px; border-radius: 38px; background: var(--teal); color: #fff; font: 800 38px/76px Jak; text-align: center; flex: none; }
-.n-name { font: 800 30px/1.2 Jak; color: var(--ink); }
+.n-name { font: 800 34px/1.2 Jak; color: var(--ink); }
 .n-name span { font: 700 22px/1 Jak; color: #7d8b88; margin-left: 10px; }
-.n-text { font: 700 36px/1.25 Jak; color: #2f4743; }
+.n-text { font: 700 42px/1.25 Jak; color: #2f4743; }
 .bubble { font: 800 58px/1.2 Jak; padding: 22px 34px; border-radius: 34px; box-shadow: 0 12px 30px rgba(0,0,0,.28); width: max-content; max-width: 800px; }
-.bubble.out { right: 0; top: 168px; background: var(--mint); color: var(--ink); border-bottom-right-radius: 8px; }
-.bubble.in { left: 140px; top: 520px; background: var(--cream); color: var(--ink); border-bottom-left-radius: 8px; font-size: 50px; white-space: nowrap; }
+.bubble.out { right: 0; top: 176px; background: var(--mint); color: var(--ink); border-bottom-right-radius: 8px; }
+.bubble.in { left: 140px; top: 548px; background: var(--cream); color: var(--ink); border-bottom-left-radius: 8px; font-size: 50px; white-space: nowrap; }
 .ticks { font: 800 30px/1 Jak; color: #8a9a97; margin-left: 10px; letter-spacing: -6px; }
-.note { right: 0; top: 300px; width: 800px; text-align: right; font: 700 54px/1.1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); }
-.chip-app { left: 0; top: 0; width: max-content; padding: 12px 24px; border-radius: 30px; background: var(--green); color: #fff; font: 800 32px/1 Jak; }
-.headline { left: 0; top: 74px; width: 800px; font: 800 104px/1.04 Jak; color: #fff; letter-spacing: -3px; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
+.note { right: 0; top: 312px; width: 800px; text-align: right; font: 700 64px/1.1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); }
+.chip-app { left: 0; top: 0; width: max-content; padding: 14px 26px; border-radius: 30px; background: var(--green); color: #fff; font: 800 38px/1 Jak; }
+.headline { left: 0; top: 84px; width: 800px; font: 800 108px/1.04 Jak; color: #fff; letter-spacing: -3px; text-shadow: 0 6px 24px rgba(0,0,0,.45); }
 .hl-pink { padding: 0 10px; border-radius: 16px; background-image: linear-gradient(var(--pink), var(--pink)); background-repeat: no-repeat; background-size: 0% 100%; }
-.subline { left: 0; top: 330px; width: 800px; font: 700 italic 46px/1.25 Jak; color: var(--cream); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+.subline { left: 0; top: 340px; width: max-content; max-width: 800px; padding: 14px 24px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 44px/1.25 Jak; color: #fff; white-space: nowrap; }
 
 /* reply card (one at a time) */
 .card { left: 140px; top: 280px; width: 800px; padding: 22px 32px 26px; border-radius: 34px; background: rgba(255,248,236,.97);
   box-shadow: 0 18px 44px rgba(0,0,0,.32); border-top: 10px solid var(--green); }
-.c-head { display: flex; align-items: center; gap: 12px; font: 700 26px/1 Jak; color: #6f7e7b; margin-bottom: 14px; }
+.c-head { display: flex; align-items: center; gap: 12px; font: 700 32px/1 Jak; color: #6f7e7b; margin-bottom: 14px; }
 .c-head b { font-weight: 800; color: var(--teal); letter-spacing: 1px; }
 .c-icon { width: 44px; height: 44px; border-radius: 22px; background: var(--green); text-align: center; font-size: 24px; line-height: 44px; }
 .c-time { margin-left: auto; }
 .typing { height: 40px; display: flex; gap: 10px; align-items: center; padding-left: 4px; overflow: hidden; }
 .typing i { width: 16px; height: 16px; border-radius: 8px; background: #9fb1ad; display: block; }
-.c-en { font: 800 60px/1.18 Jak; color: var(--ink); letter-spacing: -1px; }
+.c-en { font: 800 66px/1.16 Jak; color: var(--ink); letter-spacing: -1px; }
 .c-emoji { font-size: 50px; }
 .hl-en { background-image: linear-gradient(rgba(255,77,141,.45), rgba(255,77,141,.45)); background-repeat: no-repeat;
   background-position: 0 88%; background-size: 0% 40%; }
 .c-ticks { position: absolute; right: 30px; bottom: 18px; }
-.mean { left: 140px; top: 578px; width: 800px; }
-.m-label { font: 700 46px/1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); margin-bottom: 8px; }
-.m-text { font: 800 italic 52px/1.25 Jak; color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,.6); }
+.mean { left: 140px; top: 552px; width: 800px; }
+.m-label { font: 700 54px/1 Caveat; color: #FFD3E2; text-shadow: 0 3px 12px rgba(0,0,0,.6); margin-bottom: 6px; }
+.m-text { width: max-content; max-width: 800px; padding: 12px 22px; border-radius: 22px; background: rgba(11,59,54,.82); font: 800 italic 52px/1.2 Jak; color: #fff; }
 .hl-hi { padding: 0 10px; border-radius: 12px; color: #fff; text-shadow: none; background-image: linear-gradient(var(--pink), var(--pink));
   background-repeat: no-repeat; background-size: 0% 100%; }
 
 /* challenge */
-.ch-head { left: 140px; top: 280px; width: 800px; font: 800 96px/1 Jak; color: var(--pink); letter-spacing: -2px;
+.ch-head { left: 140px; top: 276px; width: 800px; font: 800 100px/1 Jak; color: var(--pink); letter-spacing: -2px;
   text-shadow: 0 6px 24px rgba(0,0,0,.4); }
-.ch-sub { left: 140px; top: 396px; width: 800px; font: 700 italic 40px/1.3 Jak; color: var(--cream); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
-.ch-sub b { color: #FFD3E2; }
-.inputbar { left: 140px; top: 660px; width: 800px; height: 100px; display: flex; align-items: center; justify-content: space-between;
-  padding: 0 14px 0 32px; border-radius: 50px; background: rgba(255,248,236,.97); box-shadow: 0 12px 30px rgba(0,0,0,.3); }
-.ph { font: 700 36px/1 Jak; color: #8a9a97; }
+.ch-sub { left: 140px; top: 392px; width: 800px; padding: 16px 26px; border-radius: 24px; background: rgba(11,59,54,.85); font: 800 46px/1.25 Jak; color: #fff; }
+.ch-sub b { color: #FF9EC2; }
+.inputbar { left: 140px; top: 664px; width: 800px; height: 96px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px 0 32px; border-radius: 50px; background: rgba(255,248,236,.97); box-shadow: 0 8px 16px rgba(0,0,0,.28); }
+.ph { font: 700 38px/1 Jak; color: #6f7e7b; }
 .cursor { font-style: normal; color: var(--ink); margin-left: 4px; }
-.send { padding: 18px 30px; border-radius: 40px; background: var(--green); color: #fff; font: 800 36px/1 Jak; }
+.send { padding: 18px 30px; border-radius: 40px; background: var(--green); color: #fff; font: 800 38px/1 Jak; }
 
-/* transition: chat bubble burst */
-.burst { position: absolute; left: 390px; top: 420px; width: 300px; height: 300px; border-radius: 150px;
-  background: radial-gradient(circle, rgba(217,253,211,.95), rgba(37,194,110,.55) 60%, rgba(37,194,110,0) 72%); }
-.mini { position: absolute; font: 800 54px/1 Jak; color: #fff; text-shadow: 0 4px 14px rgba(0,0,0,.4); }
-.m1 { left: 300px; top: 640px; } .m2 { left: 520px; top: 680px; color: var(--blue); } .m3 { left: 720px; top: 640px; }
+/* transition: pink-peach light leak that blooms across the frame with a warm white core */
+.leak { position: absolute; left: -540px; top: -200px; width: 2160px; height: 2320px;
+  background: radial-gradient(ellipse 38% 30% at 55% 35%, rgba(255,240,230,.95), rgba(255,140,170,.75) 35%, rgba(255,77,141,.35) 60%, rgba(255,77,141,0) 75%); }
+.core { position: absolute; left: 240px; top: 300px; width: 600px; height: 600px; border-radius: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,1), rgba(255,236,220,.6) 45%, rgba(255,236,220,0) 70%); }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="31.533" data-width="1080" data-height="1920" data-fps="30">
-<div id="c0" class="clip" data-start="0.000" data-duration="8.150" data-track-index="1"><div class="layer">
+<div id="root" data-composition-id="main" data-start="0" data-duration="33.800" data-width="1080" data-height="1920" data-fps="30">
+<div id="c0" class="clip" data-start="0.000" data-duration="8.717" data-track-index="1"><div class="layer">
               <div class="scene" id="c0-a">
                 <div class="notif" id="c0-n">
                   <div class="avatar">B</div>
@@ -92,7 +92,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="headline" id="c0-h">Smart English <span class="hl-pink">Replies</span></div>
                 <div class="subline" id="c0-t">aaj hi vocabulary mein add karo ✅</div>
               </div></div></div>
-<div id="c1" class="clip" data-start="8.282" data-duration="4.220" data-track-index="2"><div class="layer">
+<div id="c1" class="clip" data-start="8.849" data-duration="4.220" data-track-index="2"><div class="layer">
               <div class="card" id="c1-card">
                 <div class="c-head"><span class="c-icon">💬</span><b>Reply 1/4</b><span class="c-time">now</span></div>
                 <div class="typing" id="c1-dots"><i></i><i></i><i></i></div>
@@ -103,7 +103,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="m-label">matlab 👇</div>
                 <div class="m-text">Main <span class="hl-hi">baad mein</span> baat karti hoon</div>
               </div></div></div>
-<div id="c2" class="clip" data-start="12.502" data-duration="3.315" data-track-index="2"><div class="layer">
+<div id="c2" class="clip" data-start="13.069" data-duration="3.680" data-track-index="2"><div class="layer">
               <div class="card" id="c2-card">
                 <div class="c-head"><span class="c-icon">💬</span><b>Reply 2/4</b><span class="c-time">now</span></div>
                 <div class="typing" id="c2-dots"><i></i><i></i><i></i></div>
@@ -114,7 +114,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="m-label">matlab 👇</div>
                 <div class="m-text">Main <span class="hl-hi">bahut busy</span> hoon</div>
               </div></div></div>
-<div id="c3" class="clip" data-start="15.817" data-duration="3.866" data-track-index="2"><div class="layer">
+<div id="c3" class="clip" data-start="16.749" data-duration="4.000" data-track-index="2"><div class="layer">
               <div class="card" id="c3-card">
                 <div class="c-head"><span class="c-icon">💬</span><b>Reply 3/4</b><span class="c-time">now</span></div>
                 <div class="typing" id="c3-dots"><i></i><i></i><i></i></div>
@@ -125,7 +125,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="m-label">matlab 👇</div>
                 <div class="m-text">Main kal <span class="hl-hi">pakka</span> milungi</div>
               </div></div></div>
-<div id="c4" class="clip" data-start="19.867" data-duration="3.673" data-track-index="2"><div class="layer">
+<div id="c4" class="clip" data-start="21.540" data-duration="3.760" data-track-index="2"><div class="layer">
               <div class="card" id="c4-card">
                 <div class="c-head"><span class="c-icon">💬</span><b>Reply 4/4</b><span class="c-time">now</span></div>
                 <div class="typing" id="c4-dots"><i></i><i></i><i></i></div>
@@ -136,14 +136,18 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="m-label">matlab 👇</div>
                 <div class="m-text">Maine aapka message <span class="hl-hi">nahi dekha</span></div>
               </div></div></div>
-<div id="c5" class="clip" data-start="23.567" data-duration="7.966" data-track-index="3"><div class="layer">
+<div id="c5" class="clip" data-start="25.333" data-duration="8.467" data-track-index="3"><div class="layer">
               <div class="ch-head" id="c5-h">Your Turn! 🎯</div>
               <div class="ch-sub" id="c5-s">Is Hindi sentence ka <b>English translation</b> comment karo</div>
               <div class="bubble in" id="c5-q">Main pahunchne wali hoon 🏃‍♀️</div>
               <div class="inputbar" id="c5-ib"><span class="ph">Type your answer<i class="cursor">|</i></span>
                 <span class="send" id="c5-btn">Comment 👇</span></div></div></div>
-<div id="tr0" class="clip" data-start="8.050" data-duration="0.800" data-track-index="9"><div class="layer"><div class="burst"></div><div class="mini m1">💬</div><div class="mini m2">✓✓</div><div class="mini m3">💬</div></div></div>
-<div id="tr1" class="clip" data-start="23.417" data-duration="0.800" data-track-index="9"><div class="layer"><div class="burst"></div><div class="mini m1">💬</div><div class="mini m2">✓✓</div><div class="mini m3">💬</div></div></div>
+<div id="tr0" class="clip" data-start="3.939" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
+<div id="tr1" class="clip" data-start="8.517" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
+<div id="tr2" class="clip" data-start="12.819" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
+<div id="tr3" class="clip" data-start="16.499" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
+<div id="tr4" class="clip" data-start="21.290" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
+<div id="tr5" class="clip" data-start="25.083" data-duration="0.700" data-track-index="9"><div class="layer"><div class="leak"></div><div class="core"></div></div></div>
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
@@ -153,65 +157,83 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
               tl.to("#c0-hi .ticks", {color: "#34B7F1", duration: 0.15}, 1.952);
               tl.fromTo("#c0-nr", {opacity: 0, y: 16}, {opacity: 1, y: 0, duration: 0.3}, 2.252);
               tl.to("#c0-hi", {x: 12, duration: 0.06, yoyo: true, repeat: 5}, 2.5519999999999996);
-              tl.to("#c0-a", {y: -120, opacity: 0, duration: 0.3, ease: "power2.in"}, 3.6670000000000003);
-              tl.fromTo("#c0-chip", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.3}, 3.967);
-              tl.fromTo("#c0-h", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 4.067);
-              tl.fromTo("#c0-h .hl-pink", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.35}, 4.4670000000000005);
-              tl.fromTo("#c0-t", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35}, 5.923);
-              tl.to("#c0-b", {y: -100, opacity: 0, duration: 0.28, ease: "power2.in"}, 7.849999999999999);
-              tl.fromTo("#c1-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 8.282);
-              tl.fromTo("#c1-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 8.382);
-              tl.to("#c1-dots", {opacity: 0, height: 0, duration: 0.12}, 8.682);
-              tl.fromTo("#c1-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 8.802);
-              tl.fromTo("#c1-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 9.152);
-              tl.to("#c1-tk", {color: "#34B7F1", duration: 0.15}, 9.982);
-              tl.fromTo("#c1-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 10.522);
-              tl.fromTo("#c1-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 10.822000000000001);
-              tl.to("#c1-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 12.182);
-              tl.to("#c1-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 12.202);
-              tl.fromTo("#c2-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 12.502);
-              tl.fromTo("#c2-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 12.602);
-              tl.to("#c2-dots", {opacity: 0, height: 0, duration: 0.12}, 12.527000000000001);
-              tl.fromTo("#c2-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 12.647);
-              tl.fromTo("#c2-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 12.997);
-              tl.to("#c2-tk", {color: "#34B7F1", duration: 0.15}, 13.547);
-              tl.fromTo("#c2-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 14.1);
-              tl.fromTo("#c2-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 14.4);
-              tl.to("#c2-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 15.497);
-              tl.to("#c2-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 15.517);
-              tl.fromTo("#c3-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 15.817);
-              tl.fromTo("#c3-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 15.917);
-              tl.to("#c3-dots", {opacity: 0, height: 0, duration: 0.12}, 15.747000000000002);
-              tl.fromTo("#c3-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 15.867);
-              tl.fromTo("#c3-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 16.217000000000002);
-              tl.to("#c3-tk", {color: "#34B7F1", duration: 0.15}, 17.283);
-              tl.fromTo("#c3-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 17.483);
-              tl.fromTo("#c3-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 17.783);
-              tl.to("#c3-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 19.363);
-              tl.to("#c3-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 19.383);
-              tl.fromTo("#c4-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 19.867);
-              tl.fromTo("#c4-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 19.967000000000002);
-              tl.to("#c4-dots", {opacity: 0, height: 0, duration: 0.12}, 19.75);
-              tl.fromTo("#c4-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 19.87);
-              tl.fromTo("#c4-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 20.220000000000002);
-              tl.to("#c4-tk", {color: "#34B7F1", duration: 0.15}, 21.08);
-              tl.fromTo("#c4-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 21.3);
-              tl.fromTo("#c4-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 21.6);
-              tl.to("#c4-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 23.22);
-              tl.to("#c4-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 23.24);
-              tl.fromTo("#c5-h", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)"}, 23.567);
-              tl.fromTo("#c5-s", {opacity: 0, y: 16}, {opacity: 1, y: 0, duration: 0.35}, 23.917);
-              tl.fromTo("#c5-q", {opacity: 0, x: -80, scale: 0.8, transformOrigin: "0% 100%"}, {opacity: 1, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}, 28.206);
-              tl.fromTo("#c5-ib", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "power2.out"}, 29.614);
-              tl.fromTo("#c5 .cursor", {opacity: 1}, {opacity: 0, duration: 0.25, yoyo: true, repeat: 7}, 29.614);
-              tl.to("#c5-btn", {scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}, 30.478);
-              tl.to("#c5-btn", {scale: 1.08, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut"}, 30.728);
-              tl.fromTo("#tr0 .burst", {scale: 0, opacity: 0.85}, {scale: 3.2, opacity: 0, duration: 0.55, ease: "power2.out"}, 8.049999999999999);
-              tl.fromTo("#tr0 .mini", {y: 60, opacity: 0}, {y: -140, opacity: 1, duration: 0.45, stagger: 0.05, ease: "power2.out"}, 8.08);
-              tl.to("#tr0 .mini", {opacity: 0, duration: 0.15}, 8.649999999999999);
-              tl.fromTo("#tr1 .burst", {scale: 0, opacity: 0.85}, {scale: 3.2, opacity: 0, duration: 0.55, ease: "power2.out"}, 23.417);
-              tl.fromTo("#tr1 .mini", {y: 60, opacity: 0}, {y: -140, opacity: 1, duration: 0.45, stagger: 0.05, ease: "power2.out"}, 23.447);
-              tl.to("#tr1 .mini", {opacity: 0, duration: 0.15}, 24.017);
+              tl.to("#c0-a", {y: -120, opacity: 0, duration: 0.3, ease: "power2.in"}, 3.8890000000000002);
+              tl.fromTo("#c0-chip", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.3}, 4.189);
+              tl.fromTo("#c0-h", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 4.289);
+              tl.fromTo("#c0-h .hl-pink", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.35}, 4.689);
+              tl.fromTo("#c0-t", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35}, 6.309);
+              tl.to("#c0-b", {y: -100, opacity: 0, duration: 0.28, ease: "power2.in"}, 8.416999999999998);
+              tl.fromTo("#c1-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 8.849);
+              tl.fromTo("#c1-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 8.949);
+              tl.to("#c1-dots", {opacity: 0, height: 0, duration: 0.12}, 9.249);
+              tl.fromTo("#c1-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 9.369);
+              tl.fromTo("#c1-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 9.719);
+              tl.to("#c1-tk", {color: "#34B7F1", duration: 0.15}, 10.549);
+              tl.fromTo("#c1-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 11.089);
+              tl.fromTo("#c1-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 11.389000000000001);
+              tl.to("#c1-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 12.749);
+              tl.to("#c1-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 12.769);
+              tl.fromTo("#c2-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 13.069);
+              tl.fromTo("#c2-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 13.169);
+              tl.to("#c2-dots", {opacity: 0, height: 0, duration: 0.12}, 13.329);
+              tl.fromTo("#c2-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 13.449);
+              tl.fromTo("#c2-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 13.799);
+              tl.to("#c2-tk", {color: "#34B7F1", duration: 0.15}, 14.349);
+              tl.fromTo("#c2-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 14.929);
+              tl.fromTo("#c2-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 15.229000000000001);
+              tl.to("#c2-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 16.429);
+              tl.to("#c2-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 16.448999999999998);
+              tl.fromTo("#c3-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 16.749);
+              tl.fromTo("#c3-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 16.849);
+              tl.to("#c3-dots", {opacity: 0, height: 0, duration: 0.12}, 16.808999999999997);
+              tl.fromTo("#c3-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 16.929);
+              tl.fromTo("#c3-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 17.279);
+              tl.to("#c3-tk", {color: "#34B7F1", duration: 0.15}, 18.349);
+              tl.fromTo("#c3-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 18.549);
+              tl.fromTo("#c3-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 18.849);
+              tl.to("#c3-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 20.429);
+              tl.to("#c3-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 20.448999999999998);
+              tl.fromTo("#c4-card", {y: -180, opacity: 0, scale: 0.9}, {y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)"}, 21.54);
+              tl.fromTo("#c4-dots i", {y: 0}, {y: -10, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08}, 21.64);
+              tl.to("#c4-dots", {opacity: 0, height: 0, duration: 0.12}, 21.509999999999998);
+              tl.fromTo("#c4-en", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.3, ease: "power2.out"}, 21.63);
+              tl.fromTo("#c4-en .hl-en", {backgroundSize: "0% 40%"}, {backgroundSize: "100% 40%", duration: 0.35}, 21.98);
+              tl.to("#c4-tk", {color: "#34B7F1", duration: 0.15}, 22.84);
+              tl.fromTo("#c4-m", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)"}, 23.06);
+              tl.fromTo("#c4-m .hl-hi", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 23.36);
+              tl.to("#c4-card", {y: -200, opacity: 0, duration: 0.3, ease: "power2.in"}, 24.98);
+              tl.to("#c4-m", {y: 40, opacity: 0, duration: 0.25, ease: "power2.in"}, 25.0);
+              tl.fromTo("#c5-h", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)"}, 25.333);
+              tl.fromTo("#c5-s", {opacity: 0, y: 16}, {opacity: 1, y: 0, duration: 0.35}, 25.683);
+              tl.fromTo("#c5-q", {opacity: 0, x: -20, scale: 0.8, transformOrigin: "0% 100%"}, {opacity: 1, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}, 29.972);
+              tl.fromTo("#c5-ib", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.35, ease: "power2.out"}, 31.552);
+              tl.fromTo("#c5 .cursor", {opacity: 1}, {opacity: 0, duration: 0.25, yoyo: true, repeat: 7}, 31.552);
+              tl.to("#c5-btn", {scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}, 32.572);
+              tl.to("#c5-btn", {scale: 1.08, duration: 0.3, yoyo: true, repeat: 1, ease: "sine.inOut"}, 32.822);
+              tl.fromTo("#tr0 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.45, duration: 0.42, ease: "power2.inOut"}, 3.939);
+              tl.to("#tr0 .leak", {opacity: 0, duration: 0.25}, 4.359);
+              tl.fromTo("#tr0 .core", {opacity: 0, scale: 0.6}, {opacity: 0.33, scale: 1.4, duration: 0.2, ease: "power2.out"}, 4.089);
+              tl.to("#tr0 .core", {opacity: 0, duration: 0.28}, 4.289);
+              tl.fromTo("#tr1 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.75, duration: 0.42, ease: "power2.inOut"}, 8.517);
+              tl.to("#tr1 .leak", {opacity: 0, duration: 0.25}, 8.937);
+              tl.fromTo("#tr1 .core", {opacity: 0, scale: 0.6}, {opacity: 0.55, scale: 1.4, duration: 0.2, ease: "power2.out"}, 8.667);
+              tl.to("#tr1 .core", {opacity: 0, duration: 0.28}, 8.866999999999999);
+              tl.fromTo("#tr2 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.45, duration: 0.42, ease: "power2.inOut"}, 12.819);
+              tl.to("#tr2 .leak", {opacity: 0, duration: 0.25}, 13.239);
+              tl.fromTo("#tr2 .core", {opacity: 0, scale: 0.6}, {opacity: 0.33, scale: 1.4, duration: 0.2, ease: "power2.out"}, 12.969000000000001);
+              tl.to("#tr2 .core", {opacity: 0, duration: 0.28}, 13.169);
+              tl.fromTo("#tr3 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.45, duration: 0.42, ease: "power2.inOut"}, 16.499);
+              tl.to("#tr3 .leak", {opacity: 0, duration: 0.25}, 16.919);
+              tl.fromTo("#tr3 .core", {opacity: 0, scale: 0.6}, {opacity: 0.33, scale: 1.4, duration: 0.2, ease: "power2.out"}, 16.648999999999997);
+              tl.to("#tr3 .core", {opacity: 0, duration: 0.28}, 16.849);
+              tl.fromTo("#tr4 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.45, duration: 0.42, ease: "power2.inOut"}, 21.29);
+              tl.to("#tr4 .leak", {opacity: 0, duration: 0.25}, 21.71);
+              tl.fromTo("#tr4 .core", {opacity: 0, scale: 0.6}, {opacity: 0.33, scale: 1.4, duration: 0.2, ease: "power2.out"}, 21.439999999999998);
+              tl.to("#tr4 .core", {opacity: 0, duration: 0.28}, 21.64);
+              tl.fromTo("#tr5 .leak", {xPercent: 70, opacity: 0}, {xPercent: -70, opacity: 0.75, duration: 0.42, ease: "power2.inOut"}, 25.083);
+              tl.to("#tr5 .leak", {opacity: 0, duration: 0.25}, 25.503);
+              tl.fromTo("#tr5 .core", {opacity: 0, scale: 0.6}, {opacity: 0.55, scale: 1.4, duration: 0.2, ease: "power2.out"}, 25.232999999999997);
+              tl.to("#tr5 .core", {opacity: 0, duration: 0.28}, 25.433);
   window.__timelines["main"] = tl;
 </script>
 </body>
