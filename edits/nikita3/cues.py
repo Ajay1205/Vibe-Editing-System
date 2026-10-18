@@ -91,7 +91,7 @@ def build():
     # Sound effects stay sparse: hook hit, a whoosh per word transition, a light hit each time
     # she says the word inside an example sentence, "better" + "confident" at the end, comment tap.
     sfx = [("impact-bass-1", caps[0]["beats"]["num"], 0.5)]
-    risers = [(0.0, 0.45)]  # (start, gain): 3 s riser from the first frame, cresting into the hook
+    risers = [(0.0, 0.45)]  # (start, gain): the provided riser from the first frame
     flashes = []
     for sec in SECTIONS:
         c = sec["clip"]
@@ -121,12 +121,13 @@ def build():
             ("click", max(cta["comment"], cta["t"] + 1.1), 0.45)]
 
     comment_tap = max(cta["comment"], cta["t"] + 1.1)
-    risers.append((comment_tap - 3.2, 0.45))  # 3 s riser that crests on the final comment tap
+    risers.append((comment_tap - 2.95, 0.45))  # Nikita's riser (3.1 s, crest at ~2.95 s) peaks on the comment tap
     punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
            "punches": punches, "sfx": [{"name": n, "t": round(max(0, t), 3), "gain": g, "lu": -1.0 if n in ("pop", "ping") else 0.0}
                    for n, t, g in sfx]
-           + [{"name": "riser", "t": round(t, 3), "gain": g, "lu": 1.0, "from": 0.7, "dur": 3.2} for t, g in risers]}
+           + [{"name": "riser_user", "file": "assets/user/riser_user.mp3", "t": round(t, 3), "gain": g, "lu": 1.0}
+              for t, g in risers]}
     json.dump(out, open(HERE / "cues.json", "w"), ensure_ascii=False, indent=1)
     print(f"{len(caps)} captions, {len(punches)} punches, {len(out['sfx'])} sfx, {len(flashes)} flashes")
 

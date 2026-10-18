@@ -75,7 +75,8 @@ def main():
     cache = {}
     for s in CUES["sfx"]:
         if s["name"] not in cache:
-            cache[s["name"]] = decode(SFX_DIR / f"{s['name']}.mp3")
+            src = HERE / s["file"] if "file" in s else SFX_DIR / f"{s['name']}.mp3"
+            cache[s["name"]] = decode(src)
         snd = cache[s["name"]]
         if "from" in s:  # use a slice of a long effect (e.g. the riser's 3 s build)
             a, b = int(s["from"] * SR), int((s["from"] + s["dur"]) * SR)

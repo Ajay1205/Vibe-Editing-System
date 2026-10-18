@@ -317,20 +317,18 @@
    "lu": 0.0
   },
   {
-   "name": "riser",
+   "name": "riser_user",
+   "file": "assets/user/riser_user.mp3",
    "t": 0.0,
    "gain": 0.45,
-   "lu": 1.0,
-   "from": 0.7,
-   "dur": 3.2
+   "lu": 1.0
   },
   {
-   "name": "riser",
-   "t": 87.781,
+   "name": "riser_user",
+   "file": "assets/user/riser_user.mp3",
+   "t": 88.031,
    "gain": 0.45,
-   "lu": 1.0,
-   "from": 0.7,
-   "dur": 3.2
+   "lu": 1.0
   }
  ]
 }
