@@ -87,11 +87,11 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
 .send { padding: 20px 28px; border-radius: 40px; background: var(--ink); color: var(--card); font: 800 34px/1 Outfit; }
 .burst { left: 820px; top: 1420px; font-size: 70px; }
 
-/* transitions */
-.edge { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px;
-  background: radial-gradient(ellipse 62% 55% at 50% 45%, rgba(255,240,210,0) 60%, rgba(255,226,170,.55) 85%, rgba(255,214,140,.85) 100%); }
-.glow { position: absolute; left: -300px; top: 200px; width: 1680px; height: 1700px; border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255,250,235,.95), rgba(255,200,110,.7) 35%, rgba(240,120,50,.3) 60%, rgba(232,69,44,0) 75%); }
+/* transitions: warm light sweep (peach-gold streak) + soft bloom */
+.sweep { position: absolute; left: -200px; top: -400px; width: 1480px; height: 2720px; transform: rotate(18deg);
+  background: linear-gradient(90deg, rgba(255,214,170,0) 30%, rgba(255,226,190,.55) 44%, rgba(255,248,236,.95) 50%, rgba(255,226,190,.55) 56%, rgba(255,214,170,0) 70%); }
+.bloom { position: absolute; left: -300px; top: 300px; width: 1680px; height: 1500px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255,250,240,.9), rgba(245,211,188,.55) 40%, rgba(245,211,188,0) 72%); }
 </style>
 </head>
 <body>
@@ -160,15 +160,12 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <span class="send" id="c7-btn">💬 Comment</span></div>
               <div class="burst" id="c7-bu">❤️</div></div></div>
 <div id="ban" class="clip" data-start="10.567" data-duration="45.700" data-track-index="6"><div class="layer"><div class="banner" id="ban-b"><span>Restaurant mein<br/><span class="hl">English kaise bolein?</span></span><span class="bdots"><i id="bd0"></i><i id="bd1"></i><i id="bd2"></i><i id="bd3"></i><i id="bd4"></i></span></div></div></div>
-<div id="fl2" class="clip" data-start="7.956" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl5" class="clip" data-start="15.983" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl8" class="clip" data-start="21.490" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl11" class="clip" data-start="27.156" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl14" class="clip" data-start="32.630" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl17" class="clip" data-start="37.510" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="fl20" class="clip" data-start="53.751" data-duration="0.300" data-track-index="8"><div class="layer"><div class="edge"></div></div></div>
-<div id="tr0" class="clip" data-start="10.317" data-duration="0.700" data-track-index="9"><div class="layer"><div class="glow"></div></div></div>
-<div id="tr1" class="clip" data-start="40.187" data-duration="0.700" data-track-index="9"><div class="layer"><div class="glow"></div></div></div>
+<div id="sw0" class="clip" data-start="10.267" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw1" class="clip" data-start="18.750" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw2" class="clip" data-start="24.296" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw3" class="clip" data-start="29.960" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw4" class="clip" data-start="35.730" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw5" class="clip" data-start="40.137" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
 </div>
 <script>
   const tl = gsap.timeline({ paused: true });
@@ -267,11 +264,31 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
               tl.to("#c7-i .idea", {y: -8, duration: 0.9, yoyo: true, repeat: 5, stagger: 0.15, ease: "sine.inOut"}, 52.050999999999995);
               tl.to("#c7-btn", {scale: 0.84, duration: 0.08, yoyo: true, repeat: 1}, 55.351);
               tl.fromTo("#c7-bu", {opacity: 0, scale: 0.3, y: 0}, {opacity: 1, scale: 1.4, y: -90, duration: 0.45, ease: "back.out(2)"}, 55.400999999999996);
-              tl.to("#c7-bu", {opacity: 0, duration: 0.3}, 55.951);tl.fromTo("#ban-b", {opacity: 0, y: -30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}, 10.667);tl.to("#bd0", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 10.623);tl.to("#bd1", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 19.05);tl.to("#bd2", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 24.596);tl.to("#bd3", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 30.259999999999998);tl.to("#bd4", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 36.03);tl.fromTo("#fl2 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 7.956);tl.fromTo("#fl5 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 15.983);tl.fromTo("#fl8 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 21.490000000000002);tl.fromTo("#fl11 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 27.156000000000002);tl.fromTo("#fl14 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 32.63);tl.fromTo("#fl17 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 37.51);tl.fromTo("#fl20 .edge", {opacity: 0.85}, {opacity: 0, duration: 0.28, ease: "power2.out"}, 53.751);
-              tl.fromTo("#tr0 .glow", {opacity: 0, scale: 0.6}, {opacity: 0.75, scale: 1.2, duration: 0.25, ease: "power2.out"}, 10.317);
-              tl.to("#tr0 .glow", {opacity: 0, scale: 1.5, duration: 0.35}, 10.617);
-              tl.fromTo("#tr1 .glow", {opacity: 0, scale: 0.6}, {opacity: 0.75, scale: 1.2, duration: 0.25, ease: "power2.out"}, 40.187000000000005);
-              tl.to("#tr1 .glow", {opacity: 0, scale: 1.5, duration: 0.35}, 40.487);
+              tl.to("#c7-bu", {opacity: 0, duration: 0.3}, 55.951);tl.fromTo("#ban-b", {opacity: 0, y: -30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}, 10.667);tl.to("#bd0", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 10.623);tl.to("#bd1", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 19.05);tl.to("#bd2", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 24.596);tl.to("#bd3", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 30.259999999999998);tl.to("#bd4", {backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}, 36.03);
+              tl.fromTo("#sw0 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.9, duration: 0.6, ease: "power2.inOut"}, 10.267);
+              tl.to("#sw0 .sweep", {opacity: 0, duration: 0.18}, 10.687);
+              tl.fromTo("#sw0 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.55, scale: 1.25, duration: 0.25, ease: "power2.out"}, 10.447000000000001);
+              tl.to("#sw0 .bloom", {opacity: 0, duration: 0.3}, 10.697000000000001);
+              tl.fromTo("#sw1 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 18.75);
+              tl.to("#sw1 .sweep", {opacity: 0, duration: 0.18}, 19.17);
+              tl.fromTo("#sw1 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 18.93);
+              tl.to("#sw1 .bloom", {opacity: 0, duration: 0.3}, 19.18);
+              tl.fromTo("#sw2 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 24.296);
+              tl.to("#sw2 .sweep", {opacity: 0, duration: 0.18}, 24.716);
+              tl.fromTo("#sw2 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 24.476);
+              tl.to("#sw2 .bloom", {opacity: 0, duration: 0.3}, 24.726);
+              tl.fromTo("#sw3 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 29.959999999999997);
+              tl.to("#sw3 .sweep", {opacity: 0, duration: 0.18}, 30.38);
+              tl.fromTo("#sw3 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 30.139999999999997);
+              tl.to("#sw3 .bloom", {opacity: 0, duration: 0.3}, 30.389999999999997);
+              tl.fromTo("#sw4 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 35.730000000000004);
+              tl.to("#sw4 .sweep", {opacity: 0, duration: 0.18}, 36.15);
+              tl.fromTo("#sw4 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 35.910000000000004);
+              tl.to("#sw4 .bloom", {opacity: 0, duration: 0.3}, 36.160000000000004);
+              tl.fromTo("#sw5 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.9, duration: 0.6, ease: "power2.inOut"}, 40.13700000000001);
+              tl.to("#sw5 .sweep", {opacity: 0, duration: 0.18}, 40.557);
+              tl.fromTo("#sw5 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.55, scale: 1.25, duration: 0.25, ease: "power2.out"}, 40.31700000000001);
+              tl.to("#sw5 .bloom", {opacity: 0, duration: 0.3}, 40.56700000000001);
   window.__timelines["main"] = tl;
 </script>
 </body>

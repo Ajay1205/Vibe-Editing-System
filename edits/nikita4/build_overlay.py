@@ -189,17 +189,17 @@ def build(res=2160):
     for k, c in enumerate(sits):
         js.append(f'tl.to("#bd{k}", {{backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}}, {c["hi_t"]});')
 
-    # cut-in flashes: a quick warm edge glow on every close cut-in, a fuller bloom at section changes
-    shots = CUES["shots"]
-    for j, sh in enumerate(shots[1:], 1):
-        if sh["kind"] == "close":
-            els.append(clip(f"fl{j}", sh["t"], sh["t"] + 0.3, 8, '<div class="edge"></div>'))
-            js.append(f'tl.fromTo("#fl{j} .edge", {{opacity: 0.85}}, {{opacity: 0, duration: 0.28, ease: "power2.out"}}, {sh["t"]});')
-    for j, f in enumerate(CUES["flashes"]):
-        els.append(clip(f"tr{j}", max(0, f - 0.25), f + 0.45, 9, '<div class="glow"></div>'))
+    # light sweep (like Nikita 3's, in this palette): a soft warm streak glides across the frame between
+    # situations and at section changes; the camera moves themselves glide, so no flashes on cut-ins
+    sweeps = sorted(set(CUES["flashes"] + [c["start"] for c in sits[1:]]))
+    for j, f in enumerate(sweeps):
+        big = f in CUES["flashes"]
+        els.append(clip(f"sw{j}", max(0, f - 0.3), f + 0.45, 9, '<div class="sweep"></div><div class="bloom"></div>'))
         js.append(f"""
-              tl.fromTo("#tr{j} .glow", {{opacity: 0, scale: 0.6}}, {{opacity: 0.75, scale: 1.2, duration: 0.25, ease: "power2.out"}}, {max(0, f - 0.25)});
-              tl.to("#tr{j} .glow", {{opacity: 0, scale: 1.5, duration: 0.35}}, {f + 0.05});""")
+              tl.fromTo("#sw{j} .sweep", {{xPercent: -110, opacity: 0}}, {{xPercent: 110, opacity: {0.9 if big else 0.7}, duration: 0.6, ease: "power2.inOut"}}, {max(0, f - 0.3)});
+              tl.to("#sw{j} .sweep", {{opacity: 0, duration: 0.18}}, {f + 0.12});
+              tl.fromTo("#sw{j} .bloom", {{opacity: 0, scale: 0.7}}, {{opacity: {0.55 if big else 0.3}, scale: 1.25, duration: 0.25, ease: "power2.out"}}, {max(0, f - 0.12)});
+              tl.to("#sw{j} .bloom", {{opacity: 0, duration: 0.3}}, {f + 0.13});""")
 
     dur = CUES["duration"]
     page = TEMPLATE.replace("%DUR%", f"{dur:.3f}").replace("%ELS%", "\n".join(els)).replace("%JS%", "".join(js))
@@ -304,11 +304,11 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .send { padding: 20px 28px; border-radius: 40px; background: var(--ink); color: var(--card); font: 800 34px/1 Outfit; }
 .burst { left: 820px; top: 1420px; font-size: 70px; }
 
-/* transitions */
-.edge { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px;
-  background: radial-gradient(ellipse 62% 55% at 50% 45%, rgba(255,240,210,0) 60%, rgba(255,226,170,.55) 85%, rgba(255,214,140,.85) 100%); }
-.glow { position: absolute; left: -300px; top: 200px; width: 1680px; height: 1700px; border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255,250,235,.95), rgba(255,200,110,.7) 35%, rgba(240,120,50,.3) 60%, rgba(232,69,44,0) 75%); }
+/* transitions: warm light sweep (peach-gold streak) + soft bloom */
+.sweep { position: absolute; left: -200px; top: -400px; width: 1480px; height: 2720px; transform: rotate(18deg);
+  background: linear-gradient(90deg, rgba(255,214,170,0) 30%, rgba(255,226,190,.55) 44%, rgba(255,248,236,.95) 50%, rgba(255,226,190,.55) 56%, rgba(255,214,170,0) 70%); }
+.bloom { position: absolute; left: -300px; top: 300px; width: 1680px; height: 1500px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255,250,240,.9), rgba(245,211,188,.55) 40%, rgba(245,211,188,0) 72%); }
 </style>
 </head>
 <body>

@@ -72,6 +72,17 @@ def section_end(clip):
     return at(clip, 999)
 
 
+def spaced(shots, gap=1.0):
+    """Sorted shots with no two framing moves closer than `gap` s (the later one wins), so glides never overlap."""
+    out = []
+    for sh in sorted(shots, key=lambda x: x["t"]):
+        if out and sh["t"] - out[-1]["t"] < gap:
+            out.pop()
+        if not out or out[-1]["kind"] != sh["kind"]:
+            out.append(sh)
+    return out
+
+
 def build():
     caps, sfx = [], []
     hook_end = section_end(HOOK_CLIP)
@@ -96,7 +107,7 @@ def build():
         caps.append({"type": "situation", "n": i + 1, "of": len(SITUATIONS), "icon": s["icon"], "hi": s["hi"], "en": s["en"],
                      "start": starts[i], "hi_t": max(starts[i], at(SIT_CLIP, s["start"])), "q": at(SIT_CLIP, s["q"]),
                      "en_t": at(SIT_CLIP, s["en_t"]), "key": key, "pl": pl, "end": ends[i]})
-        shots += [{"t": starts[i], "kind": "mid"}, {"t": at(SIT_CLIP, s["q"]) - 0.04, "kind": "ask"},
+        shots += [{"t": at(SIT_CLIP, s["start"]) if i else starts[i], "kind": "mid"}, {"t": at(SIT_CLIP, s["q"]) - 0.04, "kind": "ask"},
                   {"t": at(SIT_CLIP, s["en_t"]) - 0.04, "kind": "close"}]
         if i:
             sfx.append(("whoosh-short", starts[i] - 0.1, -5.0, None))  # card swipe
@@ -125,7 +136,7 @@ def build():
     risers = [(2.0, 2.0, 1.1), (tap - 1.85, 1.1, 2.0)]
 
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
-           "series": HOOK["series"], "shots": sorted(shots, key=lambda x: x["t"]),
+           "series": HOOK["series"], "shots": spaced(shots),
            "sfx": [dict({"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu}, **({"file": f} if f else {}))
                    for n, t, lu, f in sfx]
            + [{"name": "riser_user", "file": "../../assets/shared/riser_user.mp3", "t": round(t, 3), "gain": 0.45,
