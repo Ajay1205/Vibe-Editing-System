@@ -72,6 +72,12 @@ def section_end(clip):
     return at(clip, 999)
 
 
+def cut_before(src, clip=SIT_CLIP):
+    """Output time of the picture cut just before source time `src` (start of the kept segment holding it)."""
+    seg = max((x for x in EDL["segments"] if x["clip"] == clip and x["in"] <= src + 0.1), key=lambda x: x["in"])
+    return round(seg["start"], 3)
+
+
 def spaced(shots, gap=1.0):
     """Sorted shots with no two framing moves closer than `gap` s (the later one wins), so glides never overlap."""
     out = []
@@ -110,7 +116,7 @@ def build():
         shots += [{"t": at(SIT_CLIP, s["start"]) if i else starts[i], "kind": "mid"}, {"t": at(SIT_CLIP, s["q"]) - 0.04, "kind": "ask"},
                   {"t": at(SIT_CLIP, s["en_t"]) - 0.04, "kind": "close"}]
         if i:
-            sfx.append(("whoosh-short", starts[i] - 0.1, -5.0, None))  # card swipe
+            sfx.append(("whoosh-short", cut_before(s["start"]) - 0.1, -5.0, None))  # with the light sweep on the cut
         if s.get("kaching"):
             sfx.append(("kaching", key - 0.02, -5.0, "assets/sfx/kaching.wav"))  # money for the bill
         else:
@@ -128,7 +134,10 @@ def build():
     sfx += [("pop", at(SIT_CLIP, CTA["comment_t"]), -5.0, None), ("click", tap, -1.0, None)]
     shots += [{"t": recap, "kind": "mid"}, {"t": cta, "kind": "mid"}, {"t": tap - 1.6, "kind": "close"}]
 
-    flashes = [hook_end, recap]  # candle-glow bloom + whoosh: into the situations, into the recap
+    # light sweeps land exactly on the picture cuts (user note: they came a second after the cut):
+    # big ones into the situations and into the recap, softer ones between situations
+    flashes = [hook_end, cut_before(RECAP["t"])]
+    sweeps = sorted(set(flashes + [cut_before(s["start"]) for s in SITUATIONS[1:]]))
     for t in flashes:
         sfx.append(("whoosh", t - 0.12, -4.0, None))
 
@@ -136,7 +145,7 @@ def build():
     risers = [(2.0, 2.0, 1.1), (tap - 1.85, 1.1, 2.0)]
 
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
-           "series": HOOK["series"], "shots": spaced(shots),
+           "series": HOOK["series"], "shots": spaced(shots), "sweeps": sweeps,
            "sfx": [dict({"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu}, **({"file": f} if f else {}))
                    for n, t, lu, f in sfx]
            + [{"name": "riser_user", "file": "../../assets/shared/riser_user.mp3", "t": round(t, 3), "gain": 0.45,

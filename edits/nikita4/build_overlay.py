@@ -181,17 +181,17 @@ def build(res=2160):
               tl.fromTo("#{cid}-bu", {{opacity: 0, scale: 0.3, y: 0}}, {{opacity: 1, scale: 1.4, y: -90, duration: 0.45, ease: "back.out(2)"}}, {c['tap'] + 0.05});
               tl.to("#{cid}-bu", {{opacity: 0, duration: 0.3}}, {c['tap'] + 0.6});""")
 
-    # series banner with progress dots, from the first situation to the end
-    b0 = sits[0]["start"]
+    # series title with progress dots, on screen from 0:00 (user note) to the end
+    b0 = 0.0
     dots = "".join(f'<i id="bd{k}"></i>' for k in range(n_sit))
     els.append(clip("ban", b0, CUES["duration"], 6, f'<div class="banner" id="ban-b"><span>{marks(CUES["series"])}</span><span class="bdots">{dots}</span></div>'))
-    js.append(f'tl.fromTo("#ban-b", {{opacity: 0, y: -30}}, {{opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}}, {b0 + 0.1});')
+    js.append(f'tl.fromTo("#ban-b", {{opacity: 0, y: -30}}, {{opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}}, 0.05);')
     for k, c in enumerate(sits):
         js.append(f'tl.to("#bd{k}", {{backgroundColor: "#F5D3BC", scale: 1.3, duration: 0.2}}, {c["hi_t"]});')
 
     # light sweep (like Nikita 3's, in this palette): a soft warm streak glides across the frame between
     # situations and at section changes; the camera moves themselves glide, so no flashes on cut-ins
-    sweeps = sorted(set(CUES["flashes"] + [c["start"] for c in sits[1:]]))
+    sweeps = CUES["sweeps"]
     for j, f in enumerate(sweeps):
         big = f in CUES["flashes"]
         els.append(clip(f"sw{j}", max(0, f - 0.3), f + 0.45, 9, '<div class="sweep"></div><div class="bloom"></div>'))
