@@ -51,7 +51,7 @@ CTA = {"t": 38.62, "head": "Next <m>situation</m> kaunsi? 🤔", "more_t": 39.98
        "tap_t": 48.70, "ideas": ["✈️ Airport", "🏥 Hospital", "🏦 Bank", "🛍️ Shopping", "💼 Interview", "🏨 Hotel"],
        "bar": "Aapki situation… comment karo"}
 # English line stays up until this far into the next situation (she starts the next Hindi need meanwhile)
-READ_HOLD = 0.7
+READ_HOLD = 1.2
 # ---------------------------------------------------------------------------------------------------------
 
 

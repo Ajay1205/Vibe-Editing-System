@@ -26,10 +26,11 @@ MIN_GAP = 0.45
 KEEP_SHARE, KEEP_MIN, KEEP_MAX = 0.6, 0.42, 0.85
 HEAD = 0.06
 TAIL = 0.35
-# Pauses right after each taught English line are kept whole (up to HOLD_MAX) so viewers can read the line
-# (user note: the English line was gone half a second after she finished). (clip, end of the English line)
+# Pauses right after each taught English line are cut short (user note: the pause after every translation felt
+# awkward). Reading time comes from the card staying up into the next situation instead (cues.READ_HOLD).
+# (clip, end of the English line)
 HOLD_AFTER = [("n42", 7.34), ("n42", 13.27), ("n42", 19.64), ("n42", 26.15), ("n42", 31.16)]
-HOLD_MAX = 1.2
+HOLD_KEEP = 0.32
 
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = [
@@ -93,7 +94,7 @@ def keep_ranges(clip):
             continue
         keep = min(KEEP_MAX, max(KEEP_MIN, KEEP_SHARE * gap))
         if any(c == clip and abs(ranges[-1][1] - t) < 0.15 for c, t in HOLD_AFTER):
-            keep = min(gap, HOLD_MAX)
+            keep = min(gap, HOLD_KEEP)
         if gap - keep < 0.12:  # cutting out a sliver would only add a jump cut
             ranges[-1][1] = en
             continue

@@ -28,7 +28,7 @@ FACE = (0.48, 0.53)  # Nikita's face centre in the raw frame (x, y as a fraction
 VERSIONS = {
     # v1 (v3 look, "Close & Bold"): shots from cues.json alternate a medium and a close framing with a hard
     # cut-in on every English line, each shot slowly pushing in by `drift`. ft = where her face sits (0 = top).
-    "v1": {"mid": (1.30, 0.40), "ask": (1.46, 0.385), "close": (1.68, 0.36), "drift": 0.035},
+    "v1": {"mid": (1.30, 0.40), "ask": (1.46, 0.385), "close": (1.68, 0.36), "drift": 0.035, "glide": 0.55},
 }
 
 
@@ -42,15 +42,38 @@ def ease_out(x):
     return 1 - (1 - x) ** 3
 
 
-def zoom_at(t, v):
-    """Zoom and face height for output time t: the current shot's framing, slowly pushing in."""
+def shot_state(k, t, v):
+    """Framing of shot k at time t: its zoom slowly pushing in over the shot's length."""
     shots = CUES["shots"]
-    k = max(i for i, sh in enumerate(shots) if sh["t"] <= t + 1e-6) if t >= shots[0]["t"] else 0
     sh = shots[k]
     t1 = shots[k + 1]["t"] if k + 1 < len(shots) else EDL["duration"]
     z, ft = v[sh["kind"]]
     p = ease((t - sh["t"]) / max(0.5, t1 - sh["t"]))
     return z * (1 + v["drift"] * p), ft
+
+
+def smoother(x):
+    x = min(1.0, max(0.0, x))
+    return x * x * x * (x * (6 * x - 15) + 10)
+
+
+def zoom_at(t, v):
+    """Zoom and face height for output time t. Shot changes glide (user note: hard zoom jumps weren't smooth):
+    the move starts a little before the shot's cue and eases in and out over v['glide'] seconds."""
+    shots = CUES["shots"]
+    g = v["glide"]
+    k = 0
+    for i, sh in enumerate(shots):
+        if sh["t"] - 0.6 * g <= t + 1e-6:
+            k = i
+    z, ft = shot_state(k, max(t, shots[k]["t"]), v)
+    if k > 0:
+        x = (t - (shots[k]["t"] - 0.6 * g)) / g
+        if x < 1:
+            zp, fp = shot_state(k - 1, t, v)
+            w = smoother(x)
+            z, ft = zp + (z - zp) * w, fp + (ft - fp) * w
+    return z, ft
 
 
 def window(z, ft):

@@ -1,5 +1,5 @@
 {
- "duration": 58.9667,
+ "duration": 56.2667,
  "fps": 30,
  "captions": [
   {
@@ -40,7 +40,7 @@
    "en_t": 16.023,
    "key": 16.203,
    "pl": 16.963,
-   "end": 19.043
+   "end": 19.05
   },
   {
    "type": "situation",
@@ -49,13 +49,13 @@
    "icon": "menu",
    "hi": "Kya mujhe menu mil sakta hai?",
    "en": "Can I get the **menu**, please?",
-   "start": 19.043,
-   "hi_t": 19.043,
-   "q": 20.123,
-   "en_t": 22.023,
-   "key": 22.603,
-   "pl": 22.903,
-   "end": 25.282999999999998
+   "start": 19.05,
+   "hi_t": 19.05,
+   "q": 19.63,
+   "en_t": 21.53,
+   "key": 22.11,
+   "pl": 22.41,
+   "end": 24.596
   },
   {
    "type": "situation",
@@ -64,13 +64,13 @@
    "icon": "spoon",
    "hi": "Khaane ke liye chammach chahiye",
    "en": "Can I get a **spoon**, please?",
-   "start": 25.282999999999998,
-   "hi_t": 25.282999999999998,
-   "q": 26.623,
-   "en_t": 28.383,
-   "key": 28.923,
-   "pl": 29.203,
-   "end": 31.673
+   "start": 24.596,
+   "hi_t": 24.596,
+   "q": 25.436,
+   "en_t": 27.196,
+   "key": 27.736,
+   "pl": 28.016,
+   "end": 30.259999999999998
   },
   {
    "type": "situation",
@@ -79,13 +79,13 @@
    "icon": "water",
    "hi": "Kya mujhe ek glass paani mil sakta hai?",
    "en": "Can I get a **glass of water**, please?",
-   "start": 31.673,
-   "hi_t": 31.673,
-   "q": 32.683,
-   "en_t": 34.583,
-   "key": 35.023,
-   "pl": 35.843,
-   "end": 38.003
+   "start": 30.259999999999998,
+   "hi_t": 30.259999999999998,
+   "q": 30.77,
+   "en_t": 32.67,
+   "key": 33.11,
+   "pl": 33.93,
+   "end": 36.03
   },
   {
    "type": "situation",
@@ -94,18 +94,18 @@
    "icon": "bill",
    "hi": "Bill maangna hai",
    "en": "Can I get the **bill**, please?",
-   "start": 38.003,
-   "hi_t": 38.003,
-   "q": 38.263,
-   "en_t": 40.023,
-   "key": 40.743,
-   "pl": 41.003,
-   "end": 42.637
+   "start": 36.03,
+   "hi_t": 36.03,
+   "q": 35.79,
+   "en_t": 37.55,
+   "key": 38.27,
+   "pl": 38.53,
+   "end": 40.437000000000005
   },
   {
    "type": "recap",
-   "start": 42.637,
-   "end": 47.971,
+   "start": 40.437000000000005,
+   "end": 45.271,
    "items": [
     "A **table for two**, please.",
     "Can I get the **menu**, please?",
@@ -123,12 +123,12 @@
    "title": "Save karo 📌",
    "sub": "5 restaurant lines",
    "say": "Real life mein bol kar dekhiye! 🗣️",
-   "say_t": 45.447
+   "say_t": 42.747
   },
   {
    "type": "cta",
-   "start": 47.971,
-   "end": 58.967,
+   "start": 45.271,
+   "end": 56.267,
    "head": "Next <m>situation</m> kaunsi? 🤔",
    "ideas": [
     "✈️ Airport",
@@ -139,15 +139,15 @@
     "🏨 Hotel"
    ],
    "bar": "Aapki situation… comment karo",
-   "more": 49.331,
-   "comment": 51.911,
-   "ideas_t": 53.451,
-   "tap": 58.051
+   "more": 46.631,
+   "comment": 49.211,
+   "ideas_t": 50.751,
+   "tap": 55.351
   }
  ],
  "flashes": [
   10.567,
-  42.637
+  40.437000000000005
  ],
  "series": "🍽️ RESTAURANT ENGLISH",
  "shots": [
@@ -176,63 +176,63 @@
    "kind": "close"
   },
   {
-   "t": 19.043,
+   "t": 19.05,
    "kind": "mid"
   },
   {
-   "t": 20.083000000000002,
+   "t": 19.59,
    "kind": "ask"
   },
   {
-   "t": 21.983,
+   "t": 21.490000000000002,
    "kind": "close"
   },
   {
-   "t": 25.282999999999998,
+   "t": 24.596,
    "kind": "mid"
   },
   {
-   "t": 26.583000000000002,
+   "t": 25.396,
    "kind": "ask"
   },
   {
-   "t": 28.343,
+   "t": 27.156000000000002,
    "kind": "close"
   },
   {
-   "t": 31.673,
+   "t": 30.259999999999998,
    "kind": "mid"
   },
   {
-   "t": 32.643,
+   "t": 30.73,
    "kind": "ask"
   },
   {
-   "t": 34.543,
+   "t": 32.63,
    "kind": "close"
   },
   {
-   "t": 38.003,
-   "kind": "mid"
-  },
-  {
-   "t": 38.223,
+   "t": 35.75,
    "kind": "ask"
   },
   {
-   "t": 39.983000000000004,
+   "t": 36.03,
+   "kind": "mid"
+  },
+  {
+   "t": 37.51,
    "kind": "close"
   },
   {
-   "t": 42.637,
+   "t": 40.437000000000005,
    "kind": "mid"
   },
   {
-   "t": 47.971,
+   "t": 45.271,
    "kind": "mid"
   },
   {
-   "t": 56.451,
+   "t": 53.751,
    "kind": "close"
   }
  ],
@@ -265,62 +265,62 @@
   },
   {
    "name": "whoosh-short",
-   "t": 18.943,
+   "t": 18.95,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "pop",
-   "t": 22.003,
+   "t": 21.51,
    "gain": 0.5,
    "lu": -4.0
   },
   {
    "name": "whoosh-short",
-   "t": 25.183,
+   "t": 24.496,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "pop",
-   "t": 28.363,
+   "t": 27.176,
    "gain": 0.5,
    "lu": -4.0
   },
   {
    "name": "whoosh-short",
-   "t": 31.573,
+   "t": 30.16,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "pop",
-   "t": 34.563,
+   "t": 32.65,
    "gain": 0.5,
    "lu": -4.0
   },
   {
    "name": "whoosh-short",
-   "t": 37.903,
+   "t": 35.93,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "kaching",
-   "t": 40.723,
+   "t": 38.25,
    "gain": 0.5,
    "lu": -5.0,
    "file": "assets/sfx/kaching.wav"
   },
   {
    "name": "pop",
-   "t": 51.911,
+   "t": 49.211,
    "gain": 0.5,
    "lu": -5.0
   },
   {
    "name": "click",
-   "t": 58.051,
+   "t": 55.351,
    "gain": 0.5,
    "lu": -1.0
   },
@@ -332,7 +332,7 @@
   },
   {
    "name": "whoosh",
-   "t": 42.517,
+   "t": 40.317,
    "gain": 0.5,
    "lu": -4.0
   },
@@ -348,7 +348,7 @@
   {
    "name": "riser_user",
    "file": "../../assets/shared/riser_user.mp3",
-   "t": 56.201,
+   "t": 53.501,
    "gain": 0.45,
    "lu": 1.0,
    "from": 1.1,
