@@ -204,13 +204,13 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 
 /* hook */
 .hook { left: 140px; top: 270px; width: 800px; height: 560px; }
-.hook-num { position: absolute; left: 0; top: 0; width: 300px; height: 380px; font: 400 380px/1 Anton; color: var(--amber);
+.hook-num { position: absolute; left: 0; top: 0; width: 230px; height: 280px; font: 400 280px/1 Anton; color: var(--amber);
   text-shadow: 0 10px 0 var(--plum), 0 18px 40px rgba(0,0,0,.35); }
-.hook-words { position: absolute; left: 240px; top: 70px; width: 560px; height: 300px; font: 400 140px/1.02 Anton; color: var(--cream);
+.hook-words { position: absolute; left: 200px; top: 30px; width: 600px; height: 240px; font: 400 116px/1.02 Anton; color: var(--cream);
   text-transform: uppercase; overflow: hidden; text-shadow: 0 6px 0 var(--plum), 0 14px 30px rgba(0,0,0,.35); }
 .hook-words span { display: block; }
 .chip { display: block; font: 800 40px/1 Poppins; padding: 22px 34px; border-radius: 60px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-.chip-cream { position: absolute; left: 240px; top: 410px; width: max-content; background: var(--cream); color: var(--plum); }
+.chip-cream { position: absolute; left: 200px; top: 285px; width: max-content; background: var(--cream); color: var(--plum); }
 
 /* promise */
 .promise { left: 140px; top: 1190px; width: 800px; height: 420px; }
@@ -228,12 +228,12 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .title-badge { position: absolute; left: 6px; top: 0; width: max-content; font: 800 34px/1 Poppins; letter-spacing: 6px; color: var(--plum);
   background: var(--amber); padding: 14px 24px; border-radius: 14px; }
 .title-badge i { font-style: normal; opacity: .55; }
-.title-word { position: absolute; left: 0; top: 60px; width: 800px; height: 240px; font: 400 205px/1.05 Anton; color: var(--cream);
+.title-word { position: absolute; left: 0; top: 56px; width: 800px; height: 200px; font: 400 180px/1.05 Anton; color: var(--cream);
   letter-spacing: 4px; overflow: hidden; white-space: nowrap; text-shadow: 0 8px 0 var(--plum), 0 20px 50px rgba(0,0,0,.4); }
 .title-word span { display: inline-block; }
-.swoosh { position: absolute; left: 0; top: 300px; width: 640px; height: 46px; overflow: visible; }
+.swoosh { position: absolute; left: 0; top: 252px; width: 640px; height: 46px; overflow: visible; }
 .swoosh path { fill: none; stroke: var(--amber); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 640; }
-.meaning { position: absolute; left: 0; top: 370px; width: max-content; max-width: 800px; font: 800 50px/1.1 Poppins; color: var(--cream);
+.meaning { position: absolute; left: 0; top: 300px; width: max-content; max-width: 800px; font: 800 50px/1.1 Poppins; color: var(--cream);
   background: var(--berry); padding: 20px 34px; border-radius: 22px; box-shadow: 0 12px 30px rgba(0,0,0,.3); }
 .meaning b { color: var(--amber); font-weight: 800; margin-right: 10px; }
 .dock { left: 140px; top: 268px; width: max-content; font: 400 52px/1 Anton; letter-spacing: 2px; color: var(--cream);
