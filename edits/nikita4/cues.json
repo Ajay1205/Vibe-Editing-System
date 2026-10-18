@@ -1,0 +1,282 @@
+{
+ "duration": 57.2,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "hook",
+   "start": 0.0,
+   "end": 10.567,
+   "beats": {
+    "book": 0.756,
+    "stamp": 2.276,
+    "sit": 3.776,
+    "talk": 5.056,
+    "aaj": 6.776,
+    "neon": 7.956
+   }
+  },
+  {
+   "type": "situation",
+   "n": 1,
+   "icon": "table",
+   "hi": "Do logon ke liye table chahiye",
+   "en": "A **table for two**, please.",
+   "start": 10.567,
+   "hi_t": 10.623,
+   "q": 14.253,
+   "en_t": 16.023,
+   "key": 16.203,
+   "pl": 16.963,
+   "end": 17.814
+  },
+  {
+   "type": "situation",
+   "n": 2,
+   "icon": "menu",
+   "hi": "Kya mujhe menu mil sakta hai?",
+   "en": "Can I get the **menu**, please?",
+   "start": 17.814,
+   "hi_t": 18.014,
+   "q": 19.794,
+   "en_t": 21.694,
+   "key": 22.274,
+   "pl": 22.574,
+   "end": 23.647000000000002
+  },
+  {
+   "type": "situation",
+   "n": 3,
+   "icon": "spoon",
+   "hi": "Khaane ke liye chammach chahiye",
+   "en": "Can I get a **spoon**, please?",
+   "start": 23.647000000000002,
+   "hi_t": 23.847,
+   "q": 25.887,
+   "en_t": 27.647,
+   "key": 28.187,
+   "pl": 28.467,
+   "end": 29.618000000000002
+  },
+  {
+   "type": "situation",
+   "n": 4,
+   "icon": "water",
+   "hi": "Kya mujhe ek glass paani mil sakta hai?",
+   "en": "Can I get a **glass of water**, please?",
+   "start": 29.618000000000002,
+   "hi_t": 29.818,
+   "q": 31.528,
+   "en_t": 33.428,
+   "key": 33.868,
+   "pl": 34.688,
+   "end": 35.611
+  },
+  {
+   "type": "situation",
+   "n": 5,
+   "icon": "bill",
+   "hi": "Bill maangna hai",
+   "en": "Can I get the **bill**, please?",
+   "start": 35.611,
+   "hi_t": 35.811,
+   "q": 36.771,
+   "en_t": 38.531,
+   "key": 39.251,
+   "pl": 39.511,
+   "end": 40.17
+  },
+  {
+   "type": "recap",
+   "start": 40.17,
+   "end": 46.204,
+   "items": [
+    "A **table for two**, please.",
+    "Can I get the **menu**, please?",
+    "Can I get a **spoon**, please?",
+    "Can I get a **glass of water**, please?",
+    "Can I get the **bill**, please?"
+   ],
+   "icons": [
+    "table",
+    "menu",
+    "spoon",
+    "water",
+    "bill"
+   ],
+   "say": 43.68
+  },
+  {
+   "type": "cta",
+   "start": 46.204,
+   "end": 57.2,
+   "more": 47.564,
+   "comment": 50.144,
+   "ideas": 51.684,
+   "tap": 56.284
+  }
+ ],
+ "flashes": [
+  10.567,
+  40.17
+ ],
+ "punches": [
+  {
+   "t": 3.776,
+   "kind": "small"
+  },
+  {
+   "t": 7.956,
+   "kind": "small"
+  },
+  {
+   "t": 16.023,
+   "kind": "small"
+  },
+  {
+   "t": 21.694,
+   "kind": "small"
+  },
+  {
+   "t": 27.647,
+   "kind": "small"
+  },
+  {
+   "t": 33.428,
+   "kind": "small"
+  },
+  {
+   "t": 38.531,
+   "kind": "small"
+  }
+ ],
+ "sfx": [
+  {
+   "name": "stamp",
+   "t": 2.276,
+   "gain": 0.5,
+   "lu": 0.0,
+   "file": "assets/sfx/stamp.wav"
+  },
+  {
+   "name": "pop",
+   "t": 3.776,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "neon",
+   "t": 7.906,
+   "gain": 0.5,
+   "lu": -2.0,
+   "file": "assets/sfx/neon.wav"
+  },
+  {
+   "name": "bell",
+   "t": 17.283,
+   "gain": 0.5,
+   "lu": -1.0,
+   "file": "assets/sfx/bell.wav"
+  },
+  {
+   "name": "whoosh-short",
+   "t": 17.764,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "bell",
+   "t": 22.894,
+   "gain": 0.5,
+   "lu": -1.0,
+   "file": "assets/sfx/bell.wav"
+  },
+  {
+   "name": "whoosh-short",
+   "t": 23.597,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "bell",
+   "t": 28.787,
+   "gain": 0.5,
+   "lu": -1.0,
+   "file": "assets/sfx/bell.wav"
+  },
+  {
+   "name": "whoosh-short",
+   "t": 29.568,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "bell",
+   "t": 35.008,
+   "gain": 0.5,
+   "lu": -1.0,
+   "file": "assets/sfx/bell.wav"
+  },
+  {
+   "name": "whoosh-short",
+   "t": 35.561,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "bell",
+   "t": 39.831,
+   "gain": 0.5,
+   "lu": -1.0,
+   "file": "assets/sfx/bell.wav"
+  },
+  {
+   "name": "printer",
+   "t": 39.151,
+   "gain": 0.5,
+   "lu": -4.0,
+   "file": "assets/sfx/printer.wav"
+  },
+  {
+   "name": "pop",
+   "t": 50.144,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "click",
+   "t": 56.284,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "whoosh",
+   "t": 10.447,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "whoosh",
+   "t": 40.05,
+   "gain": 0.5,
+   "lu": 0.0
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 54.434,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}
