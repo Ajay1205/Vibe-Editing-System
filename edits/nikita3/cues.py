@@ -117,8 +117,8 @@ def build():
     caps.append({"type": "boost", "start": b["t"], "confident": b["confident"], "end": b["end"]})
     caps.append({"type": "cta", "start": cta["t"], "follow": cta["follow"], "comment": cta["comment"],
                  "end": round(cta["end"], 3)})
-    sfx += [("impact-bass-1", b["t"], 0.35), ("sparkle", b["confident"], 0.4),
-            ("click", max(cta["comment"], cta["t"] + 1.1), 0.6)]
+    sfx += [("impact-bass-1", b["t"], 0.4), ("impact-bass-2", b["confident"], 0.4),
+            ("click", max(cta["comment"], cta["t"] + 1.1), 0.45)]
 
     punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
