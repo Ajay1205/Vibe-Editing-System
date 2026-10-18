@@ -77,15 +77,13 @@ OUTRO = {"recap": {"t": at("n34", 25.00), "rows_t": at("n34", 25.50), "end": at(
          "cta": {"t": at("n34", 33.38), "follow": at("n34", 34.00), "comment": at("n34", 34.68),
                  "end": section_end("n34")}}
 
-# Zoom punches: (clip, source time, "big"|"small")
-PUNCHES = [("n31", 1.10, "big"), ("n31", 7.84, "small"), ("n31", 8.88, "small"),
-           ("n32", 1.05, "big"), ("n32", 3.34, "small"), ("n32", 8.64, "small"), ("n32", 14.90, "small"),
-           ("n32", 21.64, "small"), ("n32", 25.74, "small"),
-           ("n33", 1.00, "big"), ("n33", 2.94, "small"), ("n33", 9.24, "small"), ("n33", 15.56, "small"),
-           ("n33", 22.16, "small"), ("n33", 26.20, "small"),
-           ("n34", 1.00, "big"), ("n34", 3.22, "small"), ("n34", 6.16, "small"), ("n34", 12.54, "small"),
-           ("n34", 19.00, "small"), ("n34", 21.16, "small"), ("n34", 25.54, "small"), ("n34", 31.46, "small"),
-           ("n34", 34.02, "small")]
+# Zoom punches: (clip, source time, "big"|"small"). Kept to the moments that matter:
+# the hook, each word title, and the word inside each example sentence.
+PUNCHES = [("n31", 1.10, "big"),
+           ("n32", 1.05, "big"), ("n32", 8.64, "small"), ("n32", 14.90, "small"),
+           ("n33", 1.00, "big"), ("n33", 9.24, "small"), ("n33", 15.56, "small"),
+           ("n34", 1.00, "big"), ("n34", 6.16, "small"), ("n34", 12.54, "small"),
+           ("n34", 32.32, "small")]
 
 
 def build():
@@ -108,7 +106,8 @@ def build():
         for k, ex in enumerate(sec["examples"]):
             sfx.append(("pop" if k == 0 else "ping", at(c, ex["word_t"]), 0.35 if k == 0 else 0.25))
             caps.append({"type": "example", "en": ex["en"], "hi": ex["hi"], "emoji": ex["emoji"],
-                         "start": at(c, ex["t"]), "hi_t": at(c, ex["hi_t"]), "end": at(c, ex["end"])})
+                         "start": at(c, ex["t"]), "word_t": at(c, ex["word_t"]), "hi_t": at(c, ex["hi_t"]),
+                         "end": at(c, ex["end"])})
         tip = sec["tip"]
         caps.append({"type": "tip", "start": at(c, tip["t"]), "end": tip_end,
                      "lines": [{"t": at(c, t), "text": s} for t, s in tip["lines"]]})
@@ -122,11 +121,12 @@ def build():
             ("click", max(cta["comment"], cta["t"] + 1.1), 0.45)]
 
     comment_tap = max(cta["comment"], cta["t"] + 1.1)
-    risers.append((comment_tap - 3.0, 0.45))  # 3 s riser that crests on the final comment tap
+    risers.append((comment_tap - 3.2, 0.45))  # 3 s riser that crests on the final comment tap
     punches = [{"t": at(c, s), "kind": k} for c, s, k in PUNCHES]
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "flashes": flashes,
-           "punches": punches, "sfx": [{"name": n, "t": round(max(0, t), 3), "gain": g} for n, t, g in sfx]
-           + [{"name": "riser", "t": round(t, 3), "gain": g, "from": 7.03, "dur": 3.0} for t, g in risers]}
+           "punches": punches, "sfx": [{"name": n, "t": round(max(0, t), 3), "gain": g, "lu": -1.0 if n in ("pop", "ping") else 0.0}
+                   for n, t, g in sfx]
+           + [{"name": "riser", "t": round(t, 3), "gain": g, "lu": 1.0, "from": 0.7, "dur": 3.2} for t, g in risers]}
     json.dump(out, open(HERE / "cues.json", "w"), ensure_ascii=False, indent=1)
     print(f"{len(caps)} captions, {len(punches)} punches, {len(out['sfx'])} sfx, {len(flashes)} flashes")
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=2160, height=3840" />
+<meta name="viewport" content="width=1080, height=1920" />
 <script src="vendor/gsap.min.js"></script>
 <style>
 @font-face { font-family: "Anton"; src: url(fonts/anton.woff2) format("woff2"); font-weight: 400; }
@@ -12,10 +12,10 @@
 @font-face { font-family: "Caveat"; src: url(fonts/caveat-700.woff2) format("woff2"); font-weight: 700; }
 :root { --cream: #FFF7EC; --plum: #4A1530; --berry: #9B2C5C; --amber: #FFB547; --ink: #22101A; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 2160px; height: 3840px; overflow: hidden; background: transparent; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
 #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
-.clip { width: 2160px; height: 3840px; }
-.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: scale(2); }
+.clip { width: 1080px; height: 1920px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: none; }
 .layer > div { position: absolute; }
 
 /* hook */
@@ -110,7 +110,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="93.100" data-width="2160" data-height="3840" data-fps="30">
+<div id="root" data-composition-id="main" data-start="0" data-duration="93.100" data-width="1080" data-height="1920" data-fps="30">
 <div id="c0" class="clip" data-start="0.000" data-duration="2.294" data-track-index="1"><div class="layer">
               <div class="hook">
                 <div class="hook-num" id="c0-num">3</div>

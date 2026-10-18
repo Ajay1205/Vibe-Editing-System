@@ -43,6 +43,7 @@
    "hi": "Asal mein mujhe coffee pasand nahi hai",
    "emoji": "☕",
    "start": 16.887,
+   "word_t": 16.933,
    "hi_t": 18.767,
    "end": 21.596
   },
@@ -52,6 +53,7 @@
    "hi": "Asal mein main Delhi se hoon",
    "emoji": "📍",
    "start": 22.541,
+   "word_t": 22.591,
    "hi_t": 24.367,
    "end": 26.412
   },
@@ -90,6 +92,7 @@
    "hi": "Coffee ki bajaye chai peete hain",
    "emoji": "🍵",
    "start": 41.83,
+   "word_t": 42.761,
    "hi_t": 44.167,
    "end": 46.642
   },
@@ -99,6 +102,7 @@
    "hi": "Taxi lene ki bajaye main paidal chali gayi",
    "emoji": "🚶‍♀️",
    "start": 47.603,
+   "word_t": 48.323,
    "hi_t": 50.123,
    "end": 53.039
   },
@@ -133,6 +137,7 @@
    "hi": "Aakhirkaar maine apna kaam poora kar diya",
    "emoji": "✅",
    "start": 65.942,
+   "word_t": 66.002,
    "hi_t": 67.833,
    "end": 70.453
   },
@@ -142,6 +147,7 @@
    "hi": "Aakhirkaar bus aa gayi",
    "emoji": "🚌",
    "start": 71.622,
+   "word_t": 71.712,
    "hi_t": 73.472,
    "end": 75.517
   },
@@ -191,20 +197,8 @@
    "kind": "big"
   },
   {
-   "t": 7.084,
-   "kind": "small"
-  },
-  {
-   "t": 7.968,
-   "kind": "small"
-  },
-  {
    "t": 10.095,
    "kind": "big"
-  },
-  {
-   "t": 12.119,
-   "kind": "small"
   },
   {
    "t": 16.933,
@@ -212,14 +206,6 @@
   },
   {
    "t": 22.591,
-   "kind": "small"
-  },
-  {
-   "t": 28.672,
-   "kind": "small"
-  },
-  {
-   "t": 32.772,
    "kind": "small"
   },
   {
@@ -227,23 +213,11 @@
    "kind": "big"
   },
   {
-   "t": 36.77,
-   "kind": "small"
-  },
-  {
    "t": 42.761,
    "kind": "small"
   },
   {
    "t": 48.323,
-   "kind": "small"
-  },
-  {
-   "t": 54.458,
-   "kind": "small"
-  },
-  {
-   "t": 58.31,
    "kind": "small"
   },
   {
@@ -251,10 +225,6 @@
    "kind": "big"
   },
   {
-   "t": 63.264,
-   "kind": "small"
-  },
-  {
    "t": 66.002,
    "kind": "small"
   },
@@ -263,23 +233,7 @@
    "kind": "small"
   },
   {
-   "t": 77.597,
-   "kind": "small"
-  },
-  {
-   "t": 79.594,
-   "kind": "small"
-  },
-  {
-   "t": 82.402,
-   "kind": "small"
-  },
-  {
-   "t": 87.961,
-   "kind": "small"
-  },
-  {
-   "t": 90.255,
+   "t": 88.821,
    "kind": "small"
   }
  ],
@@ -287,81 +241,96 @@
   {
    "name": "impact-bass-1",
    "t": 0.344,
-   "gain": 0.5
+   "gain": 0.5,
+   "lu": 0.0
   },
   {
    "name": "whoosh",
    "t": 9.313,
-   "gain": 0.55
+   "gain": 0.55,
+   "lu": 0.0
   },
   {
    "name": "pop",
    "t": 16.933,
-   "gain": 0.35
+   "gain": 0.35,
+   "lu": -1.0
   },
   {
    "name": "ping",
    "t": 22.591,
-   "gain": 0.25
+   "gain": 0.25,
+   "lu": -1.0
   },
   {
    "name": "whoosh",
    "t": 34.247,
-   "gain": 0.55
+   "gain": 0.55,
+   "lu": 0.0
   },
   {
    "name": "pop",
    "t": 42.761,
-   "gain": 0.35
+   "gain": 0.35,
+   "lu": -1.0
   },
   {
    "name": "ping",
    "t": 48.323,
-   "gain": 0.25
+   "gain": 0.25,
+   "lu": -1.0
   },
   {
    "name": "whoosh",
    "t": 60.28,
-   "gain": 0.55
+   "gain": 0.55,
+   "lu": 0.0
   },
   {
    "name": "pop",
    "t": 66.002,
-   "gain": 0.35
+   "gain": 0.35,
+   "lu": -1.0
   },
   {
    "name": "ping",
    "t": 71.712,
-   "gain": 0.25
+   "gain": 0.25,
+   "lu": -1.0
   },
   {
    "name": "impact-bass-1",
    "t": 87.941,
-   "gain": 0.4
+   "gain": 0.4,
+   "lu": 0.0
   },
   {
    "name": "impact-bass-2",
    "t": 88.801,
-   "gain": 0.4
+   "gain": 0.4,
+   "lu": 0.0
   },
   {
    "name": "click",
    "t": 90.981,
-   "gain": 0.45
+   "gain": 0.45,
+   "lu": 0.0
   },
   {
    "name": "riser",
    "t": 0.0,
    "gain": 0.45,
-   "from": 7.03,
-   "dur": 3.0
+   "lu": 1.0,
+   "from": 0.7,
+   "dur": 3.2
   },
   {
    "name": "riser",
-   "t": 87.981,
+   "t": 87.781,
    "gain": 0.45,
-   "from": 7.03,
-   "dur": 3.0
+   "lu": 1.0,
+   "from": 0.7,
+   "dur": 3.2
   }
  ]
 }

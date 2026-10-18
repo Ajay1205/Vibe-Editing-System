@@ -18,13 +18,13 @@ GRADE = "eq=contrast=1.05:saturation=1.08:gamma=0.98,vignette=angle=PI/5:mode=fo
 def main(version, preview=False):
     RENDERS.mkdir(exist_ok=True)
     out = RENDERS / f"nikita3_{version}_{'preview_1080p' if preview else '4k'}.mp4"
-    scale = "scale=1080:1920:flags=lanczos," if preview else ""
+    scale = "scale=1080:1920:flags=lanczos," if preview else ""  # base preview is 1080p already; harmless
     subprocess.run([
         "ffmpeg", "-v", "error", "-stats", "-y",
-        "-i", str(BUILD / f"base_{version}.mp4"),
-        "-c:v", "libvpx-vp9", "-i", str(BUILD / "overlay.webm"),
+        "-i", str(BUILD / f"base_{version}{'_preview' if preview else ''}.mp4"),
+        "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{version}_{1080 if preview else 2160}.webm"),
         "-i", str(BUILD / "mix.wav"),
-        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]{scale}format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
+        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
         "-map", "[v]", "-map", "2:a",
         "-c:v", "libx264", *(["-preset", "veryfast", "-crf", "20"] if preview else
                              ["-preset", "medium", "-crf", "15", "-profile:v", "high", "-level", "5.2"]),

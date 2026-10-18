@@ -37,7 +37,7 @@ def clip(id_, start, end, track, inner, extra=""):
             f'data-track-index="{track}"{extra}><div class="layer">{inner}</div></div>')
 
 
-def build():
+def build(res=2160):
     OUT.mkdir(exist_ok=True)
     (OUT / "fonts").mkdir(exist_ok=True)
     (OUT / "vendor").mkdir(exist_ok=True)
@@ -178,8 +178,14 @@ def build():
 
     dur = CUES["duration"]
     page = TEMPLATE.replace("%DUR%", f"{dur:.3f}").replace("%ELS%", "\n".join(els)).replace("%JS%", "".join(js))
+    if res == 1080:  # fast preview: same 1080x1920 stage, no 2x upscale
+        page = (page.replace("width=2160, height=3840", "width=1080, height=1920")
+                .replace("html, body { width: 2160px; height: 3840px;", "html, body { width: 1080px; height: 1920px;")
+                .replace(".clip { width: 2160px; height: 3840px; }", ".clip { width: 1080px; height: 1920px; }")
+                .replace("transform-origin: 0 0; transform: scale(2); }", "transform-origin: 0 0; transform: none; }")
+                .replace('data-width="2160" data-height="3840"', 'data-width="1080" data-height="1920"'))
     (OUT / "index.html").write_text(page, encoding="utf-8")
-    print(f"{OUT / 'index.html'}: {len(els)} clips, {dur:.2f}s")
+    print(f"{OUT / 'index.html'}: {len(els)} clips, {dur:.2f}s at {res}p")
 
 
 TEMPLATE = r"""<!doctype html>
@@ -307,4 +313,5 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 """
 
 if __name__ == "__main__":
-    build()
+    import sys
+    build(1080 if "--preview" in sys.argv else 2160)

@@ -4,7 +4,7 @@ Picture: each kept segment is decoded straight from the raw 4K .mov, the zoom is
 frame on the YUV planes (Lanczos), and everything goes to one high-quality encode.
 Versions:
   v1  gentle reframe (face bigger, wall trimmed) + soft punches on key words
-  v2  original raw framing + quick punch-ins / punch-outs on key words
+  v2  original raw framing + light punch-ins that keep her face in place (its captions sit above her head)
 
 Usage: python3 -I render_base.py v1|v2|voice [--preview]   (--preview = 1080p, fast)
 """
@@ -28,9 +28,9 @@ W, H = 2160, 3840
 FACE = (0.50, 0.54)  # face centre in the raw frame (x, y as a fraction)
 
 VERSIONS = {
-    #       base zoom, punch zoom (small, big), punch in/hold/out seconds, face height target when zoomed
-    "v1": {"base": 1.22, "small": 1.30, "big": 1.40, "tin": 0.22, "hold": 0.9, "tout": 0.45},
-    "v2": {"base": 1.00, "small": 1.18, "big": 1.30, "tin": 0.12, "hold": 0.75, "tout": 0.30},
+    #       base zoom, punch zoom (small, big), punch in/hold/out seconds, how far the face is lifted when zoomed
+    "v1": {"base": 1.22, "small": 1.27, "big": 1.32, "tin": 0.25, "hold": 0.8, "tout": 0.5, "lift": 0.09},
+    "v2": {"base": 1.00, "small": 1.07, "big": 1.12, "tin": 0.22, "hold": 0.7, "tout": 0.45, "lift": 0.0},
 }
 
 
@@ -60,14 +60,14 @@ def zoom_at(t, v):
     for f in CUES["flashes"]:
         d = t - f
         if 0 <= d < 0.5:
-            z = max(z, v["base"] + 0.10 * (1 - ease_out(d / 0.5)))
+            z = max(z, v["base"] + 0.05 * (1 - ease_out(d / 0.5)))
     return z
 
 
-def window(z):
-    """Crop window centre for zoom z: pulls the face up toward 45% of the frame as we zoom in."""
+def window(z, lift):
+    """Crop window centre for zoom z: optionally pulls the face up (by `lift` of the frame) as we zoom in."""
     k = min(1.0, (z - 1.0) / 0.25)
-    face_target = 0.54 - 0.09 * k
+    face_target = 0.54 - lift * k
     cy = FACE[1] + (0.5 - face_target) / z
     cx = FACE[0]
     half_w, half_h = 0.5 / z, 0.5 / z
@@ -113,7 +113,7 @@ def render_video(name, preview):
             last = buf
             t = frame_no / FPS
             z = zoom_at(t, v)
-            cx, cy = window(z)
+            cx, cy = window(z, v["lift"])
             y = np.frombuffer(buf, np.uint8, ysz).reshape(H, W)
             u = np.frombuffer(buf, np.uint8, csz, ysz).reshape(H // 2, W // 2)
             vv = np.frombuffer(buf, np.uint8, csz, ysz + csz).reshape(H // 2, W // 2)
