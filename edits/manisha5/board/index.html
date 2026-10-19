@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face { font-family: "Fraunces"; src: url(fonts/fraunces.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Fraunces"; src: url(fonts/fraunces-i.woff2) format("woff2"); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: "Nunito"; src: url(fonts/nunito.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Nunito"; src: url(fonts/nunito-i.woff2) format("woff2"); font-weight: 100 900; font-style: italic; }
+:root { --navy: #1B2340; --cream: #FFF8EE; --sun: #FFC94A; --apricot: #FF9E6B; --rose: #FF7E9D;
+  --sh: 0 2px 3px rgba(0,0,0,.55), 0 4px 16px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 1080px; height: 1920px; }
+.clip { width: 1080px; height: 1920px; }
+.p { position: absolute; inset: 0; }
+.p > * { position: absolute; }
+.bg { left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+/* mood meter (persistent top motion graphic) */
+.mood { left: 50%; top: 270px; transform: translateX(-50%); display: flex; align-items: center; gap: 16px; padding: 12px 22px 12px 16px;
+  border-radius: 44px; background: rgba(27,35,64,.62); backdrop-filter: blur(6px); box-shadow: 0 8px 22px rgba(0,0,0,.25); }
+.mood .face { font-size: 48px; line-height: 1; }
+.mood .lbl { font: 900 22px/1 Nunito; letter-spacing: 4px; color: var(--cream); }
+.mood .bar { width: 300px; height: 18px; border-radius: 9px; background: rgba(255,255,255,.22); overflow: hidden; }
+.mood .fill { height: 100%; border-radius: 9px; background: linear-gradient(90deg, var(--rose), var(--apricot), var(--sun)); }
+
+/* hook */
+.cloud { left: 50%; top: 380px; transform: translateX(-50%); font-size: 150px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.3)); }
+.h1 { left: 80px; top: 560px; width: 920px; text-align: center; font: 800 96px/1.02 Fraunces; color: var(--cream); text-shadow: var(--sh); letter-spacing: -1px; }
+.h1 em { font-style: italic; color: var(--sun); }
+.h2 { left: 80px; top: 690px; width: 920px; text-align: center; font: 800 italic 46px/1.2 Nunito; color: #fff; text-shadow: var(--sh); }
+
+/* sentence: soft gradient-edged bubble + hand-drawn underline + Hinglish below on the wall */
+.tag { left: 50%; top: 382px; transform: translateX(-50%); padding: 9px 22px; border-radius: 22px; background: var(--sun); color: var(--navy);
+  font: 900 24px/1 Nunito; letter-spacing: 3px; white-space: nowrap; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.bub { left: 110px; top: 440px; width: 860px; padding: 34px 40px 40px; border-radius: 46px; background: var(--cream); text-align: center;
+  box-shadow: 0 18px 44px rgba(0,0,0,.32), inset 0 0 0 4px rgba(255,201,74,.55); }
+.bub:after { content: ""; position: absolute; left: 50%; bottom: -26px; width: 52px; height: 52px; margin-left: -26px; background: var(--cream);
+  transform: rotate(45deg); border-radius: 8px; }
+.en { position: relative; z-index: 1; font: 800 74px/1.08 Fraunces; color: var(--navy); letter-spacing: -1px; }
+.k { position: relative; display: inline-block; color: #C2410C; }
+.k svg { position: absolute; left: -4%; bottom: -16px; width: 108%; height: 26px; overflow: visible; }
+.k path { fill: none; stroke: var(--sun); stroke-width: 9; stroke-linecap: round; }
+.hi { left: 80px; top: 730px; width: 920px; text-align: center; font: 800 italic 50px/1.2 Nunito; color: #fff; text-shadow: var(--sh); }
+.alt { left: 50%; top: 384px; transform: translateX(-50%); }
+.stk { font-size: 120px; line-height: 1; filter: drop-shadow(0 8px 16px rgba(0,0,0,.3)); }
+.s-sun { right: 40px; top: 300px; }
+.rays { left: 650px; top: 170px; width: 420px; height: 420px; border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255,201,74,.38) 0 8deg, rgba(255,201,74,0) 8deg 22deg);
+  -webkit-mask: radial-gradient(circle, #000 18%, transparent 68%); mask: radial-gradient(circle, #000 18%, transparent 68%); }
+.heart { font-size: 54px; }
+.pro { left: 50%; top: 860px; transform: translateX(-50%); padding: 10px 24px; border-radius: 26px; background: rgba(27,35,64,.7);
+  color: var(--sun); font: 900 26px/1 Nunito; letter-spacing: 3px; white-space: nowrap; }
+.conf { width: 16px; height: 26px; border-radius: 4px; }
+.label { left: 0; top: 1700px; width: 1080px; text-align: center; font: 900 30px/1 Nunito; color: #fff; letter-spacing: 3px; text-shadow: var(--sh); }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+
+<!-- A: hook -->
+<div class="clip" data-start="0" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_a.jpg" />
+  <div class="mood"><span class="face">😔</span><span class="lbl">MOOD</span><span class="bar"><span class="fill" style="display:block;width:12%"></span></span></div>
+  <div class="cloud">🌧️</div>
+  <div class="h1">Dost ka <em>mood off?</em></div>
+  <div class="h2">English mein cheer up kaise karein? ☀️</div>
+</div></div>
+
+<!-- B: sentence 1 -->
+<div class="clip" data-start="1" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_b.jpg" />
+  <div class="rays"></div>
+  <div class="mood"><span class="face">🙂</span><span class="lbl">MOOD</span><span class="bar"><span class="fill" style="display:block;width:38%"></span></span></div>
+  <div class="tag">PEP TALK #1</div>
+  <div class="bub"><div class="en">Everything will be <span class="k">fine.<svg viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 25 4, 50 18, 75 8 S 96 10, 98 9"/></svg></span></div></div>
+  <div class="hi">"Sab theek ho jaayega"</div>
+  <div class="stk s-sun">☀️</div>
+</div></div>
+
+<!-- C: sentence 2 + natural upgrade -->
+<div class="clip" data-start="2" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_c.jpg" />
+  <div class="mood"><span class="face">😊</span><span class="lbl">MOOD</span><span class="bar"><span class="fill" style="display:block;width:62%"></span></span></div>
+  <div class="tag">PEP TALK #2 · MORE NATURAL ✨</div>
+  <div class="bub"><div class="en">I've got your <span class="k">back.<svg viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 25 4, 50 18, 75 8 S 96 10, 98 9"/></svg></span></div></div>
+  <div class="hi">"Main aapke saath hoon"</div>
+  <div class="heart" style="left:120px;top:330px;transform:rotate(-14deg)">💛</div>
+  <div class="heart" style="left:900px;top:350px;transform:rotate(12deg)">🧡</div>
+  <div class="heart" style="left:960px;top:640px;font-size:40px">💛</div>
+</div></div>
+
+<!-- D: sentence 4 + confetti -->
+<div class="clip" data-start="3" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_d.jpg" />
+  <div class="mood"><span class="face">🤩</span><span class="lbl">MOOD</span><span class="bar"><span class="fill" style="display:block;width:100%"></span></span></div>
+  <div class="tag">PEP TALK #4 · TAARIF</div>
+  <div class="bub"><div class="en">You really did <span class="k">well!<svg viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M2 12 C 25 4, 50 18, 75 8 S 96 10, 98 9"/></svg></span></div></div>
+  <div class="hi">"Tumne sach mein bahut achha kiya"</div>
+  <div class="stk" style="left:880px;top:300px">👏</div>
+  <div class="conf" style="left:160px;top:350px;background:#FFC94A;transform:rotate(25deg)"></div>
+  <div class="conf" style="left:240px;top:420px;background:#FF7E9D;transform:rotate(-30deg)"></div>
+  <div class="conf" style="left:820px;top:430px;background:#FF9E6B;transform:rotate(40deg)"></div>
+  <div class="conf" style="left:930px;top:560px;background:#FFC94A;transform:rotate(-15deg)"></div>
+  <div class="conf" style="left:130px;top:610px;background:#FF9E6B;transform:rotate(60deg)"></div>
+  <div class="conf" style="left:560px;top:345px;background:#FF7E9D;transform:rotate(10deg)"></div>
+</div></div>
+
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["main"] = tl;
+</script>
+</body></html>

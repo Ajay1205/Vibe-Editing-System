@@ -19,3 +19,7 @@ edits/*/overlay_v2/.hyperframes/
 edits/*/overlay/fonts/
 edits/*/*.log
 edits/*/.media/
+edits/*/board/*.jpg
+edits/*/board/snaps/
+edits/*/board/gsap.min.js
+edits/*/board/.hyperframes/
