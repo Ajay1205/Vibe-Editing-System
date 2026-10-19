@@ -23,6 +23,12 @@ transcribe -> pull frames -> beat sheet (wait for OK) -> rough cut -> effects ->
   `npx hyperframes browser ensure` and `npx hyperframes models install parakeet`.
 - Don't commit raw footage or renders.
 
+## GitHub is for the English-speaking account only (user rule)
+
+This repo and its GitHub remote hold ONLY the English-speaking account's work (Nikita, Manisha). One-off client jobs
+for other brands stay entirely local: work in a git-ignored folder (`footage/<client>/`), never commit or push their
+scripts, notes or renders, and don't mention them in this file.
+
 ## Quality bar (non-negotiable, set by the user)
 
 No compromise on video quality, sound, transitions, captions or sound effects.
