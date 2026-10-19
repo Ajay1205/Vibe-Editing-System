@@ -102,7 +102,23 @@ CTA ideas) and run `build_all.sh`.
   the English line). Use this version for new reels.
 - Manisha's voice is more dynamic: loudnorm target -13.1 lands the limited mix at about -14 LUFS.
 
+## Approved style: Manisha 5 "Pep Talk" (`edits/manisha5`, cheer-up / motivation sentences)
+
+User reaction: "Looks amazing". Designed from a style board first (`edits/manisha5/board`).
+- Palette from the footage (navy top + warm lamp): navy #1B2340, cream #FFF8EE, sunflower #FFC94A, apricot #FF9E6B,
+  rose #FF7E9D. Fraunces (soft serif) for English and titles, Nunito (italic) for Hinglish and labels.
+- A MOOD meter at the top fills from 😔 to 🤩 as each sentence is taught (ties the lesson together).
+- English line in a cream speech bubble; key word gets a hand-drawn sunflower underline that draws in as she says it;
+  Hinglish line on the wall above (white italic, shadow, no panel). Optional "more natural" upgrade swaps the bubble.
+- One motion graphic per sentence (sun rays, floating hearts, 💪 pop, 👏 + confetti); hook rain cloud turns into a sun.
+- "Sunrise glow" transitions (golden bloom + soft rays) on section cuts; soft chime per English line, sparkle when
+  the meter rises; camera glides mid (1.24x) -> close (1.40x) with her face at 60% height so captions sit above her.
+
 ## Working rules (from the guide)
+
+- NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
+  captions, colours and motion graphics, composited from the raw footage) and wait for OK before building the video
+  (user request, Manisha 5).
 
 - Plan with a beat sheet and wait for approval before building.
 - Rough cut first, effects after. Never cut inside a word.
