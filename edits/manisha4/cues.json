@@ -1,0 +1,293 @@
+{
+ "duration": 61.8,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "hook",
+   "start": 0.0,
+   "end": 5.767,
+   "lines": [
+    {
+     "t": 0.05,
+     "text": "Bank mein English bolne se **darr?** 😰"
+    }
+   ],
+   "neon": "Bank",
+   "neon_sub": "4 USEFUL LINES 🏦",
+   "neon_t": 2.54
+  },
+  {
+   "type": "situation",
+   "n": 1,
+   "of": 4,
+   "icon": "🏦",
+   "hi": "Bank mein naya savings account kholna hai",
+   "en": "I want to **open a new savings account**.",
+   "start": 5.767,
+   "hi_t": 5.767,
+   "q": 9.907,
+   "en_t": 12.667,
+   "key": 13.747,
+   "pl": 15.667,
+   "end": 17.529,
+   "tag": null
+  },
+  {
+   "type": "situation",
+   "n": 2,
+   "of": 4,
+   "icon": "💸",
+   "hi": "Transaction fail ho gaya, phir bhi paise kat gaye",
+   "en": "My **transaction failed**, but the **money was deducted**.",
+   "start": 17.529,
+   "hi_t": 17.529,
+   "q": 20.579,
+   "en_t": 22.379,
+   "key": 22.719,
+   "pl": 25.649,
+   "end": 27.256999999999998,
+   "tag": null
+  },
+  {
+   "type": "situation",
+   "n": 3,
+   "of": 4,
+   "icon": "💳",
+   "hi": "ATM card kho gaya, block karwana hai",
+   "en": "I want to **block my ATM card**.",
+   "start": 27.256999999999998,
+   "hi_t": 27.256999999999998,
+   "q": 29.947,
+   "en_t": 32.087,
+   "key": 33.267,
+   "pl": 34.827,
+   "end": 36.457,
+   "tag": null
+  },
+  {
+   "type": "situation",
+   "n": 4,
+   "of": 4,
+   "icon": "🤔",
+   "hi": "Bank wale ki English samajh nahi aayi?",
+   "en": "Could you **please explain this** to me again?",
+   "start": 36.457,
+   "hi_t": 36.457,
+   "q": 42.797,
+   "en_t": 45.827,
+   "key": 46.497,
+   "pl": 48.227,
+   "end": 53.423,
+   "tag": "⭐ IMPORTANT",
+   "hi2": "Matlab: Kya aap mujhe ye dobara samjha sakte ho?",
+   "hi2_t": 48.317
+  },
+  {
+   "type": "recap",
+   "start": 53.423,
+   "end": 56.863,
+   "items": [
+    "I want to **open a new savings account**.",
+    "My **transaction failed**, but the **money was deducted**.",
+    "I want to **block my ATM card**.",
+    "Could you **please explain this** to me again?"
+   ],
+   "icons": [
+    "🏦",
+    "💸",
+    "💳",
+    "🤔"
+   ],
+   "title": "Save karo 📌",
+   "sub": "4 bank lines",
+   "say": "Ab aap bataiye 👇",
+   "say_t": 54.023
+  },
+  {
+   "type": "cta",
+   "start": 56.863,
+   "end": 61.8,
+   "head": "Aapka <m>sentence</m>? 🤔",
+   "ideas": [
+    "🧾 Cheque book",
+    "🏠 Loan",
+    "📱 Net banking",
+    "🪪 KYC",
+    "💰 FD",
+    "💳 Credit card"
+   ],
+   "bar": "Apna sentence comment karo",
+   "more": 57.283,
+   "comment": 57.523,
+   "ideas_t": 58.423,
+   "tap": 60.583
+  }
+ ],
+ "flashes": [
+  5.767,
+  52.167
+ ],
+ "series": "Bank mein<br/><m>English kaise bolein?</m>",
+ "shots": [
+  {
+   "t": 0.0,
+   "kind": "close"
+  },
+  {
+   "t": 5.767,
+   "kind": "mid"
+  },
+  {
+   "t": 9.867,
+   "kind": "ask"
+  },
+  {
+   "t": 12.627,
+   "kind": "close"
+  },
+  {
+   "t": 16.329,
+   "kind": "mid"
+  },
+  {
+   "t": 20.539,
+   "kind": "ask"
+  },
+  {
+   "t": 22.339000000000002,
+   "kind": "close"
+  },
+  {
+   "t": 26.057,
+   "kind": "mid"
+  },
+  {
+   "t": 29.907,
+   "kind": "ask"
+  },
+  {
+   "t": 32.047000000000004,
+   "kind": "close"
+  },
+  {
+   "t": 35.257,
+   "kind": "mid"
+  },
+  {
+   "t": 42.757,
+   "kind": "ask"
+  },
+  {
+   "t": 45.787,
+   "kind": "close"
+  },
+  {
+   "t": 53.423,
+   "kind": "mid"
+  },
+  {
+   "t": 58.983,
+   "kind": "close"
+  }
+ ],
+ "sweeps": [
+  5.767,
+  16.267,
+  25.933,
+  35.133,
+  52.167
+ ],
+ "sfx": [
+  {
+   "name": "neon",
+   "t": 2.49,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/neon.wav"
+  },
+  {
+   "name": "pop",
+   "t": 12.647,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 16.167,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "pop",
+   "t": 22.359,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 25.833,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "pop",
+   "t": 32.067,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 35.033,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "pop",
+   "t": 45.807,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "pop",
+   "t": 57.523,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "click",
+   "t": 60.583,
+   "gain": 0.5,
+   "lu": -1.0
+  },
+  {
+   "name": "whoosh",
+   "t": 5.647,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "whoosh",
+   "t": 52.047,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 58.733,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}

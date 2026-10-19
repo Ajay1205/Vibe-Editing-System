@@ -87,6 +87,15 @@ CTA ideas) and run `build_all.sh`.
 - Sound: no long or bright rings (the desk bell and receipt printer were "unbearable"). Pop when the English
   card lands, a soft synthesised cha-ching plus flying 💸 on money moments, quiet whooshes, the riser rules as before.
 
+### Situation Series: Manisha 4 (`edits/manisha4`, bank English)
+- Same template; palette from the footage (her navy top + warm lamp): ivory cards, navy ink, royal-blue key words
+  on a soft gold marker, gold light sweeps, gold neon. The user asked: same placements and fonts, only colours change
+  per reel.
+- `cues.py` here is the multi-clip version of the content file: every situation, the recap and the CTA name their
+  own clip. Optional per situation: `tag` (e.g. "⭐ IMPORTANT") and `hi2`/`hi2_t` (the Hindi meaning she gives after
+  the English line). Use this version for new reels.
+- Manisha's voice is more dynamic: loudnorm target -13.1 lands the limited mix at about -14 LUFS.
+
 ## Working rules (from the guide)
 
 - Plan with a beat sheet and wait for approval before building.

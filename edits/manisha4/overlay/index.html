@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Outfit"; src: url(fonts/outfit.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Pacifico"; src: url(fonts/pacifico-400.woff2) format("woff2"); }
+:root { --card: #FFFCF5; --ink: #15213F; --accent: #1E3A8A; --peach: #F3DDA6; --muted: #6E7690;
+  --shadow: 0 3px 3px rgba(0,0,0,.7), 0 4px 14px rgba(0,0,0,.65), 0 8px 34px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.6); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.clip { width: 1080px; height: 1920px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: none; }
+.layer > div { position: absolute; }
+.w { display: inline-block; }
+
+/* hook: chest captions */
+.h-blk { left: 120px; top: 1170px; width: 840px; text-align: center; }
+.h-line { font: 900 92px/1.08 Outfit; color: #fff; letter-spacing: -2px; text-shadow: var(--shadow); }
+.hk { display: inline-block; padding: 0 14px; border-radius: 18px; color: var(--ink); text-shadow: none;
+  background-image: linear-gradient(var(--peach), var(--peach)); background-repeat: no-repeat; background-size: 0% 100%; }
+.hk .w { text-shadow: none; }
+.h-sub { margin-top: 18px; font: 800 58px/1.15 Outfit; color: #fff; text-shadow: var(--shadow); }
+.xstamp { position: absolute; right: -10px; top: -110px; width: 120px; height: 120px; border-radius: 60px; background: var(--accent); color: #fff;
+  font: 900 84px/108px Outfit; text-align: center; box-shadow: 0 10px 26px rgba(0,0,0,.45); border: 6px solid #fff; }
+.neon { left: 120px; top: 1130px; width: 840px; text-align: center; }
+.n-a { font: 400 150px/1.25 Pacifico; color: #FFF6DE;
+  text-shadow: 0 0 6px #fff, 0 0 16px #F6D58A, 0 0 34px #E3B04B, 0 0 60px #C89234, 0 0 90px #A87414; }
+.n-b { margin-top: 4px; font: 900 64px/1 Outfit; letter-spacing: 10px; color: #EEF3FF;
+  text-shadow: 0 0 6px #fff, 0 0 16px #A9C1FF, 0 0 34px #6E8FE8, 0 0 64px #3F63C9; }
+
+/* banner */
+/* series title (user chose option B: a question title rather than a label pill) */
+.banner { left: 50%; top: 262px; transform: translateX(-50%); width: 840px; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  color: #FFFBF4; text-align: center; }
+.banner > span:first-child { font: 900 64px/1.05 Outfit; letter-spacing: -1px;
+  text-shadow: 0 3px 3px rgba(0,0,0,.6), 0 4px 14px rgba(0,0,0,.55), 0 8px 34px rgba(0,0,0,.45); }
+.banner .hl { color: var(--ink); padding: 0 14px; border-radius: 14px; background: var(--peach); text-shadow: none; }
+.bdots { display: flex; gap: 10px; }
+.bdots i { width: 16px; height: 16px; border-radius: 8px; background: rgba(255,255,255,.45); display: block; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+
+/* situation */
+.stk { left: 790px; top: 560px; font-size: 130px; line-height: 1;
+  filter: drop-shadow(0 0 0 #fff) drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 10px 16px rgba(0,0,0,.45)); }
+.sit { left: 120px; top: 1110px; width: 840px; height: 490px; }
+.sit > div { position: absolute; }
+.tag { left: 50%; top: 0; transform: translateX(-50%); width: max-content; padding: 10px 22px; border-radius: 12px; background: var(--ink);
+  color: var(--peach); font: 800 28px/1 Outfit; letter-spacing: 4px; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+.hi2 { opacity: 0; }
+.hi { left: 0; top: 60px; width: 840px; text-align: center; font: 800 64px/1.1 Outfit; color: #fff; text-shadow: var(--shadow);
+  transform-origin: 50% 0; }
+.card { left: 10px; top: 222px; width: 820px; padding: 26px 30px 30px; border-radius: 28px; background: var(--card); text-align: center;
+  box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+.en { font: 800 70px/1.1 Outfit; color: var(--ink); letter-spacing: -1.5px; }
+.en .key { display: inline; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 10px; border-radius: 12px; color: var(--accent);
+  background-image: linear-gradient(var(--peach), var(--peach)); background-repeat: no-repeat; background-position: 0 85%; background-size: 0% 100%; }
+.en .pl { color: var(--ink); }
+.pol { position: absolute; right: -14px; bottom: -26px; padding: 8px 16px; border-radius: 14px; background: var(--ink); color: var(--peach);
+  font: 800 30px/1 Outfit; box-shadow: 0 6px 14px rgba(0,0,0,.3); }
+.money { top: 1350px; font-size: 90px; }
+.m0 { left: 150px; } .m1 { left: 330px; } .m2 { left: 690px; } .m3 { left: 840px; }
+
+/* recap */
+.r-head { left: 50%; top: 1060px; transform: translateX(-50%); width: max-content; padding: 12px 30px; border-radius: 18px; background: var(--ink);
+  color: var(--card); font: 900 56px/1 Outfit; box-shadow: 0 10px 26px rgba(0,0,0,.4); }
+.r-list { left: 120px; top: 1150px; width: 840px; }
+.r-item { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; padding: 11px 22px; border-radius: 20px; background: var(--card);
+  box-shadow: 0 8px 20px rgba(0,0,0,.35); }
+.r-n { flex: none; width: 46px; height: 46px; border-radius: 23px; background: var(--peach); color: var(--accent); font: 900 28px/46px Outfit; text-align: center; }
+.r-t { font: 700 38px/1.12 Outfit; color: var(--ink); }
+.r-k { color: var(--accent); font-weight: 800; }
+.r-foot { left: 120px; top: 1540px; width: 840px; text-align: center; font: 800 40px/1.1 Outfit; color: #fff; text-shadow: var(--shadow); }
+
+/* CTA */
+.cta-h { left: 120px; top: 1100px; width: 840px; text-align: center; font: 900 84px/1.06 Outfit; color: #fff; letter-spacing: -2px; text-shadow: var(--shadow); }
+.cta-h .hl { padding: 0 12px; border-radius: 16px; color: var(--ink); text-shadow: none;
+  background-image: linear-gradient(var(--peach), var(--peach)); background-repeat: no-repeat; background-size: 0% 100%; }
+.ideas { left: 120px; top: 1300px; width: 840px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.idea { display: inline-block; padding: 14px 24px; border-radius: 30px; background: var(--card); color: var(--ink); font: 800 36px/1 Outfit;
+  box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+.cbar { left: 120px; top: 1480px; width: 840px; height: 104px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px 0 32px; border-radius: 52px; background: var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.32); }
+.ph { font: 600 34px/1 Outfit; color: #8a7f74; }
+.cursor { font-style: normal; color: #222; margin-left: 4px; }
+.send { padding: 20px 28px; border-radius: 40px; background: var(--ink); color: var(--card); font: 800 34px/1 Outfit; }
+.burst { left: 820px; top: 1420px; font-size: 70px; }
+
+/* transitions: warm light sweep (peach-gold streak) + soft bloom */
+.sweep { position: absolute; left: -200px; top: -400px; width: 1480px; height: 2720px; transform: rotate(18deg);
+  background: linear-gradient(90deg, rgba(240,205,120,0) 30%, rgba(243,214,140,.55) 44%, rgba(255,250,232,.95) 50%, rgba(243,214,140,.55) 56%, rgba(240,205,120,0) 70%); }
+.bloom { position: absolute; left: -300px; top: 300px; width: 1680px; height: 1500px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255,252,240,.9), rgba(243,221,166,.55) 40%, rgba(243,221,166,0) 72%); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="61.800" data-width="1080" data-height="1920" data-fps="30">
+<div id="c0" class="clip" data-start="0.000" data-duration="5.767" data-track-index="1"><div class="layer"><div class="h-blk" id="c0-l0"><div class="h-line"><span class="w">Bank</span> <span class="w">mein</span> <span class="w">English</span> <span class="w">bolne</span> <span class="w">se</span> <span class="hk"><span class="w">darr?</span></span> <span class="w">😰</span></div></div>
+              <div class="neon" id="c0-neon"><div class="n-a">Bank</div><div class="n-b">4 USEFUL LINES 🏦</div></div></div></div>
+<div id="c1" class="clip" data-start="5.767" data-duration="11.762" data-track-index="2"><div class="layer">
+              <div class="stk" id="c1-stk" data-layout-allow-overlap>🏦</div>
+              <div class="sit" id="c1-all">
+                <div class="tag" id="c1-tag">SITUATION 1</div>
+                <div class="hi" id="c1-hi"><span class="w">Bank</span> <span class="w">mein</span> <span class="w">naya</span> <span class="w">savings</span> <span class="w">account</span> <span class="w">kholna</span> <span class="w">hai</span></div>
+                
+                <div class="card" id="c1-card">
+                  <div class="en" id="c1-en"><span class="w">I</span> <span class="w">want</span> <span class="w">to</span> <span class="key"><span class="w">open</span> <span class="w">a</span> <span class="w">new</span> <span class="w">savings</span> <span class="w">account</span></span><span class="w">.</span></div>
+                  
+                </div>
+              </div></div></div>
+<div id="c2" class="clip" data-start="17.529" data-duration="9.728" data-track-index="2"><div class="layer">
+              <div class="stk" id="c2-stk" data-layout-allow-overlap>💸</div>
+              <div class="sit" id="c2-all">
+                <div class="tag" id="c2-tag">SITUATION 2</div>
+                <div class="hi" id="c2-hi"><span class="w">Transaction</span> <span class="w">fail</span> <span class="w">ho</span> <span class="w">gaya,</span> <span class="w">phir</span> <span class="w">bhi</span> <span class="w">paise</span> <span class="w">kat</span> <span class="w">gaye</span></div>
+                
+                <div class="card" id="c2-card">
+                  <div class="en" id="c2-en"><span class="w">My</span> <span class="key"><span class="w">transaction</span> <span class="w">failed</span></span><span class="w">,</span> <span class="w">but</span> <span class="w">the</span> <span class="key"><span class="w">money</span> <span class="w">was</span> <span class="w">deducted</span></span><span class="w">.</span></div>
+                  
+                </div>
+              </div></div></div>
+<div id="c3" class="clip" data-start="27.257" data-duration="9.200" data-track-index="2"><div class="layer">
+              <div class="stk" id="c3-stk" data-layout-allow-overlap>💳</div>
+              <div class="sit" id="c3-all">
+                <div class="tag" id="c3-tag">SITUATION 3</div>
+                <div class="hi" id="c3-hi"><span class="w">ATM</span> <span class="w">card</span> <span class="w">kho</span> <span class="w">gaya,</span> <span class="w">block</span> <span class="w">karwana</span> <span class="w">hai</span></div>
+                
+                <div class="card" id="c3-card">
+                  <div class="en" id="c3-en"><span class="w">I</span> <span class="w">want</span> <span class="w">to</span> <span class="key"><span class="w">block</span> <span class="w">my</span> <span class="w">ATM</span> <span class="w">card</span></span><span class="w">.</span></div>
+                  
+                </div>
+              </div></div></div>
+<div id="c4" class="clip" data-start="36.457" data-duration="16.966" data-track-index="2"><div class="layer">
+              <div class="stk" id="c4-stk" data-layout-allow-overlap>🤔</div>
+              <div class="sit" id="c4-all">
+                <div class="tag" id="c4-tag">SITUATION 4 · ⭐ IMPORTANT</div>
+                <div class="hi" id="c4-hi"><span class="w">Bank</span> <span class="w">wale</span> <span class="w">ki</span> <span class="w">English</span> <span class="w">samajh</span> <span class="w">nahi</span> <span class="w">aayi?</span></div>
+                <div class="hi hi2" id="c4-hi2"><span class="w">Matlab:</span> <span class="w">Kya</span> <span class="w">aap</span> <span class="w">mujhe</span> <span class="w">ye</span> <span class="w">dobara</span> <span class="w">samjha</span> <span class="w">sakte</span> <span class="w">ho?</span></div>
+                <div class="card" id="c4-card">
+                  <div class="en" id="c4-en"><span class="w">Could</span> <span class="w">you</span> <span class="key"><span class="w pl">please</span> <span class="w">explain</span> <span class="w">this</span></span> <span class="w">to</span> <span class="w">me</span> <span class="w">again?</span></div>
+                  <div class="pol" id="c4-po" data-layout-allow-overlap>✓ polite</div>
+                </div>
+              </div></div></div>
+<div id="c5" class="clip" data-start="53.423" data-duration="3.440" data-track-index="3"><div class="layer">
+              <div class="r-head" id="c5-h">Save karo 📌</div>
+              <div class="r-list" id="c5-l"><div class="r-item"><span class="r-n">1</span><span class="r-t">I want to <span class="r-k">open a new savings account</span>.</span></div><div class="r-item"><span class="r-n">2</span><span class="r-t">My <span class="r-k">transaction failed</span>, but the <span class="r-k">money was deducted</span>.</span></div><div class="r-item"><span class="r-n">3</span><span class="r-t">I want to <span class="r-k">block my ATM card</span>.</span></div><div class="r-item"><span class="r-n">4</span><span class="r-t">Could you <span class="r-k">please explain this</span> to me again?</span></div></div>
+              <div class="r-foot" id="c5-say">Ab aap bataiye 👇</div></div></div>
+<div id="c6" class="clip" data-start="56.863" data-duration="4.937" data-track-index="4"><div class="layer">
+              <div class="cta-h" id="c6-h">Aapka <span class="hl">sentence</span>? 🤔</div>
+              <div class="ideas" id="c6-i"><span class="idea">🧾 Cheque book</span><span class="idea">🏠 Loan</span><span class="idea">📱 Net banking</span><span class="idea">🪪 KYC</span><span class="idea">💰 FD</span><span class="idea">💳 Credit card</span></div>
+              <div class="cbar" id="c6-cb"><span class="ph">Apna sentence comment karo<i class="cursor">|</i></span>
+                <span class="send" id="c6-btn">💬 Comment</span></div>
+              <div class="burst" id="c6-bu">❤️</div></div></div>
+<div id="ban" class="clip" data-start="0.000" data-duration="61.800" data-track-index="6"><div class="layer"><div class="banner" id="ban-b"><span>Bank mein<br/><span class="hl">English kaise bolein?</span></span><span class="bdots"><i id="bd0"></i><i id="bd1"></i><i id="bd2"></i><i id="bd3"></i></span></div></div></div>
+<div id="sw0" class="clip" data-start="5.467" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw1" class="clip" data-start="15.967" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw2" class="clip" data-start="25.633" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw3" class="clip" data-start="34.833" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+<div id="sw4" class="clip" data-start="51.867" data-duration="0.750" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="bloom"></div></div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#c0-l0 .h-line .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 0.60}}, 0.050);tl.fromTo("#c0-l0 .hk", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 0.400);tl.to("#c0-l0", {opacity: 0, y: -30, scale: 0.9, duration: 0.22, ease: "power2.in"}, 2.320);
+              tl.set("#c0-neon", {opacity: 0}, 0);
+              tl.set("#c0-neon", {opacity: 1}, 2.54);
+              tl.set("#c0-neon", {opacity: 0.15}, 2.61);
+              tl.set("#c0-neon", {opacity: 1}, 2.68);
+              tl.set("#c0-neon", {opacity: 0.25}, 2.74);
+              tl.set("#c0-neon", {opacity: 1}, 2.86);
+              tl.fromTo("#c0-neon .n-b", {opacity: 0.2}, {opacity: 1, duration: 0.3}, 2.86);
+              tl.fromTo("#c0-neon", {scale: 0.92}, {scale: 1.04, duration: 2.93, ease: "none"}, 2.54);
+              tl.to("#c0-neon", {opacity: 0, scale: 1.15, duration: 0.25, ease: "power2.in"}, 5.517);
+              tl.fromTo("#c1-all", {x: 0, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power3.out"}, 5.767);
+              tl.fromTo("#c1-tag", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 5.767);
+              tl.fromTo("#c1-hi .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 1.12}}, 5.867);
+              tl.fromTo("#c1-stk", {opacity: 0, scale: 0.2, rotation: -60}, {opacity: 1, scale: 1, rotation: 10, duration: 0.5, ease: "back.out(2.2)"}, 5.9670000000000005);
+              tl.to("#c1-stk", {rotation: -8, y: -10, duration: 0.9, yoyo: true, repeat: 11, ease: "sine.inOut"}, 6.4670000000000005);
+              tl.to("#c1-hi", {scale: 0.9, opacity: 0.9, y: -8, duration: 0.25, ease: "power2.out"}, 12.567);
+              
+              tl.fromTo("#c1-card", {opacity: 0, scale: 0.5, rotation: -6}, {opacity: 1, scale: 1, rotation: -1.5, duration: 0.32, ease: "back.out(2.2)"}, 12.587);
+              tl.fromTo("#c1-en .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.16, ease: "power2.out", stagger: {amount: 2.90}}, 12.627);
+              tl.fromTo("#c1-en .key", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}, 13.747);
+              tl.to("#c1-en .key", {scale: 1.08, duration: 0.14, yoyo: true, repeat: 1}, 13.967);
+              tl.fromTo("#c1-po", {opacity: 0, scale: 2.2, rotation: 25}, {opacity: 1, scale: 1, rotation: 8, duration: 0.2, ease: "power4.in"}, 15.817);
+              tl.to("#c1-card", {scale: 1.04, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1}, 16.167);
+              tl.to("#c1-all", {x: -380, opacity: 0, duration: 0.26, ease: "power2.in"}, 17.269);
+              tl.to("#c1-stk", {scale: 0, rotation: 90, duration: 0.25, ease: "back.in(2)"}, 17.269);
+              tl.fromTo("#c2-all", {x: 300, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power3.out"}, 17.529);
+              tl.fromTo("#c2-tag", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 17.529);
+              tl.fromTo("#c2-hi .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 1.20}}, 17.629);
+              tl.fromTo("#c2-stk", {opacity: 0, scale: 0.2, rotation: -60}, {opacity: 1, scale: 1, rotation: 10, duration: 0.5, ease: "back.out(2.2)"}, 17.729);
+              tl.to("#c2-stk", {rotation: -8, y: -10, duration: 0.9, yoyo: true, repeat: 8, ease: "sine.inOut"}, 18.229);
+              tl.to("#c2-hi", {scale: 0.9, opacity: 0.9, y: -8, duration: 0.25, ease: "power2.out"}, 22.279);
+              
+              tl.fromTo("#c2-card", {opacity: 0, scale: 0.5, rotation: -6}, {opacity: 1, scale: 1, rotation: -1.5, duration: 0.32, ease: "back.out(2.2)"}, 22.299000000000003);
+              tl.fromTo("#c2-en .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.16, ease: "power2.out", stagger: {amount: 3.17}}, 22.339000000000002);
+              tl.fromTo("#c2-en .key", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}, 22.719);
+              tl.to("#c2-en .key", {scale: 1.08, duration: 0.14, yoyo: true, repeat: 1}, 22.939);
+              tl.fromTo("#c2-po", {opacity: 0, scale: 2.2, rotation: 25}, {opacity: 1, scale: 1, rotation: 8, duration: 0.2, ease: "power4.in"}, 25.799);
+              tl.to("#c2-card", {scale: 1.04, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1}, 26.149);
+              tl.to("#c2-all", {x: -380, opacity: 0, duration: 0.26, ease: "power2.in"}, 26.996999999999996);
+              tl.to("#c2-stk", {scale: 0, rotation: 90, duration: 0.25, ease: "back.in(2)"}, 26.996999999999996);
+              tl.fromTo("#c3-all", {x: 300, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power3.out"}, 27.256999999999998);
+              tl.fromTo("#c3-tag", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 27.256999999999998);
+              tl.fromTo("#c3-hi .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 1.12}}, 27.357);
+              tl.fromTo("#c3-stk", {opacity: 0, scale: 0.2, rotation: -60}, {opacity: 1, scale: 1, rotation: 10, duration: 0.5, ease: "back.out(2.2)"}, 27.456999999999997);
+              tl.to("#c3-stk", {rotation: -8, y: -10, duration: 0.9, yoyo: true, repeat: 8, ease: "sine.inOut"}, 27.956999999999997);
+              tl.to("#c3-hi", {scale: 0.9, opacity: 0.9, y: -8, duration: 0.25, ease: "power2.out"}, 31.987000000000002);
+              
+              tl.fromTo("#c3-card", {opacity: 0, scale: 0.5, rotation: -6}, {opacity: 1, scale: 1, rotation: -1.5, duration: 0.32, ease: "back.out(2.2)"}, 32.007000000000005);
+              tl.fromTo("#c3-en .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.16, ease: "power2.out", stagger: {amount: 2.64}}, 32.047000000000004);
+              tl.fromTo("#c3-en .key", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}, 33.267);
+              tl.to("#c3-en .key", {scale: 1.08, duration: 0.14, yoyo: true, repeat: 1}, 33.487);
+              tl.fromTo("#c3-po", {opacity: 0, scale: 2.2, rotation: 25}, {opacity: 1, scale: 1, rotation: 8, duration: 0.2, ease: "power4.in"}, 34.977);
+              tl.to("#c3-card", {scale: 1.04, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1}, 35.327);
+              tl.to("#c3-all", {x: -380, opacity: 0, duration: 0.26, ease: "power2.in"}, 36.197);
+              tl.to("#c3-stk", {scale: 0, rotation: 90, duration: 0.25, ease: "back.in(2)"}, 36.197);
+              tl.fromTo("#c4-all", {x: 300, opacity: 0}, {x: 0, opacity: 1, duration: 0.3, ease: "power3.out"}, 36.457);
+              tl.fromTo("#c4-tag", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 36.457);
+              tl.fromTo("#c4-hi .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 1.12}}, 36.557);
+              tl.fromTo("#c4-stk", {opacity: 0, scale: 0.2, rotation: -60}, {opacity: 1, scale: 1, rotation: 10, duration: 0.5, ease: "back.out(2.2)"}, 36.657000000000004);
+              tl.to("#c4-stk", {rotation: -8, y: -10, duration: 0.9, yoyo: true, repeat: 16, ease: "sine.inOut"}, 37.157000000000004);
+              tl.to("#c4-hi", {scale: 0.9, opacity: 0.9, y: -8, duration: 0.25, ease: "power2.out"}, 45.727);
+              tl.to("#c4-hi", {opacity: 0, y: -16, duration: 0.2}, 48.267);tl.set("#c4-hi2", {opacity: 1}, 48.317);tl.fromTo("#c4-hi2 .w", {opacity: 0, y: 26, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.28, ease: "power3.out", stagger: {amount: 0.60}}, 48.317);
+              tl.fromTo("#c4-card", {opacity: 0, scale: 0.5, rotation: -6}, {opacity: 1, scale: 1, rotation: -1.5, duration: 0.32, ease: "back.out(2.2)"}, 45.747);
+              tl.fromTo("#c4-en .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.16, ease: "power2.out", stagger: {amount: 2.30}}, 45.787);
+              tl.fromTo("#c4-en .key", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}, 46.497);
+              tl.to("#c4-en .key", {scale: 1.08, duration: 0.14, yoyo: true, repeat: 1}, 46.717);
+              tl.fromTo("#c4-po", {opacity: 0, scale: 2.2, rotation: 25}, {opacity: 1, scale: 1, rotation: 8, duration: 0.2, ease: "power4.in"}, 48.376999999999995);
+              tl.to("#c4-card", {scale: 1.04, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1}, 48.727);
+              tl.to("#c4-all", {x: -380, opacity: 0, duration: 0.26, ease: "power2.in"}, 53.163000000000004);
+              tl.to("#c4-stk", {scale: 0, rotation: 90, duration: 0.25, ease: "back.in(2)"}, 53.163000000000004);
+              tl.fromTo("#c5-h", {opacity: 0, scale: 0.5, rotation: -6}, {opacity: 1, scale: 1, rotation: -2, duration: 0.4, ease: "back.out(2.4)"}, 53.473);
+              tl.fromTo("#c5-l .r-item", {opacity: 0, x: 120}, {opacity: 1, x: 0, duration: 0.3, stagger: 0.28, ease: "back.out(1.6)"}, 53.773);
+              tl.fromTo("#c5-say", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35}, 54.023);
+              tl.to("#c5-l .r-item", {opacity: 0, x: -120, duration: 0.22, stagger: 0.04, ease: "power2.in"}, 56.513);
+              tl.to(["#c5-h", "#c5-say"], {opacity: 0, duration: 0.2}, 56.613);
+              tl.fromTo("#c6-h", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 56.963);
+              tl.fromTo("#c6-h .hl", {backgroundSize: "0% 100%"}, {backgroundSize: "100% 100%", duration: 0.3}, 57.283);
+              tl.fromTo("#c6-cb", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)"}, 57.523);
+              tl.fromTo("#c6 .cursor", {opacity: 1}, {opacity: 0, duration: 0.25, yoyo: true, repeat: 15}, 57.523);
+              tl.fromTo("#c6-i .idea", {opacity: 0, y: 50, scale: 0.5}, {opacity: 1, y: 0, scale: 1, duration: 0.4, stagger: 0.18, ease: "back.out(2.2)"}, 58.423);
+              tl.to("#c6-i .idea", {y: -8, duration: 0.9, yoyo: true, repeat: 5, stagger: 0.15, ease: "sine.inOut"}, 59.723);
+              tl.to("#c6-btn", {scale: 0.84, duration: 0.08, yoyo: true, repeat: 1}, 60.583);
+              tl.fromTo("#c6-bu", {opacity: 0, scale: 0.3, y: 0}, {opacity: 1, scale: 1.4, y: -90, duration: 0.45, ease: "back.out(2)"}, 60.632999999999996);
+              tl.to("#c6-bu", {opacity: 0, duration: 0.3}, 61.183);tl.fromTo("#ban-b", {opacity: 0, y: -30}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)"}, 0.05);tl.to("#bd0", {backgroundColor: "#F3DDA6", scale: 1.3, duration: 0.2}, 5.767);tl.to("#bd1", {backgroundColor: "#F3DDA6", scale: 1.3, duration: 0.2}, 17.529);tl.to("#bd2", {backgroundColor: "#F3DDA6", scale: 1.3, duration: 0.2}, 27.256999999999998);tl.to("#bd3", {backgroundColor: "#F3DDA6", scale: 1.3, duration: 0.2}, 36.457);
+              tl.fromTo("#sw0 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.9, duration: 0.6, ease: "power2.inOut"}, 5.4670000000000005);
+              tl.to("#sw0 .sweep", {opacity: 0, duration: 0.18}, 5.8870000000000005);
+              tl.fromTo("#sw0 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.55, scale: 1.25, duration: 0.25, ease: "power2.out"}, 5.647);
+              tl.to("#sw0 .bloom", {opacity: 0, duration: 0.3}, 5.897);
+              tl.fromTo("#sw1 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 15.966999999999999);
+              tl.to("#sw1 .sweep", {opacity: 0, duration: 0.18}, 16.387);
+              tl.fromTo("#sw1 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 16.147);
+              tl.to("#sw1 .bloom", {opacity: 0, duration: 0.3}, 16.397);
+              tl.fromTo("#sw2 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 25.633);
+              tl.to("#sw2 .sweep", {opacity: 0, duration: 0.18}, 26.053);
+              tl.fromTo("#sw2 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 25.813);
+              tl.to("#sw2 .bloom", {opacity: 0, duration: 0.3}, 26.063);
+              tl.fromTo("#sw3 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.7, duration: 0.6, ease: "power2.inOut"}, 34.833000000000006);
+              tl.to("#sw3 .sweep", {opacity: 0, duration: 0.18}, 35.253);
+              tl.fromTo("#sw3 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.3, scale: 1.25, duration: 0.25, ease: "power2.out"}, 35.013000000000005);
+              tl.to("#sw3 .bloom", {opacity: 0, duration: 0.3}, 35.263000000000005);
+              tl.fromTo("#sw4 .sweep", {xPercent: -110, opacity: 0}, {xPercent: 110, opacity: 0.9, duration: 0.6, ease: "power2.inOut"}, 51.867000000000004);
+              tl.to("#sw4 .sweep", {opacity: 0, duration: 0.18}, 52.287);
+              tl.fromTo("#sw4 .bloom", {opacity: 0, scale: 0.7}, {opacity: 0.55, scale: 1.25, duration: 0.25, ease: "power2.out"}, 52.047000000000004);
+              tl.to("#sw4 .bloom", {opacity: 0, duration: 0.3}, 52.297000000000004);
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
