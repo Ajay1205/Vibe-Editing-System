@@ -1,0 +1,351 @@
+{
+ "duration": 93.9,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "hook",
+   "start": 0.0,
+   "end": 7.145,
+   "beats": {
+    "num": 0.385,
+    "words": 0.605,
+    "sub": 1.425,
+    "teaser": 3.005,
+    "today": 3.765
+   }
+  },
+  {
+   "type": "promise",
+   "start": 7.165,
+   "end": 9.417,
+   "lines": [
+    {
+     "t": 7.225,
+     "text": "Natural"
+    },
+    {
+     "t": 8.205,
+     "text": "Confident"
+    }
+   ]
+  },
+  {
+   "type": "title",
+   "num": "01",
+   "word": "Probably",
+   "start": 10.152,
+   "meaning": "Shayad",
+   "meaning_t": 12.183,
+   "dock": 15.463,
+   "end": 31.25
+  },
+  {
+   "type": "example",
+   "en": "I will **probably** be late.",
+   "hi": "Shayad mujhe der ho jaayegi",
+   "emoji": "⏰",
+   "start": 15.483,
+   "word_t": 15.747,
+   "hi_t": 16.967,
+   "end": 19.285
+  },
+  {
+   "type": "example",
+   "en": "She will **probably** come tomorrow.",
+   "hi": "Shayad woh kal aayegi",
+   "emoji": "📅",
+   "start": 20.34,
+   "word_t": 21.1,
+   "hi_t": 22.48,
+   "end": 24.248
+  },
+  {
+   "type": "tip",
+   "start": 24.348,
+   "end": 31.25,
+   "lines": [
+    {
+     "t": 25.338,
+     "text": "Jab poori guarantee na de sako"
+    },
+    {
+     "t": 28.254,
+     "text": "→ bolo **Probably**"
+    }
+   ]
+  },
+  {
+   "type": "title",
+   "num": "02",
+   "word": "Almost",
+   "start": 32.052,
+   "meaning": "Lagbhag",
+   "meaning_t": 34.288,
+   "dock": 37.548,
+   "end": 53.817
+  },
+  {
+   "type": "example",
+   "en": "I am **almost** ready.",
+   "hi": "Main lagbhag taiyaar hoon",
+   "emoji": "👗",
+   "start": 37.688,
+   "word_t": 38.041,
+   "hi_t": 39.167,
+   "end": 40.864
+  },
+  {
+   "type": "example",
+   "en": "It's **almost** 8 o'clock.",
+   "hi": "Lagbhag 8 bajne waale hain",
+   "emoji": "🕗",
+   "start": 42.124,
+   "word_t": 42.484,
+   "hi_t": 44.144,
+   "end": 46.384
+  },
+  {
+   "type": "tip",
+   "start": 46.444,
+   "end": 53.817,
+   "lines": [
+    {
+     "t": 47.162,
+     "text": "Jab kaam poora hone ke bahut kareeb ho"
+    },
+    {
+     "t": 50.802,
+     "text": "→ bolo **Almost**"
+    }
+   ]
+  },
+  {
+   "type": "title",
+   "num": "03",
+   "word": "Already",
+   "start": 54.676,
+   "meaning": "Pehle se hi",
+   "meaning_t": 56.656,
+   "dock": 60.096,
+   "end": 78.05
+  },
+  {
+   "type": "example",
+   "en": "I have **already** eaten.",
+   "hi": "Main pehle se hi kha chuki hoon",
+   "emoji": "🍽️",
+   "start": 60.196,
+   "word_t": 60.72,
+   "hi_t": 61.933,
+   "end": 64.297
+  },
+  {
+   "type": "example",
+   "en": "She has **already** left.",
+   "hi": "Woh pehle se hi ja chuki hai",
+   "emoji": "🚶‍♀️",
+   "start": 65.487,
+   "word_t": 66.147,
+   "hi_t": 67.447,
+   "end": 69.607
+  },
+  {
+   "type": "tip",
+   "start": 69.667,
+   "end": 78.05,
+   "lines": [
+    {
+     "t": 70.747,
+     "text": "Jab koi kaam time se pehle ho jaaye"
+    },
+    {
+     "t": 75.068,
+     "text": "→ bolo **Already**"
+    }
+   ]
+  },
+  {
+   "type": "recap",
+   "start": 78.1,
+   "rows_t": 78.7,
+   "end": 85.487,
+   "rows": [
+    [
+     "Probably",
+     "Shayad"
+    ],
+    [
+     "Almost",
+     "Lagbhag"
+    ],
+    [
+     "Already",
+     "Pehle se hi"
+    ]
+   ]
+  },
+  {
+   "type": "boost",
+   "start": 85.627,
+   "confident": 86.507,
+   "end": 87.88300000000001,
+   "words": [
+    "Fluent",
+    "Natural",
+    "English"
+   ]
+  },
+  {
+   "type": "cta",
+   "start": 87.933,
+   "follow": 90.22,
+   "comment": 92.82,
+   "end": 93.9,
+   "line": "Part 3 chahiye? Comment karo",
+   "tag": "PART 2 ✓"
+  }
+ ],
+ "flashes": [
+  9.467,
+  31.3,
+  53.867
+ ],
+ "punches": [
+  {
+   "t": 0.385,
+   "kind": "big"
+  },
+  {
+   "t": 10.152,
+   "kind": "big"
+  },
+  {
+   "t": 15.747,
+   "kind": "small"
+  },
+  {
+   "t": 21.1,
+   "kind": "small"
+  },
+  {
+   "t": 32.052,
+   "kind": "big"
+  },
+  {
+   "t": 38.041,
+   "kind": "small"
+  },
+  {
+   "t": 42.484,
+   "kind": "small"
+  },
+  {
+   "t": 54.676,
+   "kind": "big"
+  },
+  {
+   "t": 60.72,
+   "kind": "small"
+  },
+  {
+   "t": 66.147,
+   "kind": "small"
+  },
+  {
+   "t": 86.507,
+   "kind": "small"
+  }
+ ],
+ "sfx": [
+  {
+   "name": "whoosh",
+   "t": 9.347,
+   "gain": 0.55,
+   "lu": 0.0
+  },
+  {
+   "name": "pop",
+   "t": 15.747,
+   "gain": 0.35,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 21.1,
+   "gain": 0.25,
+   "lu": -1.0
+  },
+  {
+   "name": "whoosh",
+   "t": 31.18,
+   "gain": 0.55,
+   "lu": 0.0
+  },
+  {
+   "name": "pop",
+   "t": 38.041,
+   "gain": 0.35,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 42.484,
+   "gain": 0.25,
+   "lu": -1.0
+  },
+  {
+   "name": "whoosh",
+   "t": 53.747,
+   "gain": 0.55,
+   "lu": 0.0
+  },
+  {
+   "name": "pop",
+   "t": 60.72,
+   "gain": 0.35,
+   "lu": -1.0
+  },
+  {
+   "name": "ping",
+   "t": 66.147,
+   "gain": 0.25,
+   "lu": -1.0
+  },
+  {
+   "name": "impact-bass-1",
+   "t": 85.627,
+   "gain": 0.4,
+   "lu": 0.0
+  },
+  {
+   "name": "impact-bass-2",
+   "t": 86.507,
+   "gain": 0.4,
+   "lu": 0.0
+  },
+  {
+   "name": "click",
+   "t": 92.82,
+   "gain": 0.45,
+   "lu": 0.0
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 90.97,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}

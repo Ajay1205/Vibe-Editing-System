@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Brico"; src: url(fonts/brico-600.woff2) format("woff2"); font-weight: 600; }
+@font-face { font-family: "Brico"; src: url(fonts/brico-700.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Brico"; src: url(fonts/brico-800.woff2) format("woff2"); font-weight: 800; }
+@font-face { font-family: "Playfair"; src: url(fonts/playfair-600i.woff2) format("woff2"); font-weight: 600; font-style: italic; }
+@font-face { font-family: "Playfair"; src: url(fonts/playfair-700i.woff2) format("woff2"); font-weight: 700; font-style: italic; }
+@font-face { font-family: "PoppinsI"; src: url(fonts/poppins-600i.woff2) format("woff2"); font-weight: 600; font-style: italic; }
+:root { --lime: #D7FF3F; --coral: #FF7A59; --peach: #FFE2CF; --ink: #10131F; --glass: rgba(12,15,28,.55); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.clip { width: 1080px; height: 1920px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: none; }
+.layer > div { position: absolute; }
+.serif { font-family: Playfair; font-style: italic; font-weight: 600; }
+.hin { font-family: PoppinsI; font-style: italic; font-weight: 600; letter-spacing: 0; }  /* Hinglish lines: readable italic */
+.w { display: inline-block; }
+.shadow, .hook-words, .pr-1, .pr-2, .t-word, .ex-en, .tip-line, .b1, .b2 { text-shadow: 0 4px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.6); }
+
+/* hook */
+.hook { left: 140px; top: 290px; width: 800px; height: 540px; }
+.teaser { position: absolute; left: 0; top: 352px; width: 800px; display: flex; gap: 16px; }
+.teaser span { display: inline-block; padding: 14px 26px; border-radius: 40px; font: 800 44px/1 Brico; color: #fff;
+  background: var(--glass); border: 3px solid var(--lime); }
+.hook-today { position: absolute; left: 4px; top: 452px; width: 800px; font-size: 40px; color: var(--peach);
+  text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+.hook-num { position: absolute; left: 0; top: 0; width: 200px; height: 300px; font: 800 300px/1 Brico; color: var(--lime);
+  text-shadow: 0 0 40px rgba(215,255,63,.45), 0 6px 20px rgba(0,0,0,.4); }
+.hook-words { position: absolute; left: 200px; top: 34px; width: 600px; font: 800 104px/1 Brico; color: #fff; letter-spacing: -2px; }
+.hook-sub { position: absolute; left: 204px; top: 262px; width: 600px; font-size: 46px; color: var(--peach); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+
+/* promise */
+.promise { left: 140px; top: 360px; width: 800px; height: 420px; text-align: center; }
+.pr-1 { font: 800 118px/1.05 Brico; color: #fff; letter-spacing: -2px; }
+.pr-1 .amp { font-size: 96px; color: var(--coral); }
+.pr-2 { font: 800 118px/1.05 Brico; color: var(--lime); letter-spacing: -2px; text-shadow: 0 0 36px rgba(215,255,63,.45), 0 4px 16px rgba(0,0,0,.5); }
+.pr-sub { margin-top: 10px; font-size: 52px; color: var(--peach); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+
+/* title */
+.title { left: 140px; top: 300px; width: 800px; height: 420px; }
+.t-meta { position: absolute; left: 4px; top: 0; width: 600px; font: 700 28px/1 Brico; letter-spacing: 7px; color: var(--lime);
+  text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+.dots { display: inline-block; margin-right: 10px; }
+.dots i { display: inline-block; width: 16px; height: 16px; border-radius: 8px; margin-right: 6px; border: 3px solid var(--lime); }
+.dots i.on { background: var(--lime); }
+.t-word { position: absolute; left: 0; top: 46px; width: 800px; height: 190px; overflow: hidden; font: 800 172px/1.08 Brico; color: #fff;
+  letter-spacing: -4px; white-space: nowrap; }
+.t-word span { display: inline-block; }
+.t-bar { position: absolute; left: 6px; top: 246px; width: 440px; height: 14px; border-radius: 7px; background: var(--lime);
+  transform-origin: 0 50%; box-shadow: 0 0 24px rgba(215,255,63,.6); }
+.t-mean { position: absolute; left: 4px; top: 286px; width: 800px; font-size: 58px; line-height: 1.15; color: var(--peach);
+  text-shadow: 0 3px 16px rgba(0,0,0,.6); }
+.dock { left: 140px; top: 268px; width: max-content; padding: 12px 24px; border-radius: 40px; background: var(--glass);
+  border: 2px solid rgba(215,255,63,.6); font: 700 34px/1 Brico; color: #fff; }
+.dock b { color: var(--lime); margin-right: 6px; }
+.dock span { margin-left: 8px; font-size: 28px; color: var(--peach); }
+
+/* example */
+.ex { left: 140px; top: 360px; width: 800px; padding: 30px 36px 34px; border-radius: 36px;
+  background: linear-gradient(180deg, rgba(12,15,28,.62), rgba(12,15,28,.38)); border-left: 8px solid var(--lime); }
+.ex-label { font: 700 26px/1 Brico; letter-spacing: 8px; color: var(--lime); margin-bottom: 18px; }
+.ex-label span { letter-spacing: 0; font-size: 34px; margin-left: 6px; }
+.ex-en { font: 800 64px/1.18 Brico; color: #fff; letter-spacing: -1px; }
+.kw { padding: 0 8px; border-radius: 10px; background-image: linear-gradient(var(--lime), var(--lime)); background-repeat: no-repeat;
+  background-size: 0% 100%; text-shadow: none; }
+.ex-hi { margin-top: 20px; font-size: 40px; line-height: 1.3; color: var(--peach); }
+
+/* tip */
+.tip { left: 140px; top: 360px; width: 800px; padding: 30px 36px; border-radius: 36px;
+  background: linear-gradient(180deg, rgba(12,15,28,.62), rgba(12,15,28,.38)); }
+.tip-head { display: inline-block; font: 800 40px/1 Brico; color: var(--ink); background: var(--coral); padding: 14px 24px;
+  border-radius: 40px; margin-bottom: 22px; }
+.tip-line { font: 700 54px/1.25 Brico; color: #fff; margin: 4px 0; }
+.kw-text { color: var(--lime); }
+
+/* recap */
+.recap { left: 140px; top: 340px; width: 800px; height: 480px; }
+.rc-head { font-size: 42px; color: var(--peach); margin-bottom: 12px; text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+.rc-row { display: flex; align-items: baseline; width: 800px; height: 100px; margin-bottom: 10px; padding: 0 30px; border-radius: 28px;
+  background: var(--glass); border-left: 8px solid var(--lime); }
+.rc-row b { font: 800 42px/100px Brico; color: var(--lime); width: 80px; }
+.rc-w { font: 800 56px/100px Brico; color: #fff; width: 300px; }
+.rc-m { font-size: 40px; color: var(--peach); }
+
+/* boost */
+.boost { left: 140px; top: 360px; width: 800px; height: 440px; text-align: center; }
+.b1 { font: 800 150px/1 Brico; color: #fff; letter-spacing: -4px; }
+.b2 { font: 800 150px/1.05 Brico; color: var(--lime); letter-spacing: -4px; text-shadow: 0 0 40px rgba(215,255,63,.5), 0 4px 16px rgba(0,0,0,.5); }
+.b3 { font-size: 60px; color: var(--peach); text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+
+/* cta */
+.cta { left: 140px; top: 380px; width: 800px; height: 380px; }
+.cta-tag { position: absolute; left: 50%; top: -96px; transform: translateX(-50%); width: max-content; padding: 10px 24px; border-radius: 30px;
+  background: var(--lime); color: var(--ink); font: 800 34px/1 Brico; letter-spacing: 3px; }
+.cta-line { position: absolute; left: 0; top: 0; width: 800px; text-align: center; font-size: 48px; color: var(--peach);
+  text-shadow: 0 3px 14px rgba(0,0,0,.6); }
+.btn { position: absolute; top: 120px; width: 360px; height: 126px; border-radius: 63px; font: 800 52px/120px Brico; text-align: center; }
+.btn-f { left: 20px; background: var(--lime); color: var(--ink); border: 3px solid var(--lime); }
+.btn-c { left: 420px; background: var(--glass); color: #fff; border: 3px solid #fff; }
+.hand { position: absolute; left: 0; top: 0; width: 140px; height: 140px; font-size: 120px; line-height: 140px; }
+
+/* transitions: a lime light sweep with a soft veil */
+.sweep { position: absolute; left: 0; top: -200px; width: 700px; height: 2400px; transform: rotate(18deg);
+  background: linear-gradient(90deg, rgba(215,255,63,0), rgba(215,255,63,.85) 45%, rgba(255,255,255,.95) 50%, rgba(215,255,63,.85) 55%, rgba(215,255,63,0)); }
+.veil { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; background: #fff; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="93.900" data-width="1080" data-height="1920" data-fps="30">
+<div id="c0" class="clip" data-start="0.000" data-duration="7.145" data-track-index="1"><div class="layer">
+              <div class="hook" id="c0-x">
+                <div class="hook-num" id="c0-n">3</div>
+                <div class="hook-words" id="c0-w"><span class="w">English</span> <span class="w">Words</span></div>
+                <div class="serif hook-sub" id="c0-s">for your vocabulary</div>
+                <div class="teaser" id="c0-tz"><span>🔒 #1 ???</span><span>🔒 #2 ???</span><span>🔒 #3 ???</span></div>
+                <div class="hin hook-today" id="c0-td">aaj se hi use karna start karo ✓</div>
+              </div></div></div>
+<div id="c1" class="clip" data-start="7.165" data-duration="2.252" data-track-index="1"><div class="layer">
+              <div class="promise" id="c1-x">
+                <div class="pr-1" id="c1-a">Natural <span class="serif amp">&amp;</span></div>
+                <div class="pr-2" id="c1-b">Confident</div>
+                <div class="serif pr-sub" id="c1-s">English ✦</div>
+              </div></div></div>
+<div id="c2" class="clip" data-start="10.152" data-duration="21.098" data-track-index="2"><div class="layer">
+              <div class="title" id="c2-t">
+                <div class="t-meta" id="c2-meta"><span class="dots"><i class="on"></i><i class=""></i><i class=""></i></span> WORD 1 OF 3</div>
+                <div class="t-word" id="c2-w"><span>P</span><span>r</span><span>o</span><span>b</span><span>a</span><span>b</span><span>l</span><span>y</span></div>
+                <div class="t-bar" id="c2-bar"></div>
+                <div class="hin t-mean" id="c2-m">“Shayad”</div>
+              </div>
+              <div class="dock" id="c2-d"><b>1/3</b> Probably <span class="hin">Shayad</span></div></div></div>
+<div id="c3" class="clip" data-start="15.483" data-duration="3.802" data-track-index="3"><div class="layer">
+              <div class="ex" id="c3-x">
+                <div class="ex-label">EXAMPLE <span>⏰</span></div>
+                <div class="ex-en" id="c3-en"><span class="w">I</span> <span class="w">will</span> <span class="w kw">probably</span> <span class="w">be</span> <span class="w">late.</span></div>
+                <div class="hin ex-hi" id="c3-hi">Shayad mujhe der ho jaayegi</div>
+              </div></div></div>
+<div id="c4" class="clip" data-start="20.340" data-duration="3.908" data-track-index="3"><div class="layer">
+              <div class="ex" id="c4-x">
+                <div class="ex-label">EXAMPLE <span>📅</span></div>
+                <div class="ex-en" id="c4-en"><span class="w">She</span> <span class="w">will</span> <span class="w kw">probably</span> <span class="w">come</span> <span class="w">tomorrow.</span></div>
+                <div class="hin ex-hi" id="c4-hi">Shayad woh kal aayegi</div>
+              </div></div></div>
+<div id="c5" class="clip" data-start="24.348" data-duration="6.902" data-track-index="3"><div class="layer">
+              <div class="tip" id="c5-x">
+                <div class="tip-head" id="c5-h">💡 Yaad rakhiye</div>
+                <div class="tip-line" id="c5-l0"><span class="w">Jab</span> <span class="w">poori</span> <span class="w">guarantee</span> <span class="w">na</span> <span class="w">de</span> <span class="w">sako</span></div><div class="tip-line" id="c5-l1"><span class="w">→</span> <span class="w">bolo</span> <span class="w kw-text">Probably</span></div>
+              </div></div></div>
+<div id="c6" class="clip" data-start="32.052" data-duration="21.765" data-track-index="2"><div class="layer">
+              <div class="title" id="c6-t">
+                <div class="t-meta" id="c6-meta"><span class="dots"><i class="on"></i><i class="on"></i><i class=""></i></span> WORD 2 OF 3</div>
+                <div class="t-word" id="c6-w"><span>A</span><span>l</span><span>m</span><span>o</span><span>s</span><span>t</span></div>
+                <div class="t-bar" id="c6-bar"></div>
+                <div class="hin t-mean" id="c6-m">“Lagbhag”</div>
+              </div>
+              <div class="dock" id="c6-d"><b>2/3</b> Almost <span class="hin">Lagbhag</span></div></div></div>
+<div id="c7" class="clip" data-start="37.688" data-duration="3.176" data-track-index="3"><div class="layer">
+              <div class="ex" id="c7-x">
+                <div class="ex-label">EXAMPLE <span>👗</span></div>
+                <div class="ex-en" id="c7-en"><span class="w">I</span> <span class="w">am</span> <span class="w kw">almost</span> <span class="w">ready.</span></div>
+                <div class="hin ex-hi" id="c7-hi">Main lagbhag taiyaar hoon</div>
+              </div></div></div>
+<div id="c8" class="clip" data-start="42.124" data-duration="4.260" data-track-index="3"><div class="layer">
+              <div class="ex" id="c8-x">
+                <div class="ex-label">EXAMPLE <span>🕗</span></div>
+                <div class="ex-en" id="c8-en"><span class="w">It&#x27;s</span> <span class="w kw">almost</span> <span class="w">8</span> <span class="w">o&#x27;clock.</span></div>
+                <div class="hin ex-hi" id="c8-hi">Lagbhag 8 bajne waale hain</div>
+              </div></div></div>
+<div id="c9" class="clip" data-start="46.444" data-duration="7.373" data-track-index="3"><div class="layer">
+              <div class="tip" id="c9-x">
+                <div class="tip-head" id="c9-h">💡 Yaad rakhiye</div>
+                <div class="tip-line" id="c9-l0"><span class="w">Jab</span> <span class="w">kaam</span> <span class="w">poora</span> <span class="w">hone</span> <span class="w">ke</span> <span class="w">bahut</span> <span class="w">kareeb</span> <span class="w">ho</span></div><div class="tip-line" id="c9-l1"><span class="w">→</span> <span class="w">bolo</span> <span class="w kw-text">Almost</span></div>
+              </div></div></div>
+<div id="c10" class="clip" data-start="54.676" data-duration="23.374" data-track-index="2"><div class="layer">
+              <div class="title" id="c10-t">
+                <div class="t-meta" id="c10-meta"><span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></span> WORD 3 OF 3</div>
+                <div class="t-word" id="c10-w"><span>A</span><span>l</span><span>r</span><span>e</span><span>a</span><span>d</span><span>y</span></div>
+                <div class="t-bar" id="c10-bar"></div>
+                <div class="hin t-mean" id="c10-m">“Pehle se hi”</div>
+              </div>
+              <div class="dock" id="c10-d"><b>3/3</b> Already <span class="hin">Pehle se hi</span></div></div></div>
+<div id="c11" class="clip" data-start="60.196" data-duration="4.101" data-track-index="3"><div class="layer">
+              <div class="ex" id="c11-x">
+                <div class="ex-label">EXAMPLE <span>🍽️</span></div>
+                <div class="ex-en" id="c11-en"><span class="w">I</span> <span class="w">have</span> <span class="w kw">already</span> <span class="w">eaten.</span></div>
+                <div class="hin ex-hi" id="c11-hi">Main pehle se hi kha chuki hoon</div>
+              </div></div></div>
+<div id="c12" class="clip" data-start="65.487" data-duration="4.120" data-track-index="3"><div class="layer">
+              <div class="ex" id="c12-x">
+                <div class="ex-label">EXAMPLE <span>🚶‍♀️</span></div>
+                <div class="ex-en" id="c12-en"><span class="w">She</span> <span class="w">has</span> <span class="w kw">already</span> <span class="w">left.</span></div>
+                <div class="hin ex-hi" id="c12-hi">Woh pehle se hi ja chuki hai</div>
+              </div></div></div>
+<div id="c13" class="clip" data-start="69.667" data-duration="8.383" data-track-index="3"><div class="layer">
+              <div class="tip" id="c13-x">
+                <div class="tip-head" id="c13-h">💡 Yaad rakhiye</div>
+                <div class="tip-line" id="c13-l0"><span class="w">Jab</span> <span class="w">koi</span> <span class="w">kaam</span> <span class="w">time</span> <span class="w">se</span> <span class="w">pehle</span> <span class="w">ho</span> <span class="w">jaaye</span></div><div class="tip-line" id="c13-l1"><span class="w">→</span> <span class="w">bolo</span> <span class="w kw-text">Already</span></div>
+              </div></div></div>
+<div id="c14" class="clip" data-start="78.100" data-duration="7.387" data-track-index="3"><div class="layer">
+              <div class="recap" id="c14-x">
+                <div class="hin rc-head">Daily conversation mein use karo</div>
+                <div class="rc-row"><b>01</b><span class="rc-w">Probably</span><span class="hin rc-m">Shayad</span></div><div class="rc-row"><b>02</b><span class="rc-w">Almost</span><span class="hin rc-m">Lagbhag</span></div><div class="rc-row"><b>03</b><span class="rc-w">Already</span><span class="hin rc-m">Pehle se hi</span></div>
+              </div></div></div>
+<div id="c15" class="clip" data-start="85.627" data-duration="2.256" data-track-index="3"><div class="layer">
+              <div class="boost" id="c15-x"><div class="b1">Fluent</div><div class="b2">Natural</div><div class="serif b3">English</div></div></div></div>
+<div id="c16" class="clip" data-start="87.933" data-duration="5.967" data-track-index="3"><div class="layer">
+              <div class="cta" id="c16-x">
+                <div class="cta-tag" id="c16-tag">PART 2 ✓</div>
+                <div class="hin cta-line">Part 3 chahiye? Comment karo</div>
+                <div class="btn btn-f" id="c16-f">Follow</div>
+                <div class="btn btn-c" id="c16-c">Comment</div>
+                <div class="hand" id="c16-hand">👆</div>
+              </div></div></div>
+<div id="tr0" class="clip" data-start="9.267" data-duration="0.550" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="veil"></div></div></div>
+<div id="tr1" class="clip" data-start="31.100" data-duration="0.550" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="veil"></div></div></div>
+<div id="tr2" class="clip" data-start="53.667" data-duration="0.550" data-track-index="9"><div class="layer"><div class="sweep"></div><div class="veil"></div></div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  
+              tl.fromTo("#c0-n", {scale: 0.2, opacity: 0, filter: "blur(20px)"}, {scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out"}, 0.385);
+              tl.fromTo("#c0-w .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.12, ease: "power3.out"}, 0.605);
+              tl.fromTo("#c0-s", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.35, ease: "power2.out"}, 1.425);
+              tl.fromTo("#c0-tz span", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.18, ease: "power3.out"}, 3.005);
+              tl.to("#c0-tz span", {backgroundColor: "rgba(215,255,63,1)", color: "#10131F", duration: 0.2, stagger: 0.35}, 3.905);
+              tl.fromTo("#c0-td", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 3.765);
+              tl.to("#c0-n", {scale: 1.08, duration: 0.6, yoyo: true, repeat: 3, ease: "sine.inOut"}, 3.005);
+              tl.to("#c0-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 6.845);
+              tl.fromTo("#c1-a", {opacity: 0, x: -80, filter: "blur(12px)"}, {opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out"}, 7.225);
+              tl.fromTo("#c1-b", {opacity: 0, x: 80, filter: "blur(12px)"}, {opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, ease: "expo.out"}, 8.205);
+              tl.fromTo("#c1-s", {opacity: 0}, {opacity: 1, duration: 0.3}, 8.405);
+              tl.to("#c1-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 9.116999999999999);
+              tl.fromTo("#c2-meta", {opacity: 0, y: -16}, {opacity: 1, y: 0, duration: 0.3}, 10.101999999999999);
+              tl.fromTo("#c2-w span", {yPercent: 100, opacity: 0, filter: "blur(10px)"}, {yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.45, stagger: 0.04, ease: "expo.out"}, 10.152);
+              tl.fromTo("#c2-bar", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "expo.out"}, 10.452);
+              tl.fromTo("#c2-m", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 12.183);
+              tl.to("#c2-t", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 15.162999999999998);
+              tl.fromTo("#c2-d", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.35, ease: "expo.out"}, 15.412999999999998);
+              tl.to("#c2-d", {opacity: 0, x: -30, duration: 0.25}, 30.97);
+              tl.fromTo("#c3 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 15.483);
+              tl.fromTo("#c3-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 15.533000000000001);
+              tl.fromTo("#c3 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 15.883000000000001);
+              tl.fromTo("#c3-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 16.967);
+              tl.to("#c3-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 18.985);
+              tl.fromTo("#c4 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 20.34);
+              tl.fromTo("#c4-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 20.39);
+              tl.fromTo("#c4 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 21.1);
+              tl.fromTo("#c4-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 22.48);
+              tl.to("#c4-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 23.948);
+              tl.fromTo("#c5-h", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 24.348);
+              tl.fromTo("#c5-l0 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 25.338);
+              tl.fromTo("#c5-l1 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 28.254);
+              tl.to("#c5-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 30.95);
+              tl.fromTo("#c6-meta", {opacity: 0, y: -16}, {opacity: 1, y: 0, duration: 0.3}, 32.002);
+              tl.fromTo("#c6-w span", {yPercent: 100, opacity: 0, filter: "blur(10px)"}, {yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.45, stagger: 0.04, ease: "expo.out"}, 32.052);
+              tl.fromTo("#c6-bar", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "expo.out"}, 32.352);
+              tl.fromTo("#c6-m", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 34.288);
+              tl.to("#c6-t", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 37.248000000000005);
+              tl.fromTo("#c6-d", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.35, ease: "expo.out"}, 37.498000000000005);
+              tl.to("#c6-d", {opacity: 0, x: -30, duration: 0.25}, 53.537);
+              tl.fromTo("#c7 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 37.688);
+              tl.fromTo("#c7-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 37.738);
+              tl.fromTo("#c7 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 38.088);
+              tl.fromTo("#c7-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 39.167);
+              tl.to("#c7-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 40.564);
+              tl.fromTo("#c8 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 42.124);
+              tl.fromTo("#c8-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 42.174);
+              tl.fromTo("#c8 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 42.524);
+              tl.fromTo("#c8-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 44.144);
+              tl.to("#c8-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 46.084);
+              tl.fromTo("#c9-h", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 46.444);
+              tl.fromTo("#c9-l0 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 47.162);
+              tl.fromTo("#c9-l1 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 50.802);
+              tl.to("#c9-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 53.517);
+              tl.fromTo("#c10-meta", {opacity: 0, y: -16}, {opacity: 1, y: 0, duration: 0.3}, 54.626000000000005);
+              tl.fromTo("#c10-w span", {yPercent: 100, opacity: 0, filter: "blur(10px)"}, {yPercent: 0, opacity: 1, filter: "blur(0px)", duration: 0.45, stagger: 0.04, ease: "expo.out"}, 54.676);
+              tl.fromTo("#c10-bar", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "expo.out"}, 54.976);
+              tl.fromTo("#c10-m", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 56.656);
+              tl.to("#c10-t", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 59.796);
+              tl.fromTo("#c10-d", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.35, ease: "expo.out"}, 60.046);
+              tl.to("#c10-d", {opacity: 0, x: -30, duration: 0.25}, 77.77);
+              tl.fromTo("#c11 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 60.196);
+              tl.fromTo("#c11-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 60.245999999999995);
+              tl.fromTo("#c11 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 60.72);
+              tl.fromTo("#c11-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 61.933);
+              tl.to("#c11-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 63.997);
+              tl.fromTo("#c12 .ex-label", {opacity: 0, x: -20}, {opacity: 1, x: 0, duration: 0.3}, 65.487);
+              tl.fromTo("#c12-en .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.07, ease: "power3.out"}, 65.53699999999999);
+              tl.fromTo("#c12 .kw", {backgroundSize: "0% 100%", color: "#FFFFFF"}, {backgroundSize: "100% 100%", color: "#10131F", duration: 0.3, ease: "power2.out"}, 66.147);
+              tl.fromTo("#c12-hi", {opacity: 0, y: 20, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.4, ease: "power3.out"}, 67.447);
+              tl.to("#c12-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 69.307);
+              tl.fromTo("#c13-h", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 69.667);
+              tl.fromTo("#c13-l0 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 70.747);
+              tl.fromTo("#c13-l1 .w", {opacity: 0, y: 34, filter: "blur(14px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.38, stagger: 0.05, ease: "power3.out"}, 75.068);
+              tl.to("#c13-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 77.75);
+              tl.fromTo("#c14 .rc-head", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 78.1);
+              tl.fromTo("#c14 .rc-row", {opacity: 0, x: -60, filter: "blur(10px)"}, {opacity: 1, x: 0, filter: "blur(0px)", duration: 0.4, stagger: 0.32, ease: "expo.out"}, 78.7);
+              tl.to("#c14-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 85.187);
+              tl.fromTo("#c15 .b1", {opacity: 0, scale: 1.6, filter: "blur(16px)"}, {opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "expo.out"}, 85.627);
+              tl.fromTo("#c15 .b2", {opacity: 0, scale: 1.6, filter: "blur(16px)"}, {opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "expo.out"}, 86.507);
+              tl.fromTo("#c15 .b3", {opacity: 0}, {opacity: 1, duration: 0.3}, 86.70700000000001);
+              tl.to("#c15-x", {opacity: 0, y: -40, filter: "blur(12px)", duration: 0.28, ease: "power2.in"}, 87.63300000000001);
+              tl.fromTo("#c16-tag", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 87.933);
+              tl.fromTo("#c16 .cta-line", {opacity: 0, y: -16}, {opacity: 1, y: 0, duration: 0.3}, 88.183);
+              tl.fromTo("#c16 .btn", {opacity: 0, y: 40, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, stagger: 0.12, ease: "expo.out"}, 88.033);
+              tl.fromTo("#c16-hand", {x: 520, y: 330, opacity: 0}, {x: 300, y: 170, opacity: 1, duration: 0.35, ease: "power2.out"}, 89.82);
+              tl.to("#c16-f", {scale: 0.9, duration: 0.08, yoyo: true, repeat: 1}, 90.22);
+              tl.set("#c16-f", {textContent: "Following ✓", backgroundColor: "#FFFFFF"}, 90.3);
+              tl.to("#c16-hand", {x: 600, y: 170, duration: 0.3, ease: "power2.inOut"}, 92.5);
+              tl.to("#c16-c", {scale: 0.9, duration: 0.08, yoyo: true, repeat: 1}, 92.82);
+              tl.set("#c16-c", {backgroundColor: "#D7FF3F", color: "#10131F", borderColor: "#D7FF3F"}, 92.89999999999999);
+              tl.to("#c16-hand", {opacity: 0, duration: 0.3}, 93.41999999999999);
+              tl.fromTo("#tr0 .sweep", {xPercent: -160}, {xPercent: 160, duration: 0.5, ease: "power2.inOut"}, 9.267000000000001);
+              tl.fromTo("#tr0 .veil", {opacity: 0}, {opacity: 0.35, duration: 0.15, yoyo: true, repeat: 1}, 9.347000000000001);
+              tl.fromTo("#tr1 .sweep", {xPercent: -160}, {xPercent: 160, duration: 0.5, ease: "power2.inOut"}, 31.1);
+              tl.fromTo("#tr1 .veil", {opacity: 0}, {opacity: 0.35, duration: 0.15, yoyo: true, repeat: 1}, 31.18);
+              tl.fromTo("#tr2 .sweep", {xPercent: -160}, {xPercent: 160, duration: 0.5, ease: "power2.inOut"}, 53.666999999999994);
+              tl.fromTo("#tr2 .veil", {opacity: 0}, {opacity: 0.35, duration: 0.15, yoyo: true, repeat: 1}, 53.747);
+  window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
