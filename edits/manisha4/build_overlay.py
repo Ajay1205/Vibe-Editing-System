@@ -51,7 +51,7 @@ def words_html(text, key_cls="key"):
         lead = " " if part[:1] == " " else ""
         trail = " " if part[-1:] == " " else ""
         inner = " ".join(ws)
-        out.append(f'{lead}<span class="{key_cls}">{inner}</span>{trail}' if i % 2 else f"{lead}{inner}{trail}")
+        out.append(f'{lead}<span class="{key_cls} {key_cls}{i // 2}">{inner}</span>{trail}' if i % 2 else f"{lead}{inner}{trail}")
     return "".join(out).strip()
 
 
@@ -73,6 +73,20 @@ def blur_in(sel, t, total):
     """Words blur and rise in one by one over `total` seconds."""
     return (f'tl.fromTo("{sel}", {{opacity: 0, y: 26, filter: "blur(10px)"}}, {{opacity: 1, y: 0, filter: "blur(0px)", '
             f'duration: 0.28, ease: "power3.out", stagger: {{amount: {max(0.1, total):.2f}}}}}, {t:.3f});')
+
+
+def key_js(cid, c):
+    """Marker sweep per key phrase, each when its own first word has appeared (the first one on the key word)."""
+    words = re.sub(r"\*\*", "", c["en"]).split()
+    step = max(0.15, c["pl"] - c["en_t"] - 0.1) / max(1, len(words) - 1)
+    out, idx = [], 0
+    for i, part in enumerate(re.split(r"\*\*(.+?)\*\*", c["en"])):
+        if i % 2:
+            t = max(c["key"] if not out else 0, c["en_t"] - 0.04 + idx * step + 0.12)
+            out.append(f'tl.fromTo("#{cid}-en .key{i // 2}", {{backgroundSize: "0% 100%"}}, '
+                       f'{{backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}}, {t:.3f});')
+        idx += len(part.split())
+    return "".join(out)
 
 
 def hi2_js(cid, c):
@@ -154,7 +168,7 @@ def build(res=2160):
               {hi2_js(cid, c)}
               tl.fromTo("#{cid}-card", {{opacity: 0, scale: 0.5, rotation: -6}}, {{opacity: 1, scale: 1, rotation: -1.5, duration: 0.32, ease: "back.out(2.2)"}}, {en_t - 0.08});
               tl.fromTo("#{cid}-en .w", {{opacity: 0, y: 14}}, {{opacity: 1, y: 0, duration: 0.16, ease: "power2.out", stagger: {{amount: {max(0.15, pl - en_t - 0.1):.2f}}}}}, {en_t - 0.04});
-              tl.fromTo("#{cid}-en .key", {{backgroundSize: "0% 100%"}}, {{backgroundSize: "100% 100%", duration: 0.22, ease: "power2.out"}}, {key});
+              {key_js(cid, c)}
               tl.to("#{cid}-en .key", {{scale: 1.08, duration: 0.14, yoyo: true, repeat: 1}}, {key + 0.22});
               tl.fromTo("#{cid}-po", {{opacity: 0, scale: 2.2, rotation: 25}}, {{opacity: 1, scale: 1, rotation: 8, duration: 0.2, ease: "power4.in"}}, {pl + 0.15});
               tl.to("#{cid}-card", {{scale: 1.04, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 1}}, {pl + 0.5});

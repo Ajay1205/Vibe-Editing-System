@@ -28,7 +28,7 @@ FACE = (0.50, 0.49)  # Manisha's face centre in the raw frame (x, y as a fractio
 VERSIONS = {
     # v1 (v3 look, "Close & Bold"): shots from cues.json alternate a medium and a close framing with a hard
     # cut-in on every English line, each shot slowly pushing in by `drift`. ft = where her face sits (0 = top).
-    "v1": {"mid": (1.30, 0.40), "ask": (1.46, 0.385), "close": (1.68, 0.36), "drift": 0.035, "glide": 0.8},
+    "v1": {"mid": (1.30, 0.42), "ask": (1.46, 0.40), "close": (1.68, 0.385), "drift": 0.035, "glide": 0.8},
 }
 
 
