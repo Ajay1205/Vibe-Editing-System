@@ -1,0 +1,339 @@
+{
+ "duration": 62.7333,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "hook",
+   "start": 0.0,
+   "end": 9.2,
+   "title": "Dost ka <em>mood off?</em>",
+   "sub": "English mein cheer up kaise karein? ☀️",
+   "title_t": 1.22,
+   "sun_t": 3.96,
+   "sub_t": 7.4
+  },
+  {
+   "type": "intro",
+   "start": 9.2,
+   "end": 17.3,
+   "line": "Kabhi na kabhi sabko <em>motivation</em> chahiye",
+   "sub": "4 simple English sentences ✨",
+   "simple_t": 14.893
+  },
+  {
+   "type": "pep",
+   "n": 1,
+   "fx": "sun",
+   "hi": "Sab theek ho jaayega",
+   "en": "Everything will be **fine.**",
+   "tag": null,
+   "start": 17.3,
+   "hi_t": 17.3,
+   "en_t": 20.82,
+   "key_t": 21.94,
+   "end": 23.66
+  },
+  {
+   "type": "pep",
+   "n": 2,
+   "fx": "hearts",
+   "hi": "Main aapke saath hoon",
+   "en": "I am **with you.**",
+   "tag": null,
+   "start": 23.66,
+   "hi_t": 23.66,
+   "en_t": 26.64,
+   "key_t": 27.32,
+   "end": 33.44,
+   "en2": "I've got your **back.**",
+   "en2_t": 31.08,
+   "key2_t": 32.06,
+   "tag2": "MORE NATURAL ✨",
+   "up_t": 27.82
+  },
+  {
+   "type": "pep",
+   "n": 3,
+   "fx": "muscle",
+   "hi": "Himmat mat haaro",
+   "en": "Do not **give up.**",
+   "tag": null,
+   "start": 33.44,
+   "hi_t": 33.44,
+   "en_t": 40.463,
+   "key_t": 41.123,
+   "end": 42.904
+  },
+  {
+   "type": "pep",
+   "n": 4,
+   "fx": "confetti",
+   "hi": "Tumne sach mein bahut achha kiya",
+   "en": "You really did **well!**",
+   "tag": "TAARIF",
+   "start": 42.904,
+   "hi_t": 42.904,
+   "en_t": 48.264,
+   "key_t": 49.424,
+   "end": 49.904
+  },
+  {
+   "type": "better",
+   "start": 49.904,
+   "end": 54.267,
+   "line": "Aise sentences kisi ka din <em>better</em> bana sakte hain",
+   "better_t": 52.864
+  },
+  {
+   "type": "cta",
+   "start": 54.267,
+   "end": 62.733,
+   "line": "Simple & useful English ke liye",
+   "daily": "Roz kuch naya seekhiye 📚",
+   "tap": 59.774,
+   "daily_t": 60.914
+  }
+ ],
+ "mood": [
+  {
+   "t": 0.05,
+   "pct": 12,
+   "face": "😔"
+  },
+  {
+   "t": 9.5,
+   "pct": 20,
+   "face": "😐"
+  },
+  {
+   "t": 22.14,
+   "pct": 38,
+   "face": "🙂"
+  },
+  {
+   "t": 27.52,
+   "pct": 62,
+   "face": "😊"
+  },
+  {
+   "t": 41.323,
+   "pct": 82,
+   "face": "😄"
+  },
+  {
+   "t": 49.624,
+   "pct": 100,
+   "face": "🤩"
+  }
+ ],
+ "glows": [
+  9.2,
+  17.3,
+  32.433,
+  54.267
+ ],
+ "flashes": [
+  9.2,
+  17.3,
+  32.433,
+  54.267
+ ],
+ "shots": [
+  {
+   "t": 0.0,
+   "kind": "mid"
+  },
+  {
+   "t": 3.96,
+   "kind": "close"
+  },
+  {
+   "t": 9.2,
+   "kind": "mid"
+  },
+  {
+   "t": 20.77,
+   "kind": "close"
+  },
+  {
+   "t": 22.66,
+   "kind": "mid"
+  },
+  {
+   "t": 26.59,
+   "kind": "close"
+  },
+  {
+   "t": 27.82,
+   "kind": "mid"
+  },
+  {
+   "t": 31.029999999999998,
+   "kind": "close"
+  },
+  {
+   "t": 32.44,
+   "kind": "mid"
+  },
+  {
+   "t": 40.413000000000004,
+   "kind": "close"
+  },
+  {
+   "t": 41.904,
+   "kind": "mid"
+  },
+  {
+   "t": 48.214000000000006,
+   "kind": "close"
+  },
+  {
+   "t": 49.904,
+   "kind": "mid"
+  },
+  {
+   "t": 58.574,
+   "kind": "close"
+  }
+ ],
+ "sfx": [
+  {
+   "name": "sparkle",
+   "t": 3.96,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "chime",
+   "t": 20.79,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "sparkle",
+   "t": 22.14,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "chime",
+   "t": 26.61,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "sparkle",
+   "t": 27.52,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 23.56,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "chime",
+   "t": 31.05,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "pop",
+   "t": 32.06,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "chime",
+   "t": 40.433,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "sparkle",
+   "t": 41.323,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 33.34,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "chime",
+   "t": 48.234,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "sparkle",
+   "t": 49.624,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 42.804,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "pop",
+   "t": 49.424,
+   "gain": 0.5,
+   "lu": -4.0
+  },
+  {
+   "name": "click",
+   "t": 59.774,
+   "gain": 0.5,
+   "lu": -2.0
+  },
+  {
+   "name": "whoosh",
+   "t": 9.08,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "whoosh",
+   "t": 17.18,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "whoosh",
+   "t": 32.313,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "whoosh",
+   "t": 54.147,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 57.924,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}
