@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+:root { --cocoa: #4A2E22; --latte: #FFF4E6; --heart: #E8475A;
+  --what: #FFB3C1; --when: #FFD58A; --where: #A8E0C4; --why: #B9C8FF; --who: #FFC2A1; --which: #D7B9FF; --whose: #A9DDF2;
+  --sh: 0 2px 3px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.45), 0 0 2px rgba(0,0,0,.5); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 1080px; height: 1920px; }
+.clip { width: 1080px; height: 1920px; }
+.p { position: absolute; inset: 0; }
+.p > * { position: absolute; }
+.bg { left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+
+.title { left: 80px; top: 280px; width: 920px; text-align: center; font: 800 92px/1 Baloo; color: var(--latte); text-shadow: var(--sh); }
+.title b { color: var(--heart); background: var(--latte); padding: 0 18px; border-radius: 22px; text-shadow: none; }
+.sub { left: 80px; top: 390px; width: 920px; text-align: center; font: 700 42px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+
+/* family grid of squircle tiles */
+.grid { left: 110px; top: 470px; width: 860px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.t { width: 190px; height: 150px; border-radius: 38px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 10px 22px rgba(0,0,0,.28), inset 0 -6px 0 rgba(0,0,0,.08); }
+.t .en { font: 800 54px/1 Baloo; color: var(--cocoa); }
+.t .hi { margin-top: 4px; font: 700 28px/1 Quick; color: rgba(74,46,34,.75); }
+.t.q .en { font-size: 70px; opacity: .55; }
+.t.flip { transform: perspective(600px) rotateY(55deg); }
+.heart { font-size: 46px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.25)); }
+
+/* example */
+.fam { left: 50%; top: 270px; transform: translateX(-50%); display: flex; gap: 10px; padding: 10px 16px; border-radius: 40px; background: rgba(74,46,34,.55); }
+.fam i { width: 58px; height: 58px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font: 800 26px/1 Baloo; color: var(--cocoa); font-style: normal; opacity: .45; }
+.fam i.on { opacity: 1; transform: scale(1.18); box-shadow: 0 0 0 4px #fff, 0 8px 18px rgba(0,0,0,.3); }
+.hq { left: 80px; top: 400px; width: 920px; text-align: center; font: 700 52px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+.card { left: 110px; top: 500px; width: 860px; padding: 34px 30px; border-radius: 40px; background: var(--latte); text-align: center;
+  box-shadow: 0 18px 44px rgba(0,0,0,.32); border: 5px solid #fff; }
+.card .q { font: 800 76px/1.05 Baloo; color: var(--cocoa); }
+.chip { display: inline-block; padding: 0 18px; border-radius: 22px; }
+.lead { left: 50%; top: 668px; transform: translateX(-50%); padding: 10px 24px; border-radius: 24px; background: var(--cocoa); color: var(--latte);
+  font: 800 28px/1 Baloo; letter-spacing: 2px; white-space: nowrap; }
+
+/* save */
+.book { left: 50%; top: 300px; transform: translateX(-50%) rotate(-8deg); font-size: 170px; filter: drop-shadow(0 12px 24px rgba(0,0,0,.35)); }
+.save { left: 80px; top: 500px; width: 920px; text-align: center; font: 800 110px/1 Baloo; color: var(--latte); text-shadow: var(--sh); }
+.save b { color: var(--heart); }
+.mini { left: 140px; top: 640px; width: 800px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.mini span { padding: 10px 18px; border-radius: 22px; font: 800 34px/1 Baloo; color: var(--cocoa); box-shadow: 0 6px 14px rgba(0,0,0,.25); }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+
+<!-- A: hook - the family, still locked -->
+<div class="clip" data-start="0" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_a.jpg" />
+  <div class="title">The <b>WH</b> Family</div>
+  <div class="sub">7 words · 100s of English questions</div>
+  <div class="grid">
+    <div class="t q" style="background:var(--what)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--when)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--where)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--why)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--who)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--which)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--whose)"><div class="en">?</div></div>
+  </div>
+  <div class="heart" style="left:120px;top:250px;transform:rotate(-14deg)">❤️</div>
+  <div class="heart" style="left:920px;top:420px;transform:rotate(12deg);font-size:36px">❤️</div>
+</div></div>
+
+<!-- B: meanings - tiles flip from Hindi to English one by one -->
+<div class="clip" data-start="1" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_b.jpg" />
+  <div class="title" style="font-size:70px;top:285px">Hindi → <b>English</b></div>
+  <div class="grid" style="top:400px">
+    <div class="t" style="background:var(--what)"><div class="en">What</div><div class="hi">kya</div></div>
+    <div class="t" style="background:var(--when)"><div class="en">When</div><div class="hi">kab</div></div>
+    <div class="t" style="background:var(--where)"><div class="en">Where</div><div class="hi">kahan</div></div>
+    <div class="t" style="background:var(--why)"><div class="en">Why</div><div class="hi">kyun</div></div>
+    <div class="t flip" style="background:var(--who)"><div class="en">Who</div><div class="hi">kaun</div></div>
+    <div class="t q" style="background:var(--which)"><div class="en">?</div></div>
+    <div class="t q" style="background:var(--whose)"><div class="en">?</div></div>
+  </div>
+</div></div>
+
+<!-- C: example -->
+<div class="clip" data-start="2" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_c.jpg" />
+  <div class="fam"><i style="background:var(--what)">Wt</i><i style="background:var(--when)">Wn</i><i class="on" style="background:var(--where)">Wr</i><i style="background:var(--why)">Wy</i><i style="background:var(--who)">Wo</i><i style="background:var(--which)">Wc</i><i style="background:var(--whose)">Ws</i></div>
+  <div class="hq">"Meri book kahan hai?"</div>
+  <div class="card"><div class="q"><span class="chip" style="background:var(--where)">Where</span> is my book?</div></div>
+  <div class="lead">👑 QUESTION LEADER = FIRST WORD</div>
+</div></div>
+
+<!-- D: save -->
+<div class="clip" data-start="3" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_d.jpg" />
+  <div class="book">🔖</div>
+  <div class="save"><b>Save</b> karo!</div>
+  <div class="mini"><span style="background:var(--what)">What</span><span style="background:var(--when)">When</span><span style="background:var(--where)">Where</span><span style="background:var(--why)">Why</span><span style="background:var(--who)">Who</span><span style="background:var(--which)">Which</span><span style="background:var(--whose)">Whose</span></div>
+</div></div>
+
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["main"] = tl;
+</script>
+</body></html>
