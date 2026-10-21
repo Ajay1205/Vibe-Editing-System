@@ -1,0 +1,720 @@
+{
+ "duration": 87.0333,
+ "fps": 30,
+ "captions": [
+  {
+   "type": "family",
+   "start": 0.0,
+   "end": 23.567,
+   "title": "The <b>WH</b> Family",
+   "sub": "7 words · 100s of English questions",
+   "rule": "📌 English grammar ka rule",
+   "label": "👑 Question Leaders",
+   "label2": "Question inhi se start hota hai",
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ],
+   "tiles_t": 2.753,
+   "sub_t": 5.503,
+   "rule_t": 8.853,
+   "family_t": 16.607,
+   "leaders_t": 19.817,
+   "start_t": 22.067
+  },
+  {
+   "type": "meanings",
+   "start": 23.567,
+   "end": 42.167,
+   "tiles": [
+    {
+     "en": "What",
+     "hi": "kya",
+     "hi_t": 27.34,
+     "en_t": 29.01
+    },
+    {
+     "en": "When",
+     "hi": "kab",
+     "hi_t": 29.772,
+     "en_t": 31.372
+    },
+    {
+     "en": "Where",
+     "hi": "kahan",
+     "hi_t": 32.192,
+     "en_t": 33.072
+    },
+    {
+     "en": "Why",
+     "hi": "kyun",
+     "hi_t": 34.036,
+     "en_t": 34.846
+    },
+    {
+     "en": "Who",
+     "hi": "kaun",
+     "hi_t": 36.282,
+     "en_t": 37.132
+    },
+    {
+     "en": "Which",
+     "hi": "kaunsa",
+     "hi_t": 38.132,
+     "en_t": 39.092
+    },
+    {
+     "en": "Whose",
+     "hi": "kiska",
+     "hi_t": 40.152,
+     "en_t": 41.102
+    }
+   ]
+  },
+  {
+   "type": "exintro",
+   "start": 42.167,
+   "end": 44.529,
+   "line": "Ab examples dekhte hain 👇"
+  },
+  {
+   "type": "example",
+   "n": 1,
+   "wh": "What",
+   "idx": 0,
+   "hi": "Aaj aapne kya khaya?",
+   "en": "What did you eat today?",
+   "start": 44.529,
+   "hi_t": 44.529,
+   "en_t": 46.429,
+   "end": 49.149,
+   "next": 48.449,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 2,
+   "wh": "Where",
+   "idx": 2,
+   "hi": "Meri book kahan hai?",
+   "en": "Where is my book?",
+   "start": 48.449,
+   "hi_t": 48.449,
+   "en_t": 50.079,
+   "end": 52.577000000000005,
+   "next": 51.877,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 3,
+   "wh": "Why",
+   "idx": 3,
+   "hi": "Tum late kyun ho?",
+   "en": "Why are you late today?",
+   "start": 51.877,
+   "hi_t": 51.877,
+   "en_t": 53.677,
+   "end": 56.672000000000004,
+   "next": 55.972,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 4,
+   "wh": "When",
+   "idx": 1,
+   "hi": "Tum kab aaoge?",
+   "en": "When will you come?",
+   "start": 55.972,
+   "hi_t": 55.972,
+   "en_t": 57.352,
+   "end": 60.056000000000004,
+   "next": 59.356,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 5,
+   "wh": "Who",
+   "idx": 4,
+   "hi": "Tumhare class teacher kaun hain?",
+   "en": "Who is your class teacher?",
+   "start": 59.356,
+   "hi_t": 59.356,
+   "en_t": 61.456,
+   "end": 64.326,
+   "next": 63.626,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 6,
+   "wh": "Which",
+   "idx": 5,
+   "hi": "Tumhari favourite movie kaun si hai?",
+   "en": "Which is your favourite movie?",
+   "start": 63.626,
+   "hi_t": 63.626,
+   "en_t": 65.546,
+   "end": 68.46300000000001,
+   "next": 67.763,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "example",
+   "n": 7,
+   "wh": "Whose",
+   "idx": 6,
+   "hi": "Ye bag kiska hai?",
+   "en": "Whose bag is it?",
+   "start": 67.763,
+   "hi_t": 67.763,
+   "en_t": 69.203,
+   "end": 71.503,
+   "next": null,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "quiz",
+   "start": 71.503,
+   "end": 77.867,
+   "hi": "Tumhara favourite colour kaun sa hai?",
+   "en": "is your favourite colour?",
+   "ask": "💬 Kaun sa WH word? Comment karo!",
+   "ask_t": 73.433,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  },
+  {
+   "type": "save",
+   "start": 77.867,
+   "end": 87.033,
+   "line": "<b>Save</b> karo!",
+   "sub": "Confusion ho toh revisit karo",
+   "save_t": 79.103,
+   "strip_t": 84.753,
+   "words": [
+    "What",
+    "When",
+    "Where",
+    "Why",
+    "Who",
+    "Which",
+    "Whose"
+   ]
+  }
+ ],
+ "shuffles": [
+  23.567,
+  42.167,
+  77.867
+ ],
+ "flashes": [
+  12.367,
+  32.133,
+  67.7
+ ],
+ "shots": [
+  {
+   "t": 0.0,
+   "kind": "mid"
+  },
+  {
+   "t": 8.552999999999999,
+   "kind": "close"
+  },
+  {
+   "t": 12.367,
+   "kind": "mid"
+  },
+  {
+   "t": 19.517,
+   "kind": "close"
+  },
+  {
+   "t": 23.567,
+   "kind": "mid"
+  },
+  {
+   "t": 46.329,
+   "kind": "close"
+  },
+  {
+   "t": 48.349,
+   "kind": "mid"
+  },
+  {
+   "t": 49.979,
+   "kind": "close"
+  },
+  {
+   "t": 51.777,
+   "kind": "mid"
+  },
+  {
+   "t": 53.577,
+   "kind": "close"
+  },
+  {
+   "t": 55.872,
+   "kind": "mid"
+  },
+  {
+   "t": 57.251999999999995,
+   "kind": "close"
+  },
+  {
+   "t": 59.256,
+   "kind": "mid"
+  },
+  {
+   "t": 61.356,
+   "kind": "close"
+  },
+  {
+   "t": 63.525999999999996,
+   "kind": "mid"
+  },
+  {
+   "t": 65.44600000000001,
+   "kind": "close"
+  },
+  {
+   "t": 67.66300000000001,
+   "kind": "mid"
+  },
+  {
+   "t": 69.10300000000001,
+   "kind": "close"
+  },
+  {
+   "t": 71.403,
+   "kind": "mid"
+  },
+  {
+   "t": 73.433,
+   "kind": "close"
+  },
+  {
+   "t": 77.867,
+   "kind": "mid"
+  },
+  {
+   "t": 84.453,
+   "kind": "close"
+  }
+ ],
+ "sfx": [
+  {
+   "name": "pop",
+   "t": 2.753,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "sparkle",
+   "t": 16.607,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "ping",
+   "t": 19.817,
+   "gain": 0.5,
+   "lu": -8.0
+  },
+  {
+   "name": "flip",
+   "t": 2.753,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 2.833,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 2.913,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 2.993,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 3.073,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 3.153,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 3.233,
+   "gain": 0.5,
+   "lu": -12.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 27.34,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 28.96,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 29.772,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 31.322,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 32.192,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 33.022,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 34.036,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 34.796,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 36.282,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 37.082,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 38.132,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 39.042,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 40.152,
+   "gain": 0.5,
+   "lu": -9.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "flip",
+   "t": 41.052,
+   "gain": 0.5,
+   "lu": -5.0,
+   "file": "assets/sfx/flip.wav"
+  },
+  {
+   "name": "pop",
+   "t": 46.399,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "pop",
+   "t": 50.049,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 48.329,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 53.647,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 51.757,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 57.322,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 55.852,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 61.426,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 59.236,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 65.516,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 63.506,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 69.173,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 67.643,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 71.703,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "ping",
+   "t": 73.433,
+   "gain": 0.5,
+   "lu": -7.0
+  },
+  {
+   "name": "sparkle",
+   "t": 79.103,
+   "gain": 0.5,
+   "lu": -5.0
+  },
+  {
+   "name": "pop",
+   "t": 84.753,
+   "gain": 0.5,
+   "lu": -8.0
+  },
+  {
+   "name": "shuffle",
+   "t": 23.317,
+   "gain": 0.5,
+   "lu": -6.0,
+   "file": "assets/sfx/shuffle.wav"
+  },
+  {
+   "name": "whoosh",
+   "t": 23.417,
+   "gain": 0.5,
+   "lu": -9.0
+  },
+  {
+   "name": "shuffle",
+   "t": 41.917,
+   "gain": 0.5,
+   "lu": -6.0,
+   "file": "assets/sfx/shuffle.wav"
+  },
+  {
+   "name": "whoosh",
+   "t": 42.017,
+   "gain": 0.5,
+   "lu": -9.0
+  },
+  {
+   "name": "shuffle",
+   "t": 77.617,
+   "gain": 0.5,
+   "lu": -6.0,
+   "file": "assets/sfx/shuffle.wav"
+  },
+  {
+   "name": "whoosh",
+   "t": 77.717,
+   "gain": 0.5,
+   "lu": -9.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 12.267,
+   "gain": 0.5,
+   "lu": -11.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 32.033,
+   "gain": 0.5,
+   "lu": -11.0
+  },
+  {
+   "name": "whoosh-short",
+   "t": 67.6,
+   "gain": 0.5,
+   "lu": -11.0
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 2.0,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 2.0,
+   "dur": 1.1
+  },
+  {
+   "name": "riser_user",
+   "file": "../../assets/shared/riser_user.mp3",
+   "t": 85.033,
+   "gain": 0.45,
+   "lu": 1.0,
+   "from": 1.1,
+   "dur": 2.0
+  }
+ ]
+}
