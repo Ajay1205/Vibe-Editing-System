@@ -114,6 +114,18 @@ User reaction: "Looks amazing". Designed from a style board first (`edits/manish
 - "Sunrise glow" transitions (golden bloom + soft rays) on section cuts; soft chime per English line, sparkle when
   the meter rises; camera glides mid (1.24x) -> close (1.40x) with her face at 60% height so captions sit above her.
 
+## Approved style: Nikita 6 "WH Family" (`edits/nikita6`, a set of words taught as a family)
+
+Board: `edits/nikita6/board`. Cocoa #4A2E22 / latte #FFF4E6 / heart red #E8475A, one pastel per word; Baloo 2 (English)
++ Quicksand (Hinglish).
+- Squircle tiles, one per word: locked "?" in the hook, then each flips "?" -> Hindi -> English as she says it.
+- Examples: mini family bar at the top (full words) lights the current word; Hindi question on the wall; English question
+  on a latte card with the word as a coloured chip; "QUESTION LEADER = FIRST WORD" below. Quiz card with a blank "?"
+  chip + "Comment karo!" for engagement; ending 🔖 "Save karo!" + recap strip.
+- "Tile shuffle" transitions (pastel columns sweep up) on section cuts, soft warm flash on other jump cuts.
+- Sound: soft marimba notes (make_sfx.py) for the tiles. The user found the synthesised paper-flick/card-flip
+  sound "very annoying"; never use it again.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
