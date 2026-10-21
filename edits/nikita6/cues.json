@@ -393,151 +393,102 @@
    "lu": -8.0
   },
   {
-   "name": "flip",
+   "name": "note0",
    "t": 2.753,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note0.wav"
   },
   {
-   "name": "flip",
+   "name": "note1",
    "t": 2.833,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note1.wav"
   },
   {
-   "name": "flip",
+   "name": "note2",
    "t": 2.913,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note2.wav"
   },
   {
-   "name": "flip",
+   "name": "note3",
    "t": 2.993,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note3.wav"
   },
   {
-   "name": "flip",
+   "name": "note4",
    "t": 3.073,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note4.wav"
   },
   {
-   "name": "flip",
+   "name": "note5",
    "t": 3.153,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note5.wav"
   },
   {
-   "name": "flip",
+   "name": "note6",
    "t": 3.233,
    "gain": 0.5,
-   "lu": -12.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -10.0,
+   "file": "assets/sfx/note6.wav"
   },
   {
-   "name": "flip",
-   "t": 27.34,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note0",
    "t": 28.96,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note0.wav"
   },
   {
-   "name": "flip",
-   "t": 29.772,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note1",
    "t": 31.322,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note1.wav"
   },
   {
-   "name": "flip",
-   "t": 32.192,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note2",
    "t": 33.022,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note2.wav"
   },
   {
-   "name": "flip",
-   "t": 34.036,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note3",
    "t": 34.796,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note3.wav"
   },
   {
-   "name": "flip",
-   "t": 36.282,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note4",
    "t": 37.082,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note4.wav"
   },
   {
-   "name": "flip",
-   "t": 38.132,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note5",
    "t": 39.042,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note5.wav"
   },
   {
-   "name": "flip",
-   "t": 40.152,
-   "gain": 0.5,
-   "lu": -9.0,
-   "file": "assets/sfx/flip.wav"
-  },
-  {
-   "name": "flip",
+   "name": "note6",
    "t": 41.052,
    "gain": 0.5,
-   "lu": -5.0,
-   "file": "assets/sfx/flip.wav"
+   "lu": -8.0,
+   "file": "assets/sfx/note6.wav"
   },
   {
    "name": "pop",
@@ -642,37 +593,16 @@
    "lu": -8.0
   },
   {
-   "name": "shuffle",
-   "t": 23.317,
-   "gain": 0.5,
-   "lu": -6.0,
-   "file": "assets/sfx/shuffle.wav"
-  },
-  {
    "name": "whoosh",
    "t": 23.417,
    "gain": 0.5,
    "lu": -9.0
   },
   {
-   "name": "shuffle",
-   "t": 41.917,
-   "gain": 0.5,
-   "lu": -6.0,
-   "file": "assets/sfx/shuffle.wav"
-  },
-  {
    "name": "whoosh",
    "t": 42.017,
    "gain": 0.5,
    "lu": -9.0
-  },
-  {
-   "name": "shuffle",
-   "t": 77.617,
-   "gain": 0.5,
-   "lu": -6.0,
-   "file": "assets/sfx/shuffle.wav"
   },
   {
    "name": "whoosh",

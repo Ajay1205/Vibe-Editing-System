@@ -79,15 +79,15 @@ def build():
     sfx += [("pop", at(h["clip"], h["tiles_t"]), -6.0), ("sparkle", at(l["clip"], l["family_t"]), -7.0),
             ("ping", at(l["clip"], l["leaders_t"]), -8.0)]
     for k in range(7):
-        sfx.append(("flip", at(h["clip"], h["tiles_t"]) + 0.08 * k, -12.0))
+        sfx.append((f"note{k}", at(h["clip"], h["tiles_t"]) + 0.08 * k, -10.0))
 
     # meanings across n63 + n64
     m_s, m_e = section_start("n63"), section_end("n64")
     tiles = [{"en": en, "hi": hi, "hi_t": at(c, ht), "en_t": at(c, et)} for en, hi, c, ht, et in MEANINGS]
     caps.append({"type": "meanings", "start": m_s, "end": m_e, "tiles": tiles})
     shots += [{"t": m_s, "kind": "mid"}]
-    for tl in tiles:
-        sfx += [("flip", tl["hi_t"], -9.0), ("flip", tl["en_t"] - 0.05, -5.0)]
+    for k, tl in enumerate(tiles):
+        sfx.append((f"note{k}", tl["en_t"] - 0.05, -8.0))
 
     # examples
     ex_s = section_start("n65")
@@ -126,7 +126,7 @@ def build():
     shuffles = [section_start("n63"), section_start("n65"), section_start("n67")]
     flashes = [section_start("n62"), section_start("n64"), section_start("n66")]
     for t in shuffles:
-        sfx += [("shuffle", t - 0.25, -6.0), ("whoosh", t - 0.15, -9.0)]
+        sfx.append(("whoosh", t - 0.15, -9.0))
     for t in flashes:
         sfx.append(("whoosh-short", t - 0.1, -11.0))
 
@@ -138,7 +138,7 @@ def build():
             spaced.pop()
         if not spaced or spaced[-1]["kind"] != sh["kind"]:
             spaced.append(sh)
-    lib = {"flip": "assets/sfx/flip.wav", "shuffle": "assets/sfx/shuffle.wav"}
+    lib = {f"note{k}": f"assets/sfx/note{k}.wav" for k in range(7)}
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "shuffles": shuffles,
            "flashes": flashes, "shots": spaced,
            "sfx": [dict({"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu},
