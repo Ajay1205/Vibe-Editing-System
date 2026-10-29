@@ -12,6 +12,7 @@ import json
 import pathlib
 import re
 import subprocess
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FOOT = ROOT / "footage" / "manisha5"
@@ -34,6 +35,15 @@ HOLD_KEEP = 0.32
 
 # Requested removals, in source seconds: (clip, start, end)
 EXCLUDE = []
+
+# Trial-reel cut (`--trial`): the same edit exactly 1.0 s shorter, taken only from pauses (user request: Instagram
+# trial reel 1 s shorter than the feed post). Extra silence removed, in source seconds, plus earlier clip ends
+# (still after the last word). Never from the reading pauses after the English lines.
+TRIAL = "--trial" in sys.argv
+TRIAL_EXCLUDE = [("m51", 2.97, 3.24), ("m54", 7.62, 7.92)]
+TRIAL_OUT = {"m51": 8.97, "m52": 8.31, "m55": 8.507}
+if TRIAL:
+    EXCLUDE = EXCLUDE + TRIAL_EXCLUDE
 
 
 def duration(clip):
@@ -98,6 +108,8 @@ def keep_ranges(clip):
         ranges.append([st - 0.4 * keep, en])
     if ranges:
         ranges[-1][1] = min(dur, ranges[-1][1] + TAIL)
+        if TRIAL and clip in TRIAL_OUT:
+            ranges[-1][1] = min(ranges[-1][1], TRIAL_OUT[clip])
     for c, a, b in EXCLUDE:  # padding must never reach back into an excluded span
         if c == clip:
             ranges = subtract(ranges, a, b)
