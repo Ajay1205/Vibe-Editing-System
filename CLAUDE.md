@@ -140,6 +140,9 @@ Built from the user's reference (a full Hindi -> English list over the speaker),
   her video passes through untouched (10-bit HEVC, HLG/BT.2020 tags), only the caption layer is converted into HLG,
   colour and alpha separately, +1.8 stops and more saturated (at reference white the captions looked grey).
   Check her pixels against the raw and caption white against the wall brightness.
+- Nikita 8 (`edits/nikita8`, positive feelings) reused this style: 8 bigger rows, her example sentence and a Follow tap
+  below the list. A translate-app card (one word at a time, `build_v1_translate.py`) and a sticker-card idea were
+  rejected: with a word list the user wants every word to STAY on screen so viewers can read and write them down.
 
 ## Working rules (from the guide)
 
