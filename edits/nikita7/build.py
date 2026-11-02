@@ -238,7 +238,9 @@ def compose():
 def hdr():
     """Final in HDR, like the original (user: she must look exactly as shot -- every SDR conversion changed her skin).
     Her video goes straight from the iPhone HLG files (only trimmed and scaled); the caption layer alone is converted
-    from SDR into HLG / BT.2020 (colour and alpha separately, so the transparency survives) and laid on top.
+    from SDR into HLG / BT.2020 (colour and alpha separately, so the transparency survives) and laid on top,
+    +1.8 stops brighter and more saturated than SDR white (user: at reference white the captions looked grey/pale --
+    white text measured below her wall; now white ~892 of 940, well above the wall).
     10-bit HEVC tagged HLG, which Instagram plays as HDR."""
     w, h = (2160, 3840) if K4 else (1080, 1920)
     inputs, parts = [], []
@@ -250,8 +252,9 @@ def hdr():
     k = len(CLIPS)
     graph = (";".join(parts) + ";" + "".join(f"[v{i}]" for i in range(k)) + f"concat=n={k}:v=1:a=0[b];"
              f"[{k}:v]format=yuva420p,split[c][a];[a]alphaextract,format=gray10le[al];"
-             "[c]format=yuv420p,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=arib-std-b67:p=bt2020:m=bt2020nc:r=tv:"
-             "npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
+             "[c]format=yuv420p,eq=saturation=1.5,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=linear:p=bt709:m=gbr:npl=203,"
+             "format=gbrpf32le,exposure=exposure=1.8,zscale=tin=linear:pin=bt709:min=gbr:t=arib-std-b67:p=bt2020:"
+             "m=bt2020nc:r=tv:npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
     out = HERE / "renders" / ("nikita7_final_4k_HDR.mp4" if K4 else "nikita7_v2_preview_1080p_HDR.mp4")
     out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-c:v", "libvpx-vp9",
