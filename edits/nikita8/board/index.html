@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face { font-family: "Wide"; src: url(fonts/unbounded.woff2) format("woff2"); font-weight: 800; }
+@font-face { font-family: "Outfit"; src: url(fonts/outfit.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-devanagari.woff2) format("woff2"); font-weight: 800; unicode-range: U+0900-097F, U+200C-200D, U+25CC; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-latin.woff2) format("woff2"); font-weight: 800; }
+:root { --ink: #2A1533; --sun: #FFD23F; --sky: #7BDFF2; --mint: #A8F0B4; --pink: #FFB4C8; --peach: #FFC48C;
+  --lilac: #C9B6FF; --aqua: #9EE6CF; --lemon: #FFF1A6;
+  --sh: 0 2px 4px rgba(42,21,51,.55), 0 6px 18px rgba(42,21,51,.45); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 1080px; height: 1920px; }
+.clip { width: 1080px; height: 1920px; }
+.p { position: absolute; inset: 0; }
+.p > * { position: absolute; }
+.bg { left: 0; top: 0; width: 1080px; height: 1920px; }
+
+/* the vibe collection on the wall above her head */
+.head { left: 0; top: 258px; width: 1080px; text-align: center; font: 800 40px/1 Wide; color: #fff;
+  -webkit-text-stroke: 9px var(--ink); paint-order: stroke fill; letter-spacing: -1px; }
+.coll { left: 120px; top: 322px; width: 840px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.chip { height: 60px; border-radius: 30px; display: flex; align-items: center; justify-content: center; gap: 6px;
+  font: 800 25px/1 Outfit; color: var(--ink); border: 4px solid #fff; box-shadow: 0 6px 14px rgba(42,21,51,.28); white-space: nowrap; }
+.chip.empty { background: rgba(255,255,255,.18); border: 4px dashed rgba(255,255,255,.9); color: #fff; font-size: 30px; box-shadow: none;
+  text-shadow: var(--sh); }
+
+/* the word card on her chest */
+.card { left: 110px; top: 1090px; width: 860px; padding: 70px 30px 46px; border-radius: 44px; border: 10px solid #fff; text-align: center;
+  transform: rotate(-3deg); box-shadow: 0 24px 50px rgba(42,21,51,.35); }
+.card .hi { position: absolute; left: 40px; top: -38px; padding: 4px 26px 0; border-radius: 22px; background: var(--ink); color: #fff;
+  font: 800 46px/1.35 Mukta; transform: rotate(-2deg); }
+.card .en { font: 800 96px/1 Wide; color: var(--ink); letter-spacing: -3px; white-space: nowrap; }
+.card .emo { position: absolute; right: -26px; top: -60px; font-size: 120px; line-height: 1; transform: rotate(12deg);
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.25)); }
+.card .n { position: absolute; right: 34px; bottom: 16px; font: 800 26px/1 Outfit; color: rgba(42,21,51,.55); letter-spacing: 2px; }
+.card .ex { font: 800 64px/1.15 Wide; color: var(--ink); letter-spacing: -2px; white-space: normal; }
+.card .ex b { padding: 0 12px; border-radius: 14px; background: var(--ink); color: var(--lemon); }
+.miss { left: 0; top: 1500px; width: 1080px; text-align: center; font: 800 40px/1 Outfit; color: #fff;
+  -webkit-text-stroke: 8px var(--ink); paint-order: stroke fill; }
+.follow { left: 50%; top: 1460px; transform: translateX(-50%); padding: 20px 60px; border-radius: 50px; background: var(--ink); color: #fff;
+  font: 800 46px/1 Outfit; border: 6px solid #fff; box-shadow: 0 14px 30px rgba(42,21,51,.4); }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3" data-width="1080" data-height="1920" data-fps="30">
+
+<!-- A: hook - 8 empty slots, mystery card -->
+<div class="clip" data-start="0" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_0.5.png" />
+  <div class="head">8 POSITIVE FEELINGS ✨</div>
+  <div class="coll">
+    <div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div>
+    <div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div>
+  </div>
+  <div class="card" style="background:var(--sun)"><div class="hi">उत्साहित होना</div><div class="en">EXCITED</div><div class="emo">🤩</div><div class="n">1/8</div></div>
+  <div class="miss">ek bhi miss mat karna 👀</div>
+</div></div>
+
+<!-- B: mid - 3 collected, card 4 on her chest -->
+<div class="clip" data-start="1" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_12.5.png" />
+  <div class="head">8 POSITIVE FEELINGS ✨</div>
+  <div class="coll">
+    <div class="chip" style="background:var(--sun)">🤩 Excited</div><div class="chip" style="background:var(--sky)">💡 Inspire</div>
+    <div class="chip" style="background:var(--mint)">💪 Encourage</div><div class="chip empty">?</div>
+    <div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div><div class="chip empty">?</div>
+  </div>
+  <div class="card" style="background:var(--pink)"><div class="hi">तारीफ करना</div><div class="en">APPRECIATE</div><div class="emo">👏</div><div class="n">4/8</div></div>
+</div></div>
+
+<!-- C: end - all collected, her example sentence, follow -->
+<div class="clip" data-start="2" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_27.png" />
+  <div class="head">8 POSITIVE FEELINGS ✨</div>
+  <div class="coll">
+    <div class="chip" style="background:var(--sun)">🤩 Excited</div><div class="chip" style="background:var(--sky)">💡 Inspire</div>
+    <div class="chip" style="background:var(--mint)">💪 Encourage</div><div class="chip" style="background:var(--pink)">👏 Appreciate</div>
+    <div class="chip" style="background:var(--peach)">🙏 Grateful</div><div class="chip" style="background:var(--lilac)">🦁 Proud</div>
+    <div class="chip" style="background:var(--aqua)">🤝 Trust</div><div class="chip" style="background:var(--lemon)">🌈 Hope</div>
+  </div>
+  <div class="card" style="background:var(--lemon)"><div class="hi">जैसे कि…</div><div class="ex">I <b>hope</b> you learnt something!</div><div class="emo">🙂</div></div>
+</div></div>
+
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["main"] = tl;
+</script>
+</body></html>
