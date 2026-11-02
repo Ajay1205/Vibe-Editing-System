@@ -1,5 +1,5 @@
-"""Nikita 8 -- "Positive feelings in English" in the TRANSLATE-APP style (user picked it for reach; options board:
-edits/nikita8/board/options.html, option A).
+"""Nikita 8 -- "Positive feelings in English". v2: the approved Nikita 7 list style (v1 translate-app card is kept as
+build_v1_translate.py; the user wanted all 8 words to stay on screen to read and write down).
 
 Steps: python3 -I build.py sfx | mix | overlay [--4k] | hdr [--4k]
   (overlay: then render overlay/ with HyperFrames to build/overlay_<res>.webm)
@@ -11,6 +11,7 @@ converted into HLG, brighter and more saturated so it pops. Everything sits belo
 """
 
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -82,11 +83,8 @@ def sfx():
         bed[i:j] += s[:j - i]
 
     for k, w in enumerate(WORDS):
-        for j in range(3):  # three soft key taps while the Hindi types in
-            place(tick(), w[3] + 0.05 + 0.09 * j, -34)
         place(marimba(NOTES[k]), w[4] - 0.02, -24)
     place(marimba(1568.0) + 0.6 * marimba(2093.0), EXAMPLE["en_t"], -25)
-    place(marimba(1046.5), RECAP_T + 0.1, -28)
     place(tick() * 2, TAP_T, -24)
     riser = decode(HERE.parents[1] / "assets" / "shared" / "riser_user.mp3")
     tail = riser[-2 * SR:].copy()
@@ -113,53 +111,70 @@ def mix():
 
 
 # --------------------------------------------------------------------------------------------- captions
+# v2 (user: the translate card didn't stay on screen -- with 8 words people want to read and write them down):
+# the approved Nikita 7 "Feelings in English" list, every row staying on screen; her example + Follow tap below it.
+N7_BOARD = HERE.parent / "nikita7" / "board" / "index.html"
+EXTRA_CSS = """
+.list { top: 372px; }
+.row { height: 112px; }
+.hi > span { font-size: 50px; }
+.en { font-size: 80px; }
+.save { top: 1300px; }
+.exl { left: 0; top: 1296px; width: 1080px; text-align: center; }
+.exl .eh { display: inline-block; padding: 2px 18px 0; border-radius: 16px; background: #fff; color: var(--plum); font: 800 40px/1.3 Mukta;
+  box-shadow: 0 6px 16px rgba(42,21,51,.28); }
+.exl .ee { display: block; margin-top: 10px; font: 900 64px/1.05 Serif; color: #fff; letter-spacing: -1px;
+  -webkit-text-stroke: 11px var(--plum); paint-order: stroke fill; text-shadow: 0 6px 16px rgba(42,21,51,.35); }
+.exl .ee b { color: #FFE14D; }
+.fol { left: 0; top: 1490px; width: 1080px; text-align: center; }
+.fol span { display: inline-block; padding: 14px 34px; border-radius: 40px; background: var(--coral); color: #fff; font: 800 40px/1 Outfit;
+  box-shadow: 0 8px 20px rgba(255,90,95,.4); }
+.hand { left: 640px; top: 1510px; font-size: 90px; }
+"""
+
+
 def overlay():
-    recap = "".join(f'<div class="rr"><span class="rh">{hi}</span><span class="ra">→</span><span class="re">{en} {emo}</span></div>'
-                    for hi, en, emo, _, _ in WORDS)
-    els = (f'<div id="main" class="clip" data-start="0" data-duration="{DUR:.3f}" data-track-index="1">'
-           '<div class="tag" id="tag">Positive feelings <b>in English</b> ✨</div>'
-           '<div class="fol" id="fol"><span id="fb">Follow</span> for daily English ✨</div><div class="hand" id="hand">👆</div>'
-           '<div class="cnt" id="cnt"><span id="cn">1</span> / 8</div>'
-           '<div class="tr" id="tr"><div class="bar"><span>Hindi</span><span class="sw">⇄</span><span class="on">English</span></div>'
-           '<div class="src"><span class="st" id="st"></span><span class="ico">🔊</span></div>'
-           '<div class="dst"><span class="dw" id="dw"></span><span class="dots" id="dots">Translating<i>.</i><i>.</i><i>.</i></span>'
-           '<span class="ico" id="spk">🔊</span></div></div>'
-           f'<div class="rec" id="rec"><div class="rt">📌 Save for later</div>{recap}</div></div>')
-    js = ['tl.set("#fol, #hand, #rec, #dots", {opacity: 0}, 0);',
-          'tl.fromTo("#tag", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 0);',
-          'tl.fromTo("#tr", {opacity: 0, y: 60, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}, 0);',
-          'tl.fromTo("#cnt", {opacity: 0}, {opacity: 1, duration: 0.3}, 0.2);']
-
-    def word_in(hi, t, en_t, en_html, k):
-        # type the Hindi (clip reveal), wait with dots, land the English
-        out = [f'tl.set("#st", {{textContent: "{hi}"}}, {t:.3f});',
-               f'tl.set("#dw", {{innerHTML: "", opacity: 0}}, {t:.3f});',
-               f'tl.fromTo("#st", {{clipPath: "inset(0 100% 0 0)"}}, {{clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}}, {t:.3f});',
-               f'tl.to("#dots", {{opacity: 1, duration: 0.15}}, {t + 0.45:.3f});',
-               f'tl.to("#dots", {{opacity: 0, duration: 0.08}}, {en_t - 0.08:.3f});',
-               f'tl.set("#dw", {{innerHTML: \'{en_html}\'}}, {en_t - 0.04:.3f});',
-               f'tl.fromTo("#dw", {{opacity: 0, scale: 1.3}}, {{opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}}, {en_t - 0.04:.3f});',
-               f'tl.fromTo("#spk", {{scale: 1.5}}, {{scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}}, {en_t:.3f});']
-        if k is not None:
-            out += [f'tl.set("#cn", {{textContent: "{k + 1}"}}, {t:.3f});',
-                    f'tl.fromTo("#cnt", {{scale: 1.3}}, {{scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}}, {t:.3f});']
-        return out
-
+    board = N7_BOARD.read_text(encoding="utf-8")
+    css = re.search(r"<style>(.*?)</style>", board, re.S).group(1) + EXTRA_CSS
+    rows = "".join(f'<div class="row" id="r{k}"><span class="hi"><span>{hi}</span></span><span class="ar">→</span>'
+                   f'<span class="en hid">{en}</span><span class="emo">{emo}</span></div>'
+                   for k, (hi, en, emo, _, _) in enumerate(WORDS))
+    els = (f'<div id="main" class="clip" data-start="0" data-duration="{DUR:.3f}" data-track-index="1"><div class="p">'
+           '<div class="ttl">Positive <i>Feelings</i> ✨</div><div class="cnt"><b id="cn">00</b> / 08</div>'
+           f'<div class="list">{rows}</div><div class="save" id="gs">Guess before I say it! 👀</div>'
+           '<div class="exl" id="ex"><span class="eh">जैसे कि…</span>'
+           '<span class="ee">I <b>hope</b> you learnt something! 🙂</span></div>'
+           '<div class="fol" id="fol"><span id="fb">👉 Follow for daily English</span></div><div class="hand" id="hand">👆</div>'
+           '</div></div>')
+    js = ['tl.set("#main .emo, #ex, #ex .ee, #fol, #hand", {opacity: 0}, 0);',
+          'tl.fromTo("#main .ttl, #main .cnt", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 0);',
+          'tl.fromTo("#main .row", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.3, stagger: 0.03, ease: "power3.out"}, 0.05);',
+          'tl.fromTo("#gs", {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)"}, 0.3);',
+          f'tl.to("#gs", {{opacity: 0, duration: 0.25}}, {WORDS[0][4] - 0.1:.3f});']
     for k, (hi, en, emo, ht, et) in enumerate(WORDS):
-        js += word_in(hi, max(ht, 0.05), et, f'{en} <em>{emo}</em>', k)
-    js += [f'tl.to("#cnt", {{opacity: 0, duration: 0.2}}, {EXAMPLE["hi_t"]:.3f});',
-           f'tl.set("#tr", {{attr: {{class: "tr ex"}}}}, {EXAMPLE["hi_t"]:.3f});']
-    js += word_in(EXAMPLE["hi"], EXAMPLE["hi_t"], EXAMPLE["en_t"], EXAMPLE["en"], None)
-    js += [f'tl.to("#tr", {{opacity: 0, y: 40, duration: 0.3, ease: "power2.in"}}, {RECAP_T - 0.3:.3f});',
-           f'tl.fromTo("#rec", {{opacity: 0, y: 60, scale: 0.92}}, {{opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}}, {RECAP_T:.3f});',
-           f'tl.fromTo("#rec .rr", {{opacity: 0, x: -30}}, {{opacity: 1, x: 0, duration: 0.25, stagger: 0.07, immediateRender: false}}, {RECAP_T + 0.2:.3f});',
-           f'tl.to("#tag", {{opacity: 0, duration: 0.2}}, {FOLLOW_T - 0.2:.3f});',
-           f'tl.fromTo("#fol", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}}, {FOLLOW_T:.3f});',
-           f'tl.fromTo("#hand", {{opacity: 0, x: 120, y: 120}}, {{opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out"}}, {TAP_T - 0.5:.3f});',
-           f'tl.to("#fb", {{scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}}, {TAP_T:.3f});',
-           f'tl.set("#fb", {{textContent: "Following ✓"}}, {TAP_T + 0.1:.3f});',
+        h, e, r = max(ht, 0.05), et, f"#r{k}"
+        if k:
+            js.append(f'tl.set("#r{k - 1}", {{attr: {{class: "row"}}}}, {h:.3f});')
+        js.append(f'tl.set("{r}", {{attr: {{class: "row on"}}}}, {h:.3f});'
+                  f'tl.fromTo("{r} .hi > span", {{scale: 1.25}}, {{scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}}, {h:.3f});'
+                  f'tl.to("{r} .en", {{filter: "blur(0px)", opacity: 1, duration: 0.18}}, {e - 0.04:.3f});'
+                  f'tl.fromTo("{r} .en", {{scale: 1.35}}, {{scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}}, {e - 0.04:.3f});'
+                  f'tl.fromTo("{r} .emo", {{opacity: 0, scale: 0.2, rotation: -30}}, {{opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(3)", immediateRender: false}}, {e + 0.05:.3f});'
+                  f'tl.set("#cn", {{textContent: "0{k + 1}"}}, {e:.3f});'
+                  f'tl.fromTo("#main .cnt", {{scale: 1.25}}, {{scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}}, {e:.3f});')
+        nxt = WORDS[k + 1][3] if k + 1 < len(WORDS) else EXAMPLE["hi_t"]
+        js.append(f'tl.to("{r} .emo", {{opacity: 0, scale: 0.5, duration: 0.15}}, {nxt - 0.15:.3f});')
+    x = EXAMPLE["hi_t"]
+    js += [f'tl.set("#r{len(WORDS) - 1}", {{attr: {{class: "row"}}}}, {x:.3f});',
+           f'tl.fromTo("#ex", {{opacity: 0, y: 30}}, {{opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)", immediateRender: false}}, {x:.3f});',
+           f'tl.fromTo("#ex .ee", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.6)", immediateRender: false}}, {EXAMPLE["en_t"]:.3f});',
+           f'tl.fromTo("#ex .ee b", {{scale: 1.4}}, {{scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}}, {EXAMPLE["en_t"] + 0.3:.3f});',
+           f'tl.fromTo("#fol", {{opacity: 0, scale: 0.6}}, {{opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)", immediateRender: false}}, {FOLLOW_T:.3f});',
+           f'tl.fromTo("#hand", {{opacity: 0, x: 120, y: 120}}, {{opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false}}, {TAP_T - 0.5:.3f});',
+           f'tl.to("#fb", {{scale: 0.9, duration: 0.08, yoyo: true, repeat: 1}}, {TAP_T:.3f});',
+           f'tl.set("#fb", {{textContent: "Following ✓", backgroundColor: "#2A1533"}}, {TAP_T + 0.1:.3f});',
            f'tl.to("#hand", {{opacity: 0, duration: 0.3}}, {TAP_T + 0.5:.3f});']
-    page = PAGE.replace("%DUR%", f"{DUR:.3f}").replace("%ELS%", els).replace("%JS%", "\n  ".join(js))
+    page = PAGE.replace("%CSS%", css).replace("%DUR%", f"{DUR:.3f}").replace("%ELS%", els).replace("%JS%", "\n  ".join(js))
     if K4:
         page = (page.replace("width=1080, height=1920", "width=2160, height=3840")
                 .replace("html, body { width: 1080px; height: 1920px;", "html, body { width: 2160px; height: 3840px;")
@@ -176,43 +191,11 @@ PAGE = r"""<!doctype html>
 <html lang="en"><head><meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="gsap.min.js"></script>
-<style>
-@font-face { font-family: "Inter"; src: url(fonts/inter.woff2) format("woff2"); font-weight: 100 900; }
-@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-devanagari.woff2) format("woff2"); font-weight: 800; unicode-range: U+0900-097F, U+200C-200D, U+25CC; }
-@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-latin.woff2) format("woff2"); font-weight: 800; }
-:root { --blue: #1A73E8; --ink: #202124; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+<style>%CSS%
+html, body { background: transparent !important; }
 #root { position: relative; width: 1080px; height: 1920px; }
 .clip { position: absolute; inset: 0; width: 1080px; height: 1920px; }
-.clip > div { position: absolute; }
-.tag, .fol { left: 50%; top: 262px; transform: translateX(-50%); padding: 14px 30px; border-radius: 44px; background: #fff; color: var(--ink);
-  font: 800 38px/1 Inter; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
-.tag b { color: var(--blue); }
-.fol #fb { display: inline-block; padding: 8px 20px; margin-right: 8px; border-radius: 26px; background: var(--blue); color: #fff; }
-.hand { left: 330px; top: 300px; font-size: 90px; }
-.cnt { right: 100px; top: 1012px; padding: 8px 20px; border-radius: 22px; background: var(--blue); color: #fff; font: 800 30px/1 Inter; }
-.tr { left: 100px; top: 1062px; width: 880px; border-radius: 34px; background: #fff; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
-.tr .bar { display: flex; align-items: center; justify-content: space-between; padding: 22px 34px; border-bottom: 2px solid #eceff1;
-  font: 700 30px/1 Inter; color: #5f6368; }
-.tr .bar .sw { color: var(--blue); font-size: 36px; }
-.tr .bar .on { color: var(--blue); }
-.tr .src { padding: 24px 34px 18px; min-height: 120px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.tr .st { font: 800 60px/1.3 Mukta; color: var(--ink); white-space: nowrap; }
-.tr .dst { position: relative; padding: 24px 34px 28px; min-height: 146px; background: #E8F0FE; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.tr .dw { display: inline-block; font: 800 96px/1 Inter; color: var(--blue); letter-spacing: -3px; white-space: nowrap; }
-.tr .dw em { font-style: normal; font-size: 74px; letter-spacing: 0; }
-.tr .dots { position: absolute; left: 34px; top: 54px; font: 700 38px/1 Inter; color: #5f6368; }
-.ico { font-size: 44px; opacity: .75; flex: none; }
-.tr.ex .st { font-size: 44px; white-space: normal; line-height: 1.3; }
-.tr.ex .dw { font-size: 58px; letter-spacing: -1.5px; white-space: normal; line-height: 1.12; }
-.tr.ex .dw b { padding: 0 12px; border-radius: 12px; background: var(--blue); color: #fff; }
-.rec { left: 100px; top: 1000px; width: 880px; padding: 26px 36px 22px; border-radius: 34px; background: #fff; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
-.rec .rt { font: 800 36px/1 Inter; color: var(--ink); margin-bottom: 12px; }
-.rec .rr { display: flex; align-items: center; height: 62px; border-top: 2px solid #eceff1; }
-.rec .rh { width: 330px; font: 800 36px/1.3 Mukta; color: #5f6368; white-space: nowrap; }
-.rec .ra { width: 50px; color: var(--blue); font: 800 32px/1 Inter; }
-.rec .re { font: 800 42px/1 Inter; color: var(--blue); letter-spacing: -1px; white-space: nowrap; }
+.row .en { display: inline-block; }
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="%DUR%" data-width="1080" data-height="1920" data-fps="30">
@@ -239,7 +222,7 @@ def hdr():
              "format=gbrpf32le,exposure=exposure=1.8,zscale=tin=linear:pin=bt709:min=gbr:t=arib-std-b67:p=bt2020:"
              "m=bt2020nc:r=tv:npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];"
              "[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
-    out = HERE / "renders" / ("nikita8_final_4k_HDR.mp4" if K4 else "nikita8_v1_preview_1080p_HDR.mp4")
+    out = HERE / "renders" / ("nikita8_final_4k_HDR.mp4" if K4 else "nikita8_v2_preview_1080p_HDR.mp4")
     out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", "-ss", f"{CLIP_IN:.3f}", "-t", f"{DUR + 0.2:.3f}", "-i", str(RAW),
                     "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{RES}.webm"), "-i", str(BUILD / "mix.wav"),

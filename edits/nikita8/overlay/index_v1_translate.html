@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face { font-family: "Inter"; src: url(fonts/inter.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-devanagari.woff2) format("woff2"); font-weight: 800; unicode-range: U+0900-097F, U+200C-200D, U+25CC; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-latin.woff2) format("woff2"); font-weight: 800; }
+:root { --blue: #1A73E8; --ink: #202124; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; }
+.clip { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+.clip > div { position: absolute; }
+.tag, .fol { left: 50%; top: 262px; transform: translateX(-50%); padding: 14px 30px; border-radius: 44px; background: #fff; color: var(--ink);
+  font: 800 38px/1 Inter; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+.tag b { color: var(--blue); }
+.fol #fb { display: inline-block; padding: 8px 20px; margin-right: 8px; border-radius: 26px; background: var(--blue); color: #fff; }
+.hand { left: 330px; top: 300px; font-size: 90px; }
+.cnt { right: 100px; top: 1012px; padding: 8px 20px; border-radius: 22px; background: var(--blue); color: #fff; font: 800 30px/1 Inter; }
+.tr { left: 100px; top: 1062px; width: 880px; border-radius: 34px; background: #fff; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+.tr .bar { display: flex; align-items: center; justify-content: space-between; padding: 22px 34px; border-bottom: 2px solid #eceff1;
+  font: 700 30px/1 Inter; color: #5f6368; }
+.tr .bar .sw { color: var(--blue); font-size: 36px; }
+.tr .bar .on { color: var(--blue); }
+.tr .src { padding: 24px 34px 18px; min-height: 120px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.tr .st { font: 800 60px/1.3 Mukta; color: var(--ink); white-space: nowrap; }
+.tr .dst { position: relative; padding: 24px 34px 28px; min-height: 146px; background: #E8F0FE; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.tr .dw { display: inline-block; font: 800 96px/1 Inter; color: var(--blue); letter-spacing: -3px; white-space: nowrap; }
+.tr .dw em { font-style: normal; font-size: 74px; letter-spacing: 0; }
+.tr .dots { position: absolute; left: 34px; top: 54px; font: 700 38px/1 Inter; color: #5f6368; }
+.ico { font-size: 44px; opacity: .75; flex: none; }
+.tr.ex .st { font-size: 44px; white-space: normal; line-height: 1.3; }
+.tr.ex .dw { font-size: 58px; letter-spacing: -1.5px; white-space: normal; line-height: 1.12; }
+.tr.ex .dw b { padding: 0 12px; border-radius: 12px; background: var(--blue); color: #fff; }
+.rec { left: 100px; top: 1000px; width: 880px; padding: 26px 36px 22px; border-radius: 34px; background: #fff; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+.rec .rt { font: 800 36px/1 Inter; color: var(--ink); margin-bottom: 12px; }
+.rec .rr { display: flex; align-items: center; height: 62px; border-top: 2px solid #eceff1; }
+.rec .rh { width: 330px; font: 800 36px/1.3 Mukta; color: #5f6368; white-space: nowrap; }
+.rec .ra { width: 50px; color: var(--blue); font: 800 32px/1 Inter; }
+.rec .re { font: 800 42px/1 Inter; color: var(--blue); letter-spacing: -1px; white-space: nowrap; }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="35.000" data-width="1080" data-height="1920" data-fps="30">
+<div id="main" class="clip" data-start="0" data-duration="35.000" data-track-index="1"><div class="tag" id="tag">Positive feelings <b>in English</b> ✨</div><div class="fol" id="fol"><span id="fb">Follow</span> for daily English ✨</div><div class="hand" id="hand">👆</div><div class="cnt" id="cnt"><span id="cn">1</span> / 8</div><div class="tr" id="tr"><div class="bar"><span>Hindi</span><span class="sw">⇄</span><span class="on">English</span></div><div class="src"><span class="st" id="st"></span><span class="ico">🔊</span></div><div class="dst"><span class="dw" id="dw"></span><span class="dots" id="dots">Translating<i>.</i><i>.</i><i>.</i></span><span class="ico" id="spk">🔊</span></div></div><div class="rec" id="rec"><div class="rt">📌 Save for later</div><div class="rr"><span class="rh">उत्साहित होना</span><span class="ra">→</span><span class="re">Excited 🤩</span></div><div class="rr"><span class="rh">प्रेरित करना</span><span class="ra">→</span><span class="re">Inspire 💡</span></div><div class="rr"><span class="rh">प्रोत्साहित करना</span><span class="ra">→</span><span class="re">Encourage 💪</span></div><div class="rr"><span class="rh">तारीफ करना</span><span class="ra">→</span><span class="re">Appreciate 👏</span></div><div class="rr"><span class="rh">आभारी होना</span><span class="ra">→</span><span class="re">Grateful 🙏</span></div><div class="rr"><span class="rh">गर्व महसूस करना</span><span class="ra">→</span><span class="re">Proud 🦁</span></div><div class="rr"><span class="rh">विश्वास करना</span><span class="ra">→</span><span class="re">Trust 🤝</span></div><div class="rr"><span class="rh">उम्मीद रखना</span><span class="ra">→</span><span class="re">Hope 🌈</span></div></div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.set("#fol, #hand, #rec, #dots", {opacity: 0}, 0);
+  tl.fromTo("#tag", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 0);
+  tl.fromTo("#tr", {opacity: 0, y: 60, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(1.8)"}, 0);
+  tl.fromTo("#cnt", {opacity: 0}, {opacity: 1, duration: 0.3}, 0.2);
+  tl.set("#st", {textContent: "उत्साहित होना"}, 0.050);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 0.050);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 0.050);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 0.500);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 2.400);
+  tl.set("#dw", {innerHTML: 'Excited <em>🤩</em>'}, 2.440);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 2.440);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 2.480);
+  tl.set("#cn", {textContent: "1"}, 0.050);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 0.050);
+  tl.set("#st", {textContent: "प्रेरित करना"}, 3.100);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 3.100);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 3.100);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 3.550);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 5.160);
+  tl.set("#dw", {innerHTML: 'Inspire <em>💡</em>'}, 5.200);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 5.200);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 5.240);
+  tl.set("#cn", {textContent: "2"}, 3.100);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 3.100);
+  tl.set("#st", {textContent: "प्रोत्साहित करना"}, 6.450);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 6.450);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 6.450);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 6.900);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 9.420);
+  tl.set("#dw", {innerHTML: 'Encourage <em>💪</em>'}, 9.460);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 9.460);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 9.500);
+  tl.set("#cn", {textContent: "3"}, 6.450);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 6.450);
+  tl.set("#st", {textContent: "तारीफ करना"}, 10.050);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 10.050);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 10.050);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 10.500);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 11.660);
+  tl.set("#dw", {innerHTML: 'Appreciate <em>👏</em>'}, 11.700);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 11.700);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 11.740);
+  tl.set("#cn", {textContent: "4"}, 10.050);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 10.050);
+  tl.set("#st", {textContent: "आभारी होना"}, 13.790);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 13.790);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 13.790);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 14.240);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 14.880);
+  tl.set("#dw", {innerHTML: 'Grateful <em>🙏</em>'}, 14.920);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 14.920);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 14.960);
+  tl.set("#cn", {textContent: "5"}, 13.790);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 13.790);
+  tl.set("#st", {textContent: "गर्व महसूस करना"}, 17.000);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 17.000);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 17.000);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 17.450);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 18.540);
+  tl.set("#dw", {innerHTML: 'Proud <em>🦁</em>'}, 18.580);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 18.580);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 18.620);
+  tl.set("#cn", {textContent: "6"}, 17.000);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 17.000);
+  tl.set("#st", {textContent: "विश्वास करना"}, 19.750);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 19.750);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 19.750);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 20.200);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 22.880);
+  tl.set("#dw", {innerHTML: 'Trust <em>🤝</em>'}, 22.920);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 22.920);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 22.960);
+  tl.set("#cn", {textContent: "7"}, 19.750);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 19.750);
+  tl.set("#st", {textContent: "उम्मीद रखना"}, 23.550);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 23.550);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 23.550);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 24.000);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 25.160);
+  tl.set("#dw", {innerHTML: 'Hope <em>🌈</em>'}, 25.200);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 25.200);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 25.240);
+  tl.set("#cn", {textContent: "8"}, 23.550);
+  tl.fromTo("#cnt", {scale: 1.3}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 23.550);
+  tl.to("#cnt", {opacity: 0, duration: 0.2}, 26.200);
+  tl.set("#tr", {attr: {class: "tr ex"}}, 26.200);
+  tl.set("#st", {textContent: "मैं उम्मीद रखती हूँ कि आपने कुछ सीखा होगा"}, 26.200);
+  tl.set("#dw", {innerHTML: "", opacity: 0}, 26.200);
+  tl.fromTo("#st", {clipPath: "inset(0 100% 0 0)"}, {clipPath: "inset(0 0% 0 0)", duration: 0.45, ease: "none"}, 26.200);
+  tl.to("#dots", {opacity: 1, duration: 0.15}, 26.650);
+  tl.to("#dots", {opacity: 0, duration: 0.08}, 28.320);
+  tl.set("#dw", {innerHTML: 'I <b>hope</b> you learnt something! 🙂'}, 28.360);
+  tl.fromTo("#dw", {opacity: 0, scale: 1.3}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 28.360);
+  tl.fromTo("#spk", {scale: 1.5}, {scale: 1, duration: 0.4, ease: "back.out(3)", immediateRender: false}, 28.400);
+  tl.to("#tr", {opacity: 0, y: 40, duration: 0.3, ease: "power2.in"}, 30.400);
+  tl.fromTo("#rec", {opacity: 0, y: 60, scale: 0.92}, {opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 30.700);
+  tl.fromTo("#rec .rr", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.25, stagger: 0.07, immediateRender: false}, 30.900);
+  tl.to("#tag", {opacity: 0, duration: 0.2}, 32.400);
+  tl.fromTo("#fol", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 32.600);
+  tl.fromTo("#hand", {opacity: 0, x: 120, y: 120}, {opacity: 1, x: 0, y: 0, duration: 0.4, ease: "power2.out"}, 33.450);
+  tl.to("#fb", {scale: 0.88, duration: 0.08, yoyo: true, repeat: 1}, 33.950);
+  tl.set("#fb", {textContent: "Following ✓"}, 34.050);
+  tl.to("#hand", {opacity: 0, duration: 0.3}, 34.450);
+  window.__timelines["main"] = tl;
+</script>
+</body></html>
