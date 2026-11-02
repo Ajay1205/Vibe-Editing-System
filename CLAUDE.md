@@ -126,6 +126,21 @@ Board: `edits/nikita6/board`. Cocoa #4A2E22 / latte #FFF4E6 / heart red #E8475A,
 - Sound: soft marimba notes (make_sfx.py) for the tiles. The user found the synthesised paper-flick/card-flip
   sound "very annoying"; never use it again.
 
+## Approved style: Nikita 7 "Feelings in English" (`edits/nikita7`, Hindi -> English word list)
+
+Built from the user's reference (a full Hindi -> English list over the speaker), made more attention-grabbing.
+- Curiosity hook: every Hindi word on screen from frame 1, every English answer blurred ("Guess before I say it! 👀");
+  each answer pops out of the blur (yellow) as she says it, its emoji at the row end, counter 00 -> 11. Last row is her
+  comment question (ईर्ष्या -> "? ? ?" + "Comment karo 👇"), answer left out on purpose for comments.
+- Rows side by side like the reference: white Mukta Hindi pill -> big white Fraunces Black English with a thick plum
+  outline; full width, may run over her (user: learning first, readability over face rule for this format).
+- Video untouched: no grade, no zoom; soft marimba note per reveal (rising), no riser at the start, soft riser tail at
+  the end.
+- iPhone HDR (HLG) footage: every SDR tone-map made her look glossy/white. Deliver in HDR instead (`build.py hdr`):
+  her video passes through untouched (10-bit HEVC, HLG/BT.2020 tags), only the caption layer is converted into HLG,
+  colour and alpha separately, +1.8 stops and more saturated (at reference white the captions looked grey).
+  Check her pixels against the raw and caption white against the wall brightness.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
