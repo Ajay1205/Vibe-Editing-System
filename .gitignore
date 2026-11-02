@@ -23,3 +23,4 @@ edits/*/board/*.jpg
 edits/*/board/snaps/
 edits/*/board/gsap.min.js
 edits/*/board/.hyperframes/
+edits/*/board/bg_*.png
