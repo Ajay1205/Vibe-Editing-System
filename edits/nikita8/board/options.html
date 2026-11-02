@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="gsap.min.js"></script>
+<style>
+@font-face { font-family: "Inter"; src: url(fonts/inter.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Caveat"; src: url(fonts/caveat.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Outfit"; src: url(fonts/outfit.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-devanagari.woff2) format("woff2"); font-weight: 800; unicode-range: U+0900-097F, U+200C-200D, U+25CC; }
+@font-face { font-family: "Mukta"; src: url(fonts/mukta-800-latin.woff2) format("woff2"); font-weight: 800; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 1080px; height: 1920px; }
+.clip { width: 1080px; height: 1920px; }
+.p { position: absolute; inset: 0; }
+.p > * { position: absolute; }
+.bg { left: 0; top: 0; width: 1080px; height: 1920px; }
+.tag { left: 50%; top: 262px; transform: translateX(-50%); padding: 12px 28px; border-radius: 40px; background: #fff; color: #1f1f1f;
+  font: 800 36px/1 Inter; white-space: nowrap; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+.tag b { color: #1A73E8; }
+
+/* A: translate app */
+.tr { left: 100px; top: 1060px; width: 880px; border-radius: 34px; background: #fff; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.3); }
+.tr .bar { display: flex; align-items: center; justify-content: space-between; padding: 22px 34px; border-bottom: 2px solid #eceff1;
+  font: 700 30px/1 Inter; color: #5f6368; }
+.tr .bar .sw { color: #1A73E8; font-size: 36px; }
+.tr .bar .on { color: #1A73E8; }
+.tr .src { padding: 26px 34px 20px; font: 800 58px/1.3 Mukta; color: #202124; display: flex; justify-content: space-between; align-items: center; }
+.tr .dst { padding: 26px 34px 30px; background: #E8F0FE; display: flex; justify-content: space-between; align-items: center; }
+.tr .dst .w { font: 800 92px/1 Inter; color: #1A73E8; letter-spacing: -3px; }
+.ico { font-size: 44px; opacity: .75; }
+.cnt { right: 100px; top: 1010px; padding: 8px 18px; border-radius: 20px; background: #1A73E8; color: #fff; font: 800 28px/1 Inter; }
+
+/* B: chat thread */
+.bub { font: 800 54px/1.25 Mukta; padding: 18px 30px; border-radius: 38px; max-width: 760px; box-shadow: 0 10px 26px rgba(0,0,0,.18); }
+.bub.l { left: 110px; background: #fff; color: #1c1c1e; border-bottom-left-radius: 10px; }
+.bub.r { right: 110px; background: #0A84FF; color: #fff; font: 800 84px/1.1 Inter; letter-spacing: -2px; border-bottom-right-radius: 10px; }
+.old { opacity: .55; transform: scale(.82); }
+.typing { right: 110px; font: 800 26px/1 Inter; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+
+/* C: study notes */
+.paper { left: 90px; top: 1060px; width: 900px; padding: 34px 50px 40px 120px; background: #FFFDF5; transform: rotate(-2deg);
+  background-image: repeating-linear-gradient(#FFFDF5 0 62px, #BFD7F2 62px 64px); box-shadow: 0 22px 50px rgba(0,0,0,.3); border-radius: 6px; }
+.paper::before { content: ""; position: absolute; left: 92px; top: 0; bottom: 0; width: 3px; background: #F28B82; }
+.paper .num { position: absolute; left: 22px; top: 40px; font: 700 64px/1 Caveat; color: #D93025; }
+.paper .hi { font: 800 50px/1.25 Mukta; color: #6b6b6b; }
+.paper .en { display: inline-block; margin-top: 4px; font: 700 150px/0.95 Caveat; color: #1c1c1e; position: relative; }
+.paper .en::before { content: ""; position: absolute; left: -12px; right: -16px; bottom: 16px; height: 52px; background: #FFE45C; z-index: -1;
+  transform: rotate(-1.5deg); border-radius: 8px; }
+.paper .en span { position: relative; z-index: 1; }
+.tape { left: 440px; top: 1030px; width: 200px; height: 56px; background: rgba(255,226,150,.85); transform: rotate(4deg); }
+.ttl { left: 0; top: 262px; width: 1080px; text-align: center; font: 700 96px/1 Caveat; color: #1c1c1e;
+  text-shadow: 0 0 18px rgba(255,253,245,.9), 0 2px 2px rgba(255,253,245,.9); }
+.ttl i { font-style: normal; background: #FFE45C; padding: 0 14px; border-radius: 8px; }
+.lbl { left: 30px; top: 1720px; padding: 10px 22px; border-radius: 30px; background: rgba(0,0,0,.65); color: #fff; font: 800 34px/1 Inter; }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3" data-width="1080" data-height="1920" data-fps="30">
+
+<div class="clip" data-start="0" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_12.5.png" />
+  <div class="tag">Positive feelings <b>in English</b> ✨</div>
+  <div class="cnt">4 / 8</div>
+  <div class="tr">
+    <div class="bar"><span>Hindi</span><span class="sw">⇄</span><span class="on">English</span></div>
+    <div class="src"><span>तारीफ करना</span><span class="ico">🔊</span></div>
+    <div class="dst"><span class="w">Appreciate</span><span class="ico">🔊</span></div>
+  </div>
+  <div class="lbl">A · Translate app</div>
+</div></div>
+
+<div class="clip" data-start="1" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_12.5.png" />
+  <div class="tag">Positive feelings <b>in English</b> ✨</div>
+  <div class="bub l old" style="top:930px;transform-origin:0 100%">प्रोत्साहित करना</div>
+  <div class="bub r old" style="top:1020px;transform-origin:100% 100%">Encourage 💪</div>
+  <div class="bub l" style="top:1170px">तारीफ करना?</div>
+  <div class="bub r" style="top:1300px">Appreciate 👏</div>
+  <div class="typing" style="top:1420px">Delivered ✓✓</div>
+  <div class="lbl">B · Chat thread</div>
+</div></div>
+
+<div class="clip" data-start="2" data-duration="1" data-track-index="1"><div class="p">
+  <img class="bg" src="bg_12.5.png" />
+  <div class="ttl">Positive <i>feelings</i> ✨</div>
+  <div class="paper"><div class="num">04.</div><div class="hi">तारीफ करना →</div><div class="en"><span>Appreciate</span></div></div>
+  <div class="tape"></div>
+  <div class="lbl">C · Study notes</div>
+</div></div>
+
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  window.__timelines["main"] = tl;
+</script>
+</body></html>
