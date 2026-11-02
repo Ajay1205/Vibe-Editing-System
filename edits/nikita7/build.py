@@ -235,5 +235,34 @@ def compose():
     print(out)
 
 
+def hdr():
+    """Final in HDR, like the original (user: she must look exactly as shot -- every SDR conversion changed her skin).
+    Her video goes straight from the iPhone HLG files (only trimmed and scaled); the caption layer alone is converted
+    from SDR into HLG / BT.2020 (colour and alpha separately, so the transparency survives) and laid on top.
+    10-bit HEVC tagged HLG, which Instagram plays as HDR."""
+    w, h = (2160, 3840) if K4 else (1080, 1920)
+    inputs, parts = [], []
+    for i, (c, a, b) in enumerate(CLIPS):
+        n = round((b - a) * FPS)
+        inputs += ["-ss", f"{a:.3f}", "-t", f"{n / FPS + 0.2:.3f}", "-i", str(RAW / f"nikita_{c}.mov")]
+        parts.append(f"[{i}:v]fps={FPS},scale={w}:{h}:flags=lanczos,format=yuv420p10le,trim=end_frame={n},"
+                     f"setpts=PTS-STARTPTS[v{i}]")
+    k = len(CLIPS)
+    graph = (";".join(parts) + ";" + "".join(f"[v{i}]" for i in range(k)) + f"concat=n={k}:v=1:a=0[b];"
+             f"[{k}:v]format=yuva420p,split[c][a];[a]alphaextract,format=gray10le[al];"
+             "[c]format=yuv420p,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=arib-std-b67:p=bt2020:m=bt2020nc:r=tv:"
+             "npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
+    out = HERE / "renders" / ("nikita7_final_4k_HDR.mp4" if K4 else "nikita7_v2_preview_1080p_HDR.mp4")
+    out.parent.mkdir(exist_ok=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-c:v", "libvpx-vp9",
+                    "-i", str(BUILD / f"overlay_{RES}.webm"), "-i", str(BUILD / "mix.wav"), "-filter_complex", graph,
+                    "-map", "[v]", "-map", f"{k + 1}:a", "-c:v", "libx265", "-preset", "medium" if K4 else "fast",
+                    "-crf", "16" if K4 else "20", "-tag:v", "hvc1",
+                    "-x265-params", "colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited:log-level=error",
+                    "-color_primaries", "bt2020", "-color_trc", "arib-std-b67", "-colorspace", "bt2020nc",
+                    "-c:a", "aac", "-b:a", "320k", "-movflags", "+faststart", "-t", f"{DUR:.3f}", str(out)], check=True)
+    print(out)
+
+
 if __name__ == "__main__":
-    {"base": base, "sfx": sfx, "mix": mix, "overlay": overlay, "compose": compose}[sys.argv[1]]()
+    {"base": base, "sfx": sfx, "mix": mix, "overlay": overlay, "compose": compose, "hdr": hdr}[sys.argv[1]]()
