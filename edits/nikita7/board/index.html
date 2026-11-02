@@ -17,100 +17,95 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; 
 .p > * { position: absolute; }
 .bg { left: 0; top: 0; width: 1080px; height: 1920px; }
 
-/* title + counter on the wall above her head (right) */
-.ttl { left: 540px; top: 266px; width: 420px; text-align: right; font: 900 70px/0.95 Serif; letter-spacing: -1px; color: var(--plum); text-shadow: var(--sh); }
-.ttl i { font-style: normal; color: var(--coral); }
-.cnt { right: 120px; top: 420px; padding: 8px 18px; border-radius: 30px; background: var(--plum); color: var(--cream);
-  font: 800 26px/1 Outfit; letter-spacing: 2px; }
-.cnt b { color: #FFB4B6; }
-
-/* the list (left column, on the wall, never over her face) */
-.list { left: 96px; top: 300px; width: 520px; }
-.row { position: relative; height: 100px; display: flex; align-items: center; gap: 14px; white-space: nowrap; }
-.hi { display: inline-block; padding: 2px 14px 0; border-radius: 12px; background: #fff; color: var(--plum);
-  font: 800 30px/1.35 Mukta; flex: none; box-shadow: 0 4px 12px rgba(42,21,51,.18); }
-.en { display: block; font: 900 52px/1 Serif; letter-spacing: -1px; color: var(--plum); text-shadow: var(--sh); white-space: nowrap; }
-.en.hid { filter: blur(11px); opacity: .45; }
-.row.done .hi { background: rgba(255,255,255,.8); }
-.row.on .en { color: #fff; text-shadow: none; }
-.row.on .en span { padding: 0 12px; border-radius: 10px; background: var(--coral); box-shadow: 0 8px 20px rgba(255,90,95,.35); }
-.row.on .hi { background: var(--plum); color: #fff; }
-.row.on::before { content: ""; position: absolute; left: -24px; top: 44px; width: 12px; height: 12px; border-radius: 50%; background: var(--coral); }
-.ar { font: 800 30px/1 Outfit; color: var(--coral); flex: none; }
-.emo { left: 690px; top: 405px; font-size: 92px; line-height: 1; filter: drop-shadow(0 8px 14px rgba(0,0,0,.2)); transform: rotate(10deg); }
-.q { color: var(--coral) !important; letter-spacing: 8px; }
-.cmt { left: 96px; top: 1508px; padding: 10px 22px; border-radius: 30px; background: var(--coral); color: #fff; font: 800 30px/1 Outfit;
-  box-shadow: 0 8px 20px rgba(255,90,95,.35); }
-.save { left: 540px; top: 474px; width: 420px; text-align: right; font: 800 38px/1.15 Outfit; color: var(--plum); text-shadow: var(--sh); }
+/* v3 (user: video untouched, words must be readable, may sit over her): big full-width rows like the reference */
+.ttl { left: 0; top: 262px; width: 1080px; text-align: center; font: 900 60px/1 Serif; color: #fff; letter-spacing: -1px;
+  -webkit-text-stroke: 10px var(--plum); paint-order: stroke fill; text-shadow: 0 6px 16px rgba(42,21,51,.35); }
+.ttl i { font-style: normal; color: #FFD3D4; }
+.cnt { right: 120px; top: 346px; padding: 6px 16px; border-radius: 26px; background: var(--coral); color: #fff; font: 800 26px/1 Outfit; letter-spacing: 2px; }
+.cnt b { color: #fff; }
+.list { left: 0; top: 400px; width: 1080px; }
+.row { position: relative; height: 98px; display: flex; align-items: center; white-space: nowrap; }
+.hi { width: 400px; flex: none; text-align: right; padding-right: 26px; }
+.hi > span { display: inline-block; padding: 2px 18px 0; border-radius: 16px; background: #fff; color: var(--plum); font: 800 44px/1.3 Mukta;
+  box-shadow: 0 6px 16px rgba(42,21,51,.28); }
+.ar { width: 50px; flex: none; font: 900 44px/1 Outfit; color: #fff; -webkit-text-stroke: 8px var(--plum); paint-order: stroke fill; }
+.en { padding-left: 12px; font: 900 70px/1 Serif; color: #fff; letter-spacing: -1px;
+  -webkit-text-stroke: 12px var(--plum); paint-order: stroke fill; text-shadow: 0 6px 16px rgba(42,21,51,.35); }
+.en.hid { filter: blur(12px); opacity: .55; }
+.row.on .hi > span { background: var(--coral); color: #fff; }
+.row.on .en { color: #FFE14D; }
+.emo { font-size: 60px; margin-left: 14px; line-height: 1; }
+.q { color: var(--coral) !important; letter-spacing: 10px; }
+.cmt { left: 0; top: 1588px; width: 1080px; text-align: center; }
+.cmt span { padding: 12px 26px; border-radius: 34px; background: var(--coral); color: #fff; font: 800 36px/1 Outfit; box-shadow: 0 8px 20px rgba(255,90,95,.4); }
+.save { left: 0; top: 1588px; width: 1080px; text-align: center; font: 800 36px/1 Outfit; color: #fff; -webkit-text-stroke: 7px var(--plum); paint-order: stroke fill; }
 </style></head>
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="3" data-width="1080" data-height="1920" data-fps="30">
 
 <!-- A: hook - every Hindi word visible, every English answer hidden -->
 <div class="clip" data-start="0" data-duration="1" data-track-index="1"><div class="p">
-  <img class="bg" src="bg_2.jpg" />
-  <div class="ttl">Feelings<br/><i>in English</i></div>
+  <img class="bg" src="bg_2.png" />
+  <div class="ttl">Feelings <i>in English</i></div>
   <div class="cnt"><b>00</b> / 11</div>
-  <div class="save">Guess before<br/>I say it! 👀</div>
+  <div class="save">Guess before I say it! 👀</div>
   <div class="list">
-    <div class="row on"><span class="hi">चिढ़ाना</span><span class="ar">→</span><span class="en hid">Annoy</span></div>
-    <div class="row"><span class="hi">शर्मिंदा</span><span class="ar">→</span><span class="en hid">Embarrass</span></div>
-    <div class="row"><span class="hi">पछताना</span><span class="ar">→</span><span class="en hid">Regret</span></div>
-    <div class="row"><span class="hi">झिझकना</span><span class="ar">→</span><span class="en hid">Hesitate</span></div>
-    <div class="row"><span class="hi">घबरा जाना</span><span class="ar">→</span><span class="en hid">Panic</span></div>
-    <div class="row"><span class="hi">परेशान होना</span><span class="ar">→</span><span class="en hid">Frustrate</span></div>
-    <div class="row"><span class="hi">निराश</span><span class="ar">→</span><span class="en hid">Disappoint</span></div>
-    <div class="row"><span class="hi">बेचैन</span><span class="ar">→</span><span class="en hid">Restless</span></div>
-    <div class="row"><span class="hi">मनाना</span><span class="ar">→</span><span class="en hid">Convince</span></div>
-    <div class="row"><span class="hi">राहत देना</span><span class="ar">→</span><span class="en hid">Relieve</span></div>
-    <div class="row"><span class="hi">हकदार</span><span class="ar">→</span><span class="en hid">Deserve</span></div>
-    <div class="row"><span class="hi">ईर्ष्या</span><span class="ar">→</span><span class="en hid">Envy</span></div>
+    <div class="row on"><span class="hi"><span>चिढ़ाना</span></span><span class="ar">→</span><span class="en hid">Annoy</span></div>
+    <div class="row"><span class="hi"><span>शर्मिंदा</span></span><span class="ar">→</span><span class="en hid">Embarrass</span></div>
+    <div class="row"><span class="hi"><span>पछताना</span></span><span class="ar">→</span><span class="en hid">Regret</span></div>
+    <div class="row"><span class="hi"><span>झिझकना</span></span><span class="ar">→</span><span class="en hid">Hesitate</span></div>
+    <div class="row"><span class="hi"><span>घबरा जाना</span></span><span class="ar">→</span><span class="en hid">Panic</span></div>
+    <div class="row"><span class="hi"><span>परेशान होना</span></span><span class="ar">→</span><span class="en hid">Frustrate</span></div>
+    <div class="row"><span class="hi"><span>निराश</span></span><span class="ar">→</span><span class="en hid">Disappoint</span></div>
+    <div class="row"><span class="hi"><span>बेचैन</span></span><span class="ar">→</span><span class="en hid">Restless</span></div>
+    <div class="row"><span class="hi"><span>मनाना</span></span><span class="ar">→</span><span class="en hid">Convince</span></div>
+    <div class="row"><span class="hi"><span>राहत देना</span></span><span class="ar">→</span><span class="en hid">Relieve</span></div>
+    <div class="row"><span class="hi"><span>हकदार</span></span><span class="ar">→</span><span class="en hid">Deserve</span></div>
+    <div class="row"><span class="hi"><span>ईर्ष्या</span></span><span class="ar">→</span><span class="en hid">Envy</span></div>
   </div>
 </div></div>
 
 <!-- B: mid-way - answers revealed so far, the current one on a coral marker, its emoji beside her head -->
 <div class="clip" data-start="1" data-duration="1" data-track-index="1"><div class="p">
-  <img class="bg" src="bg_12.jpg" />
-  <div class="ttl">Feelings<br/><i>in English</i></div>
+  <img class="bg" src="bg_12.png" />
+  <div class="ttl">Feelings <i>in English</i></div>
   <div class="cnt"><b>06</b> / 11</div>
-  <div class="emo">😩</div>
   <div class="list">
-    <div class="row done"><span class="hi">चिढ़ाना</span><span class="ar">→</span><span class="en">Annoy</span></div>
-    <div class="row done"><span class="hi">शर्मिंदा</span><span class="ar">→</span><span class="en">Embarrass</span></div>
-    <div class="row done"><span class="hi">पछताना</span><span class="ar">→</span><span class="en">Regret</span></div>
-    <div class="row done"><span class="hi">झिझकना</span><span class="ar">→</span><span class="en">Hesitate</span></div>
-    <div class="row done"><span class="hi">घबरा जाना</span><span class="ar">→</span><span class="en">Panic</span></div>
-    <div class="row on"><span class="hi">परेशान होना</span><span class="ar">→</span><span class="en"><span>Frustrate</span></span></div>
-    <div class="row"><span class="hi">निराश</span><span class="ar">→</span><span class="en hid">Disappoint</span></div>
-    <div class="row"><span class="hi">बेचैन</span><span class="ar">→</span><span class="en hid">Restless</span></div>
-    <div class="row"><span class="hi">मनाना</span><span class="ar">→</span><span class="en hid">Convince</span></div>
-    <div class="row"><span class="hi">राहत देना</span><span class="ar">→</span><span class="en hid">Relieve</span></div>
-    <div class="row"><span class="hi">हकदार</span><span class="ar">→</span><span class="en hid">Deserve</span></div>
-    <div class="row"><span class="hi">ईर्ष्या</span><span class="ar">→</span><span class="en hid">Envy</span></div>
+    <div class="row done"><span class="hi"><span>चिढ़ाना</span></span><span class="ar">→</span><span class="en">Annoy</span></div>
+    <div class="row done"><span class="hi"><span>शर्मिंदा</span></span><span class="ar">→</span><span class="en">Embarrass</span></div>
+    <div class="row done"><span class="hi"><span>पछताना</span></span><span class="ar">→</span><span class="en">Regret</span></div>
+    <div class="row done"><span class="hi"><span>झिझकना</span></span><span class="ar">→</span><span class="en">Hesitate</span></div>
+    <div class="row done"><span class="hi"><span>घबरा जाना</span></span><span class="ar">→</span><span class="en">Panic</span></div>
+    <div class="row on"><span class="hi"><span>परेशान होना</span></span><span class="ar">→</span><span class="en">Frustrate</span><span class="emo">😩</span></div>
+    <div class="row"><span class="hi"><span>निराश</span></span><span class="ar">→</span><span class="en hid">Disappoint</span></div>
+    <div class="row"><span class="hi"><span>बेचैन</span></span><span class="ar">→</span><span class="en hid">Restless</span></div>
+    <div class="row"><span class="hi"><span>मनाना</span></span><span class="ar">→</span><span class="en hid">Convince</span></div>
+    <div class="row"><span class="hi"><span>राहत देना</span></span><span class="ar">→</span><span class="en hid">Relieve</span></div>
+    <div class="row"><span class="hi"><span>हकदार</span></span><span class="ar">→</span><span class="en hid">Deserve</span></div>
+    <div class="row"><span class="hi"><span>ईर्ष्या</span></span><span class="ar">→</span><span class="en hid">Envy</span></div>
   </div>
 </div></div>
 
 <!-- C: the comment question -->
 <div class="clip" data-start="2" data-duration="1" data-track-index="1"><div class="p">
-  <img class="bg" src="bg_q.jpg" />
-  <div class="ttl">Feelings<br/><i>in English</i></div>
+  <img class="bg" src="bg_q.png" />
+  <div class="ttl">Feelings <i>in English</i></div>
   <div class="cnt"><b>11</b> / 11 ✓</div>
-  <div class="emo">🤔</div>
   <div class="list">
-    <div class="row done"><span class="hi">चिढ़ाना</span><span class="ar">→</span><span class="en">Annoy</span></div>
-    <div class="row done"><span class="hi">शर्मिंदा</span><span class="ar">→</span><span class="en">Embarrass</span></div>
-    <div class="row done"><span class="hi">पछताना</span><span class="ar">→</span><span class="en">Regret</span></div>
-    <div class="row done"><span class="hi">झिझकना</span><span class="ar">→</span><span class="en">Hesitate</span></div>
-    <div class="row done"><span class="hi">घबरा जाना</span><span class="ar">→</span><span class="en">Panic</span></div>
-    <div class="row done"><span class="hi">परेशान होना</span><span class="ar">→</span><span class="en">Frustrate</span></div>
-    <div class="row done"><span class="hi">निराश</span><span class="ar">→</span><span class="en">Disappoint</span></div>
-    <div class="row done"><span class="hi">बेचैन</span><span class="ar">→</span><span class="en">Restless</span></div>
-    <div class="row done"><span class="hi">मनाना</span><span class="ar">→</span><span class="en">Convince</span></div>
-    <div class="row done"><span class="hi">राहत देना</span><span class="ar">→</span><span class="en">Relieve</span></div>
-    <div class="row done"><span class="hi">हकदार</span><span class="ar">→</span><span class="en">Deserve</span></div>
-    <div class="row on"><span class="hi">ईर्ष्या</span><span class="ar">→</span><span class="en q">? ? ?</span></div>
+    <div class="row done"><span class="hi"><span>चिढ़ाना</span></span><span class="ar">→</span><span class="en">Annoy</span></div>
+    <div class="row done"><span class="hi"><span>शर्मिंदा</span></span><span class="ar">→</span><span class="en">Embarrass</span></div>
+    <div class="row done"><span class="hi"><span>पछताना</span></span><span class="ar">→</span><span class="en">Regret</span></div>
+    <div class="row done"><span class="hi"><span>झिझकना</span></span><span class="ar">→</span><span class="en">Hesitate</span></div>
+    <div class="row done"><span class="hi"><span>घबरा जाना</span></span><span class="ar">→</span><span class="en">Panic</span></div>
+    <div class="row done"><span class="hi"><span>परेशान होना</span></span><span class="ar">→</span><span class="en">Frustrate</span></div>
+    <div class="row done"><span class="hi"><span>निराश</span></span><span class="ar">→</span><span class="en">Disappoint</span></div>
+    <div class="row done"><span class="hi"><span>बेचैन</span></span><span class="ar">→</span><span class="en">Restless</span></div>
+    <div class="row done"><span class="hi"><span>मनाना</span></span><span class="ar">→</span><span class="en">Convince</span></div>
+    <div class="row done"><span class="hi"><span>राहत देना</span></span><span class="ar">→</span><span class="en">Relieve</span></div>
+    <div class="row done"><span class="hi"><span>हकदार</span></span><span class="ar">→</span><span class="en">Deserve</span></div>
+    <div class="row on"><span class="hi"><span>ईर्ष्या</span></span><span class="ar">→</span><span class="en q">? ? ?</span><span class="emo">🤔</span></div>
   </div>
-  <div class="cmt">💬 Comment karo 👇</div>
+  <div class="cmt"><span>💬 Comment karo 👇</span></div>
 </div></div>
 
 </div>
