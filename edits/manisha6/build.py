@@ -109,7 +109,7 @@ def sfx():
 
 
 VOICE = ("highpass=f=80,afftdn=nr=8:nf=-45,acompressor=threshold=-20dB:ratio=3:attack=5:release=90:makeup=2,"
-         "loudnorm=I=-13.1:TP=-2:LRA=7")
+         "loudnorm=I=-13.1:TP=-2:LRA=7,volume=1.4dB")
 
 
 def mix():
