@@ -26,6 +26,16 @@ TM = ("zscale=t=linear:npl=400,format=gbrpf32le,zscale=p=bt709,tonemap=reinhard:
 
 # (clip, in, out) source seconds: the list take, then the comment question
 CLIPS = [("7.1", 0.0, 22.30), ("7.2", 0.0, 3.90)]
+# Trial-reel cut (`--trial`): the same reel exactly 1.0 s shorter for Instagram Trial Reels, taken from the middle of
+# five of her longest breaths in the list (each pause keeps at least ~0.2 s); no word is touched.
+TRIAL = "--trial" in sys.argv
+TRIAL_CUTS = [(2.77, 2.97), (3.91, 4.077), (6.93, 7.163), (11.11, 11.31), (13.15, 13.35)]  # in clip 7.1
+if TRIAL:
+    segs, a = [], 0.0
+    for x, y in TRIAL_CUTS:
+        segs.append(("7.1", a, x))
+        a = y
+    CLIPS = segs + [("7.1", a, 22.30), ("7.2", 0.0, 3.90)]
 # (Hindi, English, emoji, Hindi onset, English onset) in clip 7.1 -- onsets measured on the audio energy
 WORDS = [
     ("चिढ़ाना", "Annoy", "😤", 0.05, 2.18),
@@ -44,10 +54,10 @@ QUIZ = {"hi": "ईर्ष्या", "t": 0.20, "comment_t": 2.70}  # in clip 
 
 
 def starts():
-    out, t = {}, 0.0
+    out, t = [], 0.0
     for c, a, b in CLIPS:
         n = round((b - a) * FPS)
-        out[c] = (t, a, n)
+        out.append((c, t, a, n))
         t += n / FPS
     return out, t
 
@@ -56,8 +66,15 @@ START, DUR = starts()
 
 
 def at(clip, src):
-    t0, a, n = START[clip]
-    return round(t0 + min(max(src - a, 0), n / FPS), 3)
+    """Source time -> output time; a time inside a removed pause snaps to the next kept frame."""
+    segs = [s for s in START if s[0] == clip]
+    for c, t0, a, n in segs:
+        if src < a:
+            return round(t0, 3)
+        if src < a + n / FPS:
+            return round(t0 + src - a, 3)
+    c, t0, a, n = segs[-1]
+    return round(t0 + n / FPS, 3)
 
 
 # --------------------------------------------------------------------------------------------- picture
@@ -255,7 +272,8 @@ def hdr():
              "[c]format=yuv420p,eq=saturation=1.5,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=linear:p=bt709:m=gbr:npl=203,"
              "format=gbrpf32le,exposure=exposure=1.8,zscale=tin=linear:pin=bt709:min=gbr:t=arib-std-b67:p=bt2020:"
              "m=bt2020nc:r=tv:npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
-    out = HERE / "renders" / ("nikita7_final_4k_HDR.mp4" if K4 else "nikita7_v2_preview_1080p_HDR.mp4")
+    out = HERE / "renders" / (("nikita7_trial_4k_HDR.mp4" if TRIAL else "nikita7_final_4k_HDR.mp4") if K4
+                               else "nikita7_v2_preview_1080p_HDR.mp4")
     out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-c:v", "libvpx-vp9",
                     "-i", str(BUILD / f"overlay_{RES}.webm"), "-i", str(BUILD / "mix.wav"), "-filter_complex", graph,
