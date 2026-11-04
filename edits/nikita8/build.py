@@ -228,7 +228,7 @@ def hdr():
                     "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{RES}.webm"), "-i", str(BUILD / "mix.wav"),
                     "-filter_complex", graph, "-map", "[v]", "-map", "2:a", "-c:v", "libx265",
                     "-preset", "medium" if K4 else "fast", "-crf", "16" if K4 else "20", "-tag:v", "hvc1",
-                    "-x265-params", "colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited:log-level=error",
+                    "-x265-params", "colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited:open-gop=0:keyint=60:min-keyint=30:log-level=error",
                     "-color_primaries", "bt2020", "-color_trc", "arib-std-b67", "-colorspace", "bt2020nc",
                     "-c:a", "aac", "-b:a", "320k", "-movflags", "+faststart", "-t", f"{DUR:.3f}", str(out)], check=True)
     print(out)
