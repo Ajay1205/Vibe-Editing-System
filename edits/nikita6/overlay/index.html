@@ -19,7 +19,8 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .title { left: 80px; top: 280px; width: 920px; text-align: center; font: 800 92px/1 Baloo; color: var(--latte); text-shadow: var(--sh); }
 .title b { display: inline-block; color: var(--heart); background: var(--latte); padding: 0 18px; border-radius: 22px; text-shadow: none; }
 .title.small { top: 285px; font-size: 70px; }
-.sub { left: 80px; top: 390px; width: 920px; text-align: center; font: 700 42px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+.sub { left: 80px; top: 390px; width: 920px; text-align: center; font: 700 39px/1.2 Quick; color: #fff; text-shadow: var(--sh); white-space: nowrap; }
+.sub b { color: var(--heart); font-weight: 700; padding: 0 10px; border-radius: 12px; background: #fff; text-shadow: none; }
 
 .grid { left: 110px; top: 470px; width: 860px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
 .grid.mg { top: 400px; }
@@ -74,7 +75,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 <div id="fambar" class="clip" data-start="44.529" data-duration="33.338" data-track-index="6"><div class="layer"><div class="fam" id="fam"><i id="fb0" style="background:var(--what)">What</i><i id="fb1" style="background:var(--when)">When</i><i id="fb2" style="background:var(--where)">Where</i><i id="fb3" style="background:var(--why)">Why</i><i id="fb4" style="background:var(--who)">Who</i><i id="fb5" style="background:var(--which)">Which</i><i id="fb6" style="background:var(--whose)">Whose</i></div></div></div>
 <div id="c0" class="clip" data-start="0.000" data-duration="23.567" data-track-index="1"><div class="layer">
               <div class="title" id="c0-t">The <b>WH</b> Family</div>
-              <div class="sub" id="c0-s"><span class="w">7</span> <span class="w">words</span> <span class="w">·</span> <span class="w">100s</span> <span class="w">of</span> <span class="w">English</span> <span class="w">questions</span></div>
+              <div class="sub" id="c0-s"><span class="w">Almost</span> <span class="w"><b>HAR</b></span> <span class="w">sentence</span> <span class="w">inhi</span> <span class="w">se</span> <span class="w">shuru</span> <span class="w">hota</span> <span class="w">hai!</span></div>
               <div class="grid" id="c0-g"><div class="t" style="background:var(--what)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--when)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--where)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--why)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--who)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--which)"><div class="en">?</div><div class="crown">👑</div></div><div class="t" style="background:var(--whose)"><div class="en">?</div><div class="crown">👑</div></div></div>
               <div class="heart hA">❤️</div><div class="heart hB">❤️</div><div class="heart hC">💛</div>
               <div class="pill" id="c0-r">📌 English grammar ka rule</div>
@@ -156,7 +157,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
               tl.fromTo("#c0-t b", {rotation: -8, scale: 0.6}, {rotation: 0, scale: 1, duration: 0.5, ease: "back.out(3)"}, 0.3);
               tl.fromTo("#c0-g .t", {opacity: 0, scale: 0.3, y: 40}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(2.2)", stagger: 0.08}, 2.753);
               tl.to("#c0-g .en", {rotation: 10, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut", stagger: 0.1}, 3.4530000000000003);
-              tl.fromTo("#c0-s .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 5.503);
+              tl.fromTo("#c0-s .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 0.0);
               tl.fromTo("#c0-r", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.42, ease: "back.out(2.2)"}, 8.853);
               tl.to("#c0-r", {opacity: 0, y: -20, duration: 0.25}, 16.006999999999998);
               tl.fromTo("#c0 .heart", {opacity: 0, scale: 0.2, y: 40}, {opacity: 1, scale: 1, y: 0, duration: 0.45, stagger: 0.12, ease: "back.out(2.5)"}, 16.607);
