@@ -63,6 +63,9 @@ Final masters go, untouched (no re-encode, no size reduction), into the speaker'
 - Manisha: folder link to come from the user.
 The Drive connector only uploads content passed inline (fine for small files, not for 4K videos of hundreds of MB), so
 send the master in chat and the user drags it into the folder. Never shrink a master to make it fit an upload path.
+Chat file limit is 400 MiB. A bigger master (Nikita 6: 426 MiB at CRF 15; slower x264 presets don't shrink it) is split
+losslessly at a keyframe (`ffmpeg -i m.mp4 -c copy -map 0 -f segment -segment_times <t> -reset_timestamps 1 m_part%d.mp4`),
+checked by rejoining (concat demuxer) and comparing the video MD5 with the master, then sent as parts.
 
 ## Approved style: Nikita 3 "version 2" (`edits/nikita3`)
 
