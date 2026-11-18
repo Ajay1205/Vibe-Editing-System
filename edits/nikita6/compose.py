@@ -25,13 +25,16 @@ def main(version, preview=False, crf=15, start=0.0):
     RENDERS.mkdir(exist_ok=True)
     out = RENDERS / f"nikita6_{version}_{'preview_1080p' if preview else '4k'}{'' if preview or crf == 15 else f'_crf{crf}'}{f'_from{start:g}s' if start else ''}.mp4"
     ss = ["-ss", f"{start:.3f}"] if start else []
+    # the alpha WebM can't be input-seeked (VP9 alpha only decodes from a keyframe -> blank captions at the start),
+    # so it is decoded from 0 and trimmed frame-accurately in the filter graph
+    otrim = f"trim=start={start:.3f},setpts=PTS-STARTPTS," if start else ""
     scale = "scale=1080:1920:flags=lanczos," if preview else ""  # base preview is 1080p already; harmless
     subprocess.run([
         "ffmpeg", "-v", "error", "-stats", "-y",
         *ss, "-i", str(BUILD / f"base_{version}{'_preview' if preview else ''}.mp4"),
-        *ss, "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{version}_{1080 if preview else 2160}.webm"),
+        "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{version}_{1080 if preview else 2160}.webm"),
         *ss, "-i", str(BUILD / "mix.wav"),
-        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
+        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]{otrim}format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
         *(["-af", "afade=t=in:d=0.03"] if start else []),
         "-map", "[v]", "-map", "2:a",
         "-c:v", "libx264", *(["-preset", "veryfast", "-crf", "20"] if preview else
