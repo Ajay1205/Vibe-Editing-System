@@ -23,6 +23,21 @@ transcribe -> pull frames -> beat sheet (wait for OK) -> rough cut -> effects ->
   `npx hyperframes browser ensure` and `npx hyperframes models install parakeet`.
 - Don't commit raw footage or renders.
 
+## Fresh-session rebuild (verified 2026-11-18, Nikita 6 rebuilt end to end)
+
+- Raw takes live in Google Drive (`Insta English Account/Raw Videos/<Name> Raw Videos/Video N...`). The environment
+  allows drive.google.com and drive.usercontent.google.com, so download link-shared files with
+  `curl -L "https://drive.usercontent.google.com/download?id=<FILE_ID>&export=download&confirm=t"` (the Drive
+  connector's download returns base64 and is unusable for video). Put them in `footage/<edit>/raw/` under the names
+  the edit's scripts expect (e.g. `footage/nikita6/raw/nikita_6.1.mov`).
+- mix.py reads SFX from `~/.claude/skills/media-use/audio/assets/sfx`. After `npm ci`, link it:
+  `ln -sfn "$PWD/node_modules/hyperframes/dist/skills/media-use" ~/.claude/skills/media-use`.
+- `edits/*/overlay/fonts/` is git-ignored: copy the edit's fonts from `board/fonts/` into `overlay/fonts/` before
+  rendering the overlay.
+- Overlay render: `npx hyperframes render overlay --format webm -o build/overlay_v1_<1080|2160>.webm` (from the edit
+  folder, with the proxy env vars above), then `mix.py` and `compose.py v1 [--preview]`.
+- skia-python (used by some toolkit scripts) needs `apt-get install -y libegl1 libgl1 libfontconfig1`.
+
 ## GitHub is for the English-speaking account only (user rule)
 
 This repo and its GitHub remote hold ONLY the English-speaking account's work (Nikita, Manisha). One-off client jobs
