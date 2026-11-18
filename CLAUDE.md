@@ -66,6 +66,9 @@ send the master in chat and the user drags it into the folder. Never shrink a ma
 Chat file limit is 400 MiB. A bigger master (Nikita 6: 426 MiB at CRF 15; slower x264 presets don't shrink it) is split
 losslessly at a keyframe (`ffmpeg -i m.mp4 -c copy -map 0 -f segment -segment_times <t> -reset_timestamps 1 m_part%d.mp4`),
 checked by rejoining (concat demuxer) and comparing the video MD5 with the master, then sent as parts.
+BUT a Reel must be ONE file (user, 18 Nov: "it will go on Instagram, I cannot upload it in 2 parts"). For a reel master
+over the limit, encode the final composite at CRF 16 instead (`compose.py v1 --crf 16`; Nikita 6: 361 MiB, -15 %),
+built from the same 4K base + caption layer, never from the delivered file. Parts are only for non-reel deliveries.
 
 ## Approved style: Nikita 3 "version 2" (`edits/nikita3`)
 
