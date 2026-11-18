@@ -11,8 +11,10 @@ HERE = pathlib.Path(__file__).resolve().parent
 BUILD = HERE / "build"
 RENDERS = HERE / "renders"
 
-# gentle look: a touch more contrast and colour, soft vignette to pull the eye to her face
-GRADE = "eq=contrast=1.05:saturation=1.08:gamma=0.98,vignette=angle=PI/5:mode=forward"
+# brighter, cleaner look (user note 18 Nov: the footage looked too dark): lift shadows and mids with a soft curve,
+# highlights kept, a touch less orange; no vignette
+GRADE = ("curves=master='0/0 0.2/0.30 0.5/0.66 0.8/0.89 1/1',eq=contrast=1.03:saturation=1.04,"
+         "colorbalance=rm=-0.03:bm=0.03")
 
 
 def main(version, preview=False):

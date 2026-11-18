@@ -38,8 +38,8 @@ def section_end(clip):
 
 # ------------------------------------------------------------------------------------------------ CONTENT
 FAMILY = ["What", "When", "Where", "Why", "Who", "Which", "Whose"]
-HOOK = {"clip": "n61", "tiles_t": 4.20, "sub_t": 6.95, "rule_t": 10.30,
-        "title": "The <b>WH</b> Family", "sub": "7 words · 100s of English questions", "rule": "📌 English grammar ka rule"}
+HOOK = {"clip": "n61", "tiles_t": 4.20, "sub_t": 0.30, "rule_t": 10.30,
+        "title": "The <b>WH</b> Family", "sub": "Almost *HAR* sentence inhi se shuru hota hai!", "rule": "📌 English grammar ka rule"}
 LEADERS = {"clip": "n62", "family_t": 4.24, "leaders_t": 7.45, "start_t": 9.70,
            "label": "👑 Question Leaders", "label2": "Question inhi se start hota hai"}
 # meanings: (English, Hindi, clip, Hindi time, English time) -- times from the energy onsets

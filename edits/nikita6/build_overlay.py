@@ -31,7 +31,14 @@ POP = '{opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.42, ease: "b
 
 
 def words(text):
-    return " ".join(f'<span class="w">{html.escape(w)}</span>' for w in text.split())
+    """One blur-in span per word; *word* marks a highlighted word."""
+    out = []
+    for w in text.split():
+        if w.startswith("*") and w.rstrip("!?.,").endswith("*"):
+            out.append(f'<span class="w"><b>{html.escape(w.replace("*", ""))}</b></span>')
+        else:
+            out.append(f'<span class="w">{html.escape(w)}</span>')
+    return " ".join(out)
 
 
 def clip(id_, start, end, track, inner):
@@ -215,7 +222,8 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
 .title { left: 80px; top: 280px; width: 920px; text-align: center; font: 800 92px/1 Baloo; color: var(--latte); text-shadow: var(--sh); }
 .title b { display: inline-block; color: var(--heart); background: var(--latte); padding: 0 18px; border-radius: 22px; text-shadow: none; }
 .title.small { top: 285px; font-size: 70px; }
-.sub { left: 80px; top: 390px; width: 920px; text-align: center; font: 700 42px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+.sub { left: 80px; top: 390px; width: 920px; text-align: center; font: 700 39px/1.2 Quick; color: #fff; text-shadow: var(--sh); white-space: nowrap; }
+.sub b { color: var(--heart); font-weight: 700; padding: 0 10px; border-radius: 12px; background: #fff; text-shadow: none; }
 
 .grid { left: 110px; top: 470px; width: 860px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
 .grid.mg { top: 400px; }
