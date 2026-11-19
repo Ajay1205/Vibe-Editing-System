@@ -102,6 +102,14 @@
     "Who",
     "Which",
     "Whose"
+   ],
+   "broll_end": 46.329,
+   "kw": "kya",
+   "pops": [
+    44.529,
+    45.069,
+    45.449,
+    45.769
    ]
   },
   {
@@ -373,6 +381,14 @@
    "kind": "close"
   }
  ],
+ "brolls": [
+  {
+   "file": "footage/nikita6/broll/ex1_food.mp4",
+   "in": 0.8,
+   "start": 44.529,
+   "end": 46.329
+  }
+ ],
  "sfx": [
   {
    "name": "pop",
@@ -489,6 +505,12 @@
    "gain": 0.5,
    "lu": -8.0,
    "file": "assets/sfx/note6.wav"
+  },
+  {
+   "name": "whoosh-short",
+   "t": 44.449,
+   "gain": 0.5,
+   "lu": -10.0
   },
   {
    "name": "pop",

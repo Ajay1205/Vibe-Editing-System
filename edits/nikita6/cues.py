@@ -50,7 +50,8 @@ MEANINGS = [("What", "kya", "n63", 4.13, 5.80), ("When", "kab", "n63", 6.75, 8.3
 EX_INTRO = {"clip": "n65", "t": 0.50, "line": "Ab examples dekhte hain 👇"}
 # examples: the WH word is the first word of `en`
 EXAMPLES = [
-    {"clip": "n65", "hi": "Aaj aapne kya khaya?", "hi_t": 2.80, "en": "What did you eat today?", "en_t": 4.70},
+    {"clip": "n65", "hi": "Aaj aapne kya khaya?", "hi_t": 2.80, "en": "What did you eat today?", "en_t": 4.70,
+     "broll": {"file": "ex1_food.mp4", "in": 0.8}, "kw": "kya"},
     {"clip": "n65", "hi": "Meri book kahan hai?", "hi_t": 6.72, "en": "Where is my book?", "en_t": 8.35},
     {"clip": "n65", "hi": "Tum late kyun ho?", "hi_t": 11.30, "en": "Why are you late today?", "en_t": 13.10},
     {"clip": "n65", "hi": "Tum kab aaoge?", "hi_t": 15.67, "en": "When will you come?", "en_t": 17.05},
@@ -62,11 +63,26 @@ QUIZ = {"clip": "n66", "hi": "Tumhara favourite colour kaun sa hai?", "hi_t": 4.
         "ask_t": 6.15, "ask": "💬 Kaun sa WH word? Comment karo!"}
 SAVE = {"clip": "n67", "save_t": 1.50, "strip_t": 7.15, "line": "<b>Save</b> karo!", "sub": "Confusion ho toh revisit karo"}
 READ_HOLD = 0.7  # each English card stays this long into the next Hindi question
+# AI cutaways (user, 19 Nov): on an example's Hindi question the picture cuts to an AI clip (muted) and the question
+# pops BIG in the middle, word by word; back on her (just before the English card) the normal small caption returns.
+BROLL_DIR = "footage/nikita6/broll"
+BROLL_BACK = 0.10  # cut back to her this long before the English card lands
+WORDS = json.load(open(HERE / "words.json"))
+
+
+def word_times(start, end, n):
+    """Pop times for the n words of a question spoken from `start`: Whisper word starts (they run early here, so
+    shifted to put the first word on `start`); evenly spaced if Whisper split the words differently."""
+    ws = [w["start"] for w in WORDS if w["end"] > start - 0.1 and w["start"] < end - 0.2][:n]
+    if len(ws) == n:
+        return [round(start + (t - ws[0]), 3) for t in ws]
+    step = (end - start - 0.3) / max(n, 1)
+    return [round(start + k * step, 3) for k in range(n)]
 # ---------------------------------------------------------------------------------------------------------
 
 
 def build():
-    caps, sfx, shots = [], [], []
+    caps, sfx, shots, brolls = [], [], [], []
     # hook + leaders: one caption clip so the family grid stays put across the n61 -> n62 cut
     h, l = HOOK, LEADERS
     caps.append({"type": "family", "start": 0.0, "end": section_end(l["clip"]), "title": h["title"], "sub": h["sub"],
@@ -100,9 +116,18 @@ def build():
         c = e["clip"]
         en_t = at(c, e["en_t"])
         wh = e["en"].split()[0]
-        caps.append({"type": "example", "n": k + 1, "wh": wh, "idx": FAMILY.index(wh), "hi": e["hi"],
-                     "en": e["en"], "start": starts[k], "hi_t": starts[k], "en_t": en_t, "end": ends[k],
-                     "next": starts[k + 1] if k + 1 < len(EXAMPLES) else None, "words": FAMILY})
+        cap = {"type": "example", "n": k + 1, "wh": wh, "idx": FAMILY.index(wh), "hi": e["hi"],
+               "en": e["en"], "start": starts[k], "hi_t": starts[k], "en_t": en_t, "end": ends[k],
+               "next": starts[k + 1] if k + 1 < len(EXAMPLES) else None, "words": FAMILY}
+        if e.get("broll"):
+            b_end = round(en_t - BROLL_BACK, 3)
+            cap.update({"broll_end": b_end, "kw": e.get("kw", ""),
+                        "pops": word_times(starts[k], b_end, len(e["hi"].split()))})
+            brolls.append({"file": f"{BROLL_DIR}/{e['broll']['file']}", "in": e["broll"].get("in", 0.0),
+                           "start": starts[k], "end": b_end})
+            if k == 0:  # later examples already get a whoosh on their start
+                sfx.append(("whoosh-short", starts[k] - 0.08, -10.0))
+        caps.append(cap)
         shots += [{"t": starts[k] - 0.1, "kind": "mid"}, {"t": en_t - 0.1, "kind": "close"}]
         sfx += [("pop", en_t - 0.03, -6.0)]
         if k:
@@ -140,7 +165,7 @@ def build():
             spaced.append(sh)
     lib = {f"note{k}": f"assets/sfx/note{k}.wav" for k in range(7)}
     out = {"duration": EDL["duration"], "fps": EDL["fps"], "captions": caps, "shuffles": shuffles,
-           "flashes": flashes, "shots": spaced,
+           "flashes": flashes, "shots": spaced, "brolls": brolls,
            "sfx": [dict({"name": n, "t": round(max(0, t), 3), "gain": 0.5, "lu": lu},
                         **({"file": lib[n]} if n in lib else {})) for n, t, lu in sfx]
            + [{"name": "riser_user", "file": "../../assets/shared/riser_user.mp3", "t": round(t, 3), "gain": 0.45,

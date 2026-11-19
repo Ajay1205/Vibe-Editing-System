@@ -134,12 +134,31 @@ def build(res=2160):
             wh, rest = c["en"].split(" ", 1)
             track = 2 + (c["n"] % 2)  # alternate tracks so the held card can overlap the next question
             lead = '<div class="lead">👑 QUESTION LEADER = FIRST WORD</div>'
-            els.append(clip(cid, s, e, track, f"""
+            big = ""
+            if c.get("broll_end"):  # big popping question over the AI cutaway
+                toks = []
+                for w in c["hi"].split():
+                    bare = w.strip("?!.,").lower()
+                    inner = html.escape(w)
+                    if bare == c["kw"].lower():
+                        inner = f'<b>{html.escape(w.rstrip("?!.,"))}</b>{html.escape(w[len(w.rstrip("?!.,")):])}'
+                    toks.append(f'<span class="bw">{inner}</span>')
+                half = (len(toks) + 1) // 2
+                big = f'<div class="bigq" id="{cid}-bq">{" ".join(toks[:half])}<br>{" ".join(toks[half:])}</div>'
+            els.append(clip(cid, s, e, track, f"""{big}
               <div class="hq" id="{cid}-hq"{' style="font-size:42px"' if len(c['hi']) > 28 else ''}>{words(chr(8220) + c['hi'] + chr(8221))}</div>
               <div class="ex" id="{cid}-x"><div class="card" id="{cid}-c"><div class="q"><span class="chip" style="{bg(wh)}">{wh}</span> {words(rest)}</div></div>
               {lead}</div>"""))
+            hq_t = c.get("broll_end", c["hi_t"])
+            if c.get("broll_end"):
+                for j, t in enumerate(c["pops"]):
+                    js.append(f'tl.fromTo("#{cid}-bq .bw:nth-of-type({j + 1})", {{opacity: 0, scale: 0.3, y: 50}}, '
+                              f'{{opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}}, {t});')
+                js.append(f'tl.fromTo("#{cid}-bq b", {{scale: 1}}, {{scale: 1.12, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut"}}, '
+                          f'{c["pops"][-1] + 0.25});')
+                js.append(f'tl.set("#{cid}-bq", {{opacity: 0}}, {c["broll_end"]});')
             js.append(f"""
-              tl.fromTo("#{cid}-hq .w", {BLUR_IN.format(st=0.06)}, {c['hi_t']});
+              tl.fromTo("#{cid}-hq .w", {BLUR_IN.format(st=0.06)}, {hq_t});
               tl.fromTo("#{cid}-c", {{opacity: 0, scale: 0.5, y: 40}}, {{opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.9)"}}, {c['en_t'] - 0.1});
               tl.fromTo("#{cid}-c .chip", {{scale: 1.6, rotation: -10}}, {{scale: 1, rotation: 0, duration: 0.45, ease: "back.out(3)"}}, {c['en_t']});
               tl.fromTo("#{cid}-c .w", {{opacity: 0, y: 14}}, {{opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: 0.09}}, {c['en_t'] + 0.15});
@@ -250,6 +269,11 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   background: rgba(74,46,34,.55); }
 .fam i { display: inline-block; padding: 9px 12px; border-radius: 16px; font: 800 26px/1 Baloo; color: var(--cocoa); font-style: normal; opacity: .45; }
 .hq { left: 30px; top: 382px; width: 1020px; text-align: center; white-space: nowrap; font: 700 48px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+.bigq { left: 60px; top: 420px; width: 960px; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
+  text-shadow: 0 4px 6px rgba(0,0,0,.45), 0 10px 34px rgba(0,0,0,.55); }
+.bigq .bw { display: inline-block; }
+.bigq b { display: inline-block; color: #fff; background: var(--heart); padding: 0 22px; border-radius: 30px; text-shadow: none;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35); }
 .ex { left: 90px; top: 470px; width: 900px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .card { width: 900px; padding: 30px 30px; border-radius: 40px; background: var(--latte); text-align: center;
   box-shadow: 0 18px 44px rgba(0,0,0,.32); border: 5px solid #fff; }

@@ -7,6 +7,7 @@ Instagram upload (user, 18 Nov: a Reel can't be split; Instagram re-encodes anyw
 Picture, captions and mix are all cut from the same 4K parts; 30 ms audio fade-in. Output gets a _fromS suffix.
 """
 
+import json
 import pathlib
 import subprocess
 import sys
@@ -28,13 +29,29 @@ def main(version, preview=False, crf=15, start=0.0):
     # the alpha WebM can't be input-seeked (VP9 alpha only decodes from a keyframe -> blank captions at the start),
     # so it is decoded from 0 and trimmed frame-accurately in the filter graph
     otrim = f"trim=start={start:.3f},setpts=PTS-STARTPTS," if start else ""
+    # AI cutaways (cues.json "brolls"): muted clips laid over her picture, under the captions, with hard cuts
+    W, H = (1080, 1920) if preview else (2160, 3840)
+    b_in, b_fc, last = [], [], "b"
+    for k, b in enumerate(json.load(open(HERE / "cues.json")).get("brolls", [])):
+        st, en, src_in = b["start"] - start, b["end"] - start, b["in"]
+        if en <= 0:
+            continue
+        if st < 0:
+            src_in, st = src_in - st, 0.0
+        b_in += ["-ss", f"{src_in:.3f}", "-t", f"{en - st + 0.2:.3f}", "-i", str(HERE.parents[1] / b["file"])]
+        n = 2 + len(b_in) // 6  # inputs: 0 base, 1 captions, 2 mix, then one per cutaway
+        b_fc.append(f"[{n}:v]fps=30,scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,crop={W}:{H},"
+                    f"setsar=1,setpts=PTS-STARTPTS+{st:.3f}/TB[r{k}];"
+                    f"[{last}][r{k}]overlay=enable='between(t,{st:.3f},{en - 0.001:.3f})':eof_action=pass[x{k}]")
+        last = f"x{k}"
+    bfc = (";" + ";".join(b_fc)) if b_fc else ""
     scale = "scale=1080:1920:flags=lanczos," if preview else ""  # base preview is 1080p already; harmless
     subprocess.run([
         "ffmpeg", "-v", "error", "-stats", "-y",
         *ss, "-i", str(BUILD / f"base_{version}{'_preview' if preview else ''}.mp4"),
         "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{version}_{1080 if preview else 2160}.webm"),
-        *ss, "-i", str(BUILD / "mix.wav"),
-        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b];[1:v]{otrim}format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
+        *ss, "-i", str(BUILD / "mix.wav"), *b_in,
+        "-filter_complex", f"[0:v]{scale}{GRADE},format=yuv420p[b]{bfc};[1:v]{otrim}format=yuva420p[o];[{last}][o]overlay=0:0:format=yuv420,format=yuv420p[v]",
         *(["-af", "afade=t=in:d=0.03"] if start else []),
         "-map", "[v]", "-map", "2:a",
         "-c:v", "libx264", *(["-preset", "veryfast", "-crf", "20"] if preview else

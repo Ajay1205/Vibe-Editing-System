@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="UTF-8" />
-<meta name="viewport" content="width=2160, height=3840" />
+<meta name="viewport" content="width=1080, height=1920" />
 <script src="vendor/gsap.min.js"></script>
 <style>
 @font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
@@ -9,10 +9,10 @@
   --what: #FFB3C1; --when: #FFD58A; --where: #A8E0C4; --why: #B9C8FF; --who: #FFC2A1; --which: #D7B9FF; --whose: #A9DDF2;
   --sh: 0 2px 3px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.45), 0 0 2px rgba(0,0,0,.5); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 2160px; height: 3840px; overflow: hidden; background: transparent; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: transparent; }
 #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
-.clip { width: 2160px; height: 3840px; }
-.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: scale(2); }
+.clip { width: 1080px; height: 1920px; }
+.layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform-origin: 0 0; transform: none; }
 .layer > div { position: absolute; }
 .w { display: inline-block; }
 
@@ -47,6 +47,11 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   background: rgba(74,46,34,.55); }
 .fam i { display: inline-block; padding: 9px 12px; border-radius: 16px; font: 800 26px/1 Baloo; color: var(--cocoa); font-style: normal; opacity: .45; }
 .hq { left: 30px; top: 382px; width: 1020px; text-align: center; white-space: nowrap; font: 700 48px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
+.bigq { left: 60px; top: 420px; width: 960px; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
+  text-shadow: 0 4px 6px rgba(0,0,0,.45), 0 10px 34px rgba(0,0,0,.55); }
+.bigq .bw { display: inline-block; }
+.bigq b { display: inline-block; color: #fff; background: var(--heart); padding: 0 22px; border-radius: 30px; text-shadow: none;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35); }
 .ex { left: 90px; top: 470px; width: 900px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .card { width: 900px; padding: 30px 30px; border-radius: 40px; background: var(--latte); text-align: center;
   box-shadow: 0 18px 44px rgba(0,0,0,.32); border: 5px solid #fff; }
@@ -71,7 +76,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   background: radial-gradient(circle at 50% 35%, rgba(255,244,230,.95), rgba(255,194,161,.6) 45%, rgba(255,179,193,.25) 75%, rgba(255,179,193,0)); }
 </style></head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="87.033" data-width="2160" data-height="3840" data-fps="30">
+<div id="root" data-composition-id="main" data-start="0" data-duration="87.033" data-width="1080" data-height="1920" data-fps="30">
 <div id="fambar" class="clip" data-start="44.529" data-duration="33.338" data-track-index="6"><div class="layer"><div class="fam" id="fam"><i id="fb0" style="background:var(--what)">What</i><i id="fb1" style="background:var(--when)">When</i><i id="fb2" style="background:var(--where)">Where</i><i id="fb3" style="background:var(--why)">Why</i><i id="fb4" style="background:var(--who)">Who</i><i id="fb5" style="background:var(--which)">Which</i><i id="fb6" style="background:var(--whose)">Whose</i></div></div></div>
 <div id="c0" class="clip" data-start="0.000" data-duration="23.567" data-track-index="1"><div class="layer">
               <div class="title" id="c0-t">The <b>WH</b> Family</div>
@@ -106,7 +111,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
                 <div class="face fh"><div class="hib">kiska</div></div>
                 <div class="face fe"><div class="en">Whose</div><div class="hi">kiska</div></div></div></div></div></div>
 <div id="c2" class="clip" data-start="42.167" data-duration="2.362" data-track-index="1"><div class="layer"><div class="title small" id="c2-t"><span class="w">Ab</span> <span class="w">examples</span> <span class="w">dekhte</span> <span class="w">hain</span> <span class="w">👇</span></div></div></div>
-<div id="c3" class="clip" data-start="44.529" data-duration="4.620" data-track-index="3"><div class="layer">
+<div id="c3" class="clip" data-start="44.529" data-duration="4.620" data-track-index="3"><div class="layer"><div class="bigq" id="c3-bq"><span class="bw">Aaj</span> <span class="bw">aapne</span><br><span class="bw"><b>kya</b></span> <span class="bw">khaya?</span></div>
               <div class="hq" id="c3-hq"><span class="w">“Aaj</span> <span class="w">aapne</span> <span class="w">kya</span> <span class="w">khaya?”</span></div>
               <div class="ex" id="c3-x"><div class="card" id="c3-c"><div class="q"><span class="chip" style="background:var(--what)">What</span> <span class="w">did</span> <span class="w">you</span> <span class="w">eat</span> <span class="w">today?</span></div></div>
               <div class="lead">👑 QUESTION LEADER = FIRST WORD</div></div></div></div>
@@ -227,8 +232,8 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
               tl.set("#c1-t6 .fe", {opacity: 1}, 41.142);
               tl.to("#c1-t6", {rotationY: 0, duration: 0.2, ease: "back.out(2)"}, 41.142);tl.to("#c1-t6", {scale: 1.12, duration: 0.16, yoyo: true, repeat: 1}, 41.202);tl.to("#c1 .layer > *", {opacity: 0, duration: 0.2}, 41.967);
               tl.fromTo("#c2-t .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.08}, 42.467);
-              tl.to("#c2-t", {opacity: 0, y: -20, duration: 0.2}, 44.329);
-              tl.fromTo("#c3-hq .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 44.529);
+              tl.to("#c2-t", {opacity: 0, y: -20, duration: 0.2}, 44.329);tl.fromTo("#c3-bq .bw:nth-of-type(1)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 44.529);tl.fromTo("#c3-bq .bw:nth-of-type(2)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 45.069);tl.fromTo("#c3-bq .bw:nth-of-type(3)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 45.449);tl.fromTo("#c3-bq .bw:nth-of-type(4)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 45.769);tl.fromTo("#c3-bq b", {scale: 1}, {scale: 1.12, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut"}, 46.019);tl.set("#c3-bq", {opacity: 0}, 46.329);
+              tl.fromTo("#c3-hq .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 46.329);
               tl.fromTo("#c3-c", {opacity: 0, scale: 0.5, y: 40}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.9)"}, 46.329);
               tl.fromTo("#c3-c .chip", {scale: 1.6, rotation: -10}, {scale: 1, rotation: 0, duration: 0.45, ease: "back.out(3)"}, 46.429);
               tl.fromTo("#c3-c .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: 0.09}, 46.579);
