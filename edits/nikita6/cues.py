@@ -51,14 +51,19 @@ EX_INTRO = {"clip": "n65", "t": 0.50, "line": "Ab examples dekhte hain 👇"}
 # examples: the WH word is the first word of `en`
 EXAMPLES = [
     {"clip": "n65", "hi": "Aaj aapne kya khaya?", "hi_t": 2.80, "en": "What did you eat today?", "en_t": 4.70,
-     "broll": {"file": "ex1_food.mp4", "in": 0.8}, "kw": "kya"},
-    {"clip": "n65", "hi": "Meri book kahan hai?", "hi_t": 6.72, "en": "Where is my book?", "en_t": 8.35},
-    {"clip": "n65", "hi": "Tum late kyun ho?", "hi_t": 11.30, "en": "Why are you late today?", "en_t": 13.10},
-    {"clip": "n65", "hi": "Tum kab aaoge?", "hi_t": 15.67, "en": "When will you come?", "en_t": 17.05},
-    {"clip": "n65", "hi": "Tumhare class teacher kaun hain?", "hi_t": 19.53, "en": "Who is your class teacher?", "en_t": 21.63},
+     "broll": {"file": "ex1_food_anim.mp4", "in": 0.0}, "kw": "kya"},
+    {"clip": "n65", "hi": "Meri book kahan hai?", "hi_t": 6.72, "en": "Where is my book?", "en_t": 8.35,
+     "broll": {"file": "ex2_book_anim.mp4", "in": 0.0}, "kw": "kahan"},
+    {"clip": "n65", "hi": "Tum late kyun ho?", "hi_t": 11.30, "en": "Why are you late today?", "en_t": 13.10,
+     "broll": {"file": "ex3_late_anim.mp4", "in": 0.0}, "kw": "kyun"},
+    {"clip": "n65", "hi": "Tum kab aaoge?", "hi_t": 15.67, "en": "When will you come?", "en_t": 17.05,
+     "broll": {"file": "ex4_phone_anim.mp4", "in": 0.0}, "kw": "kab"},
+    {"clip": "n65", "hi": "Tumhare class teacher kaun hain?", "hi_t": 19.53, "en": "Who is your class teacher?", "en_t": 21.63,
+     "broll": {"file": "ex5_teacher_anim.mp4", "in": 0.0}, "kw": "kaun"},
     {"clip": "n65", "hi": "Tumhari favourite movie kaun si hai?", "hi_t": 23.80, "en": "Which is your favourite movie?", "en_t": 25.72,
      "broll": {"file": "ex6_movie_anim.mp4", "in": 0.0}, "kw": "kaun si"},
-    {"clip": "n66", "hi": "Ye bag kiska hai?", "hi_t": 0.48, "en": "Whose bag is it?", "en_t": 1.92},
+    {"clip": "n66", "hi": "Ye bag kiska hai?", "hi_t": 0.48, "en": "Whose bag is it?", "en_t": 1.92,
+     "broll": {"file": "ex7_bag_anim.mp4", "in": 0.0}, "kw": "kiska"},
 ]
 QUIZ = {"clip": "n66", "hi": "Tumhara favourite colour kaun sa hai?", "hi_t": 4.22, "en": "is your favourite colour?",
         "ask_t": 6.15, "ask": "💬 Kaun sa WH word? Comment karo!"}

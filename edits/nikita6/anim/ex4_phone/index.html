@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0;
+  overflow: hidden; background: radial-gradient(ellipse at 50% 50%, #6A4430 0%, #4A2E22 45%, #24150F 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.glow { left: 140px; top: 760px; width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,170,.38) 0%, rgba(255,214,170,0) 70%); }
+.spark { font: 60px/1 sans-serif; }
+.q { font: 800 110px/1 Baloo; text-shadow: 0 8px 20px rgba(0,0,0,.35); }
+
+#phone { left: 330px; top: 760px; width: 420px; height: 860px; border-radius: 70px; background: #2B1A13; box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 0 6px #6B3F2A; }
+#scr { left: 22px; top: 22px; width: 376px; height: 816px; border-radius: 52px; background: linear-gradient(180deg, #FFF4E6, #FFE2CF); overflow: hidden; }
+#notch { left: 150px; top: 18px; width: 76px; height: 22px; border-radius: 11px; background: #2B1A13; }
+#hdr { left: 0; top: 0; width: 376px; height: 120px; background: #E8475A; }
+#av { left: 26px; top: 50px; width: 52px; height: 52px; border-radius: 50%; background: #FFC94A; font: 34px/52px sans-serif; text-align: center; }
+.bub { left: 30px; max-width: 290px; padding: 18px 26px; border-radius: 30px 30px 30px 8px; background: #FFFFFF; box-shadow: 0 8px 16px rgba(0,0,0,.15);
+  font: 800 44px/1.1 Baloo; color: #4A2E22; }
+.dot { display: inline-block; width: 18px; height: 18px; margin: 0 5px; border-radius: 50%; background: #B9A6A0; }
+.wave { left: 290px; top: 940px; width: 500px; height: 500px; border-radius: 50%; border: 10px solid rgba(255,201,74,.75); }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam"><div class="abs glow" id="glow"></div>
+
+<div class="abs wave" id="w1"></div><div class="abs wave" id="w2"></div>
+<div class="abs" id="phone"><div class="abs" id="scr">
+  <div class="abs" id="hdr"><div class="abs" id="av">🏠</div></div>
+  <div class="abs bub" id="typing" style="top:220px"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <div class="abs bub" id="msg" style="top:220px">Kab aaoge? 🏠</div>
+  <div class="abs bub" id="msg2" style="top:350px">❤️</div>
+</div><div class="abs" id="notch"></div></div>
+<div class="abs spark" style="left:220px;top:820px">✨</div><div class="abs spark" style="left:800px;top:1500px">✨</div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.06, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo("#glow", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.6, ease: "power2.out"}, 0);
+  tl.fromTo(".spark", {scale: 0, rotation: -40, opacity: 0}, {scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.16}, 0.45);
+  tl.to(".spark", {scale: 0.7, duration: 0.3, yoyo: true, repeat: 3, stagger: 0.1}, 0.95);
+  
+  tl.fromTo("#phone", {y: 500, rotation: 8}, {y: 0, rotation: 0, duration: 0.5, ease: "back.out(1.6)"}, 0);
+  tl.to("#phone", {x: 8, rotation: 2, duration: 0.05, yoyo: true, repeat: 9, ease: "none"}, 0.45);
+  tl.fromTo(".wave", {scale: 0.3, opacity: 1}, {scale: 1.5, opacity: 0, duration: 0.8, ease: "power2.out", stagger: 0.3}, 0.4);
+  tl.fromTo("#typing", {scale: 0, transformOrigin: "0% 100%"}, {scale: 1, duration: 0.25, ease: "back.out(2.5)"}, 0.35);
+  tl.fromTo("#typing .dot", {y: 0}, {y: -10, duration: 0.15, yoyo: true, repeat: 3, stagger: 0.07}, 0.45);
+  tl.set("#typing", {opacity: 0}, 0.85);
+  tl.fromTo("#msg", {scale: 0, transformOrigin: "0% 100%"}, {scale: 1, duration: 0.35, ease: "back.out(2.5)"}, 0.85);
+  tl.fromTo("#msg2", {scale: 0, transformOrigin: "0% 100%"}, {scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 1.35);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

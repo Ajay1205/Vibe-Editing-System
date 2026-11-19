@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0;
+  overflow: hidden; background: radial-gradient(ellipse at 50% 50%, #6A4430 0%, #4A2E22 45%, #24150F 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.glow { left: 140px; top: 760px; width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,170,.38) 0%, rgba(255,214,170,0) 70%); }
+.spark { font: 60px/1 sans-serif; }
+.q { font: 800 110px/1 Baloo; text-shadow: 0 8px 20px rgba(0,0,0,.35); }
+
+#table { left: -40px; top: 1180px; width: 1160px; height: 800px; border-radius: 40px 40px 0 0;
+  background: repeating-linear-gradient(90deg, #8A5534 0 140px, #7C4A2C 140px 150px, #925C39 150px 290px); box-shadow: 0 -10px 40px rgba(0,0,0,.4); }
+#plate { left: 170px; top: 1020px; width: 740px; height: 740px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FFFFFF 0%, #DCDCE2 35%, #B8B9C2 70%, #9FA0AA 100%); box-shadow: 0 30px 50px rgba(0,0,0,.45); }
+#inner { left: 225px; top: 1075px; width: 630px; height: 630px; border-radius: 50%; background: radial-gradient(circle at 45% 40%, #F4F4F7, #CFD0D8); }
+.katori { width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF, #B9BAC4); box-shadow: 0 10px 18px rgba(0,0,0,.3); }
+.fill { position: absolute; left: 22px; top: 22px; width: 176px; height: 176px; border-radius: 50%; }
+#rice { left: 560px; top: 1330px; width: 250px; height: 200px; border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 45% 35%, #FFFFFF, #ECE8DD); box-shadow: 0 8px 14px rgba(0,0,0,.18); }
+#roti { left: 300px; top: 1440px; width: 280px; height: 230px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #F3D29A, #D9A55F);
+  box-shadow: 0 8px 14px rgba(0,0,0,.25); }
+.spot { width: 26px; height: 18px; border-radius: 50%; background: #B97B3C; opacity: .7; }
+.steam { width: 40px; height: 230px; border-radius: 20px; background: linear-gradient(0deg, rgba(255,255,255,.75), rgba(255,255,255,0)); filter: blur(8px); }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam"><div class="abs glow" id="glow"></div>
+
+<div class="abs" id="table"></div>
+<div class="abs" id="plate"></div><div class="abs" id="inner"></div>
+<div class="abs katori" id="k1" style="left:270px;top:1130px"><div class="fill" style="background:radial-gradient(circle at 45% 40%,#FFD25C,#E8A93A)"></div></div>
+<div class="abs katori" id="k2" style="left:520px;top:1095px"><div class="fill" style="background:radial-gradient(circle at 45% 40%,#F6A15C,#C9632E)"></div></div>
+<div class="abs" id="rice"></div>
+<div class="abs" id="roti"><div class="abs spot" style="left:80px;top:70px"></div><div class="abs spot" style="left:170px;top:120px"></div><div class="abs spot" style="left:120px;top:160px"></div></div>
+<div class="abs steam" style="left:360px;top:900px"></div><div class="abs steam" style="left:610px;top:870px"></div><div class="abs steam" style="left:500px;top:930px"></div>
+<div class="abs spark" style="left:110px;top:1000px">✨</div><div class="abs spark" style="left:900px;top:1180px">✨</div><div class="abs spark" style="left:860px;top:900px">✨</div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.06, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo("#glow", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.6, ease: "power2.out"}, 0);
+  tl.fromTo(".spark", {scale: 0, rotation: -40, opacity: 0}, {scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.16}, 0.45);
+  tl.to(".spark", {scale: 0.7, duration: 0.3, yoyo: true, repeat: 3, stagger: 0.1}, 0.95);
+  
+  tl.fromTo("#table", {y: 300}, {y: 0, duration: 0.45, ease: "power3.out"}, 0);
+  tl.fromTo("#plate, #inner", {scale: 0.4, opacity: 0}, {scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)"}, 0.1);
+  tl.fromTo(".katori, #rice, #roti", {y: -260, opacity: 0}, {y: 0, opacity: 1, duration: 0.42, ease: "bounce.out", stagger: 0.1}, 0.3);
+  tl.fromTo(".steam", {y: 60, opacity: 0, scaleY: 0.6}, {y: -120, opacity: 1, scaleY: 1.1, duration: 0.9, ease: "sine.out", stagger: 0.2, repeat: 1}, 0.6);
+  tl.to(".steam", {x: 18, duration: 0.45, yoyo: true, repeat: 3, ease: "sine.inOut", stagger: 0.15}, 0.6);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

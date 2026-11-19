@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0;
+  overflow: hidden; background: radial-gradient(ellipse at 50% 50%, #6A4430 0%, #4A2E22 45%, #24150F 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.glow { left: 140px; top: 760px; width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,170,.38) 0%, rgba(255,214,170,0) 70%); }
+.spark { font: 60px/1 sans-serif; }
+.q { font: 800 110px/1 Baloo; text-shadow: 0 8px 20px rgba(0,0,0,.35); }
+
+#clock { left: 220px; top: 820px; width: 640px; height: 640px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFFFF, #FFF4E6 60%, #F3E3CC);
+  border: 34px solid #E8475A; box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 0 10px #FFF; }
+.tick { left: 309px; top: 20px; width: 22px; height: 60px; border-radius: 11px; background: #4A2E22; transform-origin: 11px 300px; }
+#hh { left: 304px; top: 160px; width: 32px; height: 170px; border-radius: 16px; background: #4A2E22; transform-origin: 16px 160px; }
+#mh { left: 309px; top: 70px; width: 22px; height: 260px; border-radius: 11px; background: #4A2E22; transform-origin: 11px 250px; }
+#hub { left: 290px; top: 290px; width: 60px; height: 60px; border-radius: 50%; background: #E8475A; border: 8px solid #FFF4E6; }
+.bell { top: 760px; width: 170px; height: 120px; border-radius: 85px 85px 20px 20px; background: #E8475A; box-shadow: 0 10px 20px rgba(0,0,0,.35); }
+.leg { top: 1430px; width: 40px; height: 120px; border-radius: 20px; background: #E8475A; }
+.mark { font: 800 120px/1 Baloo; color: #FFC94A; text-shadow: 0 8px 18px rgba(0,0,0,.35); }
+.puff { font: 80px/1 sans-serif; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam"><div class="abs glow" id="glow"></div>
+
+<div class="abs bell" id="bL" style="left:200px;transform:rotate(-24deg)"></div><div class="abs bell" id="bR" style="left:710px;transform:rotate(24deg)"></div>
+<div class="abs leg" style="left:330px;transform:rotate(20deg)"></div><div class="abs leg" style="left:710px;transform:rotate(-20deg)"></div>
+<div class="abs" id="clock">
+  <div class="abs tick"></div><div class="abs tick" style="transform:rotate(90deg)"></div><div class="abs tick" style="transform:rotate(180deg)"></div><div class="abs tick" style="transform:rotate(270deg)"></div>
+  <div class="abs" id="hh"></div><div class="abs" id="mh"></div><div class="abs" id="hub"></div>
+</div>
+<div class="abs mark" id="x1" style="left:110px;top:960px">!</div><div class="abs mark" id="x2" style="left:920px;top:1010px">!</div>
+<div class="abs puff" id="p1" style="left:140px;top:1480px">💨</div><div class="abs puff" id="p2" style="left:850px;top:1480px">💨</div>
+<div class="abs spark" style="left:900px;top:820px">✨</div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.06, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo("#glow", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.6, ease: "power2.out"}, 0);
+  tl.fromTo(".spark", {scale: 0, rotation: -40, opacity: 0}, {scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.16}, 0.45);
+  tl.to(".spark", {scale: 0.7, duration: 0.3, yoyo: true, repeat: 3, stagger: 0.1}, 0.95);
+  
+  tl.fromTo("#clock, .bell, .leg", {scale: 0.3, opacity: 0}, {scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)"}, 0);
+  tl.fromTo("#mh", {rotation: 0}, {rotation: 1440, duration: 1.6, ease: "power2.inOut"}, 0.2);
+  tl.fromTo("#hh", {rotation: 60}, {rotation: 180, duration: 1.6, ease: "power2.inOut"}, 0.2);
+  tl.to("#clock", {rotation: 6, duration: 0.06, yoyo: true, repeat: 13, ease: "none"}, 0.5);
+  tl.to("#bL", {rotation: -34, duration: 0.06, yoyo: true, repeat: 13}, 0.5);
+  tl.to("#bR", {rotation: 34, duration: 0.06, yoyo: true, repeat: 13}, 0.5);
+  tl.fromTo(".mark", {scale: 0, rotation: -20}, {scale: 1, rotation: 0, duration: 0.3, ease: "back.out(3)", stagger: 0.12}, 0.6);
+  tl.fromTo(".puff", {opacity: 0, x: 0}, {opacity: 1, x: (i) => i ? 60 : -60, duration: 0.5, ease: "power2.out", stagger: 0.1}, 0.7);
+
+  window.__timelines["main"] = tl;
+</script></body></html>
