@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+/* "Tum late kyun ho?" -- grown-up version (user, 19 Nov: audience is 20+, the cartoon scenes felt young).
+   A phone lock screen at 10:12 with work notifications sliding in. Calm motion (slides, gentle drift),
+   no characters, no bounce; WH Family colours. 1080x1920 stage rendered at 2160x3840. */
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #5A3828 0%, #3A231A 50%, #1E120D 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 65%; }
+.abs { position: absolute; }
+#phone { left: 250px; top: 740px; width: 580px; height: 1180px; border-radius: 86px; background: #15100D;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 5px #4A2E22; }
+#scr { left: 18px; top: 18px; width: 544px; height: 1144px; border-radius: 70px; overflow: hidden;
+  background: linear-gradient(170deg, #6A4430 0%, #3E261C 55%, #24150F 100%); }
+#island { left: 212px; top: 22px; width: 120px; height: 34px; border-radius: 17px; background: #000; }
+#date { left: 0; top: 110px; width: 544px; text-align: center; font: 600 30px/1 Quick; color: rgba(255,244,230,.85); letter-spacing: 1px; }
+#time { left: 0; top: 150px; width: 544px; text-align: center; font: 300 170px/1 Quick; color: #FFF4E6; letter-spacing: -4px; }
+.n { box-sizing: border-box; left: 26px; width: 492px; padding: 22px 24px; border-radius: 34px; background: rgba(255,244,230,.92); box-shadow: 0 14px 30px rgba(0,0,0,.35);
+  display: flex; gap: 18px; align-items: flex-start; }
+.ic { flex: none; width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font: 36px/1 sans-serif; }
+.tx { flex: 1; }
+.ap { font: 700 22px/1.2 Quick; color: #8A6A5C; letter-spacing: .5px; display: flex; justify-content: space-between; }
+.tt { font: 700 30px/1.2 Quick; color: #2B1A13; margin-top: 4px; }
+.bd { font: 600 26px/1.25 Quick; color: #4A2E22; margin-top: 2px; }
+.late { color: #E8475A; }
+#halo { left: 140px; top: 700px; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, rgba(232,71,90,.28), rgba(232,71,90,0) 68%); }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+  <div class="abs" id="halo"></div>
+  <div class="abs" id="phone"><div class="abs" id="scr">
+    <div class="abs" id="date">MONDAY, 9 NOVEMBER</div>
+    <div class="abs" id="time">10:12</div>
+    <div class="abs n" id="n1" style="top:390px"><div class="ic" style="background:#E8475A">📅</div>
+      <div class="tx"><div class="ap"><span>CALENDAR</span><span>now</span></div><div class="tt">Team meeting</div><div class="bd late">Started 12 min ago</div></div></div>
+    <div class="abs n" id="n2" style="top:560px"><div class="ic" style="background:#8FD6B8">💬</div>
+      <div class="tx"><div class="ap"><span>RAHUL</span><span>1m</span></div><div class="tt">Sab wait kar rahe hain 👀</div></div></div>
+    <div class="abs n" id="n3" style="top:745px"><div class="ic" style="background:#FFC94A">📞</div>
+      <div class="tx"><div class="ap"><span>MISSED CALL</span><span>2m</span></div><div class="tt">Manager (2)</div></div></div>
+  </div><div class="abs" id="island"></div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0, y: 0}, {scale: 1.05, y: -20, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo("#phone", {y: 260, opacity: 0}, {y: 0, opacity: 1, duration: 0.55, ease: "power3.out"}, 0);
+  tl.fromTo("#date, #time", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.4, ease: "power2.out", stagger: 0.06}, 0.2);
+  tl.fromTo("#time", {color: "#FFF4E6"}, {color: "#FF8A97", duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut"}, 1.25);
+  tl.fromTo(".n", {opacity: 0, y: -40, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "power3.out", stagger: 0.28}, 0.45);
+  tl.fromTo("#halo", {opacity: 0}, {opacity: 1, duration: 0.5, yoyo: true, repeat: 1, ease: "sine.inOut"}, 0.9);
+  tl.to("#phone", {x: 5, duration: 0.05, yoyo: true, repeat: 5, ease: "none"}, 1.05);
+  window.__timelines["main"] = tl;
+</script></body></html>
