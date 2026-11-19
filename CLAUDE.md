@@ -60,7 +60,7 @@ No compromise on video quality, sound, transitions, captions or sound effects.
 
 Final masters go, untouched (no re-encode, no size reduction), into the speaker's Google Drive folder:
 - Nikita: https://drive.google.com/drive/folders/18O_CX2kY7W_qWNL5P_cW8LlSi1v1QAod (folder id 18O_CX2kY7W_qWNL5P_cW8LlSi1v1QAod)
-- Manisha: folder link to come from the user.
+- Manisha: folder link to come from the user. (Manisha 7 was shared from a Drive file owned by another account.)
 The Drive connector only uploads content passed inline (fine for small files, not for 4K videos of hundreds of MB), so
 send the master in chat and the user drags it into the folder. Never shrink a master to make it fit an upload path.
 Chat file limit is 400 MiB. A bigger master (Nikita 6: 426 MiB at CRF 15; slower x264 presets don't shrink it) is split
@@ -176,6 +176,18 @@ Built from the user's reference (a full Hindi -> English list over the speaker),
 - Nikita 8 (`edits/nikita8`, positive feelings) reused this style: 8 bigger rows, her example sentence and a Follow tap
   below the list. A translate-app card (one word at a time, `build_v1_translate.py`) and a sticker-card idea were
   rejected: with a word list the user wants every word to STAY on screen so viewers can read and write them down.
+
+## Approved style: Manisha 7 "Pick One" quiz (`edits/manisha7`, fill in the blank + options + comment CTA)
+
+Short single-take quiz (19 Nov). Built from `build.py` (cues / base / overlay / compose) + `mix.py` (Manisha's -13.1 chain).
+- Palette from the footage (window plants, warm wood, her beige top): forest #1F4D3A, mint #D6F0DF, cream #FFF8EE,
+  sunflower #FFC94A. Bricolage Grotesque for the sentence and options, Plus Jakarta Sans for the chip and letters,
+  Caveat for the handwritten comment line.
+- She is framed close (face fills the top half), so everything sits LOW (y 1075-1550): "FILL IN THE BLANK" chip top-left,
+  the sentence on one line with a pulsing dashed yellow blank, option pills A and B side by side with C centred below
+  (user's layout), each slides in as she reads it and lights yellow on the word; "Comment karo — A, B ya C?" at the end.
+- Video untouched; trimmed to start on her first word and end before she lowers the phone. Whoosh, pop per option,
+  ping on the CTA. The answer is never shown (for comments).
 
 ## Working rules (from the guide)
 

@@ -1,0 +1,61 @@
+{
+ "duration": 10.55,
+ "fps": 30,
+ "cut_in": 0.85,
+ "cut_out": 11.4,
+ "options": [
+  {
+   "letter": "A",
+   "word": "since",
+   "in": 3.05,
+   "hot": 3.89
+  },
+  {
+   "letter": "B",
+   "word": "for",
+   "in": 4.77,
+   "hot": 5.89
+  },
+  {
+   "letter": "C",
+   "word": "during",
+   "in": 6.75,
+   "hot": 7.77
+  }
+ ],
+ "q_t": 0.15,
+ "blank_t": 1.55,
+ "cta_t": 8.55,
+ "sfx": [
+  {
+   "name": "whoosh-short",
+   "t": 0.04999999999999999,
+   "gain": 0.5,
+   "lu": -10.0
+  },
+  {
+   "name": "pop",
+   "t": 3.05,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "pop",
+   "t": 4.77,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "pop",
+   "t": 6.75,
+   "gain": 0.5,
+   "lu": -6.0
+  },
+  {
+   "name": "ping",
+   "t": 8.55,
+   "gain": 0.5,
+   "lu": -8.0
+  }
+ ]
+}

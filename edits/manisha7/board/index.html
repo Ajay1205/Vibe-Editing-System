@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Style board: "Pick One" grammar quiz. Palette from the footage (window plants, warm wood, her beige top, rose lips).
+   Everything sits in the lower half (y 1000-1600 on the 1080x1920 stage) so her face, which fills the top half, stays clear. */
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs600.woff2); font-weight: 600; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+:root { --forest: #1F4D3A; --mint: #D6F0DF; --cream: #FFF8EE; --rose: #FF6F91; --sun: #FFC94A;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 6px 22px rgba(0,0,0,.45); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; }
+.chip { left: 120px; top: 268px; padding: 12px 22px; border-radius: 30px; background: var(--forest); color: var(--mint);
+  font: 800 30px/1 PJS; letter-spacing: 2px; box-shadow: 0 10px 24px rgba(0,0,0,.3); }
+.q { left: 60px; top: 1075px; width: 960px; white-space: nowrap; text-align: center; font: 800 58px/1.1 Brico; color: #fff; text-shadow: var(--sh); }
+.blank { display: inline-block; width: 200px; height: 62px; vertical-align: -10px; border-radius: 20px; border: 6px dashed var(--sun);
+  background: rgba(255,201,74,.18); }
+.opts { left: 120px; top: 1190px; width: 840px; display: grid; grid-template-columns: 400px 400px; column-gap: 40px; row-gap: 22px; }
+#oC { grid-column: 1 / span 2; justify-self: center; width: 400px; }
+.o { display: flex; align-items: center; gap: 22px; height: 104px; padding: 0 26px; border-radius: 48px; background: rgba(255,248,238,.95);
+  box-shadow: 0 14px 30px rgba(0,0,0,.28); font: 800 54px/1 Brico; color: var(--forest); }
+.o b { flex: none; width: 70px; height: 70px; border-radius: 50%; background: var(--forest); color: var(--mint); font: 800 38px/70px PJS; text-align: center; }
+.o.hot { background: var(--sun); }
+.cta { left: 0; top: 1462px; width: 1080px; text-align: center; font: 700 76px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.cta i { font-style: normal; color: var(--sun); }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="11.5" data-width="1080" data-height="1920" data-fps="30">
+  <div class="abs chip" id="chip">✏️ FILL IN THE BLANK</div>
+  <div class="abs q" id="q">I have known him <span class="blank" id="bl"></span> years.</div>
+  <div class="abs opts">
+    <div class="o" id="oA"><b>A</b>since</div>
+    <div class="o" id="oB"><b>B</b>for</div>
+    <div class="o" id="oC"><b>C</b>during</div>
+  </div>
+  <div class="abs cta" id="cta">Comment karo — <i>A, B ya C?</i> 👇</div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#chip", {opacity: 0, y: -16}, {opacity: 1, y: 0, duration: 0.35}, 0.9);
+  tl.fromTo("#q", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 1.0);
+  tl.to("#bl", {scale: 1.06, duration: 0.35, yoyo: true, repeat: 5}, 2.4);
+  tl.fromTo("#oA", {opacity: 0, x: -60}, {opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)"}, 3.9);
+  tl.fromTo("#oB", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.4, ease: "back.out(1.6)"}, 5.6);
+  tl.fromTo("#oC", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)"}, 7.6);
+  tl.call(() => document.querySelector("#oA").classList.add("hot"), null, 4.7);
+  tl.call(() => document.querySelector("#oA").classList.remove("hot"), null, 5.6);
+  tl.call(() => document.querySelector("#oB").classList.add("hot"), null, 6.7);
+  tl.call(() => document.querySelector("#oB").classList.remove("hot"), null, 7.6);
+  tl.call(() => document.querySelector("#oC").classList.add("hot"), null, 8.6);
+  tl.call(() => document.querySelector("#oC").classList.remove("hot"), null, 9.3);
+  tl.fromTo("#cta", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4}, 9.4);
+  tl.to(".o", {scale: 1.03, duration: 0.25, yoyo: true, repeat: 3, stagger: 0.12}, 9.6);
+  window.__timelines["main"] = tl;
+</script></body></html>
