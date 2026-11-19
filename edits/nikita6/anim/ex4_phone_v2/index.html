@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #5A3828 0%, #3A231A 50%, #1E120D 100%); font-family: Quick; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 65%; }
+.abs { position: absolute; }
+* { box-sizing: border-box; }
+/* phone mockup shared by the app / chat scenes */
+.phone { left: 250px; top: 740px; width: 580px; height: 1180px; border-radius: 86px; background: #15100D;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 5px #4A2E22; }
+.scr { left: 18px; top: 18px; width: 544px; height: 1144px; border-radius: 70px; overflow: hidden; background: #FFF4E6; }
+.island { left: 212px; top: 22px; width: 120px; height: 34px; border-radius: 17px; background: #000; }
+.card { border-radius: 30px; background: #FFFFFF; box-shadow: 0 10px 24px rgba(74,46,34,.14); }
+
+.chdr { left: 0; top: 0; width: 544px; height: 170px; background: #FFFFFF; box-shadow: 0 6px 16px rgba(74,46,34,.10); }
+.av { left: 36px; top: 84px; width: 66px; height: 66px; border-radius: 50%; background: linear-gradient(160deg, #FFC995, #E8475A); }
+.nm { left: 120px; top: 90px; font: 700 32px/1 Quick; color: #2B1A13; }
+.ol { left: 120px; top: 130px; font: 600 22px/1 Quick; color: #3FA27A; }
+.wall { left: 0; top: 170px; width: 544px; height: 974px; background: #F6EBDD; }
+.b { left: 30px; max-width: 380px; padding: 20px 26px; border-radius: 28px 28px 28px 8px; background: #FFFFFF; box-shadow: 0 6px 14px rgba(74,46,34,.10);
+  font: 700 32px/1.25 Quick; color: #2B1A13; }
+.me { left: auto; right: 30px; border-radius: 28px 28px 8px 28px; background: #E8475A; color: #FFF4E6; }
+.tm { font: 600 18px/1 Quick; color: #8A6A5C; margin-top: 8px; text-align: right; }
+.me .tm { color: rgba(255,244,230,.8); }
+.dots { padding: 22px 26px; }
+.dot { display: inline-block; width: 16px; height: 16px; margin: 0 4px; border-radius: 50%; background: #C5B3A8; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+
+<div class="abs phone"><div class="abs scr">
+  <div class="abs wall"></div>
+  <div class="abs chdr"><div class="abs av"></div><div class="abs nm">Mumma ❤️</div><div class="abs ol">online</div></div>
+  <div class="abs b me" id="m0" style="top:230px">Office se nikal rahi hoon<div class="tm">7:41 PM ✓✓</div></div>
+  <div class="abs b dots" id="ty" style="top:410px"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <div class="abs b" id="m1" style="top:410px">Kab aaoge? 🏠<div class="tm">7:42 PM</div></div>
+  <div class="abs b" id="m2" style="top:560px">Khana ready hai 🍲<div class="tm">7:42 PM</div></div>
+</div><div class="abs island"></div></div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0, y: 0}, {scale: 1.05, y: -20, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo(".phone", {y: 260, opacity: 0}, {y: 0, opacity: 1, duration: 0.55, ease: "power3.out"}, 0);
+  tl.fromTo("#m0", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 0.15);
+  tl.fromTo("#ty", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.2, ease: "power3.out"}, 0.3);
+  tl.fromTo("#ty .dot", {opacity: 0.35}, {opacity: 1, duration: 0.1, yoyo: true, repeat: 1, stagger: 0.06}, 0.32);
+  tl.set("#ty", {opacity: 0}, 0.55);
+  tl.fromTo("#m1", {opacity: 0, y: 24, scale: 0.97}, {opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out"}, 0.55);
+  tl.fromTo("#m2", {opacity: 0, y: 24, scale: 0.97}, {opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out"}, 0.85);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

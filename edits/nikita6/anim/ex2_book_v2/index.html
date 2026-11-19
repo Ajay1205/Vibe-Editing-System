@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #5A3828 0%, #3A231A 50%, #1E120D 100%); font-family: Quick; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 65%; }
+.abs { position: absolute; }
+* { box-sizing: border-box; }
+/* phone mockup shared by the app / chat scenes */
+.phone { left: 250px; top: 740px; width: 580px; height: 1180px; border-radius: 86px; background: #15100D;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 5px #4A2E22; }
+.scr { left: 18px; top: 18px; width: 544px; height: 1144px; border-radius: 70px; overflow: hidden; background: #FFF4E6; }
+.island { left: 212px; top: 22px; width: 120px; height: 34px; border-radius: 17px; background: #000; }
+.card { border-radius: 30px; background: #FFFFFF; box-shadow: 0 10px 24px rgba(74,46,34,.14); }
+
+.desk { left: 60px; top: 760px; width: 960px; height: 1040px; border-radius: 40px; background: linear-gradient(160deg, #A87250, #8A5534);
+  box-shadow: 0 40px 90px rgba(0,0,0,.55); overflow: hidden; }
+.grain { inset: 0; background: repeating-linear-gradient(100deg, rgba(255,255,255,.04) 0 6px, rgba(0,0,0,.03) 6px 14px); }
+.lap { left: 110px; top: 120px; width: 500px; height: 330px; border-radius: 22px; background: #2B2B30; box-shadow: 0 14px 30px rgba(0,0,0,.35); }
+.lscr { left: 20px; top: 20px; width: 460px; height: 290px; border-radius: 12px; background: linear-gradient(160deg, #9EB9F5, #C9A8F2); }
+.mug { left: 690px; top: 150px; width: 170px; height: 170px; border-radius: 50%; background: #FFF4E6; box-shadow: 0 12px 26px rgba(0,0,0,.35); }
+.cof { left: 25px; top: 25px; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #8A5534, #4A2E22); }
+.handle { left: 840px; top: 205px; width: 60px; height: 60px; border-radius: 50%; border: 16px solid #FFF4E6; }
+.note { left: 640px; top: 470px; width: 240px; height: 300px; border-radius: 12px; background: #FFE2CF; transform: rotate(8deg); box-shadow: 0 10px 22px rgba(0,0,0,.3); }
+.line { left: 30px; width: 180px; height: 8px; border-radius: 4px; background: rgba(74,46,34,.25); }
+.pen { left: 520px; top: 560px; width: 16px; height: 230px; border-radius: 8px; background: #E8475A; transform: rotate(-30deg); }
+.slot { left: 130px; top: 560px; width: 330px; height: 400px; border-radius: 18px; border: 7px dashed rgba(255,244,230,.85); }
+.slotq { left: 130px; top: 680px; width: 330px; text-align: center; font: 800 140px/1 Baloo; color: rgba(255,244,230,.9); }
+.lens { left: 330px; top: 600px; font: 120px/1 sans-serif; filter: drop-shadow(0 10px 18px rgba(0,0,0,.4)); }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+
+<div class="abs desk"><div class="abs grain"></div>
+  <div class="abs lap"><div class="abs lscr"></div></div>
+  <div class="abs mug"><div class="abs cof"></div></div><div class="abs handle"></div>
+  <div class="abs note"><div class="abs line" style="top:50px"></div><div class="abs line" style="top:90px"></div><div class="abs line" style="top:130px;width:120px"></div></div>
+  <div class="abs pen"></div>
+  <div class="abs slot"></div><div class="abs slotq">?</div>
+  <div class="abs lens">🔍</div>
+</div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0, y: 0}, {scale: 1.05, y: -20, duration: 2.2, ease: "none"}, 0);
+  
+  tl.fromTo(".desk", {opacity: 0, y: 200}, {opacity: 1, y: 0, duration: 0.55, ease: "power3.out"}, 0);
+  tl.fromTo(".lap, .mug, .handle, .note, .pen", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, ease: "power3.out", stagger: 0.07}, 0.2);
+  tl.fromTo(".slot", {opacity: 0, scale: 0.92}, {opacity: 1, scale: 1, duration: 0.45, ease: "power2.out"}, 0.55);
+  tl.fromTo(".slotq", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power2.out"}, 0.75);
+  tl.fromTo(".lens", {opacity: 0, x: -260, y: 120}, {opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power2.inOut"}, 0.7);
+  tl.to(".lens", {x: 60, y: -40, duration: 0.6, ease: "sine.inOut"}, 1.4);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

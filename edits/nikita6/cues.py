@@ -51,25 +51,25 @@ EX_INTRO = {"clip": "n65", "t": 0.50, "line": "Ab examples dekhte hain 👇"}
 # examples: the WH word is the first word of `en`
 EXAMPLES = [
     {"clip": "n65", "hi": "Aaj aapne kya khaya?", "hi_t": 2.80, "en": "What did you eat today?", "en_t": 4.70,
-     "broll": {"file": "ex1_food_anim.mp4", "in": 0.0}, "kw": "kya"},
+     "broll": {"file": "ex1_food_v2_anim.mp4", "in": 0.0}, "kw": "kya"},
     {"clip": "n65", "hi": "Meri book kahan hai?", "hi_t": 6.72, "en": "Where is my book?", "en_t": 8.35,
-     "broll": {"file": "ex2_book_anim.mp4", "in": 0.0}, "kw": "kahan"},
+     "broll": {"file": "ex2_book_v2_anim.mp4", "in": 0.0}, "kw": "kahan"},
     {"clip": "n65", "hi": "Tum late kyun ho?", "hi_t": 11.30, "en": "Why are you late today?", "en_t": 13.10,
-     "broll": {"file": "ex3_late_anim.mp4", "in": 0.0}, "kw": "kyun"},
+     "broll": {"file": "ex3_late_v2_anim.mp4", "in": 0.0}, "kw": "kyun"},
     {"clip": "n65", "hi": "Tum kab aaoge?", "hi_t": 15.67, "en": "When will you come?", "en_t": 17.05,
-     "broll": {"file": "ex4_phone_anim.mp4", "in": 0.0}, "kw": "kab"},
+     "broll": {"file": "ex4_phone_v2_anim.mp4", "in": 0.0}, "kw": "kab"},
     {"clip": "n65", "hi": "Tumhare class teacher kaun hain?", "hi_t": 19.53, "en": "Who is your class teacher?", "en_t": 21.63,
-     "broll": {"file": "ex5_teacher_anim.mp4", "in": 0.0}, "kw": "kaun"},
+     "broll": {"file": "ex5_teacher_v2_anim.mp4", "in": 0.0}, "kw": "kaun"},
     {"clip": "n65", "hi": "Tumhari favourite movie kaun si hai?", "hi_t": 23.80, "en": "Which is your favourite movie?", "en_t": 25.72,
-     "broll": {"file": "ex6_movie_anim.mp4", "in": 0.0}, "kw": "kaun si"},
+     "broll": {"file": "ex6_movie_v2_anim.mp4", "in": 0.0}, "kw": "kaun si"},
     {"clip": "n66", "hi": "Ye bag kiska hai?", "hi_t": 0.48, "en": "Whose bag is it?", "en_t": 1.92,
-     "broll": {"file": "ex7_bag_anim.mp4", "in": 0.0}, "kw": "kiska"},
+     "broll": {"file": "ex7_bag_v2_anim.mp4", "in": 0.0}, "kw": "kiska"},
 ]
 QUIZ = {"clip": "n66", "hi": "Tumhara favourite colour kaun sa hai?", "hi_t": 4.22, "en": "is your favourite colour?",
         "ask_t": 6.15, "ask": "💬 Kaun sa WH word? Comment karo!"}
 SAVE = {"clip": "n67", "save_t": 1.50, "strip_t": 7.15, "line": "<b>Save</b> karo!", "sub": "Confusion ho toh revisit karo"}
 READ_HOLD = 0.7  # each English card stays this long into the next Hindi question
-# AI cutaways (user, 19 Nov): on an example's Hindi question the picture cuts to an AI clip (muted) and the question
+# Cutaways (user, 19 Nov; grown-up style chosen for the 20+ audience, anim/make_scenes_grown.py): on an example's Hindi question the picture cuts to an AI clip (muted) and the question
 # pops BIG in the middle, word by word; back on her (just before the English card) the normal small caption returns.
 BROLL_DIR = "footage/nikita6/broll"
 BROLL_BACK = 0.10  # cut back to her this long before the English card lands

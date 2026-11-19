@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #5A3828 0%, #3A231A 50%, #1E120D 100%); font-family: Quick; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 65%; }
+.abs { position: absolute; }
+* { box-sizing: border-box; }
+/* phone mockup shared by the app / chat scenes */
+.phone { left: 250px; top: 740px; width: 580px; height: 1180px; border-radius: 86px; background: #15100D;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 5px #4A2E22; }
+.scr { left: 18px; top: 18px; width: 544px; height: 1144px; border-radius: 70px; overflow: hidden; background: #FFF4E6; }
+.island { left: 212px; top: 22px; width: 120px; height: 34px; border-radius: 17px; background: #000; }
+.card { border-radius: 30px; background: #FFFFFF; box-shadow: 0 10px 24px rgba(74,46,34,.14); }
+
+.sh { left: 30px; top: 110px; font: 700 26px/1 Quick; color: #8A6A5C; letter-spacing: 1px; }
+.sd { left: 30px; top: 150px; font: 700 48px/1 Quick; color: #2B1A13; }
+.cl { left: 30px; width: 484px; height: 150px; padding: 26px 26px 26px 34px; }
+.cl::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 8px; border-radius: 4px; background: var(--c); }
+.ct { font: 600 22px/1 Quick; color: #8A6A5C; }
+.cn { font: 700 34px/1.2 Quick; color: #2B1A13; margin-top: 10px; }
+.cr { font: 600 24px/1 Quick; color: #8A6A5C; margin-top: 10px; }
+.focus { box-shadow: 0 0 0 5px #E8475A, 0 16px 34px rgba(232,71,90,.30); }
+.who { display: inline-block; min-width: 110px; padding: 2px 16px; border-radius: 14px; border: 4px dashed #E8475A; color: #E8475A; text-align: center; }
+.pin { left: 420px; top: 470px; width: 70px; height: 70px; border-radius: 50%; background: #F1E4D6; border: 4px dashed #C5B3A8;
+  font: 800 40px/62px Baloo; color: #8A6A5C; text-align: center; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+
+<div class="abs phone"><div class="abs scr">
+  <div class="abs sh">MONDAY · NEW TERM</div><div class="abs sd">Today's classes</div>
+  <div class="abs card cl" id="c1" style="top:240px;--c:#9EB9F5"><div class="ct">9:00 – 9:45</div><div class="cn">Maths</div><div class="cr">Room 112 · Mr. Sharma</div></div>
+  <div class="abs card cl" id="c2" style="top:420px;--c:#E8475A"><div class="ct">10:00 – 10:45 · CLASS TEACHER</div><div class="cn">English</div>
+    <div class="cr">Room 204 · <span class="who">?</span></div></div>
+  <div class="abs pin" id="pin">?</div>
+  <div class="abs card cl" id="c3" style="top:600px;--c:#8FD6B8"><div class="ct">11:00 – 11:45</div><div class="cn">Science</div><div class="cr">Lab 3 · Ms. Iyer</div></div>
+</div><div class="abs island"></div></div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0, y: 0}, {scale: 1.05, y: -20, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo(".phone", {y: 260, opacity: 0}, {y: 0, opacity: 1, duration: 0.55, ease: "power3.out"}, 0);
+  tl.fromTo(".sh, .sd", {opacity: 0, y: 16}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out", stagger: 0.06}, 0.2);
+  tl.fromTo(".cl", {opacity: 0, x: 40}, {opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.12}, 0.35);
+  tl.to("#c2", {scale: 1.04, duration: 0.45, ease: "power2.out"}, 0.95);
+  tl.call(() => document.querySelector("#c2").classList.add("focus"), null, 0.95);
+  tl.fromTo("#pin", {opacity: 0, scale: 0.7}, {opacity: 1, scale: 1, duration: 0.4, ease: "power2.out"}, 1.1);
+  tl.fromTo(".who", {opacity: 0.4}, {opacity: 1, duration: 0.3, yoyo: true, repeat: 2, ease: "sine.inOut"}, 1.1);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

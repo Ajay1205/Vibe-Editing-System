@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: "Quick"; src: url(fonts/quicksand.woff2) format("woff2"); font-weight: 300 700; }
+@font-face { font-family: "Baloo"; src: url(fonts/baloo.woff2) format("woff2"); font-weight: 400 800; }
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #5A3828 0%, #3A231A 50%, #1E120D 100%); font-family: Quick; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 65%; }
+.abs { position: absolute; }
+* { box-sizing: border-box; }
+/* phone mockup shared by the app / chat scenes */
+.phone { left: 250px; top: 740px; width: 580px; height: 1180px; border-radius: 86px; background: #15100D;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 5px #4A2E22; }
+.scr { left: 18px; top: 18px; width: 544px; height: 1144px; border-radius: 70px; overflow: hidden; background: #FFF4E6; }
+.island { left: 212px; top: 22px; width: 120px; height: 34px; border-radius: 17px; background: #000; }
+.card { border-radius: 30px; background: #FFFFFF; box-shadow: 0 10px 24px rgba(74,46,34,.14); }
+
+.tv { left: 40px; top: 760px; width: 1000px; height: 660px; border-radius: 34px; background: #120C09; box-shadow: 0 40px 90px rgba(0,0,0,.6), inset 0 0 0 6px #3A231A; }
+.tvs { left: 22px; top: 22px; width: 956px; height: 616px; border-radius: 20px; overflow: hidden; background: linear-gradient(180deg, #2B1A13, #1A100C); }
+.lbl { left: 40px; top: 36px; font: 700 30px/1 Quick; color: #FFF4E6; }
+.po { top: 100px; width: 200px; height: 290px; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 22px rgba(0,0,0,.45); }
+.po2 { top: 410px; height: 170px; }
+.pick { box-shadow: 0 0 0 6px #FFF4E6, 0 20px 50px rgba(255,201,74,.45); z-index: 2; }
+.shape { border-radius: 50%; opacity: .85; }
+.play { left: 70px; top: 100px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,244,230,.92); }
+.play::after { content: ""; position: absolute; left: 23px; top: 17px; border-left: 22px solid #E8475A; border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+.stand { left: 470px; top: 1420px; width: 140px; height: 70px; background: #2B1A13; border-radius: 0 0 20px 20px; }
+.base { left: 380px; top: 1485px; width: 320px; height: 24px; border-radius: 12px; background: #2B1A13; }
+.sofa { left: 0; top: 1640px; width: 1080px; height: 300px; border-radius: 120px 120px 0 0; background: linear-gradient(180deg, #6B3F30, #3A231A); }
+.remote { left: 690px; top: 1600px; width: 70px; height: 210px; border-radius: 30px; background: #1A100C; transform: rotate(18deg); box-shadow: 0 12px 24px rgba(0,0,0,.5); }
+.btn { left: 22px; width: 26px; height: 26px; border-radius: 50%; background: #E8475A; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+
+<div class="abs tv"><div class="abs tvs">
+  <div class="abs lbl">Continue watching</div>
+  <div class="abs po" style="left:40px;background:linear-gradient(160deg,#9EB9F5,#4A5FA8)"><div class="abs shape" style="left:40px;top:60px;width:120px;height:120px;background:#FFF4E6"></div></div>
+  <div class="abs po" id="pk" style="left:268px;background:linear-gradient(160deg,#F7B3C2,#C93448)"><div class="abs shape" style="left:-30px;top:150px;width:260px;height:260px;background:#FFC995"></div><div class="abs play"></div></div>
+  <div class="abs po" style="left:496px;background:linear-gradient(160deg,#8FD6B8,#2E7D5E)"><div class="abs shape" style="left:60px;top:40px;width:80px;height:80px;background:#FFF4E6"></div></div>
+  <div class="abs po" style="left:724px;background:linear-gradient(160deg,#C9A8F2,#6B4FA8)"><div class="abs shape" style="left:20px;top:170px;width:160px;height:160px;background:#F7B3C2"></div></div>
+  <div class="abs po po2" style="left:40px;background:linear-gradient(160deg,#FFC995,#C9632E)"></div>
+  <div class="abs po po2" style="left:268px;background:linear-gradient(160deg,#9EB9F5,#6B4FA8)"></div>
+  <div class="abs po po2" style="left:496px;background:linear-gradient(160deg,#F7B3C2,#8A5534)"></div>
+  <div class="abs po po2" style="left:724px;background:linear-gradient(160deg,#8FD6B8,#4A5FA8)"></div>
+</div></div>
+<div class="abs stand"></div><div class="abs base"></div>
+<div class="abs sofa"></div>
+<div class="abs remote"><div class="abs btn" style="top:30px"></div><div class="abs btn" style="top:80px;background:#FFF4E6;opacity:.5"></div></div>
+
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0, y: 0}, {scale: 1.05, y: -20, duration: 2.2, ease: "none"}, 0);
+  
+  tl.fromTo(".tv, .stand, .base", {opacity: 0, y: 120}, {opacity: 1, y: 0, duration: 0.55, ease: "power3.out"}, 0);
+  tl.fromTo(".sofa, .remote", {opacity: 0, y: 160}, {opacity: 1, y: 0, duration: 0.55, ease: "power3.out"}, 0.1);
+  tl.fromTo(".lbl", {opacity: 0}, {opacity: 1, duration: 0.3}, 0.35);
+  tl.fromTo(".po", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, ease: "power3.out", stagger: 0.05}, 0.35);
+  tl.to("#pk", {scale: 1.12, duration: 0.5, ease: "power2.out"}, 1.0);
+  tl.call(() => document.querySelector("#pk").classList.add("pick"), null, 1.0);
+  tl.fromTo(".play", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "power2.out"}, 1.2);
+
+  window.__timelines["main"] = tl;
+</script></body></html>

@@ -147,6 +147,18 @@ Board: `edits/nikita6/board`. Cocoa #4A2E22 / latte #FFF4E6 / heart red #E8475A,
 - Sound: soft marimba notes (make_sfx.py) for the tiles. The user found the synthesised paper-flick/card-flip
   sound "very annoying"; never use it again.
 
+### Nikita 6 cutaways (19 Nov): grown-up animated scenes on every example
+- On each example's Hindi question the picture cuts to a 1.3-2 s animated scene (no AI apps: built in code with
+  HyperFrames, `anim/make_scenes_grown.py`, rendered to `footage/nikita6/broll/*_v2_anim.mp4`) and the question pops
+  BIG in the middle word by word with the WH word on a heart-red chip; back on her (0.1 s before the English card)
+  the small caption returns. `cues.py` EXAMPLES[].broll + kw drive it; `compose.py` lays the clips with hard cuts.
+- Audience is 20+: the first cartoon set (clock with eyes-and-bounce style, waving teacher, 👀) felt childish and was
+  replaced by GROWN-UP scenes: real adult moments (food-delivery order, desk from above, family chat, class schedule,
+  streaming grid, lost-and-found notice, lock screen with work notifications), flat editorial look, NO characters,
+  calm power3 slides, few emoji. The key beat of each scene must land within the cutaway (shortest is 1.3 s).
+- AI clips from Gemini work too (muted; prompts must show the person ASKING, adults only, "no dialogue, mouth
+  closed"), but the user chose not to use other apps.
+
 ## Approved style: Nikita 7 "Feelings in English" (`edits/nikita7`, Hindi -> English word list)
 
 Built from the user's reference (a full Hindi -> English list over the speaker), made more attention-grabbing.
