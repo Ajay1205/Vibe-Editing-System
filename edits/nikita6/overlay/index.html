@@ -47,7 +47,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
   background: rgba(74,46,34,.55); }
 .fam i { display: inline-block; padding: 9px 12px; border-radius: 16px; font: 800 26px/1 Baloo; color: var(--cocoa); font-style: normal; opacity: .45; }
 .hq { left: 30px; top: 382px; width: 1020px; text-align: center; white-space: nowrap; font: 700 48px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
-.bigq { left: 60px; top: 420px; width: 960px; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
+.bigq { left: 40px; top: 420px; width: 1000px; white-space: nowrap; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
   text-shadow: 0 4px 6px rgba(0,0,0,.45), 0 10px 34px rgba(0,0,0,.55); }
 .bigq .bw { display: inline-block; }
 .bigq b { display: inline-block; color: #fff; background: var(--heart); padding: 0 22px; border-radius: 30px; text-shadow: none;
@@ -111,7 +111,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
                 <div class="face fh"><div class="hib">kiska</div></div>
                 <div class="face fe"><div class="en">Whose</div><div class="hi">kiska</div></div></div></div></div></div>
 <div id="c2" class="clip" data-start="42.167" data-duration="2.362" data-track-index="1"><div class="layer"><div class="title small" id="c2-t"><span class="w">Ab</span> <span class="w">examples</span> <span class="w">dekhte</span> <span class="w">hain</span> <span class="w">👇</span></div></div></div>
-<div id="c3" class="clip" data-start="44.529" data-duration="4.620" data-track-index="3"><div class="layer"><div class="bigq" id="c3-bq"><span class="bw">Aaj</span> <span class="bw">aapne</span><br><span class="bw"><b>kya</b></span> <span class="bw">khaya?</span></div>
+<div id="c3" class="clip" data-start="44.529" data-duration="4.620" data-track-index="3"><div class="layer"><div class="bigq" id="c3-bq" style="font-size:120px"><span class="bw">Aaj</span> <span class="bw">aapne</span><br><span class="bw"><b>kya</b></span> <span class="bw">khaya?</span></div>
               <div class="hq" id="c3-hq"><span class="w">“Aaj</span> <span class="w">aapne</span> <span class="w">kya</span> <span class="w">khaya?”</span></div>
               <div class="ex" id="c3-x"><div class="card" id="c3-c"><div class="q"><span class="chip" style="background:var(--what)">What</span> <span class="w">did</span> <span class="w">you</span> <span class="w">eat</span> <span class="w">today?</span></div></div>
               <div class="lead">👑 QUESTION LEADER = FIRST WORD</div></div></div></div>
@@ -127,11 +127,11 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
               <div class="hq" id="c6-hq"><span class="w">“Tum</span> <span class="w">kab</span> <span class="w">aaoge?”</span></div>
               <div class="ex" id="c6-x"><div class="card" id="c6-c"><div class="q"><span class="chip" style="background:var(--when)">When</span> <span class="w">will</span> <span class="w">you</span> <span class="w">come?</span></div></div>
               <div class="lead">👑 QUESTION LEADER = FIRST WORD</div></div></div></div>
-<div id="c7" class="clip" data-start="59.356" data-duration="4.970" data-track-index="3"><div class="layer">
+<div id="c7" class="clip" data-start="59.356" data-duration="4.270" data-track-index="3"><div class="layer">
               <div class="hq" id="c7-hq" style="font-size:42px"><span class="w">“Tumhare</span> <span class="w">class</span> <span class="w">teacher</span> <span class="w">kaun</span> <span class="w">hain?”</span></div>
               <div class="ex" id="c7-x"><div class="card" id="c7-c"><div class="q"><span class="chip" style="background:var(--who)">Who</span> <span class="w">is</span> <span class="w">your</span> <span class="w">class</span> <span class="w">teacher?</span></div></div>
               <div class="lead">👑 QUESTION LEADER = FIRST WORD</div></div></div></div>
-<div id="c8" class="clip" data-start="63.626" data-duration="4.837" data-track-index="2"><div class="layer">
+<div id="c8" class="clip" data-start="63.626" data-duration="4.837" data-track-index="2"><div class="layer"><div class="bigq" id="c8-bq" style="font-size:76px"><span class="bw">Tumhari</span> <span class="bw">favourite</span> <span class="bw">movie</span><br><span class="bw"><b>kaun si</b></span> <span class="bw">hai?</span></div>
               <div class="hq" id="c8-hq" style="font-size:42px"><span class="w">“Tumhari</span> <span class="w">favourite</span> <span class="w">movie</span> <span class="w">kaun</span> <span class="w">si</span> <span class="w">hai?”</span></div>
               <div class="ex" id="c8-x"><div class="card" id="c8-c"><div class="q"><span class="chip" style="background:var(--which)">Which</span> <span class="w">is</span> <span class="w">your</span> <span class="w">favourite</span> <span class="w">movie?</span></div></div>
               <div class="lead">👑 QUESTION LEADER = FIRST WORD</div></div></div></div>
@@ -257,8 +257,8 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: transp
               tl.fromTo("#c7-c", {opacity: 0, scale: 0.5, y: 40}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.9)"}, 61.356);
               tl.fromTo("#c7-c .chip", {scale: 1.6, rotation: -10}, {scale: 1, rotation: 0, duration: 0.45, ease: "back.out(3)"}, 61.456);
               tl.fromTo("#c7-c .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: 0.09}, 61.606);
-              tl.fromTo("#c7 .lead", {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.3}, 61.956);tl.to("#c7-hq", {opacity: 0, y: -16, duration: 0.2}, 63.425999999999995);tl.to("#c7-x", {opacity: 0, y: -24, scale: 0.92, duration: 0.25, ease: "power2.in"}, 64.076);
-              tl.fromTo("#c8-hq .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 63.626);
+              tl.fromTo("#c7 .lead", {opacity: 0, y: -10}, {opacity: 1, y: 0, duration: 0.3}, 61.956);tl.to("#c7-hq", {opacity: 0, y: -16, duration: 0.2}, 63.425999999999995);tl.to("#c7-x", {opacity: 0, y: -24, scale: 0.92, duration: 0.25, ease: "power2.in"}, 63.376);tl.fromTo("#c8-bq .bw:nth-of-type(1)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 63.626);tl.fromTo("#c8-bq .bw:nth-of-type(2)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 64.077);tl.fromTo("#c8-bq .bw:nth-of-type(3)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 64.461);tl.fromTo("#c8-bq .bw:nth-of-type(4)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 64.745);tl.fromTo("#c8-bq .bw:nth-of-type(5)", {opacity: 0, scale: 0.3, y: 50}, {opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}, 65.146);tl.fromTo("#c8-bq b", {scale: 1}, {scale: 1.12, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut"}, 65.396);tl.set("#c8-bq", {opacity: 0}, 65.446);
+              tl.fromTo("#c8-hq .w", {opacity: 0, y: 22, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 65.446);
               tl.fromTo("#c8-c", {opacity: 0, scale: 0.5, y: 40}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.9)"}, 65.44600000000001);
               tl.fromTo("#c8-c .chip", {scale: 1.6, rotation: -10}, {scale: 1, rotation: 0, duration: 0.45, ease: "back.out(3)"}, 65.546);
               tl.fromTo("#c8-c .w", {opacity: 0, y: 14}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out", stagger: 0.09}, 65.69600000000001);

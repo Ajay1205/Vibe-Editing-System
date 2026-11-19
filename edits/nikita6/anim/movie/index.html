@@ -1,0 +1,82 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script src="vendor/gsap.min.js"></script>
+<style>
+/* Nikita 6 cutaway: "Tumhari favourite movie kaun si hai?" -- animated cinema in the WH Family palette.
+   Designed on a 1080x1920 stage, rendered natively at 2160x3840 (stage scaled 2x). The big question caption
+   (y 420-680 on the stage) comes from the main overlay, so the screen sits below it. */
+html, body { margin: 0; background: #1E120D; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #1E120D; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 55%, #5A3828 0%, #3A231A 45%, #1E120D 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 52%; }
+.abs { position: absolute; }
+/* screen */
+#frame { left: 95px; top: 745px; width: 890px; height: 530px; border-radius: 34px; background: #FFF4E6; box-shadow: 0 0 120px 30px rgba(255,214,170,.35); }
+#screen { left: 110px; top: 760px; width: 860px; height: 500px; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(180deg, #B9A6F5 0%, #F7B3C2 45%, #FFC995 75%, #FFE2B8 100%); }
+#sun { left: 340px; top: 300px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, #FFF6D9 0%, #FFD36E 60%, #FFB85C 100%);
+  box-shadow: 0 0 80px 30px rgba(255,214,120,.65); }
+#m1 { left: -60px; top: 250px; width: 560px; height: 260px; background: #8FD6B8; clip-path: polygon(0 100%, 45% 0, 100% 100%); }
+#m2 { left: 380px; top: 200px; width: 620px; height: 310px; background: #9EB9F5; clip-path: polygon(0 100%, 52% 0, 100% 100%); }
+#m3 { left: 160px; top: 330px; width: 520px; height: 180px; background: #C9A8F2; clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+.bird { font: 800 40px/1 sans-serif; color: #4A2E22; }
+.star { width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px 4px rgba(255,255,255,.8); }
+/* curtains */
+.cur { top: 640px; width: 560px; height: 760px; background: repeating-linear-gradient(90deg, #C93448 0 40px, #E8475A 40px 80px, #B82C40 80px 110px);
+  box-shadow: inset 0 -40px 60px rgba(0,0,0,.35), 0 20px 40px rgba(0,0,0,.4); }
+#curL { left: 0; border-bottom-right-radius: 120px; }
+#curR { left: 520px; border-bottom-left-radius: 120px; }
+#valance { left: 40px; top: 600px; width: 1000px; height: 110px; border-radius: 0 0 50px 50px;
+  background: repeating-linear-gradient(90deg, #B82C40 0 60px, #D63A50 60px 120px); box-shadow: 0 14px 30px rgba(0,0,0,.45); }
+/* beam + seats */
+#beam { left: 140px; top: 1240px; width: 800px; height: 520px; clip-path: polygon(50% 100%, 0 0, 100% 0);
+  background: linear-gradient(0deg, rgba(255,244,230,.55), rgba(255,244,230,0)); mix-blend-mode: screen; }
+.seat { height: 150px; border-radius: 48px 48px 14px 14px; background: linear-gradient(180deg, #6B3F30, #3A231A); box-shadow: 0 -4px 0 #85503D inset; }
+.head { width: 120px; height: 140px; border-radius: 60px 60px 40px 40px; background: #24150F; }
+#pop { left: 760px; top: 1480px; font: 170px/1 sans-serif; filter: drop-shadow(0 18px 24px rgba(0,0,0,.5)); }
+.spark { font: 60px/1 sans-serif; }
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="2.2" data-width="2160" data-height="3840" data-fps="30">
+ <div id="stage"><div id="cam">
+  <div id="frame" class="abs"></div>
+  <div id="screen" class="abs">
+    <div id="sun" class="abs"></div>
+    <div id="m1" class="abs"></div><div id="m2" class="abs"></div><div id="m3" class="abs"></div>
+    <div class="abs star" style="left:120px;top:70px"></div><div class="abs star" style="left:690px;top:110px"></div>
+    <div class="abs star" style="left:420px;top:50px"></div><div class="abs star" style="left:780px;top:40px"></div>
+    <div id="b1" class="abs bird" style="left:-80px;top:150px">︶</div><div id="b2" class="abs bird" style="left:-160px;top:190px">︶</div>
+  </div>
+  <div id="beam" class="abs"></div>
+  <div id="curL" class="abs cur"></div><div id="curR" class="abs cur"></div>
+  <div id="valance" class="abs"></div>
+  <div class="abs seat" style="left:-40px;top:1560px;width:300px"></div><div class="abs seat" style="left:280px;top:1560px;width:300px"></div>
+  <div class="abs seat" style="left:600px;top:1560px;width:300px"></div><div class="abs seat" style="left:920px;top:1560px;width:300px"></div>
+  <div class="abs head" style="left:120px;top:1440px"></div><div class="abs head" style="left:470px;top:1460px"></div>
+  <div id="pop" class="abs">🍿</div>
+  <div class="abs seat" style="left:-120px;top:1760px;width:320px;height:200px"></div><div class="abs seat" style="left:220px;top:1760px;width:320px;height:200px"></div>
+  <div class="abs seat" style="left:560px;top:1760px;width:320px;height:200px"></div><div class="abs seat" style="left:900px;top:1760px;width:320px;height:200px"></div>
+  <div id="s1" class="abs spark" style="left:70px;top:860px">✨</div><div id="s2" class="abs spark" style="left:950px;top:1180px">✨</div>
+  <div id="s3" class="abs spark" style="left:930px;top:720px">✨</div>
+ </div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.07, duration: 2.2, ease: "none"}, 0);
+  tl.fromTo("#curL", {x: 0}, {x: -470, duration: 0.6, ease: "power2.inOut"}, 0.05);
+  tl.fromTo("#curR", {x: 0}, {x: 470, duration: 0.6, ease: "power2.inOut"}, 0.05);
+  tl.fromTo("#sun", {y: 140}, {y: 0, duration: 1.8, ease: "power1.out"}, 0.1);
+  tl.fromTo("#screen", {filter: "brightness(.6)"}, {filter: "brightness(1)", duration: 0.5}, 0.15);
+  tl.fromTo("#frame", {boxShadow: "0 0 40px 6px rgba(255,214,170,.15)"}, {boxShadow: "0 0 140px 40px rgba(255,214,170,.45)", duration: 0.6}, 0.2);
+  tl.to("#b1", {x: 1050, y: -40, duration: 2.0, ease: "none"}, 0.2);
+  tl.to("#b2", {x: 1100, y: -30, duration: 2.0, ease: "none"}, 0.3);
+  tl.fromTo(".star", {opacity: 0.2, scale: 0.6}, {opacity: 1, scale: 1.2, duration: 0.35, yoyo: true, repeat: 5, stagger: 0.12}, 0);
+  tl.fromTo("#beam", {opacity: 0}, {opacity: 0.9, duration: 0.3}, 0.25);
+  tl.to("#beam", {opacity: 0.6, duration: 0.09, yoyo: true, repeat: 15, ease: "steps(1)"}, 0.55);
+  tl.fromTo("#pop", {y: 60, rotation: -8, opacity: 0}, {y: 0, rotation: 0, opacity: 1, duration: 0.45, ease: "back.out(2.5)"}, 0.3);
+  tl.to("#pop", {y: -26, rotation: 6, duration: 0.28, yoyo: true, repeat: 4, ease: "sine.inOut"}, 0.8);
+  tl.fromTo(".spark", {scale: 0, rotation: -40, opacity: 0}, {scale: 1, rotation: 0, opacity: 1, duration: 0.4, ease: "back.out(3)", stagger: 0.18}, 0.5);
+  tl.to(".spark", {scale: 0.7, duration: 0.3, yoyo: true, repeat: 3, stagger: 0.1}, 1.0);
+  window.__timelines["main"] = tl;
+</script>
+</body></html>

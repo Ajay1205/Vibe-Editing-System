@@ -135,23 +135,34 @@ def build(res=2160):
             track = 2 + (c["n"] % 2)  # alternate tracks so the held card can overlap the next question
             lead = '<div class="lead">👑 QUESTION LEADER = FIRST WORD</div>'
             big = ""
-            if c.get("broll_end"):  # big popping question over the AI cutaway
-                toks = []
-                for w in c["hi"].split():
-                    bare = w.strip("?!.,").lower()
-                    inner = html.escape(w)
-                    if bare == c["kw"].lower():
-                        inner = f'<b>{html.escape(w.rstrip("?!.,"))}</b>{html.escape(w[len(w.rstrip("?!.,")):])}'
-                    toks.append(f'<span class="bw">{inner}</span>')
+            if c.get("broll_end"):  # big popping question over the cutaway; the WH phrase (kw) on a red chip
+                ws, kw = c["hi"].split(), c["kw"].lower().split()
+                bare = [w.strip("?!.,").lower() for w in ws]
+                k0 = next((i for i in range(len(ws)) if kw and bare[i:i + len(kw)] == kw), -1)
+                toks, firsts, i = [], [], 0
+                while i < len(ws):
+                    if i == k0:
+                        last = ws[i + len(kw) - 1]
+                        core = " ".join(ws[i:i + len(kw) - 1] + [last.rstrip("?!.,")])
+                        toks.append(f'<span class="bw"><b>{html.escape(core)}</b>{html.escape(last[len(last.rstrip("?!.,")):])}</span>')
+                        firsts.append(i)
+                        i += len(kw)
+                    else:
+                        toks.append(f'<span class="bw">{html.escape(ws[i])}</span>')
+                        firsts.append(i)
+                        i += 1
+                c["span_pops"] = [c["pops"][j] for j in firsts]
                 half = (len(toks) + 1) // 2
-                big = f'<div class="bigq" id="{cid}-bq">{" ".join(toks[:half])}<br>{" ".join(toks[half:])}</div>'
+                fs = 120 if len(c["hi"]) <= 22 else 76  # long questions stay on two lines, above the cutaway subject
+                big = (f'<div class="bigq" id="{cid}-bq" style="font-size:{fs}px">{" ".join(toks[:half])}<br>'
+                       f'{" ".join(toks[half:])}</div>')
             els.append(clip(cid, s, e, track, f"""{big}
               <div class="hq" id="{cid}-hq"{' style="font-size:42px"' if len(c['hi']) > 28 else ''}>{words(chr(8220) + c['hi'] + chr(8221))}</div>
               <div class="ex" id="{cid}-x"><div class="card" id="{cid}-c"><div class="q"><span class="chip" style="{bg(wh)}">{wh}</span> {words(rest)}</div></div>
               {lead}</div>"""))
             hq_t = c.get("broll_end", c["hi_t"])
             if c.get("broll_end"):
-                for j, t in enumerate(c["pops"]):
+                for j, t in enumerate(c["span_pops"]):
                     js.append(f'tl.fromTo("#{cid}-bq .bw:nth-of-type({j + 1})", {{opacity: 0, scale: 0.3, y: 50}}, '
                               f'{{opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2.6)"}}, {t});')
                 js.append(f'tl.fromTo("#{cid}-bq b", {{scale: 1}}, {{scale: 1.12, duration: 0.22, yoyo: true, repeat: 1, ease: "sine.inOut"}}, '
@@ -269,7 +280,7 @@ html, body { width: 2160px; height: 3840px; overflow: hidden; background: transp
   background: rgba(74,46,34,.55); }
 .fam i { display: inline-block; padding: 9px 12px; border-radius: 16px; font: 800 26px/1 Baloo; color: var(--cocoa); font-style: normal; opacity: .45; }
 .hq { left: 30px; top: 382px; width: 1020px; text-align: center; white-space: nowrap; font: 700 48px/1.2 Quick; color: #fff; text-shadow: var(--sh); }
-.bigq { left: 60px; top: 420px; width: 960px; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
+.bigq { left: 40px; top: 420px; width: 1000px; white-space: nowrap; text-align: center; font: 800 120px/1.08 Baloo; color: #fff;
   text-shadow: 0 4px 6px rgba(0,0,0,.45), 0 10px 34px rgba(0,0,0,.55); }
 .bigq .bw { display: inline-block; }
 .bigq b { display: inline-block; color: #fff; background: var(--heart); padding: 0 22px; border-radius: 30px; text-shadow: none;

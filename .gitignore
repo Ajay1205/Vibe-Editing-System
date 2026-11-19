@@ -25,3 +25,5 @@ edits/*/board/gsap.min.js
 edits/*/board/.hyperframes/
 edits/*/board/bg_*.png
 edits/*/overlay/img/
+edits/*/anim/*/vendor/
+edits/*/anim/*/.hyperframes/

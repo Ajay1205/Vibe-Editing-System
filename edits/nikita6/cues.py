@@ -56,7 +56,8 @@ EXAMPLES = [
     {"clip": "n65", "hi": "Tum late kyun ho?", "hi_t": 11.30, "en": "Why are you late today?", "en_t": 13.10},
     {"clip": "n65", "hi": "Tum kab aaoge?", "hi_t": 15.67, "en": "When will you come?", "en_t": 17.05},
     {"clip": "n65", "hi": "Tumhare class teacher kaun hain?", "hi_t": 19.53, "en": "Who is your class teacher?", "en_t": 21.63},
-    {"clip": "n65", "hi": "Tumhari favourite movie kaun si hai?", "hi_t": 23.80, "en": "Which is your favourite movie?", "en_t": 25.72},
+    {"clip": "n65", "hi": "Tumhari favourite movie kaun si hai?", "hi_t": 23.80, "en": "Which is your favourite movie?", "en_t": 25.72,
+     "broll": {"file": "ex6_movie_anim.mp4", "in": 0.0}, "kw": "kaun si"},
     {"clip": "n66", "hi": "Ye bag kiska hai?", "hi_t": 0.48, "en": "Whose bag is it?", "en_t": 1.92},
 ]
 QUIZ = {"clip": "n66", "hi": "Tumhara favourite colour kaun sa hai?", "hi_t": 4.22, "en": "is your favourite colour?",
@@ -75,7 +76,12 @@ def word_times(start, end, n):
     shifted to put the first word on `start`); evenly spaced if Whisper split the words differently."""
     ws = [w["start"] for w in WORDS if w["end"] > start - 0.1 and w["start"] < end - 0.2][:n]
     if len(ws) == n:
-        return [round(start + (t - ws[0]), 3) for t in ws]
+        ts = [start + (t - ws[0]) for t in ws]
+        limit = end - 0.3  # the last word must be on screen for a moment before the cut back
+        if ts[-1] > limit:
+            k = (limit - start) / max(ts[-1] - start, 1e-6)
+            ts = [start + (t - start) * k for t in ts]
+        return [round(t, 3) for t in ts]
     step = (end - start - 0.3) / max(n, 1)
     return [round(start + k * step, 3) for k in range(n)]
 # ---------------------------------------------------------------------------------------------------------
@@ -111,7 +117,9 @@ def build():
                  "line": EX_INTRO["line"]})
     starts = [at(e["clip"], e["hi_t"]) for e in EXAMPLES]
     quiz_t = at(QUIZ["clip"], QUIZ["hi_t"])
-    ends = [starts[k + 1] + READ_HOLD for k in range(len(EXAMPLES) - 1)] + [quiz_t]
+    # the English card stays READ_HOLD into the next question, except when that question cuts to a cutaway:
+    # then it leaves at the cut, so it never sits on top of the big popping question
+    ends = [starts[k + 1] + (0.0 if EXAMPLES[k + 1].get("broll") else READ_HOLD) for k in range(len(EXAMPLES) - 1)] + [quiz_t]
     for k, e in enumerate(EXAMPLES):
         c = e["clip"]
         en_t = at(c, e["en_t"])
