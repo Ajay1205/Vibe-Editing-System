@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #0E2A26; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #0E2A26; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 58%, #22584E 0%, #17423C 50%, #0E2A26 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 40px; top: 300px; width: 1000px; text-align: center; font: 800 76px/1.12 Brico; color: #fff; }
+.top .hl { display: inline-block; padding: 0 16px; border-radius: 16px; background: var(--pen); color: var(--ink); }
+.sub { left: 0; top: 0; width: 1080px; text-align: center; font: 800 36px/1 PJS; color: var(--mint); letter-spacing: 1px; }
+.chip { padding: 14px 26px; border-radius: 34px; background: var(--pen); color: var(--teal); font: 800 36px/1 PJS; letter-spacing: 2px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.35); white-space: nowrap; }
+.word { left: 0; top: 300px; width: 1080px; text-align: center; font: 400 150px/1 Anton; color: #fff; text-transform: uppercase; }
+.word small { display: block; font: 800 44px/1 PJS; letter-spacing: 8px; color: var(--pen); margin-bottom: 18px; }
+.card { border-radius: 36px; background: var(--paper); box-shadow: 0 40px 90px rgba(0,0,0,.5); overflow: hidden; }
+
+.jun { left: 60px; top: 700px; width: 960px; height: 980px; border-radius: 40px; background: radial-gradient(ellipse at 50% 60%, #1D3B22, #0B1A0E); overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6); }
+.leaf { border-radius: 0 100% 0 100%; background: #2F6B3A; }
+.eye { width: 70px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #FFE27A 0%, #FFC94A 45%, #B36B00 100%);
+  box-shadow: 0 0 40px 10px rgba(255,201,74,.55); }
+.eye::after { content: ""; position: absolute; left: 30px; top: 4px; width: 10px; height: 32px; border-radius: 5px; background: #111; }
+.paw { font: 64px/1 sans-serif; opacity: 0; filter: grayscale(1) brightness(2.2); }
+.stripes { left: 0; top: 0; width: 960px; height: 80px; background: repeating-linear-gradient(115deg, #F28C28 0 50px, #111 50px 80px); }
+.pc { left: 620px; top: 1580px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3.6" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Mujhe <span class="hl">tiger</span> se dar lagta hai.<div class="sub" style="position:static;margin-top:16px">I am scared of tigers.</div></div><div class="abs jun" id="jn"><div class="abs stripes"></div>
+ <div class="abs leaf" style="left:-60px;top:500px;width:420px;height:300px;transform:rotate(-20deg)"></div>
+ <div class="abs leaf" style="left:600px;top:560px;width:420px;height:300px;transform:rotate(200deg);background:#245A2F"></div>
+ <div class="abs leaf" style="left:250px;top:720px;width:500px;height:320px;transform:rotate(10deg);background:#1F4E29"></div>
+ <div class="abs eye" id="e1" style="left:380px;top:360px"></div><div class="abs eye" id="e2" style="left:510px;top:360px"></div>
+ <div class="abs paw" style="left:120px;top:860px">🐾</div><div class="abs paw" style="left:300px;top:780px">🐾</div>
+ <div class="abs paw" style="left:480px;top:860px">🐾</div><div class="abs paw" style="left:660px;top:780px">🐾</div></div>
+<div class="abs chip pc" id="pc">🐯 ANIMAL</div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.05, duration: 3.6, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, ease: "power3.out"}, 0.05);tl.fromTo("#tp .hl", {backgroundColor: "rgba(255,201,74,0)", color: "#ffffff"}, {backgroundColor: "rgba(255,201,74,1)", color: "#23324A", duration: 0.3}, 0.6);tl.fromTo("#jn", {opacity: 0, scale: 0.94}, {opacity: 1, scale: 1, duration: 0.45, ease: "power3.out"}, 0.0);
+tl.fromTo(".eye", {opacity: 0, scaleY: 0.1}, {opacity: 1, scaleY: 1, duration: 0.25, ease: "power2.out"}, 0.35);
+tl.to(".eye", {scaleY: 0.1, duration: 0.07, yoyo: true, repeat: 1}, 1.4);
+tl.to(".paw", {opacity: 0.9, duration: 0.15, stagger: 0.18}, 0.55);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.75);
+  window.__timelines["main"] = tl;
+</script></body></html>

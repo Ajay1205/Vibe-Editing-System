@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #0E2A26; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #0E2A26; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 58%, #22584E 0%, #17423C 50%, #0E2A26 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 40px; top: 300px; width: 1000px; text-align: center; font: 800 76px/1.12 Brico; color: #fff; }
+.top .hl { display: inline-block; padding: 0 16px; border-radius: 16px; background: var(--pen); color: var(--ink); }
+.sub { left: 0; top: 0; width: 1080px; text-align: center; font: 800 36px/1 PJS; color: var(--mint); letter-spacing: 1px; }
+.chip { padding: 14px 26px; border-radius: 34px; background: var(--pen); color: var(--teal); font: 800 36px/1 PJS; letter-spacing: 2px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.35); white-space: nowrap; }
+.word { left: 0; top: 300px; width: 1080px; text-align: center; font: 400 150px/1 Anton; color: #fff; text-transform: uppercase; }
+.word small { display: block; font: 800 44px/1 PJS; letter-spacing: 8px; color: var(--pen); margin-bottom: 18px; }
+.card { border-radius: 36px; background: var(--paper); box-shadow: 0 40px 90px rgba(0,0,0,.5); overflow: hidden; }
+
+.paper { left: 110px; top: 740px; width: 860px; height: 760px; border-radius: 30px; background: var(--paper); box-shadow: 0 40px 90px rgba(0,0,0,.5);
+  background-image: repeating-linear-gradient(180deg, transparent 0 79px, #CFE0EE 79px 82px); overflow: hidden; }
+.mg { left: 90px; top: 0; width: 4px; height: 760px; background: var(--red); opacity: .7; }
+.wclip { left: 150px; top: 250px; width: 0; height: 220px; overflow: hidden; }
+.wtxt { left: 0; top: 0; width: 700px; font: 700 200px/1 Cav; color: var(--ink); white-space: nowrap; }
+.ul { left: 160px; top: 470px; width: 560px; height: 14px; border-radius: 7px; background: var(--pen); transform-origin: 0 50%; }
+.pencil { left: 0; top: 0; width: 520px; height: 64px; transform-origin: 0 50%; }
+.body { left: 70px; top: 0; width: 380px; height: 64px; background: linear-gradient(180deg, #FFD86B, #FFC94A 50%, #E9A92A); }
+.tip { left: 0; top: 0; width: 72px; height: 64px; background: #F1D2A8; clip-path: polygon(0 50%, 100% 0, 100% 100%); }
+.lead { left: 0; top: 22px; width: 24px; height: 20px; background: #333; clip-path: polygon(0 50%, 100% 0, 100% 100%); }
+.band { left: 450px; top: 0; width: 26px; height: 64px; background: #B9BAC4; }
+.eras { left: 476px; top: 0; width: 60px; height: 64px; border-radius: 0 18px 18px 0; background: #F7B3C2; }
+.pwrap { left: 150px; top: 380px; transform: rotate(-35deg); transform-origin: 0 50%; }
+.pc { left: 640px; top: 1560px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3.6" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">I have a <span class="hl">pencil</span>.</div><div class="abs paper" id="pp"><div class="abs mg"></div>
+ <div class="abs wclip" id="wc"><div class="abs wtxt">pencil</div></div><div class="abs ul" id="ul"></div>
+ <div class="abs pwrap" id="pw"><div class="abs pencil"><div class="abs body"></div><div class="abs tip"></div><div class="abs lead"></div>
+  <div class="abs band"></div><div class="abs eras"></div></div></div></div>
+<div class="abs chip pc" id="pc">✏️ THING</div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.05, duration: 3.6, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, ease: "power3.out"}, 0.05);tl.fromTo("#tp .hl", {backgroundColor: "rgba(255,201,74,0)", color: "#ffffff"}, {backgroundColor: "rgba(255,201,74,1)", color: "#23324A", duration: 0.3}, 0.6);tl.fromTo("#pp", {opacity: 0, y: 120, rotation: 3}, {opacity: 1, y: 0, rotation: 0, duration: 0.45, ease: "power3.out"}, 0.0);
+tl.fromTo("#pw", {x: 0, y: -60}, {x: 560, y: -60, duration: 0.6, ease: "none"}, 0.25);
+tl.fromTo("#wc", {width: 0}, {width: 620, duration: 0.6, ease: "none"}, 0.25);
+tl.to("#pw", {x: 30, y: 60, duration: 0.25, ease: "power2.inOut"}, 0.88);
+tl.fromTo("#ul", {scaleX: 0}, {scaleX: 1, duration: 0.35, ease: "power2.out"}, 1.1);
+tl.to("#pw", {x: 600, y: 60, duration: 0.35, ease: "power2.out"}, 1.1);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.75);
+  window.__timelines["main"] = tl;
+</script></body></html>

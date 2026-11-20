@@ -30,3 +30,6 @@ edits/*/anim/*/.hyperframes/
 edits/*/anim/*/fonts/
 edits/*/board/vendor/
 edits/*/board/style_board*.png
+edits/*/overlay/*/vendor/
+edits/*/overlay/*/fonts/
+edits/*/overlay/*/.hyperframes/

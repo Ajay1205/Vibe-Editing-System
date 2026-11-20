@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #0E2A26; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #0E2A26; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 58%, #22584E 0%, #17423C 50%, #0E2A26 100%); }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 40px; top: 300px; width: 1000px; text-align: center; font: 800 76px/1.12 Brico; color: #fff; }
+.top .hl { display: inline-block; padding: 0 16px; border-radius: 16px; background: var(--pen); color: var(--ink); }
+.sub { left: 0; top: 0; width: 1080px; text-align: center; font: 800 36px/1 PJS; color: var(--mint); letter-spacing: 1px; }
+.chip { padding: 14px 26px; border-radius: 34px; background: var(--pen); color: var(--teal); font: 800 36px/1 PJS; letter-spacing: 2px;
+  box-shadow: 0 12px 26px rgba(0,0,0,.35); white-space: nowrap; }
+.word { left: 0; top: 300px; width: 1080px; text-align: center; font: 400 150px/1 Anton; color: #fff; text-transform: uppercase; }
+.word small { display: block; font: 800 44px/1 PJS; letter-spacing: 8px; color: var(--pen); margin-bottom: 18px; }
+.card { border-radius: 36px; background: var(--paper); box-shadow: 0 40px 90px rgba(0,0,0,.5); overflow: hidden; }
+
+.map { left: 120px; top: 720px; width: 840px; height: 900px; border-radius: 40px; background: #EAF3EC; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+.road { background: #FFFFFF; border-radius: 10px; }
+.sea { left: 0; top: 0; width: 260px; height: 900px; background: #BFE0EE; border-radius: 0 60% 40% 0; }
+.park { border-radius: 40%; background: #CBE7C8; }
+.pin { left: 470px; top: 980px; width: 110px; height: 110px; border-radius: 55px 55px 55px 0; transform: rotate(-45deg); background: var(--red); box-shadow: 0 16px 30px rgba(0,0,0,.35); }
+.pin i { position: absolute; left: 35px; top: 35px; width: 40px; height: 40px; border-radius: 50%; background: #fff; }
+.ring { left: 445px; top: 1060px; width: 160px; height: 60px; border-radius: 50%; border: 6px solid var(--red); }
+.city { left: 360px; top: 1130px; padding: 14px 26px; border-radius: 30px; background: #fff; font: 800 48px/1 Brico; color: var(--ink); box-shadow: 0 12px 26px rgba(0,0,0,.25); }
+.pc { left: 600px; top: 1560px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3.6" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Main <span class="hl">Mumbai</span> mein rehti hoon.<div class="sub" style="position:static;margin-top:16px">I live in Mumbai.</div></div><div class="abs map" id="mp"><div class="abs sea"></div>
+ <div class="abs road" style="left:200px;top:300px;width:700px;height:30px;transform:rotate(-12deg)"></div>
+ <div class="abs road" style="left:420px;top:0;width:30px;height:900px;transform:rotate(8deg)"></div>
+ <div class="abs road" style="left:250px;top:620px;width:620px;height:22px;transform:rotate(6deg)"></div>
+ <div class="abs park" style="left:560px;top:420px;width:200px;height:150px"></div><div class="abs park" style="left:300px;top:720px;width:160px;height:120px"></div></div>
+<div class="abs ring" id="rg"></div><div class="abs pin" id="pn"><i></i></div><div class="abs city" id="ct">Mumbai</div>
+<div class="abs chip pc" id="pc">📍 PLACE</div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.05, duration: 3.6, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, ease: "power3.out"}, 0.05);tl.fromTo("#tp .hl", {backgroundColor: "rgba(255,201,74,0)", color: "#ffffff"}, {backgroundColor: "rgba(255,201,74,1)", color: "#23324A", duration: 0.3}, 0.6);tl.fromTo("#mp", {opacity: 0, y: 120, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out"}, 0.0);
+tl.fromTo("#pn", {y: -400, opacity: 0}, {y: 0, opacity: 1, duration: 0.4, ease: "power3.in"}, 0.3);
+tl.fromTo("#rg", {scale: 0.2, opacity: 1}, {scale: 1.6, opacity: 0, duration: 0.7, ease: "power2.out"}, 0.7);
+tl.fromTo("#ct", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 0.62);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.8);
+  window.__timelines["main"] = tl;
+</script></body></html>
