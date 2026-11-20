@@ -1,0 +1,179 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.45); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; }
+.clip { position: absolute; inset: 0; } .layer { position: absolute; inset: 0; }
+.layer > div { position: absolute; }
+.w { display: inline-block; }
+/* hook A */
+.h1 { left: 0; top: 290px; width: 1080px; text-align: center; font: 400 104px/1.02 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.h1 span, .h1 em { display: inline-block; } .h1 em { font-style: normal; color: var(--pen); }
+.def { left: 150px; top: 590px; width: 780px; padding: 24px 30px; border-radius: 18px; background: rgba(255,249,238,.95); transform: rotate(-3deg);
+  font: 800 32px/1.25 Brico; color: #6B6B6B; box-shadow: 0 16px 34px rgba(0,0,0,.3); }
+.slash { left: 130px; top: 670px; width: 820px; height: 14px; border-radius: 7px; background: var(--red); transform: rotate(-9deg); }
+.nope { left: 680px; top: 540px; padding: 8px 20px; border-radius: 14px; border: 6px solid var(--red); color: var(--red); font: 400 54px/1 Anton;
+  transform: rotate(10deg); background: rgba(255,249,238,.95); }
+/* hook C */
+.hc { left: 0; top: 280px; width: 1080px; text-align: center; font: 400 92px/1.05 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.hc em { font-style: normal; color: var(--pen); }
+.hw { left: 0; width: 1080px; text-align: center; font: 800 58px/1 PJS; letter-spacing: 6px; color: var(--teal); }
+.hw { -webkit-text-stroke: 0; text-shadow: 0 0 0 transparent; }
+.hw { color: #fff; text-shadow: var(--sh); }
+/* handwriting lines */
+.hand { left: 0; top: 380px; width: 1080px; text-align: center; font: 700 82px/1.1 Cav; color: #fff; text-shadow: var(--sh); }
+.hand b { color: var(--pen); font-weight: 700; }
+/* notebook */
+.nb { left: 110px; top: 270px; width: 860px; height: 470px; border-radius: 22px; background: var(--paper); box-shadow: 0 20px 44px rgba(0,0,0,.32); overflow: hidden;
+  background-image: repeating-linear-gradient(180deg, transparent 0 69px, #CFE0EE 69px 72px); }
+.margin { position: absolute; left: 70px; top: 0; width: 4px; height: 470px; background: var(--red); opacity: .7; }
+.cols { position: absolute; left: 74px; top: 0; width: 786px; height: 470px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.col { border-left: 3px solid #B8C9D8; } .col:first-child { border-left: none; }
+.hd { height: 96px; display: flex; align-items: center; justify-content: center; font: 800 32px/1 PJS; letter-spacing: 1px; color: var(--teal);
+  background: var(--mint); border-bottom: 4px solid var(--teal); }
+.en { height: 150px; display: flex; align-items: center; justify-content: center; font: 700 64px/1 Cav; color: var(--ink); }
+.tag { margin: 22px auto 0; width: 150px; padding: 10px 0; border-radius: 30px; background: var(--teal); color: var(--pen); text-align: center;
+  font: 800 26px/1 PJS; letter-spacing: 2px; }
+.eq { left: 0; top: 770px; width: 1080px; text-align: center; font: 800 56px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.eq b { color: var(--pen); }
+/* naming word */
+.big { left: 0; top: 330px; width: 1080px; text-align: center; font: 400 120px/1.02 Anton; color: #fff; text-shadow: var(--sh); }
+.big em { font-style: normal; color: var(--pen); }
+.tagicon { left: 760px; top: 260px; font: 120px/1 sans-serif; transform-origin: 30% 10%; }
+.chipbig { left: 0; top: 420px; width: 1080px; text-align: center; }
+.chipbig, .chip, .lab { font: 800 34px/1 PJS; letter-spacing: 2px; }
+#sit { display: inline-block; left: 310px; width: auto; padding: 18px 34px; border-radius: 40px; background: var(--teal); color: var(--mint); font-size: 48px; }
+#sit b { color: var(--pen); }
+/* examples */
+.chip { left: 120px; top: 280px; padding: 12px 22px; border-radius: 30px; background: var(--teal); color: var(--mint); font-size: 28px; }
+.lab { left: 560px; top: 370px; padding: 12px 22px; border-radius: 30px; background: var(--pen); color: var(--teal); box-shadow: 0 10px 24px rgba(0,0,0,.3); }
+.s { left: 40px; top: 470px; width: 1000px; text-align: center; font: 800 70px/1.15 Brico; color: #fff; text-shadow: var(--sh); }
+.hl { display: inline-block; color: #fff; padding: 0 14px; border-radius: 16px; background: rgba(255,201,74,0); text-shadow: var(--sh); }
+.hl.on { color: var(--ink); background: rgba(255,201,74,1); text-shadow: none; }
+.co2 { color: #fff; text-shadow: var(--sh); }
+.sb { left: 40px; top: 460px; width: 1000px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.s2 { width: 1000px; text-align: center; font: 800 64px/1.12 Brico; color: #fff; text-shadow: var(--sh); }
+.eng2 { font: 800 36px/1 PJS; color: var(--mint); text-shadow: var(--sh); letter-spacing: 1px; }
+.eng { left: 0; top: 570px; width: 1080px; text-align: center; font: 800 38px/1 PJS; color: var(--mint); text-shadow: var(--sh); letter-spacing: 1px; }
+.why { left: 0; top: 660px; width: 1080px; text-align: center; font: 700 64px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.why b { color: var(--pen); font-weight: 700; }
+.ask { left: 0; top: 740px; width: 1080px; text-align: center; font: 700 96px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.ask b { color: var(--pen); font-weight: 700; }
+/* types */
+.tt { left: 0; top: 330px; width: 1080px; text-align: center; font: 400 110px/1 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.tt em { font-style: normal; color: var(--pen); }
+.pills, .tagrow { left: 120px; top: 500px; width: 840px; display: flex; justify-content: center; gap: 30px; }
+.tagrow { top: 600px; }
+.pl { padding: 18px 30px; border-radius: 40px; font: 800 40px/1 PJS; box-shadow: 0 12px 26px rgba(0,0,0,.3); }
+.pr { background: var(--pen); color: var(--teal); } .co { background: var(--mint); color: var(--teal); }
+#tes { top: 440px; }
+/* part 2 */
+.p2card { left: 160px; top: 320px; width: 760px; padding: 34px; border-radius: 36px; background: var(--teal); text-align: center; box-shadow: 0 20px 44px rgba(0,0,0,.35); }
+.p2k { font: 400 96px/1 Anton; color: var(--pen); } .p2t { margin-top: 16px; font: 800 48px/1.1 Brico; color: var(--paper); }
+.follow { left: 0; top: 640px; width: 1080px; text-align: center; font: 700 70px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.follow b { color: var(--pen); font-weight: 700; } .follow.end { top: 700px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="89.280" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="hook" class="clip" data-start="0.000" data-duration="3.620" data-track-index="1"><div class="layer">
+          <div class="def" id="dc">“A noun is a word used to identify any of a class of people, places, or things...”</div>
+          <div class="slash" id="sl"></div><div class="nope" id="np">RATTA? NO!</div>
+          <div class="h1" id="h1"><span class="l1">Noun ki definition</span><br><em class="l2">yaad mat karo</em></div></div></div>
+<div id="bp" class="clip" data-start="3.620" data-duration="2.650" data-track-index="3"><div class="layer"><div class="hand" id="bpt">Bas bachpan ka <b>favourite game</b><br>yaad karo 🎮</div></div></div>
+<div id="nb0" class="clip" data-start="6.270" data-duration="26.940" data-track-index="2"><div class="layer"><div class="nb" id="nb0n"><div class="margin"></div><div class="cols"><div class="col"><div class="hd" id="nb0h0">NAME</div><div class="en" id="nb0e0">Ria</div><div class="tag" id="nb0t0">PERSON</div></div><div class="col"><div class="hd" id="nb0h1">PLACE</div><div class="en" id="nb0e1">Mumbai</div><div class="tag" id="nb0t1">PLACE</div></div><div class="col"><div class="hd" id="nb0h2">ANIMAL</div><div class="en" id="nb0e2">Tiger</div><div class="tag" id="nb0t2">ANIMAL</div></div><div class="col"><div class="hd" id="nb0h3">THING</div><div class="en" id="nb0e3">Pencil</div><div class="tag" id="nb0t3">THING</div></div></div></div><div class="eq" id="nb0q"></div></div></div>
+<div id="nm" class="clip" data-start="33.210" data-duration="2.930" data-track-index="3"><div class="layer"><div class="big" id="nmt">NOUN =<br><em>NAMING WORD</em></div><div class="tagicon" id="nmi">🏷️</div></div></div>
+<div id="si" class="clip" data-start="36.140" data-duration="2.030" data-track-index="3"><div class="layer"><div class="chipbig" id="sit">Ab <b>SENTENCES</b> ✍️</div></div></div>
+<div id="ex0" class="clip" data-start="38.170" data-duration="6.880" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex0c">EXAMPLE 1/4</div>
+          <div class="lab" id="ex0l">👤 PERSON = NOUN</div>
+          <div class="sb"><div class="s2" id="ex0s"><span class="w">Meri</span> <span class="w">friend</span> <span class="w"><span class="hl">Ria</span></span> <span class="w">hai.</span></div>
+          <div class="eng2" id="ex0g">My friend is Ria.</div></div>
+          <div class="why" id="ex0y">kyunki Ria ek ladki ka <b>naam</b> hai</div></div></div>
+<div id="ex1" class="clip" data-start="45.050" data-duration="8.260" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex1c">EXAMPLE 2/4</div>
+          <div class="lab" id="ex1l">📍 PLACE = NOUN</div>
+          <div class="sb"><div class="s2" id="ex1s"><span class="w">Main</span> <span class="w"><span class="hl">Mumbai</span></span> <span class="w">mein</span> <span class="w">rehti</span> <span class="w">hoon.</span></div>
+          <div class="eng2" id="ex1g">I live in Mumbai.</div></div>
+          <div class="why" id="ex1y">kyunki Mumbai ek jagah ka <b>naam</b> hai</div></div></div>
+<div id="ask" class="clip" data-start="49.710" data-duration="1.130" data-track-index="6"><div class="layer"><div class="ask" id="askt">Bataiye <b>kyun?</b> 🤔</div></div></div>
+<div id="ex2" class="clip" data-start="53.310" data-duration="6.160" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex2c">EXAMPLE 3/4</div>
+          <div class="lab" id="ex2l">🐯 ANIMAL = NOUN</div>
+          <div class="sb"><div class="s2" id="ex2s"><span class="w">Mujhe</span> <span class="w"><span class="hl">tiger</span></span> <span class="w">se</span> <span class="w">dar</span> <span class="w">lagta</span> <span class="w">hai.</span></div>
+          <div class="eng2" id="ex2g">I am scared of tigers.</div></div>
+          <div class="why" id="ex2y">kyunki tiger ek animal ka <b>naam</b> hai</div></div></div>
+<div id="ex3" class="clip" data-start="59.470" data-duration="4.750" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex3c">EXAMPLE 4/4</div>
+          <div class="lab" id="ex3l">✏️ THING = NOUN</div>
+          <div class="sb"><div class="s2" id="ex3s"><span class="w">I</span> <span class="w">have</span> <span class="w">a</span> <span class="w"><span class="hl">pencil</span>.</span></div>
+          </div>
+          <div class="why" id="ex3y">kyunki pencil ek cheez ka <b>naam</b> hai</div></div></div>
+<div id="cl" class="clip" data-start="64.220" data-duration="4.580" data-track-index="3"><div class="layer"><div class="hand" id="clt">Concept <b>clear?</b> ✅</div></div></div>
+<div id="ty" class="clip" data-start="68.800" data-duration="5.270" data-track-index="3"><div class="layer"><div class="tt" id="tyt">NOUN ke <em>2 TYPES</em></div><div class="pills"><div class="pl pr" id="typ">PROPER noun</div><div class="pl co" id="tyc">COMMON noun</div></div></div></div>
+<div id="te" class="clip" data-start="74.070" data-duration="6.440" data-track-index="3"><div class="layer">
+          <div class="s" id="tes">My <span class="hl co2" id="tef">friend</span> is <span class="hl" id="ter">Ria.</span></div>
+          <div class="tagrow"><div class="pl pr" id="tep">Ria → PROPER</div><div class="pl co" id="tec">friend → COMMON</div></div></div></div>
+<div id="p2" class="clip" data-start="80.510" data-duration="8.770" data-track-index="5"><div class="layer">
+          <div class="p2card" id="p2c"><div class="p2k">PART 2 👉</div><div class="p2t">Proper vs Common Noun</div></div>
+          <div class="follow" id="p2f">Follow karo 🔔 taaki miss na ho</div></div></div>
+</div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  
+          tl.fromTo("#h1 .l1", {opacity: 0, y: -40, scale: 1.3}, {opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out"}, 0.02);
+          tl.fromTo("#dc", {opacity: 0, y: 40, rotation: 2}, {opacity: 1, y: 0, rotation: -3, duration: 0.4, ease: "power3.out"}, 0.35);
+          tl.fromTo("#sl", {scaleX: 0, transformOrigin: "0% 50%"}, {scaleX: 1, duration: 0.18, ease: "power2.in"}, 2.6500000000000004);
+          tl.fromTo("#np", {opacity: 0, scale: 2.2, rotation: 25}, {opacity: 1, scale: 1, rotation: 10, duration: 0.22, ease: "power3.in"}, 2.8000000000000003);
+          tl.fromTo("#h1 .l2", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)"}, 1.46);
+          tl.fromTo("#hook .layer", {x: 0}, {x: 10, duration: 0.04, yoyo: true, repeat: 5, ease: "none"}, 3.0);
+          tl.to("#hook .layer > *", {opacity: 0, duration: 0.15}, 3.47);
+tl.fromTo("#bpt", {opacity: 0, y: 24, rotation: -2}, {opacity: 1, y: 0, rotation: -2, duration: 0.35, ease: "power3.out"}, 3.67);tl.fromTo("#bpt b", {color: "#FFFFFF"}, {color: "#FFC94A", duration: 0.2}, 4.88);tl.to("#bpt", {opacity: 0, duration: 0.15}, 6.119999999999999);
+tl.fromTo("#nb0n", {opacity: 0, y: -60, rotation: -4, scale: 0.9}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.4, ease: "back.out(1.7)"}, 6.27);
+tl.fromTo("#nb0h0", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 6.54);
+tl.fromTo("#nb0h1", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 7.0);
+tl.fromTo("#nb0h2", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 7.52);
+tl.fromTo("#nb0h3", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 8.02);
+tl.fromTo("#nb0e0", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 14.57);
+tl.fromTo("#nb0e1", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 15.77);
+tl.fromTo("#nb0e2", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 17.13);
+tl.fromTo("#nb0e3", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 18.37);
+tl.fromTo("#nb0t0", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 20.67);
+tl.fromTo("#nb0t1", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 22.77);
+tl.fromTo("#nb0t2", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 24.61);
+tl.fromTo("#nb0t3", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 26.83);
+tl.call(() => document.querySelector("#nb0q").innerHTML = "= Noun ka <b>poora concept</b> ✨", null, 8.3);tl.fromTo("#nb0q", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 8.350000000000001);tl.to("#nb0q", {opacity: 0, duration: 0.15}, 10.94);
+tl.call(() => document.querySelector("#nb0q").innerHTML = "Inka <b>NAAM</b> = <b>NOUN</b> ✏️", null, 28.135);tl.fromTo("#nb0q", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 32.43);tl.to("#nb0 .en", {scale: 1.12, color: "#E8475A", duration: 0.2, yoyo: true, repeat: 1, stagger: 0.08}, 32.43);
+tl.to("#nb0 .layer > *", {opacity: 0, y: -20, duration: 0.2}, 33.01);
+tl.fromTo("#nmt", {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, duration: 0.3, ease: "power3.out"}, 34.7);tl.fromTo("#nmi", {opacity: 0, rotation: -60, scale: 0.3}, {opacity: 1, rotation: 12, scale: 1, duration: 0.45, ease: "back.out(2.5)"}, 35.46);tl.to("#nmi", {rotation: -8, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut"}, 35.910000000000004);
+tl.fromTo("#sit", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 36.19);tl.to("#sit", {opacity: 0, duration: 0.15}, 38.02);
+tl.fromTo("#ex0c", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 38.190000000000005);tl.fromTo("#ex0s .w", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 38.25);tl.call(() => document.querySelector("#ex0s .hl").classList.add("on"), null, 39.85);tl.fromTo("#ex0s .hl", {scale: 1}, {scale: 1.1, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out"}, 39.85);
+tl.fromTo("#ex0g", {opacity: 0}, {opacity: 1, duration: 0.3}, 40.15);
+tl.fromTo("#ex0l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 42.4);
+tl.fromTo("#ex0y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 43.34);
+tl.to("#ex0 .layer > *", {opacity: 0, duration: 0.15}, 44.9);
+tl.fromTo("#ex1c", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 45.07);tl.fromTo("#ex1s .w", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 45.129999999999995);tl.call(() => document.querySelector("#ex1s .hl").classList.add("on"), null, 46.04);tl.fromTo("#ex1s .hl", {scale: 1}, {scale: 1.1, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out"}, 46.04);
+tl.fromTo("#ex1g", {opacity: 0}, {opacity: 1, duration: 0.3}, 46.339999999999996);
+tl.fromTo("#ex1l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 49.21);
+tl.fromTo("#ex1y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 50.9);
+tl.fromTo("#askt", {opacity: 0, scale: 0.3, rotation: -10}, {opacity: 1, scale: 1, rotation: -4, duration: 0.3, ease: "back.out(3)"}, 49.71);
+tl.to("#ex1 .layer > *", {opacity: 0, duration: 0.15}, 53.160000000000004);
+tl.fromTo("#ex2c", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 53.330000000000005);tl.fromTo("#ex2s .w", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 53.39);tl.call(() => document.querySelector("#ex2s .hl").classList.add("on"), null, 53.7);tl.fromTo("#ex2s .hl", {scale: 1}, {scale: 1.1, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out"}, 53.7);
+tl.fromTo("#ex2g", {opacity: 0}, {opacity: 1, duration: 0.3}, 54.0);
+tl.fromTo("#ex2l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 56.9);
+tl.fromTo("#ex2y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 57.66);
+tl.to("#ex2 .layer > *", {opacity: 0, duration: 0.15}, 59.32);
+tl.fromTo("#ex3c", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 59.49);tl.fromTo("#ex3s .w", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 59.55);tl.call(() => document.querySelector("#ex3s .hl").classList.add("on"), null, 60.57);tl.fromTo("#ex3s .hl", {scale: 1}, {scale: 1.1, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out"}, 60.57);
+tl.fromTo("#ex3l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 62.84);
+tl.fromTo("#ex3y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 63.12);
+tl.to("#ex3 .layer > *", {opacity: 0, duration: 0.15}, 64.07);
+tl.fromTo("#clt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 67.22);tl.to("#clt", {opacity: 0, duration: 0.15}, 68.64999999999999);
+tl.fromTo("#tyt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 70.68);tl.fromTo("#typ", {opacity: 0, x: -80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 72.26);tl.fromTo("#tyc", {opacity: 0, x: 80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 73.5);tl.to("#ty .layer > *", {opacity: 0, duration: 0.15}, 73.91999999999999);
+tl.fromTo("#tes", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3}, 74.07);tl.fromTo("#tep", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 77.86);tl.call(() => document.querySelector("#ter").classList.add("on"), null, 77.86);tl.fromTo("#ter", {scale: 1}, {scale: 1.12, duration: 0.2, yoyo: true, repeat: 1}, 77.86);tl.fromTo("#tec", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 79.7);tl.to("#tef", {backgroundColor: "rgba(207,234,223,1)", color: "#17423C", textShadow: "none", duration: 0.25}, 79.7);tl.to("#te .layer > *", {opacity: 0, duration: 0.15}, 80.36);
+tl.fromTo("#p2c", {opacity: 0, y: -40, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)"}, 80.56);tl.fromTo("#p2f", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 81.11);tl.to("#p2f", {scale: 1.06, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut"}, 81.61);
+  window.__timelines["main"] = tl;
+</script></body></html>
