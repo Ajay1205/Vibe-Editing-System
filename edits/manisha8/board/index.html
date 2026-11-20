@@ -1,0 +1,95 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Manisha 8 style board -- "NPAT Notebook": the childhood Name-Place-Animal-Thing game as a ruled notebook page.
+   Palette from the footage (her mint shirt, warm lamp, white wall): deep teal #17423C, mint #CFEADF, paper #FFF9EE,
+   pencil yellow #FFC94A, margin red #E8475A. Anton (hook), Bricolage Grotesque (sentences), Caveat (handwriting).
+   Four states on one timeline for snapshots: 0.5 hook, 1.5 grid, 2.5 sentence, 3.5 animated cutaway. */
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.45); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+/* 1 hook */
+.h1 { left: 0; top: 300px; width: 1080px; text-align: center; font: 400 112px/1.02 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.h1 em { font-style: normal; color: var(--pen); }
+.def { left: 150px; top: 610px; width: 780px; padding: 26px 30px; border-radius: 18px; background: rgba(255,249,238,.94); transform: rotate(-3deg);
+  font: 700 34px/1.25 Brico; color: #6B6B6B; box-shadow: 0 16px 34px rgba(0,0,0,.3); }
+.slash { left: 130px; top: 700px; width: 820px; height: 14px; border-radius: 7px; background: var(--red); transform: rotate(-9deg); }
+.nope { left: 760px; top: 560px; padding: 8px 20px; border-radius: 14px; border: 6px solid var(--red); color: var(--red); font: 400 54px/1 Anton; transform: rotate(10deg); background: rgba(255,249,238,.9); }
+/* 2 grid */
+.nb { left: 110px; top: 270px; width: 860px; height: 560px; border-radius: 22px; background: var(--paper); box-shadow: 0 20px 44px rgba(0,0,0,.32); overflow: hidden;
+  background-image: repeating-linear-gradient(180deg, transparent 0 69px, #CFE0EE 69px 72px); }
+.margin { left: 70px; top: 0; width: 4px; height: 560px; background: var(--red); opacity: .7; }
+.cols { left: 74px; top: 0; width: 786px; height: 560px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.col { border-left: 3px solid #B8C9D8; }
+.col:first-child { border-left: none; }
+.hd { height: 96px; display: flex; align-items: center; justify-content: center; font: 800 32px/1 PJS; letter-spacing: 1px; color: var(--teal);
+  background: var(--mint); border-bottom: 4px solid var(--teal); }
+.en { height: 140px; display: flex; align-items: center; justify-content: center; font: 700 64px/1 Cav; color: var(--ink); }
+.tag { margin: 18px auto 0; width: 150px; padding: 10px 0; border-radius: 30px; background: var(--teal); color: var(--pen); text-align: center; font: 800 26px/1 PJS; letter-spacing: 2px; }
+.eq { left: 0; top: 860px; width: 1080px; text-align: center; font: 800 56px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.eq b { color: var(--pen); }
+/* 3 sentence */
+.s { left: 0; top: 520px; width: 1080px; text-align: center; font: 800 76px/1.15 Brico; color: #fff; text-shadow: var(--sh); }
+.hl { position: relative; display: inline-block; color: var(--ink); padding: 0 16px; border-radius: 16px; background: var(--pen); text-shadow: none; }
+.lab { left: 590px; top: 380px; padding: 12px 22px; border-radius: 30px; background: var(--teal); color: var(--mint); font: 800 34px/1 PJS; letter-spacing: 2px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.3); }
+.arrow { left: 640px; top: 430px; font: 700 80px/1 Cav; color: var(--pen); text-shadow: var(--sh); transform: rotate(20deg); }
+.why { left: 0; top: 720px; width: 1080px; text-align: center; font: 700 60px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.why b { color: var(--pen); font-weight: 700; }
+/* 4 animated cutaway: a city map, the pin drops on Mumbai */
+.cut { left: 0; top: 0; width: 1080px; height: 1920px; background: radial-gradient(ellipse at 50% 55%, #1F5249, #17423C 55%, #0E2A26); }
+.map { left: 120px; top: 720px; width: 840px; height: 900px; border-radius: 40px; background: #EAF3EC; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+.road { background: #FFFFFF; border-radius: 10px; }
+.sea { left: 0; top: 0; width: 260px; height: 900px; background: #BFE0EE; border-radius: 0 60% 40% 0; }
+.park { border-radius: 40%; background: #CBE7C8; }
+.pin { left: 470px; top: 980px; width: 110px; height: 110px; border-radius: 55px 55px 55px 0; transform: rotate(-45deg); background: var(--red);
+  box-shadow: 0 16px 30px rgba(0,0,0,.35); }
+.pin i { position: absolute; left: 35px; top: 35px; width: 40px; height: 40px; border-radius: 50%; background: #fff; }
+.city { left: 330px; top: 1120px; padding: 14px 26px; border-radius: 30px; background: #fff; font: 800 44px/1 Brico; color: var(--ink); box-shadow: 0 12px 26px rgba(0,0,0,.25); }
+.ptag { left: 0; top: 580px; width: 1080px; text-align: center; font: 800 46px/1 PJS; letter-spacing: 3px; color: var(--pen); }
+.big { left: 0; top: 310px; width: 1080px; text-align: center; font: 800 100px/1.05 Brico; color: #fff; }
+.big .hl { padding: 0 20px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+ <div class="st" id="s1">
+  <div class="abs def">"A noun is a word used to identify any of a class of people, places, or things..."</div>
+  <div class="abs slash"></div><div class="abs nope">RATTA? NO!</div>
+  <div class="abs h1">Noun ki definition<br><em>yaad mat karo</em></div>
+ </div>
+ <div class="st" id="s2">
+  <div class="abs nb"><div class="abs margin"></div><div class="abs cols">
+   <div class="col"><div class="hd">NAME</div><div class="en">Ria</div><div class="tag">PERSON</div></div>
+   <div class="col"><div class="hd">PLACE</div><div class="en">Mumbai</div><div class="tag">PLACE</div></div>
+   <div class="col"><div class="hd">ANIMAL</div><div class="en">Tiger</div><div class="tag">ANIMAL</div></div>
+   <div class="col"><div class="hd">THING</div><div class="en">Pencil</div><div class="tag">THING</div></div>
+  </div></div>
+  <div class="abs eq">Sab ke sab = <b>NOUNS</b> ✏️</div>
+ </div>
+ <div class="st" id="s3">
+  <div class="abs lab">📍 PLACE = NOUN</div>
+  <div class="abs s">I live in <span class="hl">Mumbai.</span></div>
+  <div class="abs why">kyunki <b>Mumbai</b> ek jagah ka naam hai</div>
+ </div>
+ <div class="st" id="s4">
+  <div class="abs cut"></div>
+  <div class="abs big">I live in <span class="hl">Mumbai.</span></div>
+  <div class="abs ptag">📍 NAME OF A PLACE → NOUN</div>
+  <div class="abs map"><div class="abs sea"></div>
+   <div class="abs road" style="left:200px;top:300px;width:700px;height:30px;transform:rotate(-12deg)"></div>
+   <div class="abs road" style="left:420px;top:0;width:30px;height:900px;transform:rotate(8deg)"></div>
+   <div class="abs road" style="left:250px;top:620px;width:620px;height:22px;transform:rotate(6deg)"></div>
+   <div class="abs park" style="left:560px;top:420px;width:200px;height:150px"></div><div class="abs park" style="left:300px;top:720px;width:160px;height:120px"></div>
+  </div>
+  <div class="abs pin"><i></i></div><div class="abs city">Mumbai</div>
+ </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#s1","#s2","#s3","#s4"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>
