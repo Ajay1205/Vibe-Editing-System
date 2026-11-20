@@ -79,7 +79,7 @@ html, body { margin: 0; background: transparent; }
 .follow { left: 0; top: 640px; width: 1080px; text-align: center; font: 700 70px/1 Cav; color: #fff; text-shadow: var(--sh); }
 .follow b { color: var(--pen); font-weight: 700; } .follow.end { top: 700px; }
 </style></head><body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="63.905" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="root" data-composition-id="main" data-start="0" data-duration="66.095" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
 <div id="hook" class="clip" data-start="0.000" data-duration="3.620" data-track-index="1"><div class="layer">
           <div class="def" id="dc">“A noun is a word used to identify any of a class of people, places, or things...”</div>
           <div class="slash" id="sl"></div><div class="nope" id="np">RATTA? NO!</div>
@@ -105,17 +105,17 @@ html, body { margin: 0; background: transparent; }
           <div class="sb"><div class="s2" id="ex2s"><span class="w">Mujhe</span> <span class="w"><span class="hl">tiger</span></span> <span class="w">se</span> <span class="w">dar</span> <span class="w">lagta</span> <span class="w">hai.</span></div>
           <div class="eng2" id="ex2g">I am scared of tigers.</div></div>
           <div class="why" id="ex2y">kyunki tiger ek animal ka <b>naam</b> hai</div></div></div>
-<div id="ex3" class="clip" data-start="44.275" data-duration="4.750" data-track-index="4"><div class="layer">
+<div id="ex3" class="clip" data-start="44.275" data-duration="5.740" data-track-index="4"><div class="layer">
           <div class="chip" id="ex3c">EXAMPLE 4/4</div>
           <div class="lab" id="ex3l">✏️ THING = NOUN</div>
           <div class="sb"><div class="s2" id="ex3s"><span class="w">I</span> <span class="w">have</span> <span class="w">a</span> <span class="w"><span class="hl">pencil</span>.</span></div>
           </div>
           <div class="why" id="ex3y">kyunki pencil ek cheez ka <b>naam</b> hai</div></div></div>
-<div id="ty" class="clip" data-start="49.025" data-duration="5.270" data-track-index="3"><div class="layer"><div class="tt" id="tyt">NOUN ke <em>2 TYPES</em></div><div class="pills"><div class="pl pr" id="typ">PROPER noun</div><div class="pl co" id="tyc">COMMON noun</div></div></div></div>
-<div id="te" class="clip" data-start="54.295" data-duration="6.440" data-track-index="3"><div class="layer">
+<div id="ty" class="clip" data-start="50.015" data-duration="5.270" data-track-index="3"><div class="layer"><div class="tt" id="tyt">NOUN ke <em>2 TYPES</em></div><div class="pills"><div class="pl pr" id="typ">PROPER noun</div><div class="pl co" id="tyc">COMMON noun</div></div></div></div>
+<div id="te" class="clip" data-start="55.285" data-duration="6.440" data-track-index="3"><div class="layer">
           <div class="s" id="tes">My <span class="hl co2" id="tef">friend</span> is <span class="hl" id="ter">Ria.</span></div>
           <div class="tagrow"><div class="pl pr" id="tep">Ria → PROPER</div><div class="pl co" id="tec">friend → COMMON</div></div></div></div>
-<div id="p2" class="clip" data-start="60.735" data-duration="3.170" data-track-index="5"><div class="layer">
+<div id="p2" class="clip" data-start="61.725" data-duration="4.370" data-track-index="5"><div class="layer">
           <div class="p2card" id="p2c"><div class="p2k">PART 2 👉</div><div class="p2t">Proper vs Common Noun</div></div>
           <div class="follow" id="p2f">Follow karo 🔔 taaki miss na ho</div></div></div>
 </div></div>
@@ -164,9 +164,9 @@ tl.to("#ex2 .layer > *", {opacity: 0, duration: 0.15}, 44.125);
 tl.fromTo("#ex3c", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 44.295);tl.fromTo("#ex3s .w", {opacity: 0, y: 24, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.32, ease: "power3.out", stagger: 0.06}, 44.355);tl.call(() => document.querySelector("#ex3s .hl").classList.add("on"), null, 45.375);tl.fromTo("#ex3s .hl", {scale: 1}, {scale: 1.1, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out"}, 45.375);
 tl.fromTo("#ex3l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 47.645);
 tl.fromTo("#ex3y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 47.925);
-tl.to("#ex3 .layer > *", {opacity: 0, duration: 0.15}, 48.875);
-tl.fromTo("#tyt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 50.905);tl.fromTo("#typ", {opacity: 0, x: -80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 52.485);tl.fromTo("#tyc", {opacity: 0, x: 80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 53.725);tl.to("#ty .layer > *", {opacity: 0, duration: 0.15}, 54.145);
-tl.fromTo("#tes", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3}, 54.295);tl.fromTo("#tep", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 58.085);tl.call(() => document.querySelector("#ter").classList.add("on"), null, 58.085);tl.fromTo("#ter", {scale: 1}, {scale: 1.12, duration: 0.2, yoyo: true, repeat: 1}, 58.085);tl.fromTo("#tec", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 59.925);tl.to("#tef", {backgroundColor: "rgba(207,234,223,1)", color: "#17423C", textShadow: "none", duration: 0.25}, 59.925);tl.to("#te .layer > *", {opacity: 0, duration: 0.15}, 60.585);
-tl.fromTo("#p2c", {opacity: 0, y: -40, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)"}, 60.785);tl.fromTo("#p2f", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 61.335);tl.to("#p2f", {scale: 1.06, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut"}, 61.835);
+tl.to("#ex3 .layer > *", {opacity: 0, duration: 0.15}, 49.865);
+tl.fromTo("#tyt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 51.895);tl.fromTo("#typ", {opacity: 0, x: -80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 53.475);tl.fromTo("#tyc", {opacity: 0, x: 80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 54.715);tl.to("#ty .layer > *", {opacity: 0, duration: 0.15}, 55.135);
+tl.fromTo("#tes", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3}, 55.285);tl.fromTo("#tep", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 59.075);tl.call(() => document.querySelector("#ter").classList.add("on"), null, 59.075);tl.fromTo("#ter", {scale: 1}, {scale: 1.12, duration: 0.2, yoyo: true, repeat: 1}, 59.075);tl.fromTo("#tec", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 60.915);tl.to("#tef", {backgroundColor: "rgba(207,234,223,1)", color: "#17423C", textShadow: "none", duration: 0.25}, 60.915);tl.to("#te .layer > *", {opacity: 0, duration: 0.15}, 61.575);
+tl.fromTo("#p2c", {opacity: 0, y: -40, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)"}, 61.775);tl.fromTo("#p2f", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 62.325);tl.to("#p2f", {scale: 1.06, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut"}, 62.825);
   window.__timelines["main"] = tl;
 </script></body></html>
