@@ -67,7 +67,7 @@ def build(version, res=2160):
     if version == "v4_shortest":
         s, e = span["npat"]
         els.append(clip("hookc", 0.0, e + 0.1, 8, '<div class="hc" id="hc">Bachpan ka <em>YE</em> game =<br>poori <em>NOUN</em> grammar 🤯</div>'))
-        js.append('tl.fromTo("#hc", {opacity: 0, scale: 1.25}, {opacity: 1, scale: 1, duration: 0.3, ease: "power3.out"}, 0);')
+        js.append('tl.fromTo("#hc", {opacity: 1, scale: 1.06}, {opacity: 1, scale: 1, duration: 0.35, ease: "power3.out"}, 0);  // frame 1 fully readable (it is the hook)')
         for j, (head, *_r) in enumerate(COLS):
             t = W("npat", head.lower())
             els.append(clip(f"hw{j}", t, e + 0.1, 7, f'<div class="hw" style="top:{560 + j * 70}px">{head}</div>'))
@@ -241,6 +241,8 @@ def build(version, res=2160):
     if "part2" in order:
         s = span["part2"][0]
         e = span["part2_b"][1] if "part2_b" in order else span["part2"][1]
+        if order[-1] in ("part2", "part2_b"):
+            e = dur  # keep the card up through the end hold
         if "part2" in cut:
             s = SP.cut_end(version, "part2")
         els.append(clip("p2", s, e, 5, """

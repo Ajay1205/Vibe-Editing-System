@@ -38,7 +38,7 @@ LINES = {
     "ex3":      ("m83", 20.48, 21.92, "Mujhe tiger se dar lagta hai."),
     "ex3_why":  ("m83", 22.48, 26.44, "Iss sentence mein tiger ek noun hai, kyunki wo ek animal ka naam hai."),
     "ex4":      ("m83", 26.62, 27.74, "I have a pencil."),
-    "ex4_why":  ("m83", 28.58, 31.42, "In this sentence, pencil is a noun because it is the name of something."),
+    "ex4_why":  ("m83", 28.58, 32.30, "Iss sentence mein pencil ek noun hai, kyunki wo ek cheez ka naam hai."),  # Whisper stopped at "vo ek": end set from the audio (user note)
     "clear":    ("m84", 0.00, 4.22, "Ab aapko in sentences se noun ka concept samajh aa raha hoga."),
     "types":    ("m84", 4.92, 9.72, "Lekin noun ke do aur types hote hain: special noun aur common noun."),
     "type_ex":  ("m85", 0.00, 6.52, "For example, my friend is Ria. Yahan Ria ek special noun hai, friend ek common noun hai."),
@@ -48,13 +48,14 @@ LINES = {
 
 ALL = list(LINES)
 VERSIONS = {
-    # V1 full: everything, pauses tightened
-    "v1_full": ALL,
+    # V1 full: everything, pauses tightened -- minus her last sentence (user: "common noun" at the end is
+    # pronounced badly), so it ends on "dekhiye hamara part 2" with the Part 2 card held on screen
+    "v1_full": [x for x in ALL if x != "part2_b"],
     # V2 shorter: every noun explanation kept; cut the repeats (the notebook shows them) and the long part-2 pitch
     "v2_short": ["def", "bachpan", "npat", "answers", "rule", "naming", "ex1", "ex1_why", "ex2", "ex2_is", "ex2_why",
                  "ex3", "ex3_why", "ex4", "ex4_why", "types", "type_ex", "part2"],
-    # V3 animated: the full explanation with an animated scene on each idea
-    "v3_anim": ALL,
+    # V3 animated: the full explanation with an animated scene on each idea (same lines as V1)
+    "v3_anim": [x for x in ALL if x != "part2_b"],
     # V4 shortest: cold open on the game, the rule, the naming word, follow for part 2 (text)
     "v4_shortest": ["npat", "def", "answers", "rule", "naming"],
 }
