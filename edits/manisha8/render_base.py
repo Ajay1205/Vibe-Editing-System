@@ -35,7 +35,7 @@ def plan(version):
     segs = L.edl(version)
     prev = None
     for s in segs:
-        z = ZOOM[SHOT[s["id"]]]
+        z = ZOOM[SHOT[L.parent(s["id"])]]
         if prev is not None and abs(z - prev) < 0.03:
             z = round(z + (0.07 if z < 1.25 else -0.07), 3)
         s["zoom"] = z

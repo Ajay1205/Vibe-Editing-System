@@ -56,7 +56,7 @@ def clip(id_, start, end, track, inner):
 
 def build(version, res=2160):
     segs = L.edl(version)
-    order = L.VERSIONS[version]
+    order = [L.parent(x) for x in L.VERSIONS[version]]  # trimmed variants are addressed by their parent id
     cut = SP.cutaways(version)  # {line id: (start, end)} picture is a scene there
     dur = segs[-1]["end"] + SP.TAIL.get(version, 0.0)
     span = {lid: L.span(version, lid) for lid in order}
@@ -64,7 +64,7 @@ def build(version, res=2160):
     els, js = [], []
 
     # ---------------------------------------------------------------- hook C (shortest): text hook from frame 1
-    if version == "v4_shortest":
+    if order[0] == "npat":  # the version opens cold on "Name, place, animal, thing": text hook from frame 1
         s, e = span["npat"]
         els.append(clip("hookc", 0.0, e + 0.1, 8, '<div class="hc" id="hc">Bachpan ka <em>YE</em> game =<br>poori <em>NOUN</em> grammar 🤯</div>'))
         js.append('tl.fromTo("#hc", {opacity: 1, scale: 1.06}, {opacity: 1, scale: 1, duration: 0.35, ease: "power3.out"}, 0);  // frame 1 fully readable (it is the hook)')
@@ -105,7 +105,7 @@ def build(version, res=2160):
     # ---------------------------------------------------------------- notebook runs
     runs, cur = [], []
     for lid in order:
-        if lid in NB_LINES and not (version == "v4_shortest" and lid == "npat"):
+        if lid in NB_LINES and not (order[0] == "npat" and lid == "npat"):
             cur.append(lid)
         elif cur:
             runs.append(cur)
@@ -158,6 +158,18 @@ def build(version, res=2160):
             js.append(f'tl.call(() => document.querySelector("#{cid}q").innerHTML = "Inka <b>NAAM</b> = <b>NOUN</b> ✏️", null, {t0});'
                       f'tl.fromTo("#{cid}q", {{opacity: 0, y: 20}}, {{opacity: 1, y: 0, duration: 0.3}}, {W("rule", "noun")});'
                       f'tl.to("#{cid} .en", {{scale: 1.12, color: "#E8475A", duration: 0.2, yoyo: true, repeat: 1, stagger: 0.08}}, {W("rule", "noun")});')
+            # user, 21 Nov: "place, person, animal or thing" -- each column lights up as she says it
+            seq = [("place", 1), ("person", 0), ("animal", 2), ("thing", 3)]
+            ts = [W("rule", w) for w, _ in seq]
+            for k, (w, j) in enumerate(seq):
+                t = ts[k]
+                off = (ts[k + 1] - 0.04) if k + 1 < len(seq) else t + 0.7
+                js.append(f'tl.to("#{cid}h{j}", {{backgroundColor: "#FFC94A", scale: 1.1, duration: 0.12, ease: "power2.out"}}, {t});'
+                          f'tl.to("#{cid}e{j}", {{scale: 1.2, color: "#E8475A", duration: 0.12, ease: "power2.out"}}, {t});'
+                          f'tl.to("#{cid}t{j}", {{scale: 1.18, backgroundColor: "#E8475A", color: "#FFFFFF", duration: 0.12}}, {t});'
+                          f'tl.to("#{cid}h{j}", {{backgroundColor: "#CFEADF", scale: 1, duration: 0.15}}, {off});'
+                          f'tl.to("#{cid}e{j}", {{scale: 1, color: "#23324A", duration: 0.15}}, {off});'
+                          f'tl.to("#{cid}t{j}", {{scale: 1, backgroundColor: "#17423C", color: "#FFC94A", duration: 0.15}}, {off});')
         js.append(f'tl.to("#{cid} .layer > *", {{opacity: 0, y: -20, duration: 0.2}}, {e - 0.2});')
 
     # ---------------------------------------------------------------- naming word

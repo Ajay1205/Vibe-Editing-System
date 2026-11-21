@@ -36,14 +36,14 @@ def bdir(v):
 
 def cues(v):
     W = lambda lid, w, n=0: L.word_t(v, lid, w, n)  # noqa: E731
-    order = L.VERSIONS[v]
+    order = [L.parent(x) for x in L.VERSIONS[v]]
     sp = {lid: L.span(v, lid) for lid in order}
     fx = []  # (name, t, lu)
 
     def add(name, t, lu):
         if t is not None:
             fx.append((name, max(0.0, t), lu))
-    if v == "v4_shortest":
+    if order[0] == "npat":  # cold open with the text hook
         add("impact-bass-2", 0.0, -6)
         for h in ("name", "place", "animal", "thing"):
             add("pop", W("npat", h), -9)
@@ -56,7 +56,7 @@ def cues(v):
             if nb_open is None or nb_open != order[order.index(lid) - 1]:
                 add("whoosh-short", sp[lid][0] - 0.08, -11)
         nb_open = lid if lid in ("npat", "concept", "answers", "notice", "rule") else None
-    if "npat" in order and v != "v4_shortest":
+    if "npat" in order and order[0] != "npat":
         for h in ("name", "place", "animal", "thing"):
             add("pop", W("npat", h), -10)
     if "answers" in order:
@@ -66,6 +66,8 @@ def cues(v):
         for w in ("person", "place", "animal", "thing"):
             add("pop", W("notice", w), -11)
     if "rule" in order:
+        for w in ("place", "person", "animal", "thing"):  # the columns light up one by one
+            add("click-soft", W("rule", w), -10)
         add("ping", W("rule", "noun"), -8)
     if "naming" in order:
         add("sparkle", W("naming", "naming"), -7)
@@ -119,9 +121,7 @@ def caps(v, res=2160):
 def compose(v, preview=False, crf=15):
     RENDERS.mkdir(exist_ok=True)
     W, H = (1080, 1920) if preview else (2160, 3840)
-    base = bdir(v.replace("v3_anim", "v1_full")) / f"base{'_preview' if preview else ''}.mp4"  # v3 shares v1's picture
-    if not base.exists():
-        base = bdir(v) / f"base{'_preview' if preview else ''}.mp4"
+    base = bdir(v) / f"base{'_preview' if preview else ''}.mp4"
     dur = json.load(open(bdir(v) / "cues.json"))["duration"]
     tail = SP.TAIL.get(v, 0.0)
     br = SP.brolls(v)
@@ -146,12 +146,8 @@ def compose(v, preview=False, crf=15):
 
 
 def everything(v, preview=False):
-    src = "v1_full" if v == "v3_anim" else v
-    if not (bdir(src) / f"base{'_preview' if preview else ''}.mp4").exists():
-        subprocess.run([sys.executable, "-I", str(HERE / "render_base.py"), src] + (["--preview"] if preview else []), check=True)
-    if v == "v3_anim":
-        import shutil
-        shutil.copy(bdir("v1_full") / "voice_raw.wav", bdir(v) / "voice_raw.wav")
+    if not (bdir(v) / f"base{'_preview' if preview else ''}.mp4").exists():
+        subprocess.run([sys.executable, "-I", str(HERE / "render_base.py"), v] + (["--preview"] if preview else []), check=True)
     cues(v)
     subprocess.run([sys.executable, "-I", str(HERE / "mix.py")], check=True, env=dict(os.environ, M8_VERSION=v))
     subprocess.run([sys.executable, "-I", str(HERE / "overlay.py"), v], check=True)

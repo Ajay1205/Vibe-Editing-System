@@ -46,16 +46,34 @@ LINES = {
     "part2_b":  ("m85", 11.58, 16.52, "jisme main aapko sikhaungi special noun aur common noun ka matlab aur kai saare examples."),
 }
 
+# Trimmed variants (user, 21 Nov, timestamps on the V1 timeline): a variant starts later inside its parent line and
+# ends where the parent ends. Captions / cues address the parent id; span() and at() resolve to the variant.
+ALT = {
+    "answers_j": ("answers", 1.98, "Jaise name: Ria, place: Mumbai, animal: tiger, thing: pencil."),   # cut "Game mein kya likhte hain?"
+    "notice_b":  ("notice", 9.20, "Ria kisi person ka naam hai, Mumbai place, tiger animal, pencil thing."),  # cut "Ab aap notice karo"
+}
 ALL = list(LINES)
+for _k, (_p, _s0, _t) in ALT.items():
+    LINES[_k] = (LINES[_p][0], _s0, LINES[_p][2], _t)
+
+
+def parent(lid):
+    return ALT[lid][0] if lid in ALT else lid
+
+
+V1 = [x for x in ALL if x != "part2_b"]
 VERSIONS = {
     # V1 full: everything, pauses tightened -- minus her last sentence (user: "common noun" at the end is
     # pronounced badly), so it ends on "dekhiye hamara part 2" with the Part 2 card held on screen
-    "v1_full": [x for x in ALL if x != "part2_b"],
-    # V2 shorter: every noun explanation kept; cut the repeats (the notebook shows them) and the long part-2 pitch
-    "v2_short": ["def", "bachpan", "npat", "answers", "rule", "naming", "ex1", "ex1_why", "ex2", "ex2_is", "ex2_why",
-                 "ex3", "ex3_why", "ex4", "ex4_why", "types", "type_ex", "part2"],
-    # V3 animated: the full explanation with an animated scene on each idea (same lines as V1)
-    "v3_anim": [x for x in ALL if x != "part2_b"],
+    "v1_full": V1,
+    # V2 (user, 21 Nov, V1 timestamps): starts at 0:06 on "Name, place, animal, thing" (text hook on frame 1);
+    # cut 0:11-0:13 "Game mein kya likhte hain?", 0:18-0:19 "Ab aap notice karo", and "Bataiye kyun?";
+    # also cut (our call) the filler "Ab aapko in sentences se noun ka concept samajh aa raha hoga"
+    "v2_short": [{"answers": "answers_j", "notice": "notice_b"}.get(x, x) for x in V1
+                 if x not in ("def", "bachpan", "ex2_ask", "clear")],
+    # V3 animated (user, 21 Nov): V1 minus 0:08-0:13 ("...noun ka poora concept" + "Game mein kya likhte hain?")
+    # and 0:18-0:19 ("Ab aap notice karo"); scenes on each idea
+    "v3_anim": [{"answers": "answers_j", "notice": "notice_b"}.get(x, x) for x in V1 if x != "concept"],
     # V4 shortest: cold open on the game, the rule, the naming word, follow for part 2 (text)
     "v4_shortest": ["npat", "def", "answers", "rule", "naming"],
 }
@@ -70,9 +88,12 @@ def words(take):
 
 
 def bounds(lid):
+    if lid in ALT:
+        a = _bounds(lid)[0]
+        return round(a, 3), bounds(ALT[lid][0])[1]
     a, b = _bounds(lid)
     take = LINES[lid][0]
-    same = [k for k in LINES if LINES[k][0] == take]
+    same = [k for k in LINES if LINES[k][0] == take and k not in ALT]
     i = same.index(lid)
     r, fr = rms(take), 0.03
     if i > 0:  # meets the previous line of the same take: cut both at the quietest frame between them
@@ -157,7 +178,7 @@ def edl(version):
 def at(version, lid, raw_t):
     """Raw time inside a line -> output time in a version (None if the line isn't in it). A time inside a removed
     pause snaps to the next kept frame."""
-    segs = [s for s in edl(version) if s["id"] == lid]
+    segs = _segs(version, lid)
     for s in segs:
         if raw_t < s["in"]:
             return s["start"]
@@ -166,8 +187,16 @@ def at(version, lid, raw_t):
     return segs[-1]["end"] if segs else None
 
 
+def _segs(version, lid):
+    e = edl(version)
+    segs = [s for s in e if s["id"] == lid]
+    if not segs:
+        segs = [s for s in e if parent(s["id"]) == lid]
+    return segs
+
+
 def span(version, lid):
-    segs = [s for s in edl(version) if s["id"] == lid]
+    segs = _segs(version, lid)
     return (segs[0]["start"], segs[-1]["end"]) if segs else None
 
 

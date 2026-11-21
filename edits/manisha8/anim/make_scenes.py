@@ -292,11 +292,153 @@ tl.fromTo("#fl", {scaleX: 0}, {scaleX: 1, duration: 2.4, ease: "power1.inOut"}, 
     return css, body, js
 
 
+
+# ------------------------------------------------------------------------------------------------ v2 visuals (user, 21 Nov)
+def v_girl():  # Ria: an illustrated young woman who waves and says hi (user: "the Ria animation should have a girl")
+    css = """
+.gcard { left: 120px; top: 720px; width: 840px; height: 980px; border-radius: 40px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #FFE9D6, #F7C9B0 70%); box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+.girl { left: 140px; top: 140px; width: 560px; height: 840px; }
+.bub { left: 470px; top: 820px; padding: 22px 34px; border-radius: 40px 40px 40px 10px; background: #fff; font: 700 70px/1 Cav; color: var(--ink);
+  box-shadow: 0 14px 30px rgba(0,0,0,.25); white-space: nowrap; }
+.pc { left: 640px; top: 1600px; }"""
+    svg = """<svg class="abs girl" viewBox="0 0 560 840">
+ <path d="M120 300 C 90 520, 80 700, 110 840 L 450 840 C 480 700, 470 520, 440 300 Z" fill="#2B1A13"/>
+ <path d="M60 840 C 70 700, 160 640, 280 640 C 400 640, 490 700, 500 840 Z" fill="#E8475A"/>
+ <path d="M200 660 L 280 740 L 360 660 Z" fill="#C93448"/>
+ <rect x="240" y="540" width="80" height="120" rx="30" fill="#D99B72"/>
+ <ellipse cx="280" cy="400" rx="150" ry="180" fill="#E6AE86"/>
+ <circle cx="128" cy="420" r="26" fill="#D99B72"/><circle cx="432" cy="420" r="26" fill="#D99B72"/>
+ <circle cx="128" cy="462" r="10" fill="#FFC94A"/><circle cx="432" cy="462" r="10" fill="#FFC94A"/>
+ <path d="M120 360 C 110 200, 220 150, 300 170 C 400 190, 460 260, 440 380 C 400 300, 330 260, 250 280 C 190 290, 150 320, 120 360 Z" fill="#2B1A13"/>
+ <g id="eyes"><ellipse cx="225" cy="410" rx="16" ry="20" fill="#2B1A13"/><ellipse cx="335" cy="410" rx="16" ry="20" fill="#2B1A13"/>
+  <circle cx="231" cy="403" r="5" fill="#fff"/><circle cx="341" cy="403" r="5" fill="#fff"/></g>
+ <path d="M195 372 Q 225 358 255 370" stroke="#2B1A13" stroke-width="8" fill="none" stroke-linecap="round"/>
+ <path d="M305 370 Q 335 358 365 372" stroke="#2B1A13" stroke-width="8" fill="none" stroke-linecap="round"/>
+ <circle cx="280" cy="360" r="7" fill="#E8475A"/>
+ <path d="M272 430 Q 280 462 290 440" stroke="#C98A62" stroke-width="6" fill="none" stroke-linecap="round"/>
+ <path d="M235 492 Q 280 530 325 492" stroke="#A8423A" stroke-width="9" fill="#fff" stroke-linecap="round"/>
+ <ellipse cx="200" cy="470" rx="26" ry="14" fill="#F29A8C" opacity=".55"/><ellipse cx="360" cy="470" rx="26" ry="14" fill="#F29A8C" opacity=".55"/>
+ <g id="arm"><path d="M470 760 C 500 680, 520 600, 520 520" stroke="#E8475A" stroke-width="70" stroke-linecap="round" fill="none"/>
+  <ellipse cx="522" cy="480" rx="40" ry="50" fill="#E6AE86"/></g>
+</svg>"""
+    body = f"""<div class="abs gcard" id="gc">{svg}</div><div class="abs bub" id="bb">Hi, I'm Ria! 👋</div>
+<div class="abs chip pc" id="pc">👤 PERSON</div>"""
+    js = """tl.fromTo("#gc", {opacity: 0, y: 140}, {opacity: 1, y: 0, duration: 0.5, ease: "power3.out"}, 0.0);
+tl.fromTo(".girl", {y: 120}, {y: 0, duration: 0.6, ease: "power3.out"}, 0.05);
+tl.fromTo("#arm", {rotation: 0, transformOrigin: "470px 760px"}, {rotation: -14, duration: 0.22, yoyo: true, repeat: 7, ease: "sine.inOut"}, 0.45);
+tl.to("#eyes", {scaleY: 0.1, transformOrigin: "280px 410px", duration: 0.06, yoyo: true, repeat: 1}, 1.4);
+tl.fromTo("#bb", {opacity: 0, scale: 0.4, transformOrigin: "0% 100%"}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 0.55);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.8);"""
+    return css, body, js
+
+
+def v_tiger_real():  # tiger: an illustrated tiger rises out of the jungle and growls (user: "should show a tiger")
+    css = """
+.jun2 { left: 60px; top: 700px; width: 960px; height: 1000px; border-radius: 40px; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #2F5E33, #10261A 75%); box-shadow: 0 40px 90px rgba(0,0,0,.6); }
+.tig { left: 180px; top: 170px; width: 600px; height: 620px; }
+.lf { border-radius: 0 100% 0 100%; }
+.grr { left: 640px; top: 880px; font: 400 92px/1 Anton; color: var(--pen); letter-spacing: 4px; transform: rotate(-8deg); }
+.pc { left: 620px; top: 1600px; }"""
+    svg = """<svg class="abs tig" viewBox="0 0 600 620">
+ <path d="M110 130 L 150 30 L 230 110 Z" fill="#E07A1F"/><path d="M490 130 L 450 30 L 370 110 Z" fill="#E07A1F"/>
+ <path d="M140 110 L 160 60 L 205 105 Z" fill="#FFF4E6"/><path d="M460 110 L 440 60 L 395 105 Z" fill="#FFF4E6"/>
+ <ellipse cx="300" cy="320" rx="250" ry="250" fill="#F28C28"/>
+ <path d="M300 90 L 285 170 L 300 200 L 315 170 Z" fill="#1A1A1A"/>
+ <path d="M240 110 Q 255 160 245 200" stroke="#1A1A1A" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <path d="M360 110 Q 345 160 355 200" stroke="#1A1A1A" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <path d="M60 300 Q 120 290 150 320" stroke="#1A1A1A" stroke-width="18" fill="none" stroke-linecap="round"/>
+ <path d="M70 360 Q 125 350 150 375" stroke="#1A1A1A" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <path d="M540 300 Q 480 290 450 320" stroke="#1A1A1A" stroke-width="18" fill="none" stroke-linecap="round"/>
+ <path d="M530 360 Q 475 350 450 375" stroke="#1A1A1A" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <ellipse cx="190" cy="430" rx="120" ry="95" fill="#FFF4E6"/><ellipse cx="410" cy="430" rx="120" ry="95" fill="#FFF4E6"/>
+ <ellipse cx="300" cy="500" rx="110" ry="80" fill="#FFF4E6"/>
+ <g id="teyes"><ellipse cx="205" cy="290" rx="40" ry="30" fill="#D8F06A"/><ellipse cx="395" cy="290" rx="40" ry="30" fill="#D8F06A"/>
+  <ellipse cx="205" cy="290" rx="9" ry="26" fill="#111"/><ellipse cx="395" cy="290" rx="9" ry="26" fill="#111"/></g>
+ <path d="M160 255 L 245 270" stroke="#1A1A1A" stroke-width="10" stroke-linecap="round"/><path d="M440 255 L 355 270" stroke="#1A1A1A" stroke-width="10" stroke-linecap="round"/>
+ <path d="M262 380 L 338 380 L 300 425 Z" fill="#B5545C"/>
+ <path d="M300 425 L 300 455" stroke="#1A1A1A" stroke-width="7"/>
+ <g id="jaw"><path d="M240 470 Q 300 545 360 470 Q 300 500 240 470 Z" fill="#6B1F24"/>
+  <path d="M255 474 L 265 498 L 275 480 Z" fill="#fff"/><path d="M345 474 L 335 498 L 325 480 Z" fill="#fff"/></g>
+ <g stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" opacity=".7"><path d="M230 440 L 140 425"/><path d="M230 455 L 145 465"/>
+  <path d="M370 440 L 460 425"/><path d="M370 455 L 455 465"/></g>
+</svg>"""
+    body = f"""<div class="abs jun2" id="jn">{svg}
+ <div class="abs lf" style="left:-80px;top:640px;width:460px;height:340px;background:#3E8A45;transform:rotate(-18deg)"></div>
+ <div class="abs lf" style="left:600px;top:680px;width:460px;height:340px;background:#2F7A3A;transform:rotate(195deg)"></div>
+ <div class="abs lf" style="left:230px;top:820px;width:520px;height:320px;background:#256B31;transform:rotate(8deg)"></div></div>
+<div class="abs grr" id="gr">GRRR!</div><div class="abs chip pc" id="pc">🐯 ANIMAL</div>"""
+    js = """tl.fromTo("#jn", {opacity: 0, scale: 0.95}, {opacity: 1, scale: 1, duration: 0.4, ease: "power3.out"}, 0.0);
+tl.fromTo(".tig", {y: 420}, {y: 0, duration: 0.6, ease: "power3.out"}, 0.1);
+tl.fromTo("#jaw", {scaleY: 0.3, transformOrigin: "300px 470px"}, {scaleY: 1.25, duration: 0.18, yoyo: true, repeat: 3, ease: "power2.inOut"}, 0.7);
+tl.fromTo(".tig", {x: 0}, {x: 8, duration: 0.05, yoyo: true, repeat: 7, ease: "none"}, 0.7);
+tl.fromTo("#gr", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.25, ease: "back.out(3)"}, 0.72);
+tl.to("#teyes", {scaleY: 0.15, transformOrigin: "300px 290px", duration: 0.06, yoyo: true, repeat: 1}, 1.6);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.85);"""
+    return css, body, js
+
+
+def v_mumbai_night():  # Mumbai at night: lit high-rises and the Bandra-Worli Sea Link over the sea (user request)
+    import random
+    rnd = random.Random(8)
+    css = """
+.night { left: 60px; top: 700px; width: 960px; height: 1000px; border-radius: 40px; overflow: hidden;
+  background: linear-gradient(180deg, #0A1230 0%, #1B2A5A 55%, #3B3870 68%, #0B1A33 68.2%, #0A1530 100%); box-shadow: 0 40px 90px rgba(0,0,0,.6); }
+.moon { left: 760px; top: 70px; width: 90px; height: 90px; border-radius: 50%; background: #FFF4D6; box-shadow: 0 0 60px 20px rgba(255,244,214,.35); }
+.st { width: 4px; height: 4px; border-radius: 50%; background: #fff; }
+.bld { bottom: 320px; background: #121B3A; }
+.win { width: 8px; height: 10px; background: #FFD66B; box-shadow: 0 0 6px rgba(255,214,107,.8); }
+.rl { width: 8px; height: 8px; border-radius: 50%; background: #FF4D5E; box-shadow: 0 0 10px 4px rgba(255,77,94,.7); }
+.link { left: 0; top: 560px; width: 960px; height: 240px; }
+.refl { left: 0; top: 690px; width: 960px; height: 310px; background: repeating-linear-gradient(180deg, rgba(255,214,107,.10) 0 6px, transparent 6px 18px); }
+.car { width: 12px; height: 5px; border-radius: 3px; background: #FFE9A8; box-shadow: 0 0 10px 4px rgba(255,233,168,.8); }
+.car.r { background: #FF6B6B; box-shadow: 0 0 10px 4px rgba(255,107,107,.8); }
+.tag2 { left: 40px; top: 40px; padding: 14px 26px; border-radius: 30px; background: #fff; font: 800 44px/1 Brico; color: var(--ink); white-space: nowrap; }
+.tag2 small { display: block; font: 800 22px/1 PJS; color: #6B6B6B; letter-spacing: 1px; margin-top: 6px; text-align: center; }
+.pc { left: 600px; top: 1600px; }"""
+    stars = "".join(f'<div class="abs st" style="left:{rnd.randint(20, 940)}px;top:{rnd.randint(20, 380)}px;opacity:{rnd.uniform(.4, 1):.2f}"></div>' for _ in range(40))
+    blds, x = [], 10
+    for w, h in [(70, 230), (90, 330), (60, 260), (110, 420), (80, 300), (70, 360), (120, 470), (60, 280), (90, 390), (70, 250), (100, 340)]:
+        wins = "".join(f'<div class="abs win {"on" if rnd.random() < .55 else "off"}" style="left:{cx}px;top:{cy}px"></div>'
+                       for cy in range(24, h - 20, 26) for cx in range(10, w - 14, 20))
+        top = f'<div class="abs rl" style="left:{w // 2 - 4}px;top:-14px"></div>' if h > 380 else ""
+        blds.append(f'<div class="abs bld" style="left:{x}px;width:{w}px;height:{h}px">{wins}{top}</div>')
+        x += w + 12
+    link = """<svg class="abs link" viewBox="0 0 960 240">
+ <path d="M-10 170 Q 480 120 970 170" stroke="#C9D2E8" stroke-width="10" fill="none"/>
+ <path d="M-10 180 Q 480 130 970 180" stroke="#55607E" stroke-width="6" fill="none"/>
+ <g stroke="#E8ECF8" stroke-width="10" stroke-linecap="round"><path d="M310 150 L 340 20 L 370 150"/><path d="M590 150 L 620 20 L 650 150"/></g>
+ <g stroke="#C9D2E8" stroke-width="2" opacity=".8">
+  <path d="M340 30 L 200 160"/><path d="M340 40 L 230 158"/><path d="M340 50 L 260 156"/><path d="M340 60 L 290 154"/>
+  <path d="M340 30 L 480 145"/><path d="M340 40 L 450 147"/><path d="M340 50 L 420 149"/><path d="M340 60 L 390 151"/>
+  <path d="M620 30 L 480 145"/><path d="M620 40 L 510 147"/><path d="M620 50 L 540 149"/><path d="M620 60 L 570 151"/>
+  <path d="M620 30 L 760 155"/><path d="M620 40 L 730 153"/><path d="M620 50 L 700 152"/><path d="M620 60 L 670 151"/></g>
+ <g fill="#FFD66B">""" + "".join(f'<circle cx="{px}" cy="{170 - 50 * (1 - ((px - 480) / 490) ** 2) + 2:.0f}" r="3"/>' for px in range(20, 960, 40)) + """</g>
+</svg>"""
+    cars = "".join(f'<div class="abs car{" r" if k % 2 else ""}" id="car{k}" style="left:-30px;top:{700 + (0 if k % 2 == 0 else 8)}px"></div>' for k in range(6))
+    body = f"""<div class="abs night" id="nt"><div class="abs moon"></div>{stars}{''.join(blds)}<div class="abs refl" id="rf"></div>{link}{cars}
+ <div class="abs tag2" id="tg">📍 Mumbai<small>BANDRA–WORLI SEA LINK</small></div></div>
+<div class="abs chip pc" id="pc">📍 PLACE</div>"""
+    js = """tl.fromTo("#nt", {opacity: 0, y: 120, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out"}, 0.0);
+tl.fromTo(".bld", {scaleY: 0, transformOrigin: "50% 100%"}, {scaleY: 1, duration: 0.5, ease: "power3.out", stagger: 0.03}, 0.1);
+tl.fromTo(".win.on", {opacity: 0}, {opacity: 1, duration: 0.3, stagger: {each: 0.003, from: "random"}}, 0.45);
+tl.fromTo(".win.off", {opacity: 0}, {opacity: 0.12, duration: 0.3}, 0.45);
+tl.fromTo(".link", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.35);
+tl.fromTo(".st", {opacity: 0.2}, {opacity: 1, duration: 0.4, yoyo: true, repeat: 6, stagger: {each: 0.03, from: "random"}}, 0.2);
+tl.fromTo(".rl", {opacity: 1}, {opacity: 0.15, duration: 0.3, yoyo: true, repeat: 9, ease: "steps(1)"}, 0.4);
+for (let k = 0; k < 6; k++) { const ltr = k % 2 === 0; tl.fromTo("#car" + k, {x: ltr ? 0 : 1000}, {x: ltr ? 1000 : 0, duration: 1.6, ease: "none"}, 0.5 + k * 0.25); }
+tl.fromTo("#rf", {opacity: 0.4}, {opacity: 1, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut"}, 0.5);
+tl.fromTo("#tg", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 0.75);
+tl.fromTo("#pc", {opacity: 0, x: 60}, {opacity: 1, x: 0, duration: 0.35, ease: "power3.out"}, 0.9);"""
+    return css, body, js
+
+
 SCENES = {}
 for name, vis, sent, hl, sub, kind, word in [
-        ("ria", v_badge, "Meri friend Ria hai.", "Ria", "My friend is Ria.", "NAME", "Ria"),
-        ("mumbai", v_map, "Main Mumbai mein rehti hoon.", "Mumbai", "I live in Mumbai.", "PLACE", "Mumbai"),
-        ("tiger", v_tiger, "Mujhe tiger se dar lagta hai.", "tiger", "I am scared of tigers.", "ANIMAL", "Tiger"),
+        ("ria", v_girl, "Meri friend Ria hai.", "Ria", "My friend is Ria.", "NAME", "Ria"),
+        ("mumbai", v_mumbai_night, "Main Mumbai mein rehti hoon.", "Mumbai", "I live in Mumbai.", "PLACE", "Mumbai"),
+        ("tiger", v_tiger_real, "Mujhe tiger se dar lagta hai.", "tiger", "I am scared of tigers.", "ANIMAL", "Tiger"),
         ("pencil", v_pencil, "I have a pencil.", "pencil", "", "THING", "Pencil")]:
     SCENES[f"{name}_s"] = (3.6, vis, ("sent", sent, hl, sub))
     SCENES[f"{name}_w"] = (2.0, vis, ("word", kind, word))
