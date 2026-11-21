@@ -25,6 +25,10 @@ import scenes_plan as SP  # noqa: E402
 
 BROLL = L.ROOT / "footage" / "manisha8" / "broll"
 RENDERS = HERE / "renders"
+# user, 21 Nov: "Manisha is looking a bit dark, do what we did to Nikita" -- the Nikita 6 grade, on HER picture only
+# (applied to the base before the scenes and the caption layer go on, so text / animation colours are untouched)
+GRADE = ("curves=master='0/0 0.2/0.30 0.5/0.66 0.8/0.89 1/1',eq=contrast=1.03:saturation=1.04,"
+         "colorbalance=rm=-0.03:bm=0.03")
 ENV = dict(os.environ, NODE_USE_ENV_PROXY="1", NODE_EXTRA_CA_CERTS="/root/.ccr/ca-bundle.crt")
 
 
@@ -126,7 +130,7 @@ def compose(v, preview=False, crf=15):
     tail = SP.TAIL.get(v, 0.0)
     br = SP.brolls(v)
     ins = ["-i", str(base), "-c:v", "libvpx-vp9", "-i", str(bdir(v) / "overlay_2160.webm"), "-i", str(bdir(v) / "mix.wav")]
-    fc = [f"[0:v]fps=30,{'tpad=stop_mode=clone:stop_duration=' + str(tail) + ',' if tail else ''}format=yuv420p[b0]"]
+    fc = [f"[0:v]fps=30,{'tpad=stop_mode=clone:stop_duration=' + str(tail) + ',' if tail else ''}{GRADE},format=yuv420p[b0]"]
     last = "b0"
     for k, b in enumerate(br):
         ins += ["-ss", f"{b['in']:.3f}", "-t", f"{b['end'] - b['start'] + 0.2:.3f}", "-i", str(BROLL / b["file"])]
