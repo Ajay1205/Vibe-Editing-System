@@ -1,0 +1,167 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/caveat700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+:root { --teal: #17423C; --mint: #CFEADF; --paper: #FFF9EE; --pen: #FFC94A; --red: #E8475A; --ink: #23324A;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.45); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; }
+.clip { position: absolute; inset: 0; } .layer { position: absolute; inset: 0; }
+.layer > div { position: absolute; }
+.w { display: inline-block; }
+/* hook A */
+.h1 { left: 0; top: 290px; width: 1080px; text-align: center; font: 400 104px/1.02 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.h1 span, .h1 em { display: inline-block; } .h1 em { font-style: normal; color: var(--pen); }
+.def { left: 150px; top: 590px; width: 780px; padding: 24px 30px; border-radius: 18px; background: rgba(255,249,238,.95); transform: rotate(-3deg);
+  font: 800 32px/1.25 Brico; color: #6B6B6B; box-shadow: 0 16px 34px rgba(0,0,0,.3); }
+.slash { left: 130px; top: 670px; width: 820px; height: 14px; border-radius: 7px; background: var(--red); transform: rotate(-9deg); }
+.nope { left: 680px; top: 540px; padding: 8px 20px; border-radius: 14px; border: 6px solid var(--red); color: var(--red); font: 400 54px/1 Anton;
+  transform: rotate(10deg); background: rgba(255,249,238,.95); }
+/* hook C */
+.hc { left: 0; top: 280px; width: 1080px; text-align: center; font: 400 92px/1.05 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.hc em { font-style: normal; color: var(--pen); }
+.hw { left: 0; width: 1080px; text-align: center; font: 800 58px/1 PJS; letter-spacing: 6px; color: var(--teal); }
+.hw { -webkit-text-stroke: 0; text-shadow: 0 0 0 transparent; }
+.hw { color: #fff; text-shadow: var(--sh); }
+/* handwriting lines */
+.hand { left: 0; top: 380px; width: 1080px; text-align: center; font: 700 82px/1.1 Cav; color: #fff; text-shadow: var(--sh); }
+.hand b { color: var(--pen); font-weight: 700; }
+/* notebook */
+.nb { left: 110px; top: 270px; width: 860px; height: 470px; border-radius: 22px; background: var(--paper); box-shadow: 0 20px 44px rgba(0,0,0,.32); overflow: hidden;
+  background-image: repeating-linear-gradient(180deg, transparent 0 69px, #CFE0EE 69px 72px); }
+.margin { position: absolute; left: 70px; top: 0; width: 4px; height: 470px; background: var(--red); opacity: .7; }
+.cols { position: absolute; left: 74px; top: 0; width: 786px; height: 470px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.col { border-left: 3px solid #B8C9D8; } .col:first-child { border-left: none; }
+.hd { height: 96px; display: flex; align-items: center; justify-content: center; font: 800 32px/1 PJS; letter-spacing: 1px; color: var(--teal);
+  background: var(--mint); border-bottom: 4px solid var(--teal); }
+.en { height: 150px; display: flex; align-items: center; justify-content: center; font: 700 64px/1 Cav; color: var(--ink); }
+.tag { margin: 22px auto 0; width: 150px; padding: 10px 0; border-radius: 30px; background: var(--teal); color: var(--pen); text-align: center;
+  font: 800 26px/1 PJS; letter-spacing: 2px; }
+.eq { left: 0; top: 770px; width: 1080px; text-align: center; font: 800 56px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.eq b { color: var(--pen); }
+/* naming word */
+.big { left: 0; top: 330px; width: 1080px; text-align: center; font: 400 120px/1.02 Anton; color: #fff; text-shadow: var(--sh); }
+.big em { font-style: normal; color: var(--pen); }
+.tagicon { left: 760px; top: 260px; font: 120px/1 sans-serif; transform-origin: 30% 10%; }
+.chipbig { left: 0; top: 420px; width: 1080px; text-align: center; }
+.chipbig, .chip, .lab { font: 800 34px/1 PJS; letter-spacing: 2px; }
+#sit { display: inline-block; left: 310px; width: auto; padding: 18px 34px; border-radius: 40px; background: var(--teal); color: var(--mint); font-size: 48px; }
+#sit b { color: var(--pen); }
+/* examples */
+.chip { left: 120px; top: 280px; padding: 12px 22px; border-radius: 30px; background: var(--teal); color: var(--mint); font-size: 28px; }
+.lab { left: 560px; top: 370px; padding: 12px 22px; border-radius: 30px; background: var(--pen); color: var(--teal); box-shadow: 0 10px 24px rgba(0,0,0,.3); }
+.s { left: 40px; top: 470px; width: 1000px; text-align: center; font: 800 70px/1.15 Brico; color: #fff; text-shadow: var(--sh); }
+.hl { display: inline-block; color: #fff; padding: 0 14px; border-radius: 16px; background: rgba(255,201,74,0); text-shadow: var(--sh); }
+.hl.on { color: var(--ink); background: rgba(255,201,74,1); text-shadow: none; }
+.co2 { color: #fff; text-shadow: var(--sh); }
+.sb { left: 40px; top: 460px; width: 1000px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.s2 { width: 1000px; text-align: center; font: 800 64px/1.12 Brico; color: #fff; text-shadow: var(--sh); }
+.eng2 { font: 800 36px/1 PJS; color: var(--mint); text-shadow: var(--sh); letter-spacing: 1px; }
+.eng { left: 0; top: 570px; width: 1080px; text-align: center; font: 800 38px/1 PJS; color: var(--mint); text-shadow: var(--sh); letter-spacing: 1px; }
+.why { left: 0; top: 660px; width: 1080px; text-align: center; font: 700 64px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.why b { color: var(--pen); font-weight: 700; }
+.ask { left: 0; top: 740px; width: 1080px; text-align: center; font: 700 96px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.ask b { color: var(--pen); font-weight: 700; }
+/* types */
+.tt { left: 0; top: 330px; width: 1080px; text-align: center; font: 400 110px/1 Anton; color: #fff; text-shadow: var(--sh); text-transform: uppercase; }
+.tt em { font-style: normal; color: var(--pen); }
+.pills, .tagrow { left: 120px; top: 500px; width: 840px; display: flex; justify-content: center; gap: 30px; }
+.tagrow { top: 600px; }
+.pl { padding: 18px 30px; border-radius: 40px; font: 800 40px/1 PJS; box-shadow: 0 12px 26px rgba(0,0,0,.3); }
+.pr { background: var(--pen); color: var(--teal); } .co { background: var(--mint); color: var(--teal); }
+#tes { top: 440px; }
+/* part 2 */
+.p2card { left: 160px; top: 320px; width: 760px; padding: 34px; border-radius: 36px; background: var(--teal); text-align: center; box-shadow: 0 20px 44px rgba(0,0,0,.35); }
+.p2k { font: 400 96px/1 Anton; color: var(--pen); } .p2t { margin-top: 16px; font: 800 48px/1.1 Brico; color: var(--paper); }
+.follow { left: 0; top: 640px; width: 1080px; text-align: center; font: 700 70px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.follow b { color: var(--pen); font-weight: 700; } .follow.end { top: 700px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="70.990" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="hookc" class="clip" data-start="0.000" data-duration="2.130" data-track-index="8"><div class="layer"><div class="hc" id="hc">Bachpan ka <em>YE</em> game =<br>poori <em>NOUN</em> grammar 🤯</div></div></div>
+<div id="hw0" class="clip" data-start="0.270" data-duration="1.860" data-track-index="7"><div class="layer"><div class="hw" style="top:560px">NAME</div></div></div>
+<div id="hw1" class="clip" data-start="0.730" data-duration="1.400" data-track-index="7"><div class="layer"><div class="hw" style="top:630px">PLACE</div></div></div>
+<div id="hw2" class="clip" data-start="1.250" data-duration="0.880" data-track-index="7"><div class="layer"><div class="hw" style="top:700px">ANIMAL</div></div></div>
+<div id="hw3" class="clip" data-start="1.750" data-duration="0.380" data-track-index="7"><div class="layer"><div class="hw" style="top:770px">THING</div></div></div>
+<div id="nb0" class="clip" data-start="2.030" data-duration="21.910" data-track-index="2"><div class="layer"><div class="nb" id="nb0n"><div class="margin"></div><div class="cols"><div class="col"><div class="hd" id="nb0h0">NAME</div><div class="en" id="nb0e0">Ria</div><div class="tag" id="nb0t0">PERSON</div></div><div class="col"><div class="hd" id="nb0h1">PLACE</div><div class="en" id="nb0e1">Mumbai</div><div class="tag" id="nb0t1">PLACE</div></div><div class="col"><div class="hd" id="nb0h2">ANIMAL</div><div class="en" id="nb0e2">Tiger</div><div class="tag" id="nb0t2">ANIMAL</div></div><div class="col"><div class="hd" id="nb0h3">THING</div><div class="en" id="nb0e3">Pencil</div><div class="tag" id="nb0t3">THING</div></div></div></div><div class="eq" id="nb0q"></div></div></div>
+<div id="si" class="clip" data-start="26.870" data-duration="2.030" data-track-index="3"><div class="layer"><div class="chipbig" id="sit">Ab <b>SENTENCES</b> ✍️</div></div></div>
+<div id="ex0" class="clip" data-start="28.900" data-duration="6.880" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex0c">EXAMPLE 1/4</div>
+          <div class="lab" id="ex0l">👤 PERSON = NOUN</div>
+          <div class="sb"><div class="s2" id="ex0s"><span class="w">Meri</span> <span class="w">friend</span> <span class="w"><span class="hl">Ria</span></span> <span class="w">hai.</span></div>
+          <div class="eng2" id="ex0g">My friend is Ria.</div></div>
+          <div class="why" id="ex0y">kyunki Ria ek ladki ka <b>naam</b> hai</div></div></div>
+<div id="ex1" class="clip" data-start="35.780" data-duration="7.230" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex1c">EXAMPLE 2/4</div>
+          <div class="lab" id="ex1l">📍 PLACE = NOUN</div>
+          <div class="sb"><div class="s2" id="ex1s"><span class="w">Main</span> <span class="w"><span class="hl">Mumbai</span></span> <span class="w">mein</span> <span class="w">rehti</span> <span class="w">hoon.</span></div>
+          <div class="eng2" id="ex1g">I live in Mumbai.</div></div>
+          <div class="why" id="ex1y">kyunki Mumbai ek jagah ka <b>naam</b> hai</div></div></div>
+<div id="ex2" class="clip" data-start="43.010" data-duration="6.160" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex2c">EXAMPLE 3/4</div>
+          <div class="lab" id="ex2l">🐯 ANIMAL = NOUN</div>
+          <div class="sb"><div class="s2" id="ex2s"><span class="w">Mujhe</span> <span class="w"><span class="hl">tiger</span></span> <span class="w">se</span> <span class="w">dar</span> <span class="w">lagta</span> <span class="w">hai.</span></div>
+          <div class="eng2" id="ex2g">I am scared of tigers.</div></div>
+          <div class="why" id="ex2y">kyunki tiger ek animal ka <b>naam</b> hai</div></div></div>
+<div id="ex3" class="clip" data-start="49.170" data-duration="5.740" data-track-index="4"><div class="layer">
+          <div class="chip" id="ex3c">EXAMPLE 4/4</div>
+          <div class="lab" id="ex3l">✏️ THING = NOUN</div>
+          <div class="sb"><div class="s2" id="ex3s"><span class="w">I</span> <span class="w">have</span> <span class="w">a</span> <span class="w"><span class="hl">pencil</span>.</span></div>
+          </div>
+          <div class="why" id="ex3y">kyunki pencil ek cheez ka <b>naam</b> hai</div></div></div>
+<div id="ty" class="clip" data-start="54.910" data-duration="5.270" data-track-index="3"><div class="layer"><div class="tt" id="tyt">NOUN ke <em>2 TYPES</em></div><div class="pills"><div class="pl pr" id="typ">PROPER noun</div><div class="pl co" id="tyc">COMMON noun</div></div></div></div>
+<div id="te" class="clip" data-start="60.180" data-duration="6.440" data-track-index="3"><div class="layer">
+          <div class="s" id="tes">My <span class="hl co2" id="tef">friend</span> is <span class="hl" id="ter">Ria.</span></div>
+          <div class="tagrow"><div class="pl pr" id="tep">Ria → PROPER</div><div class="pl co" id="tec">friend → COMMON</div></div></div></div>
+<div id="p2" class="clip" data-start="69.790" data-duration="1.200" data-track-index="5"><div class="layer">
+          <div class="p2card" id="p2c"><div class="p2k">PART 2 👉</div><div class="p2t">Proper vs Common Noun</div></div>
+          <div class="follow" id="p2f">Follow karo 🔔 taaki miss na ho</div></div></div>
+</div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#hc", {opacity: 1, scale: 1.06}, {opacity: 1, scale: 1, duration: 0.35, ease: "power3.out"}, 0);  // frame 1 fully readable (it is the hook)
+tl.fromTo("#hw0 .hw", {opacity: 0, x: 120, scale: 1.4}, {opacity: 1, x: 0, scale: 1, duration: 0.25, ease: "power3.out"}, 0.27);
+tl.fromTo("#hw1 .hw", {opacity: 0, x: -120, scale: 1.4}, {opacity: 1, x: 0, scale: 1, duration: 0.25, ease: "power3.out"}, 0.73);
+tl.fromTo("#hw2 .hw", {opacity: 0, x: 120, scale: 1.4}, {opacity: 1, x: 0, scale: 1, duration: 0.25, ease: "power3.out"}, 1.25);
+tl.fromTo("#hw3 .hw", {opacity: 0, x: -120, scale: 1.4}, {opacity: 1, x: 0, scale: 1, duration: 0.25, ease: "power3.out"}, 1.75);
+tl.fromTo("#nb0n", {opacity: 0, y: -60, rotation: -4, scale: 0.9}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.4, ease: "back.out(1.7)"}, 2.03);
+tl.fromTo("#nb0 .hd", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)"}, 2.13);
+tl.fromTo("#nb0e0", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 6.53);
+tl.fromTo("#nb0e1", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 7.73);
+tl.fromTo("#nb0e2", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 9.09);
+tl.fromTo("#nb0e3", {opacity: 0, scale: 1.5, rotation: -8}, {opacity: 1, scale: 1, rotation: 0, duration: 0.3, ease: "power3.out"}, 10.33);
+tl.fromTo("#nb0t0", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 11.4);
+tl.fromTo("#nb0t1", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 13.5);
+tl.fromTo("#nb0t2", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 15.34);
+tl.fromTo("#nb0t3", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 17.56);
+tl.call(() => document.querySelector("#nb0q").innerHTML = "= Noun ka <b>poora concept</b> ✨", null, 2.03);tl.fromTo("#nb0q", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 2.0799999999999996);tl.to("#nb0q", {opacity: 0, duration: 0.15}, 4.67);
+tl.call(() => document.querySelector("#nb0q").innerHTML = "Inka <b>NAAM</b> = <b>NOUN</b> ✏️", null, 18.865);tl.fromTo("#nb0q", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3}, 23.16);tl.to("#nb0 .en", {scale: 1.12, color: "#E8475A", duration: 0.2, yoyo: true, repeat: 1, stagger: 0.08}, 23.16);
+tl.to("#nb0h1", {backgroundColor: "#FFC94A", scale: 1.1, duration: 0.12, ease: "power2.out"}, 19.6);tl.to("#nb0e1", {scale: 1.2, color: "#E8475A", duration: 0.12, ease: "power2.out"}, 19.6);tl.to("#nb0t1", {scale: 1.18, backgroundColor: "#E8475A", color: "#FFFFFF", duration: 0.12}, 19.6);tl.to("#nb0h1", {backgroundColor: "#CFEADF", scale: 1, duration: 0.15}, 20.36);tl.to("#nb0e1", {scale: 1, color: "#23324A", duration: 0.15}, 20.36);tl.to("#nb0t1", {scale: 1, backgroundColor: "#17423C", color: "#FFC94A", duration: 0.15}, 20.36);
+tl.to("#nb0h0", {backgroundColor: "#FFC94A", scale: 1.1, duration: 0.12, ease: "power2.out"}, 20.4);tl.to("#nb0e0", {scale: 1.2, color: "#E8475A", duration: 0.12, ease: "power2.out"}, 20.4);tl.to("#nb0t0", {scale: 1.18, backgroundColor: "#E8475A", color: "#FFFFFF", duration: 0.12}, 20.4);tl.to("#nb0h0", {backgroundColor: "#CFEADF", scale: 1, duration: 0.15}, 21.380000000000003);tl.to("#nb0e0", {scale: 1, color: "#23324A", duration: 0.15}, 21.380000000000003);tl.to("#nb0t0", {scale: 1, backgroundColor: "#17423C", color: "#FFC94A", duration: 0.15}, 21.380000000000003);
+tl.to("#nb0h2", {backgroundColor: "#FFC94A", scale: 1.1, duration: 0.12, ease: "power2.out"}, 21.42);tl.to("#nb0e2", {scale: 1.2, color: "#E8475A", duration: 0.12, ease: "power2.out"}, 21.42);tl.to("#nb0t2", {scale: 1.18, backgroundColor: "#E8475A", color: "#FFFFFF", duration: 0.12}, 21.42);tl.to("#nb0h2", {backgroundColor: "#CFEADF", scale: 1, duration: 0.15}, 22.060000000000002);tl.to("#nb0e2", {scale: 1, color: "#23324A", duration: 0.15}, 22.060000000000002);tl.to("#nb0t2", {scale: 1, backgroundColor: "#17423C", color: "#FFC94A", duration: 0.15}, 22.060000000000002);
+tl.to("#nb0h3", {backgroundColor: "#FFC94A", scale: 1.1, duration: 0.12, ease: "power2.out"}, 22.1);tl.to("#nb0e3", {scale: 1.2, color: "#E8475A", duration: 0.12, ease: "power2.out"}, 22.1);tl.to("#nb0t3", {scale: 1.18, backgroundColor: "#E8475A", color: "#FFFFFF", duration: 0.12}, 22.1);tl.to("#nb0h3", {backgroundColor: "#CFEADF", scale: 1, duration: 0.15}, 22.8);tl.to("#nb0e3", {scale: 1, color: "#23324A", duration: 0.15}, 22.8);tl.to("#nb0t3", {scale: 1, backgroundColor: "#17423C", color: "#FFC94A", duration: 0.15}, 22.8);
+tl.to("#nb0 .layer > *", {opacity: 0, y: -20, duration: 0.2}, 23.740000000000002);
+tl.fromTo("#sit", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 26.92);tl.to("#sit", {opacity: 0, duration: 0.15}, 28.75);
+tl.set("#ex0c, #ex0s .w, #ex0g", {opacity: 1}, 28.9);tl.call(() => document.querySelector("#ex0s .hl").classList.add("on"), null, 28.9);
+tl.fromTo("#ex0l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 33.13);
+tl.fromTo("#ex0y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 34.07);
+tl.to("#ex0 .layer > *", {opacity: 0, duration: 0.15}, 35.63);
+tl.set("#ex1c, #ex1s .w, #ex1g", {opacity: 1}, 35.78);tl.call(() => document.querySelector("#ex1s .hl").classList.add("on"), null, 35.78);
+tl.fromTo("#ex1l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 39.94);
+tl.fromTo("#ex1y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 40.6);
+tl.to("#ex1 .layer > *", {opacity: 0, duration: 0.15}, 42.86);
+tl.set("#ex2c, #ex2s .w, #ex2g", {opacity: 1}, 43.01);tl.call(() => document.querySelector("#ex2s .hl").classList.add("on"), null, 43.01);
+tl.fromTo("#ex2l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 46.6);
+tl.fromTo("#ex2y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 47.36);
+tl.to("#ex2 .layer > *", {opacity: 0, duration: 0.15}, 49.02);
+tl.set("#ex3c, #ex3s .w, #ex3g", {opacity: 1}, 49.17);tl.call(() => document.querySelector("#ex3s .hl").classList.add("on"), null, 49.17);
+tl.fromTo("#ex3l", {opacity: 0, scale: 0.4, rotation: -12}, {opacity: 1, scale: 1, rotation: -4, duration: 0.4, ease: "back.out(2.6)"}, 52.54);
+tl.fromTo("#ex3y", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.35, ease: "power3.out"}, 52.82);
+tl.to("#ex3 .layer > *", {opacity: 0, duration: 0.15}, 54.76);
+tl.fromTo("#tyt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 56.79);tl.fromTo("#typ", {opacity: 0, x: -80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 58.37);tl.fromTo("#tyc", {opacity: 0, x: 80}, {opacity: 1, x: 0, duration: 0.35, ease: "back.out(2)"}, 59.61);tl.to("#ty .layer > *", {opacity: 0, duration: 0.15}, 60.03);
+tl.fromTo("#tes", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3}, 62.93);tl.fromTo("#tep", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 63.97);tl.call(() => document.querySelector("#ter").classList.add("on"), null, 63.97);tl.fromTo("#ter", {scale: 1}, {scale: 1.12, duration: 0.2, yoyo: true, repeat: 1}, 63.97);tl.fromTo("#tec", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 65.81);tl.to("#tef", {backgroundColor: "rgba(207,234,223,1)", color: "#17423C", textShadow: "none", duration: 0.25}, 65.81);tl.to("#te .layer > *", {opacity: 0, duration: 0.15}, 66.47);
+tl.fromTo("#p2c", {opacity: 0, y: -40, scale: 0.9}, {opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "back.out(2)"}, 69.84);tl.fromTo("#p2f", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 70.39);tl.to("#p2f", {scale: 1.06, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut"}, 70.89);
+  window.__timelines["main"] = tl;
+</script></body></html>
