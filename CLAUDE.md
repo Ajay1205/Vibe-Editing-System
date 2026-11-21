@@ -189,6 +189,25 @@ Short single-take quiz (19 Nov). Built from `build.py` (cues / base / overlay / 
 - Video untouched; trimmed to start on her first word and end before she lowers the phone. Whoosh, pop per option,
   ping on the CTA. The answer is never shown (for comments).
 
+## Approved: Manisha 8 "NPAT Notebook" (`edits/manisha8`, nouns via the Name-Place-Animal-Thing game, 5 takes)
+
+Multi-version reel (20-21 Nov). `lines.py` (24 lines with audio-measured cuts + trimmed variants) -> `render_base.py`
+(alternating zoom so every cut is a punch, face at (0.50,0.54)) -> `overlay.py` (captions) -> `build.py` (cues, mix,
+compose; `all <v> [--preview]`). Scenes: `anim/make_scenes.py`. Delivered: V2 and V3 4K (V1 kept, V4 dropped).
+- Palette from the footage: deep teal #17423C, mint #CFEADF, paper #FFF9EE, pencil yellow #FFC94A, red #E8475A;
+  Anton hook, Bricolage sentences, Caveat handwriting, Plus Jakarta chips. Notebook with NAME/PLACE/ANIMAL/THING columns
+  fills on her words; examples get a noun highlight, a label chip and her "kyunki..." reason; Part-2 card at the end.
+- Hooks: "Ratta? No!" (slashed textbook definition + stamp) or, when a version opens cold on "Name, place, animal,
+  thing", the text hook "Bachpan ka YE game = poori NOUN grammar" readable on frame 1.
+- User notes: highlight each column as she says "place, person, animal, thing"; cut her badly pronounced last
+  "common noun" sentence (end on "dekhiye hamara part 2" + card held 1.2 s); Whisper can stop early on a take, so
+  check every line's end against the audio energy; user timestamps for cuts refer to the V1 timeline.
+- Animated scenes the user asked for: Ria = an illustrated girl waving ("Hi, I'm Ria!"), tiger = an illustrated tiger
+  that growls, Mumbai = night skyline + Bandra-Worli Sea Link. Other scenes in the grown-up flat style.
+- She looked a bit dark: the Nikita 6 grade is applied to HER picture only (build.py GRADE), before scenes and
+  captions are laid on, so graphic colours never change. Mix: voice target -12.5 + 0.7 dB into a 0.75 limiter
+  -> -13.9 LUFS, -2.0 dBFS after AAC. 4K masters at CRF 15 were 276-341 MiB (one file each).
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
