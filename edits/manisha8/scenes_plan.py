@@ -13,7 +13,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import lines as L  # noqa: E402
 
-TAIL = {"v4_shortest": 1.6, "v1_full": 1.2, "v2_short": 1.2, "v3_anim": 1.2}  # seconds held after her last word (CTA readable)
+TAIL = {"v4_shortest": 1.6, "v1_full": 1.2, "v2_short": 1.2, "v3_anim": 1.2, "v4_anim": 1.2}  # seconds held after her last word (CTA readable)
 
 V3 = {  # line id: (scene, in-point inside the scene, end: None = whole line | (line, word) = cut back on that word)
     "bachpan": ("game", 0.0, None),
@@ -31,7 +31,7 @@ V4_FLASH = [("ria", "place"), ("mumbai", "animal"), ("tiger", "thing"), ("pencil
 def brolls(version):
     """[{key, file, in, start, end}] on the output timeline."""
     out = []
-    if version == "v3_anim":
+    if version in ("v3_anim", "v4_anim"):
         for lid, (scene, sin, until) in V3.items():
             sp = L.span(version, lid)
             if not sp:

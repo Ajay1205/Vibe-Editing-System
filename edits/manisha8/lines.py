@@ -71,12 +71,16 @@ VERSIONS = {
     # also cut (our call) the filler "Ab aapko in sentences se noun ka concept samajh aa raha hoga"
     "v2_short": [{"answers": "answers_j", "notice": "notice_b"}.get(x, x) for x in V1
                  if x not in ("def", "bachpan", "ex2_ask", "clear")],
+    # V4 animated (user, 21 Nov): V2's lines and cuts, with V3's animated scenes
+    "v4_anim": None,
     # V3 animated (user, 21 Nov): V1 minus 0:08-0:13 ("...noun ka poora concept" + "Game mein kya likhte hain?")
     # and 0:18-0:19 ("Ab aap notice karo"); scenes on each idea
     "v3_anim": [{"answers": "answers_j", "notice": "notice_b"}.get(x, x) for x in V1 if x != "concept"],
     # V4 shortest: cold open on the game, the rule, the naming word, follow for part 2 (text)
     "v4_shortest": ["npat", "def", "answers", "rule", "naming"],
 }
+
+VERSIONS["v4_anim"] = list(VERSIONS["v2_short"])
 
 
 def rms(take):
