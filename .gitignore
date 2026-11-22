@@ -33,3 +33,7 @@ edits/*/board/style_board*.png
 edits/*/overlay/*/vendor/
 edits/*/overlay/*/fonts/
 edits/*/overlay/*/.hyperframes/
+edits/*/board_*/snaps/
+edits/*/board_*/.hyperframes/
+edits/*/board_*/vendor/
+edits/*/board_*/style_board*.png
