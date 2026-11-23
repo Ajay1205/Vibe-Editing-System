@@ -208,6 +208,21 @@ compose; `all <v> [--preview]`). Scenes: `anim/make_scenes.py`. Delivered: V2 an
   captions are laid on, so graphic colours never change. Mix: voice target -12.5 + 0.7 dB into a 0.75 limiter
   -> -13.9 LUFS, -2.0 dBFS after AAC. 4K masters at CRF 15 were 276-341 MiB (one file each).
 
+## Manisha 9 "being: 3 uses" (`edits/manisha9`, two versions, 22-23 Nov)
+
+Six single-line takes (iPhone HLG 4K60). `cut.py` (segments, energy-checked edges, T() source->output time) ->
+`keys.py` (word times) -> `overlay.py a|b` -> `build.py cues|caps|compose <v> [--crf N]` + `mix.py` (M9_VERSION).
+Delivered in HDR (HLG passthrough, captions converted into HLG as Nikita 7), 4K, one file each.
+- A "Gold Tabs" (board/): Playfair "being" + numbered tabs 🎭🪪🏗️, chip + rule on the wall, ivory card with the
+  being-phrase on a gold pill, Hinglish meaning under it, "is / are + being + V3" chip, recap tabs, comment box.
+  In HDR, gold text straight on her warm wall vanished: wall highlights sit on dark ink pills, "being" has an ink outline.
+- B "Explainer Panel" (board_b/), copied from the user's reference reel (a grammar-challenge reel): top progress bar
+  (user: NO series title), one dark-glass panel at chest height with concept widgets (branches, toggles, ID slot,
+  progress bar, tilted stamp), English sentence grey -> lit word by word in yellow, short subtitle pill under the
+  panel, recap + typed comment box with her picture blurred at the end. Yellow #FFC83D, blue #5AA9FF, Poppins.
+- Mix: loudnorm -13.1 then master volume +0.1 dB into the 0.75 limiter -> -14.0 LUFS, -2.0 dBFS.
+- Sizes at 66.6 s: B 225 MiB (CRF 16); A was 400.07 MiB at CRF 16, so A ships at CRF 17 (344 MiB).
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
