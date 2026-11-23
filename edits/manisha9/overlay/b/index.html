@@ -1,0 +1,211 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: PF; src: url(fonts/pf900.woff2); font-weight: 900; }
+@font-face { font-family: PF; src: url(fonts/pf900i.woff2); font-weight: 900; font-style: italic; }
+@font-face { font-family: Pop; src: url(fonts/pop500.woff2); font-weight: 500; }
+@font-face { font-family: Pop; src: url(fonts/pop600.woff2); font-weight: 600; }
+@font-face { font-family: Pop; src: url(fonts/pop700.woff2); font-weight: 700; }
+@font-face { font-family: Pop; src: url(fonts/pop800.woff2); font-weight: 800; }
+@font-face { font-family: Pop; src: url(fonts/pop600i.woff2); font-weight: 600; font-style: italic; }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; }
+.clip { position: absolute; inset: 0; } .layer { position: absolute; inset: 0; }
+.layer > div { position: absolute; }
+.w { display: inline-block; }
+
+:root { --glass: rgba(22,22,28,.82); --y: #FFC83D; --b: #5AA9FF; --mut: rgba(255,255,255,.45); }
+#stage { font-family: Pop; color: #fff; }
+.y { color: var(--y); } .b { color: var(--b); } .m { color: var(--mut); }
+.bar { left: 70px; top: 255px; width: 940px; height: 74px; border-radius: 18px; background: var(--glass); }
+.bar .d { position: absolute; left: 26px; top: 12px; font: 800 28px/1 Pop; color: var(--y); letter-spacing: 1.5px; opacity: 0; } #bl0 { opacity: 1; }
+.bar .seg { position: absolute; left: 26px; right: 26px; bottom: 14px; display: flex; gap: 10px; }
+.bar .seg i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,.18); overflow: hidden; }
+.bar .seg b { display: block; height: 100%; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
+.pan { left: 90px; top: 1100px; width: 900px; height: 370px; border-radius: 34px; background: var(--glass); box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.pc { left: 90px; top: 1100px; width: 900px; height: 370px; }
+#br .pc { height: 445px; }
+.pc > * { position: absolute; }
+.lab { left: 30px; top: 24px; padding: 7px 16px; border-radius: 12px; border: 2px solid rgba(90,169,255,.55); background: rgba(90,169,255,.12); color: var(--b); font: 700 24px/1 Pop; }
+.sub { left: 0; top: 1490px; width: 1080px; text-align: center; }
+.sub > span { display: inline-block; max-width: 900px; padding: 12px 24px; border-radius: 16px; background: rgba(22,22,28,.80); font: 700 36px/1.2 Pop; }
+.sen { left: 0; width: 900px; text-align: center; font: 800 56px/1.15 Pop; color: rgba(255,255,255,.32); }
+svg { fill: none; stroke: #fff; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.big { left: 0; width: 900px; top: 70px; text-align: center; font: 800 112px/1 Pop; color: var(--y); }
+.node { width: 50px; height: 50px; border-radius: 50%; background: var(--b); color: #0E1A2A; text-align: center; font: 800 28px/50px Pop; }
+.nl { width: 260px; text-align: center; font: 700 30px/1.1 Pop; }
+.row1 { left: 200px; top: 96px; display: flex; align-items: center; gap: 22px; }
+.tl { font: 700 30px/1 Pop; }
+.row1 .tl:first-child { width: 120px; }
+.tg { position: relative; width: 84px; height: 44px; border-radius: 22px; background: rgba(255,255,255,.2); display: inline-block; }
+.tg::after { content: ""; position: absolute; left: 5px; top: 5px; width: 34px; height: 34px; border-radius: 50%; background: #fff; }
+#tg2 { background: rgba(255,255,255,.2); } #tg2::after { display: none; }
+#tg2 i { position: absolute; left: 5px; top: 5px; width: 34px; height: 34px; border-radius: 50%; background: #fff; }
+.ring { display: inline-block; padding: 0 10px; border-radius: 40px; outline: 4px solid rgba(255,77,77,0); outline-offset: -2px; }
+.idc { left: 200px; top: 100px; font: 700 34px/1 Pop; display: flex; align-items: center; gap: 14px; }
+.slot { display: inline-block; min-width: 70px; padding: 8px 18px; border: 3px dashed rgba(255,255,255,.4); border-radius: 14px; text-align: center; }
+.tick { display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #3BD16F; color: #0E1A2A; font: 800 26px/40px Pop; text-align: center; }
+.pb { height: 14px; border-radius: 7px; background: rgba(255,255,255,.16); overflow: hidden; }
+.pb i { display: block; height: 100%; width: 0%; border-radius: 7px; background: var(--b); }
+.stamp { padding: 8px 18px; border: 5px solid var(--y); border-radius: 14px; color: var(--y); font: 800 34px/1 Pop; transform: rotate(-7deg); background: rgba(22,22,28,.6); }
+.row { left: 40px; width: 820px; display: flex; align-items: center; gap: 18px; font: 700 34px/1 Pop; }
+.row .n { width: 44px; height: 44px; border-radius: 50%; background: var(--b); color: #0E1A2A; font: 800 26px/44px Pop; text-align: center; }
+.box { left: 40px; width: 820px; height: 78px; border-radius: 39px; background: rgba(255,255,255,.1); border: 2px solid rgba(255,255,255,.25);
+  font: 500 32px/78px Pop; padding-left: 30px; box-sizing: border-box; color: var(--mut); }
+.box b { color: #fff; font-weight: 700; } .caret { display: inline-block; width: 3px; height: 34px; background: var(--y); vertical-align: -6px; margin-left: 4px; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="66.600" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="bar" class="clip" data-start="0.000" data-duration="66.600" data-track-index="1"><div class="layer"><div class="bar"><div class="d" id="bl0">BEING · 3 USES</div><div class="d" id="bl1">USE 1 / 3</div><div class="d" id="bl2">USE 2 / 3</div><div class="d" id="bl3">USE 3 / 3</div><div class="d" id="bl4">RECAP</div><div class="d" id="bl5">COMMENT 👇</div><div class="seg"><i><b id="sg1"></b></i><i><b id="sg2"></b></i><i><b id="sg3"></b></i></div></div></div></div>
+<div id="pan" class="clip" data-start="0.000" data-duration="66.600" data-track-index="2"><div class="layer"><div class="pan" id="pb"></div></div></div>
+<div id="bh" class="clip" data-start="0.000" data-duration="5.667" data-track-index="3"><div class="layer"><div class="pc" id="bhp"><div class="lab">1 word · 3 uses</div><div class="big" id="bhb">being</div>
+      <svg width="900" height="370" style="left:0;top:0;stroke:#5AA9FF;stroke-width:4"><path id="br1" d="M350 180 L150 235"/><path id="br2" d="M450 185 L450 235"/><path id="br3" d="M550 180 L750 235"/></svg>
+      <div class="node" id="nd1" style="left:125px;top:228px">1</div><div class="node" id="nd2" style="left:425px;top:228px">2</div><div class="node" id="nd3" style="left:725px;top:228px">3</div>
+      <div class="nl" id="nl1" style="left:20px;top:295px">behave</div><div class="nl" id="nl2" style="left:320px;top:295px">pehchaan</div><div class="nl" id="nl3" style="left:620px;top:295px">kaam ho raha</div></div></div></div>
+<div id="bs0" class="clip" data-start="0.000" data-duration="2.920" data-track-index="9"><div class="layer"><div class="sub"><span id="bs0s">Being ke <span class="y">3 alag uses</span></span></div></div></div>
+<div id="bs1" class="clip" data-start="2.920" data-duration="2.747" data-track-index="9"><div class="layer"><div class="sub"><span id="bs1s">Trust me, <span class="y">bahut simple</span> hai 😌</span></div></div></div>
+<div id="b1" class="clip" data-start="5.667" data-duration="10.733" data-track-index="3"><div class="layer"><div class="pc" id="b1p"><div class="lab">USE 1 · behave</div>
+      <svg width="120" height="120" style="left:40px;top:84px" viewBox="0 0 120 120"><circle cx="60" cy="60" r="44"/><path d="M42 50 l10 4 M78 50 l-10 4"/><path d="M42 84 q18 -14 36 0"/></svg>
+      <div class="row1" id="b1r1"><span class="tl m">usually</span><span class="tg" id="tg1"></span><span class="tl m">polite 🙂</span></div>
+      <div class="row1" id="b1r2" style="top:158px"><span class="tl">aaj</span><span class="tg" id="tg2"><i></i></span><span class="tl y" id="b1rude">rude 😤</span></div>
+      <div class="sen" style="top:262px;font-size:56px"><span class="w " id="b1w0">You</span> <span class="w " id="b1w1">are</span> <span class="w y" id="b1w2"><span class="ring" id="rg">being</span></span> <span class="w y" id="b1w3">rude</span> <span class="w " id="b1w4">today.</span></div></div></div></div>
+<div id="b1s0" class="clip" data-start="5.767" data-duration="5.530" data-track-index="9"><div class="layer"><div class="sub"><span id="b1s0s">Jab koi <span class="y">alag behave</span> kare</span></div></div></div>
+<div id="b1s1" class="clip" data-start="11.297" data-duration="2.120" data-track-index="9"><div class="layer"><div class="sub"><span id="b1s1s">For example 👇</span></div></div></div>
+<div id="b1s2" class="clip" data-start="13.417" data-duration="2.983" data-track-index="9"><div class="layer"><div class="sub"><span id="b1s2s">= Aaj tum thoda <span class="y">rude behave</span> kar rahe ho</span></div></div></div>
+<div id="b2" class="clip" data-start="16.400" data-duration="15.133" data-track-index="3"><div class="layer"><div class="pc" id="b2p"><div class="lab">USE 2 · pehchaan</div>
+      <svg width="120" height="120" style="left:40px;top:84px" viewBox="0 0 120 120"><rect x="14" y="22" width="92" height="76" rx="12"/><circle cx="42" cy="54" r="11"/><path d="M26 84 q16 -18 32 0"/><path d="M70 50 h24 M70 66 h18"/></svg>
+      <div class="idc" id="b2id"><span class="m">I am</span> <span class="slot" id="b2slot"><span id="b2q">?</span><span id="b2a" class="y">a teacher</span></span> <span class="tick" id="b2tk">✓</span></div>
+      <div class="sen" style="top:200px;font-size:48px"><span class="w y" id="b2w0">Being</span> <span class="w y" id="b2w1">a</span> <span class="w y" id="b2w2">teacher,</span> <span class="w " id="b2w3">I</span> <span class="w " id="b2w4">understand</span> <span class="w " id="b2w5">my</span> <span class="w " id="b2w6">students</span> <span class="w " id="b2w7">very</span> <span class="w " id="b2w8">well.</span></div></div></div></div>
+<div id="b2s0" class="clip" data-start="16.500" data-duration="6.850" data-track-index="9"><div class="layer"><div class="sub"><span id="b2s0s">Jab apni <span class="y">pehchaan</span> batani ho</span></div></div></div>
+<div id="b2s1" class="clip" data-start="23.350" data-duration="3.540" data-track-index="9"><div class="layer"><div class="sub"><span id="b2s1s">For example 👇</span></div></div></div>
+<div id="b2s2" class="clip" data-start="26.890" data-duration="4.643" data-track-index="9"><div class="layer"><div class="sub"><span id="b2s2s">= <span class="y">Teacher hone ke naate</span>, main bachchon ko<br>bahut achhe se samajhti hoon</span></div></div></div>
+<div id="b3" class="clip" data-start="31.533" data-duration="13.767" data-track-index="3"><div class="layer"><div class="pc" id="b3p"><div class="lab">USE 3 · kaam ho raha hai</div>
+      <svg width="130" height="120" style="left:40px;top:84px" viewBox="0 0 130 120"><path d="M14 58 L62 18 L110 58"/><path d="M26 50 V106 H98 V50"/><path d="M52 106 V76 H72 V106"/></svg>
+      <div class="tl m" style="left:200px;top:96px" id="b3pl">painting…</div><div class="tl b" style="left:700px;top:96px" id="b3pc">ho raha hai…</div>
+      <div class="pb" style="left:200px;top:146px;width:640px"><i id="b3bar"></i></div>
+      <div class="stamp" id="b3st" style="left:500px;top:186px">is / are + being + V3</div>
+      <div class="sen" style="top:284px;font-size:56px"><span class="w " id="b3w0">The</span> <span class="w " id="b3w1">house</span> <span class="w y" id="b3w2">is</span> <span class="w y" id="b3w3">being</span> <span class="w y" id="b3w4">painted.</span></div></div></div></div>
+<div id="b3s0" class="clip" data-start="31.633" data-duration="8.350" data-track-index="9"><div class="layer"><div class="sub"><span id="b3s0s">Jab kisi <span class="y">kaam ke hone</span> ki baat ho</span></div></div></div>
+<div id="b3s1" class="clip" data-start="39.983" data-duration="2.680" data-track-index="9"><div class="layer"><div class="sub"><span id="b3s1s">For example 👇</span></div></div></div>
+<div id="b3s2" class="clip" data-start="42.663" data-duration="2.637" data-track-index="9"><div class="layer"><div class="sub"><span id="b3s2s">= Ghar ko <span class="y">paint kiya ja raha hai</span></span></div></div></div>
+<div id="br" class="clip" data-start="45.300" data-duration="21.800" data-track-index="3"><div class="layer"><div class="pc" id="brp"><div class="lab">RECAP</div><div class="row" id="rr0" style="top:84px"><span class="n">1</span><span class="m">behave →</span><span>You are <span class="y">being rude</span>.</span></div><div class="row" id="rr1" style="top:146px"><span class="n">2</span><span class="m">pehchaan →</span><span><span class="y">Being a teacher</span>, I…</span></div><div class="row" id="rr2" style="top:208px"><span class="n">3</span><span class="m">kaam →</span><span>The house is <span class="y">being painted</span>.</span></div>
+      <div class="tl" id="brq" style="left:40px;top:292px"><span class="y">Comment</span> karo: kaunsa word confuse karta hai?</div>
+      <div class="box" id="brb" style="top:340px"><b id="brt"><span id="brt0">“</span><span id="brt1">S</span><span id="brt2">i</span><span id="brt3">n</span><span id="brt4">c</span><span id="brt5">e</span><span id="brt6">”</span><span id="brt7">&nbsp;</span><span id="brt8">v</span><span id="brt9">s</span><span id="brt10">&nbsp;</span><span id="brt11">“</span><span id="brt12">F</span><span id="brt13">o</span><span id="brt14">r</span><span id="brt15">”</span></b><span class="caret" id="brc"></span></div></div></div></div>
+<div id="brs0" class="clip" data-start="45.400" data-duration="5.200" data-track-index="9"><div class="layer"><div class="sub"><span id="brs0s">I hope <span class="y">clarity</span> mil gayi ✅</span></div></div></div>
+<div id="brs1" class="clip" data-start="50.650" data-duration="7.670" data-track-index="9"><div class="layer"><div class="sub"><span id="brs1s">Bahut saare English words <span class="y">confusing</span> hote hain 🤯</span></div></div></div>
+<div id="brs2" class="clip" data-start="58.320" data-duration="0.960" data-track-index="9"><div class="layer"><div class="sub"><span id="brs2s"><span class="y">Comment</span> karo 👇</span></div></div></div>
+<div id="brs3" class="clip" data-start="59.280" data-duration="7.520" data-track-index="9"><div class="layer"><div class="sub"><span id="brs3s">Next video mein <span class="y">uska explanation</span> 👀</span></div></div></div>
+</div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.to("#bl0", {opacity: 0, y: -8, duration: 0.15}, 5.566666666666667);tl.fromTo("#bl1", {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.25}, 5.716666666666667);
+tl.to("#sg1", {scaleX: 1, duration: 0.5, ease: "power2.out"}, 5.766666666666667);
+tl.to("#bl1", {opacity: 0, y: -8, duration: 0.15}, 16.299999999999997);tl.fromTo("#bl2", {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.25}, 16.45);
+tl.to("#sg2", {scaleX: 1, duration: 0.5, ease: "power2.out"}, 16.5);
+tl.to("#bl2", {opacity: 0, y: -8, duration: 0.15}, 31.43333333333333);tl.fromTo("#bl3", {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.25}, 31.583333333333332);
+tl.to("#sg3", {scaleX: 1, duration: 0.5, ease: "power2.out"}, 31.633333333333333);
+tl.to("#bl3", {opacity: 0, y: -8, duration: 0.15}, 45.199999999999996);tl.fromTo("#bl4", {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.25}, 45.349999999999994);
+tl.to("#bl4", {opacity: 0, y: -8, duration: 0.15}, 50.49999999999999);tl.fromTo("#bl5", {opacity: 0, y: 8}, {opacity: 1, y: 0, duration: 0.25}, 50.64999999999999);
+tl.to("#pb", {top: 1100, height: 300, duration: 0.35, ease: "power3.inOut"}, 45.25);
+tl.to("#pb", {top: 1045, height: 445, duration: 0.35, ease: "power3.inOut"}, 50.64999999999999);
+tl.to("#bhp", {opacity: 0, y: -14, duration: 0.15, ease: "power2.in"}, 5.506666666666667);
+tl.fromTo("#bhb", {scale: 1.15}, {scale: 1, duration: 0.5, ease: "power3.out"}, 0);
+tl.fromTo("#br1", {strokeDasharray: 220, strokeDashoffset: 220}, {strokeDashoffset: 0, duration: 0.3, ease: "power2.out"}, 1.22);
+tl.fromTo("#nd1", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 1.42);
+tl.fromTo("#nl1", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 2.05);
+tl.fromTo("#br2", {strokeDasharray: 220, strokeDashoffset: 220}, {strokeDashoffset: 0, duration: 0.3, ease: "power2.out"}, 1.34);
+tl.fromTo("#nd2", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 1.54);
+tl.fromTo("#nl2", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 2.2);
+tl.fromTo("#br3", {strokeDasharray: 220, strokeDashoffset: 220}, {strokeDashoffset: 0, duration: 0.3, ease: "power2.out"}, 1.46);
+tl.fromTo("#nd3", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 1.66);
+tl.fromTo("#nl3", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 2.35);
+tl.to("#bs0s", {opacity: 0, duration: 0.12}, 2.8);
+tl.fromTo("#bs1s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 2.92);
+tl.to("#bs1s", {opacity: 0, duration: 0.12}, 5.546666666666667);
+tl.fromTo("#b1p", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 5.6866666666666665);
+tl.to("#b1p", {opacity: 0, y: -14, duration: 0.15, ease: "power2.in"}, 16.24);
+tl.fromTo("#b1r1", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 7.637);tl.fromTo("#b1r2", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 8.637);tl.set("#b1rude", {opacity: 0.3}, 5.666666666666667);
+tl.to("#tg2", {backgroundColor: "#5AA9FF", duration: 0.2}, 12.277);tl.to("#tg2 i", {x: 40, duration: 0.2, ease: "power2.out"}, 12.277);tl.to("#b1rude", {opacity: 1, duration: 0.15}, 12.277);tl.fromTo("#b1rude", {scale: 1}, {scale: 1.18, duration: 0.18, yoyo: true, repeat: 1}, 12.277);
+tl.fromTo("#b1w0", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 11.357);
+tl.fromTo("#b1w1", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 11.477);
+tl.fromTo("#b1w2", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 11.677);
+tl.fromTo("#b1w3", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 12.237);
+tl.fromTo("#b1w4", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 12.457);
+tl.fromTo("#rg", {outlineColor: "rgba(255,77,77,0)"}, {outlineColor: "rgba(255,77,77,1)", duration: 0.25}, 11.817);
+tl.fromTo("#b1s0s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 5.766666666666667);
+tl.to("#b1s0s", {opacity: 0, duration: 0.12}, 11.177000000000001);
+tl.fromTo("#b1s1s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 11.297);
+tl.to("#b1s1s", {opacity: 0, duration: 0.12}, 13.297);
+tl.fromTo("#b1s2s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 13.417);
+tl.to("#b1s2s", {opacity: 0, duration: 0.12}, 16.279999999999998);
+tl.fromTo("#b2p", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 16.419999999999998);
+tl.to("#b2p", {opacity: 0, y: -14, duration: 0.15, ease: "power2.in"}, 31.37333333333333);
+tl.fromTo("#b2id", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 18.86);
+tl.set("#b2a", {display: "none"}, 0);tl.set("#b2q", {display: "none"}, 23.9);tl.set("#b2a", {display: "inline"}, 23.9);tl.fromTo("#b2slot", {borderColor: "rgba(255,255,255,.4)"}, {borderColor: "rgba(255,200,61,.9)", duration: 0.2}, 23.9);tl.fromTo("#b2slot", {scale: 0.7}, {scale: 1, duration: 0.3, ease: "back.out(2.4)"}, 23.9);tl.fromTo("#b2tk", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 24.2);
+tl.fromTo("#b2w0", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 23.46);
+tl.fromTo("#b2w1", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 23.6);
+tl.fromTo("#b2w2", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 23.86);
+tl.fromTo("#b2w3", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 24.56);
+tl.fromTo("#b2w4", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 24.72);
+tl.fromTo("#b2w5", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 25.12);
+tl.fromTo("#b2w6", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 25.34);
+tl.fromTo("#b2w7", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 25.76);
+tl.fromTo("#b2w8", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 26.2);
+tl.fromTo("#b2s0s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 16.5);
+tl.to("#b2s0s", {opacity: 0, duration: 0.12}, 23.23);
+tl.fromTo("#b2s1s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 23.35);
+tl.to("#b2s1s", {opacity: 0, duration: 0.12}, 26.77);
+tl.fromTo("#b2s2s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 26.89);
+tl.to("#b2s2s", {opacity: 0, duration: 0.12}, 31.41333333333333);
+tl.fromTo("#b3p", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 31.55333333333333);
+tl.to("#b3p", {opacity: 0, y: -14, duration: 0.15, ease: "power2.in"}, 45.14);
+tl.fromTo("#b3pl, #b3pc", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 33.773);
+tl.fromTo("#b3bar", {width: "0%"}, {width: "38%", duration: 4.30, ease: "none"}, 34.233);
+tl.to("#b3bar", {width: "100%", duration: 2.26, ease: "power1.inOut"}, 40.133);
+tl.fromTo("#b3pc", {color: "#5AA9FF"}, {color: "#FFC83D", duration: 0.2}, 41.273);
+tl.fromTo("#b3w0", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 40.093);
+tl.fromTo("#b3w1", {color: "rgba(255,255,255,0.32)"}, {color: "#FFFFFF", duration: 0.18}, 40.293);
+tl.fromTo("#b3w2", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 40.853);
+tl.fromTo("#b3w3", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 41.233);
+tl.fromTo("#b3w4", {color: "rgba(255,255,255,0.32)"}, {color: "#FFC83D", duration: 0.18}, 41.753);
+tl.fromTo("#b3st", {opacity: 0, scale: 2, rotation: -20}, {opacity: 1, scale: 1, rotation: -7, duration: 0.25, ease: "power3.in"}, 42.343);
+tl.fromTo("#b3s0s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 31.633333333333333);
+tl.to("#b3s0s", {opacity: 0, duration: 0.12}, 39.863);
+tl.fromTo("#b3s1s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 39.983);
+tl.to("#b3s1s", {opacity: 0, duration: 0.12}, 42.543);
+tl.fromTo("#b3s2s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 42.663);
+tl.to("#b3s2s", {opacity: 0, duration: 0.12}, 45.18);
+tl.fromTo("#brp", {opacity: 0, y: 24}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 45.32);
+tl.to("#brp", {opacity: 0, y: -14, duration: 0.15, ease: "power2.in"}, 66.94);
+tl.fromTo("#rr0", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.3, ease: "power3.out"}, 45.55);
+tl.fromTo("#rr1", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.3, ease: "power3.out"}, 45.8);
+tl.fromTo("#rr2", {opacity: 0, x: -30}, {opacity: 1, x: 0, duration: 0.3, ease: "power3.out"}, 46.05);
+tl.fromTo("#br .pc", {top: 1100}, {top: 1045, duration: 0.35, ease: "power3.inOut"}, 50.64999999999999);
+tl.fromTo("#brq", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 52.96);
+tl.fromTo("#brb", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3, ease: "power3.out"}, 58.27);
+tl.fromTo("#brt0", {display: "none"}, {display: "inline", duration: 0.01}, 58.620);
+tl.fromTo("#brt1", {display: "none"}, {display: "inline", duration: 0.01}, 58.680);
+tl.fromTo("#brt2", {display: "none"}, {display: "inline", duration: 0.01}, 58.740);
+tl.fromTo("#brt3", {display: "none"}, {display: "inline", duration: 0.01}, 58.800);
+tl.fromTo("#brt4", {display: "none"}, {display: "inline", duration: 0.01}, 58.860);
+tl.fromTo("#brt5", {display: "none"}, {display: "inline", duration: 0.01}, 58.920);
+tl.fromTo("#brt6", {display: "none"}, {display: "inline", duration: 0.01}, 58.980);
+tl.fromTo("#brt7", {display: "none"}, {display: "inline", duration: 0.01}, 59.040);
+tl.fromTo("#brt8", {display: "none"}, {display: "inline", duration: 0.01}, 59.100);
+tl.fromTo("#brt9", {display: "none"}, {display: "inline", duration: 0.01}, 59.160);
+tl.fromTo("#brt10", {display: "none"}, {display: "inline", duration: 0.01}, 59.220);
+tl.fromTo("#brt11", {display: "none"}, {display: "inline", duration: 0.01}, 59.280);
+tl.fromTo("#brt12", {display: "none"}, {display: "inline", duration: 0.01}, 59.340);
+tl.fromTo("#brt13", {display: "none"}, {display: "inline", duration: 0.01}, 59.400);
+tl.fromTo("#brt14", {display: "none"}, {display: "inline", duration: 0.01}, 59.460);
+tl.fromTo("#brt15", {display: "none"}, {display: "inline", duration: 0.01}, 59.520);
+tl.fromTo("#brc", {opacity: 1}, {opacity: 0, duration: 0.3, yoyo: true, repeat: 21, ease: "steps(1)"}, 58.42);
+tl.fromTo("#brs0s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 45.4);
+tl.to("#brs0s", {opacity: 0, duration: 0.12}, 50.48);
+tl.fromTo("#brs1s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 50.64999999999999);
+tl.to("#brs1s", {opacity: 0, duration: 0.12}, 58.2);
+tl.fromTo("#brs2s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 58.32);
+tl.to("#brs2s", {opacity: 0, duration: 0.12}, 59.160000000000004);
+tl.fromTo("#brs3s", {opacity: 0, y: 14, scale: 0.96}, {opacity: 1, y: 0, scale: 1, duration: 0.22, ease: "power3.out"}, 59.28);
+tl.to("#brs3s", {opacity: 0, duration: 0.12}, 66.67999999999999);
+  window.__timelines["main"] = tl;
+</script></body></html>
