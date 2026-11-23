@@ -112,7 +112,7 @@ def compose(v, crf=16):
              "[c]format=yuv420p,eq=saturation=1.5,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=linear:p=bt709:m=gbr:npl=203,"
              "format=gbrpf32le,exposure=exposure=1.8,zscale=tin=linear:pin=bt709:min=gbr:t=arib-std-b67:p=bt2020:"
              "m=bt2020nc:r=tv:npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
-    out = HERE / "renders" / f"manisha9_{v}_4k_HDR.mp4"
+    out = HERE / "renders" / f"manisha9_{v}_4k_HDR{'' if crf == 16 else f'_crf{crf}'}.mp4"
     out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-c:v", "libvpx-vp9", "-i", str(bdir(v) / "overlay_2160.webm"),
                     "-i", str(bdir(v) / "mix.wav"), "-filter_complex", graph, "-map", "[v]", "-map", f"{k + 1}:a",
@@ -133,4 +133,4 @@ def everything(v):
 
 if __name__ == "__main__":
     cmd, v = sys.argv[1], sys.argv[2]
-    {"cues": lambda: cues(v), "caps": lambda: caps(v), "compose": lambda: compose(v), "all": lambda: everything(v)}[cmd]()
+    {"cues": lambda: cues(v), "caps": lambda: caps(v), "compose": lambda: compose(v, int(sys.argv[sys.argv.index("--crf") + 1]) if "--crf" in sys.argv else 16), "all": lambda: everything(v)}[cmd]()
