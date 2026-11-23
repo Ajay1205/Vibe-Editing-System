@@ -1,0 +1,106 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Manisha 10 style board -- "Tag It": prepositions taught on the real props on her desk.
+   Every example gets AR-style corner brackets + name tags on the real objects (lamp, table, mic, box, pen, napkin),
+   a mini icon (ball ON a table / IN a box / UNDER a table / AT a pin+clock) and the sentence card with the
+   preposition on an amber pill. A 4-tab strip at the top (ON · IN · UNDER · AT) lights the current word.
+   Palette from the footage (black-and-cream leaf print, warm floor lamp, white desk): charcoal #1E1C1A,
+   cream #FFF6E6, lamp amber #FFB547, leaf sage #A8D5B5, tomato #FF6B57.
+   Bricolage Grotesque 800 (words, sentences), Plus Jakarta Sans (tags, chips), Caveat (Hinglish meaning).
+   States: 0.5 hook, 1.5 ON (lamp), 2.5 UNDER (pen / napkin), 3.5 quiz. */
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs600.woff2); font-weight: 600; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #1E1C1A; --cream: #FFF6E6; --amb: #FFB547; --sage: #A8D5B5; --tom: #FF6B57;
+  --sh: 0 2px 3px rgba(0,0,0,.4), 0 8px 26px rgba(0,0,0,.35); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+/* tab strip */
+.tabs { left: 150px; top: 262px; width: 780px; display: flex; gap: 12px; }
+.tabs span { flex: 1; height: 54px; border-radius: 27px; background: rgba(30,28,26,.55); color: rgba(255,246,230,.6);
+  font: 800 26px/54px PJS; letter-spacing: 2px; text-align: center; }
+.tabs span.on { background: var(--amb); color: var(--ink); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+.tabs span.done { background: rgba(30,28,26,.8); color: var(--sage); }
+/* hook tiles */
+.tiles { left: 110px; top: 350px; width: 860px; display: flex; gap: 20px; }
+.tile { flex: 1; height: 220px; border-radius: 30px; background: var(--cream); box-shadow: 0 16px 34px rgba(0,0,0,.25); text-align: center; }
+.tile b { display: block; margin-top: 16px; font: 800 52px/1 Brico; color: var(--ink); }
+.tile svg { margin-top: 10px; }
+.prep { left: 0; top: 610px; width: 1080px; text-align: center; }
+.prep span { display: inline-block; padding: 14px 30px; border-radius: 40px; background: var(--tom); color: #fff; font: 800 46px/1 Brico; box-shadow: 0 12px 26px rgba(0,0,0,.25); }
+/* example header */
+.big { left: 130px; top: 340px; font: 800 150px/1 Brico; color: var(--amb); -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill;
+  text-shadow: 0 10px 26px rgba(0,0,0,.3); }
+.mean { left: 0; top: 380px; font: 700 76px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.ico { width: 170px; height: 150px; border-radius: 26px; background: var(--cream); box-shadow: 0 14px 30px rgba(0,0,0,.25); }
+.card { left: 110px; top: 545px; width: 860px; box-sizing: border-box; padding: 24px 28px; border-radius: 30px; background: var(--cream);
+  text-align: center; font: 800 56px/1.1 Brico; color: var(--ink); box-shadow: 0 18px 40px rgba(0,0,0,.28); }
+.pill { display: inline-block; padding: 0 16px 4px; border-radius: 16px; background: var(--amb); }
+/* AR tags */
+.brk { border: 0; }
+.brk i { position: absolute; width: 46px; height: 46px; border: 7px solid var(--amb); }
+.brk i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; border-radius: 14px 0 0 0; }
+.brk i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; border-radius: 0 14px 0 0; }
+.brk i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; border-radius: 0 0 0 14px; }
+.brk i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; border-radius: 0 0 14px 0; }
+.brk.sg i { border-color: var(--sage); }
+.tag { padding: 10px 18px; border-radius: 14px; background: var(--ink); color: var(--amb); font: 800 28px/1 PJS; letter-spacing: 2px; box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+.tag.sg { color: var(--sage); }
+.tag::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: currentColor; margin-right: 10px; vertical-align: 2px; }
+.lead { height: 4px; background: var(--amb); transform-origin: 0 50%; border-radius: 2px; }
+/* quiz */
+.qchip { left: 110px; top: 262px; padding: 12px 22px; border-radius: 30px; background: var(--tom); color: #fff; font: 800 28px/1 PJS; letter-spacing: 2px; }
+.blank { display: inline-block; width: 170px; height: 56px; vertical-align: -8px; border-radius: 16px; border: 5px dashed var(--tom); background: rgba(255,107,87,.12); }
+.opts { left: 110px; top: 700px; width: 860px; display: flex; gap: 16px; justify-content: center; }
+.opts span { padding: 16px 26px; border-radius: 30px; background: rgba(30,28,26,.85); color: var(--cream); font: 800 38px/1 Brico; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
+.opts span em { font-style: normal; color: var(--amb); margin-right: 10px; font: 800 26px/1 PJS; }
+.cta { left: 0; top: 800px; width: 1080px; text-align: center; font: 700 76px/1 Cav; color: #fff; text-shadow: var(--sh); }
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-on" viewBox="0 0 120 100"><circle cx="60" cy="34" r="16" fill="#FFB547" stroke="#1E1C1A" stroke-width="5"/><path d="M14 52 H106 M26 52 V92 M94 52 V92" stroke="#1E1C1A" stroke-width="8" stroke-linecap="round" fill="none"/></symbol>
+ <symbol id="i-in" viewBox="0 0 120 100"><rect x="22" y="30" width="76" height="60" rx="8" fill="rgba(168,213,181,.45)" stroke="#1E1C1A" stroke-width="7"/><circle cx="60" cy="62" r="16" fill="#FFB547" stroke="#1E1C1A" stroke-width="5"/></symbol>
+ <symbol id="i-under" viewBox="0 0 120 100"><path d="M14 22 H106 M26 22 V92 M94 22 V92" stroke="#1E1C1A" stroke-width="8" stroke-linecap="round" fill="none"/><circle cx="60" cy="74" r="16" fill="#FFB547" stroke="#1E1C1A" stroke-width="5"/></symbol>
+ <symbol id="i-at" viewBox="0 0 120 100"><circle cx="40" cy="52" r="28" fill="#fff" stroke="#1E1C1A" stroke-width="6"/><path d="M40 52 V34 M40 52 H54" stroke="#1E1C1A" stroke-width="6" stroke-linecap="round"/><path d="M92 86 C76 64 74 56 74 46 a18 18 0 0 1 36 0 c0 10 -2 18 -18 40z" fill="#FF6B57" stroke="#1E1C1A" stroke-width="5"/><circle cx="92" cy="46" r="6" fill="#fff"/></symbol>
+</defs></svg>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+ <!-- hook -->
+ <div class="st" id="s1">
+  <div class="abs tiles"><div class="tile"><b>ON</b><svg width="120" height="100"><use href="#i-on"/></svg></div>
+   <div class="tile"><b>IN</b><svg width="120" height="100"><use href="#i-in"/></svg></div>
+   <div class="tile"><b>UNDER</b><svg width="120" height="100"><use href="#i-under"/></svg></div>
+   <div class="tile"><b>AT</b><svg width="120" height="100"><use href="#i-at"/></svg></div></div>
+  <div class="abs prep"><span>= PREPOSITIONS 📍</span></div></div>
+ <!-- ON -->
+ <div class="st" id="s2">
+  <div class="abs tabs"><span class="on">ON</span><span>IN</span><span>UNDER</span><span>AT</span></div>
+  <div class="abs big">ON</div><div class="abs mean" style="left:420px">= upar ⬆️</div>
+  <div class="abs ico" style="left:780px;top:340px"><svg width="170" height="150" viewBox="-25 -25 170 150"><use href="#i-on" width="120" height="100"/></svg></div>
+  <div class="abs card">The lamp is <span class="pill">on</span> the table.</div>
+  <div class="abs brk" style="left:590px;top:1140px;width:470px;height:750px"><i></i><i></i><i></i><i></i></div>
+  <div class="abs tag" style="left:620px;top:1080px">LAMP</div>
+  <div class="abs lead" style="left:150px;top:1568px;width:900px;background:var(--sage)"></div>
+  <div class="abs tag sg" style="left:150px;top:1505px">TABLE</div></div>
+ <!-- UNDER -->
+ <div class="st" id="s3">
+  <div class="abs tabs"><span class="done">ON ✓</span><span class="done">IN ✓</span><span class="on">UNDER</span><span>AT</span></div>
+  <div class="abs big">UNDER</div><div class="abs mean" style="left:700px;top:380px">= neeche ⬇️</div>
+  <div class="abs card">The pen is <span class="pill">under</span> the napkin.</div>
+  <div class="abs brk sg" style="left:540px;top:1670px;width:480px;height:240px"><i></i><i></i><i></i><i></i></div>
+  <div class="abs tag sg" style="left:700px;top:1590px">NAPKIN</div>
+  <div class="abs brk" style="left:320px;top:1735px;width:250px;height:90px"><i></i><i></i><i></i><i></i></div>
+  <div class="abs tag" style="left:330px;top:1655px">PEN</div></div>
+ <!-- quiz -->
+ <div class="st" id="s4">
+  <div class="abs qchip">QUIZ TIME 🧠</div>
+  <div class="abs card" style="top:350px;font-size:52px">The keys are <span class="blank"></span> the table.</div>
+  <div class="abs" style="left:0;top:520px;width:1080px;text-align:center;font:700 64px/1 Cav;color:#fff;text-shadow:var(--sh)">Sahi preposition kaunsa? 🤔</div>
+  <div class="abs opts" style="top:620px"><span><em>A</em>on</span><span><em>B</em>in</span><span><em>C</em>under</span><span><em>D</em>at</span></div>
+  <div class="abs cta" style="top:745px">Comment karo 👇</div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#s1","#s2","#s3","#s4"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>
