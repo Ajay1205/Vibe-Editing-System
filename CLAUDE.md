@@ -223,6 +223,20 @@ Delivered in HDR (HLG passthrough, captions converted into HLG as Nikita 7), 4K,
 - Mix: loudnorm -13.1 then master volume +0.1 dB into the 0.75 limiter -> -14.0 LUFS, -2.0 dBFS.
 - Sizes at 66.6 s: B 225 MiB (CRF 16); A was 400.07 MiB at CRF 16, so A ships at CRF 17 (344 MiB).
 
+## Manisha 10 "Tag It" (`edits/manisha10`, prepositions on/in/under/at taught on real desk props, 23 Nov)
+
+Seven single-line takes (SDR 4K30). `cut.py` -> `keys.py` -> `overlay.py` -> `build.py cues|caps|compose [--hevc] [--crf N]`
++ `mix.py`. User cut "0:02-0:05" = her question sentence in take 1 (cut at word edges, not the exact seconds).
+- Look: AR corner brackets + name tags land on the real props (lamp, table, box, mic, pen, napkin) as she names them
+  (`cut.stage()` maps raw-frame positions through each take's zoom); big amber word with ink outline + Caveat Hinglish
+  meaning + mini icon; sentence card with the preposition on an amber pill; ON·IN·UNDER·AT strip with ✓; AT = clock
+  turning to 5 PM, then a map pin "Gandhinagar"; quiz card (pulsing blank, A-D options, "Comment karo", no answer).
+  Charcoal / cream / lamp amber #FFB547 / sage / tomato; Bricolage 800, Plus Jakarta Sans, Caveat.
+- User: "make her look a little better, just the video" -> Nikita 6 grade + saturation 1.06 + light unsharp on her
+  picture only (captions untouched). Gold/amber words on the wall need a dark pill.
+- Size: 80.6 s was 558 MiB as H.264 CRF 15 and 409 MiB as HEVC CRF 16; delivered HEVC CRF 17 (353 MiB, one file).
+  For long reels (> ~70 s) go straight to `--hevc --crf 17`.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
