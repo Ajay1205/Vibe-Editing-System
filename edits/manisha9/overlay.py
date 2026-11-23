@@ -316,20 +316,23 @@ TPL_A = """
 .being { font: italic 900 1.08em/1 PF; color: var(--gold); }
 .gold { color: var(--gold); }
 .hk { left: 0; top: 280px; width: 1080px; text-align: center; font: 800 76px/1.05 Pop; color: #fff; text-shadow: var(--sh); }
-.hk .big { display: block; font: italic 900 190px/1 PF; color: var(--gold); margin-bottom: 4px; }
+.hk .big { display: block; font: italic 900 190px/1 PF; color: var(--gold); margin-bottom: 4px; -webkit-text-stroke: 5px var(--ink); paint-order: stroke fill;
+  text-shadow: 0 6px 24px rgba(0,0,0,.45); }
+.hk .gold { color: var(--gold); background: rgba(30,27,36,.88); padding: 0 16px; border-radius: 14px; text-shadow: none; }
 .tabs { left: 150px; top: 590px; width: 780px; display: flex; justify-content: center; gap: 26px; }
 .tb { width: 220px; height: 150px; border-radius: 28px; background: var(--ivory); box-shadow: 0 16px 34px rgba(0,0,0,.3); text-align: center; }
 .tb b { display: block; margin-top: 14px; font: italic 900 70px/1 PF; color: var(--ink); }
 .tb i { display: block; font: normal 46px/1.2 sans-serif; }
 .tb.wide { width: 250px; height: 200px; } .tb u { display: block; margin-top: 6px; text-decoration: none; font: 800 28px/1 Pop; color: var(--coral); }
 .rt { left: 90px; width: 900px; top: 400px; }
+.rch .being { -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; }
 .rch { left: 0; top: 290px; width: 1080px; text-align: center; font: 800 64px/1.1 Pop; color: #fff; text-shadow: var(--sh); }
 .easy { left: 0; top: 770px; width: 1080px; text-align: center; font: italic 600 46px/1 Pop; color: #fff; text-shadow: var(--sh); }
 .rce { top: 640px; }
 .chip { left: 120px; top: 270px; padding: 12px 22px; border-radius: 30px; background: var(--ink); color: var(--gold); font: 800 30px/1 Pop; letter-spacing: 2px; }
 .icon { left: 820px; top: 250px; font: 90px/1 sans-serif; }
 .rule { left: 0; top: 350px; width: 1080px; text-align: center; font: 600 44px/1.2 Pop; color: #fff; text-shadow: var(--sh); }
-.rule b { color: var(--gold); font-weight: 800; }
+.rule b { color: var(--gold); font-weight: 800; background: rgba(30,27,36,.88); padding: 0 12px 2px; border-radius: 12px; text-shadow: none; }
 .card { left: 90px; top: 450px; width: 900px; box-sizing: border-box; padding: 30px 30px; border-radius: 36px; background: var(--ivory); text-align: center; box-shadow: 0 18px 40px rgba(0,0,0,.3); }
 .en { font: 800 64px/1.15 Pop; color: var(--ink); }
 .card.sm .en { font-size: 50px; } .card.sm .hi { font-size: 35px; } .card.sm3 .en { font-size: 56px; }
@@ -340,7 +343,7 @@ TPL_A = """
 .pat { left: 0; top: 660px; width: 1080px; text-align: center; }
 .pat span { display: inline-block; padding: 14px 26px; border-radius: 30px; background: var(--sky); color: var(--ink); font: 800 36px/1 Pop; box-shadow: 0 10px 24px rgba(0,0,0,.25); }
 .cq { left: 0; top: 300px; width: 1080px; text-align: center; font: 800 70px/1.1 Pop; color: #fff; text-shadow: var(--sh); }
-.cq em { font-style: normal; color: var(--gold); }
+.cq em { font-style: normal; color: var(--gold); background: rgba(30,27,36,.88); padding: 0 14px 4px; border-radius: 14px; text-shadow: none; }
 .box { left: 140px; top: 500px; width: 800px; height: 120px; box-sizing: border-box; border-radius: 60px; background: #fff; box-shadow: 0 16px 34px rgba(0,0,0,.3);
   display: flex; align-items: center; padding: 0 40px; font: 600 44px/1 Pop; color: #9A8F86; }
 .box b { color: var(--ink); font-weight: 600; margin-left: 12px; }
