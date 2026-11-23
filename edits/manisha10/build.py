@@ -71,7 +71,7 @@ def caps():
     print("caption layer done")
 
 
-def compose(crf=15):
+def compose(crf=15, hevc=False):
     W, H = 2160, 3840
     inputs, parts = [], []
     for i, e in enumerate(C.edl()):
@@ -85,11 +85,13 @@ def compose(crf=15):
     graph = (";".join(parts) + ";" + "".join(f"[v{i}]" for i in range(k)) +
              f"concat=n={k}:v=1:a=0,tpad=stop_mode=clone:stop_duration={C.TAIL},{GRADE},format=yuv420p[b];"
              f"[{k}:v]format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]")
-    out = HERE / "renders" / f"manisha10_4k{'' if crf == 15 else f'_crf{crf}'}.mp4"
+    out = HERE / "renders" / f"manisha10_4k{'_hevc' if hevc else ''}{'' if crf == 15 else f'_crf{crf}'}.mp4"
     out.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *inputs, "-c:v", "libvpx-vp9", "-i", str(HERE / "build" / "overlay_2160.webm"),
                     "-i", str(HERE / "build" / "mix.wav"), "-filter_complex", graph, "-map", "[v]", "-map", f"{k + 1}:a",
-                    "-c:v", "libx264", "-preset", "medium", "-crf", str(crf), "-profile:v", "high", "-level", "5.2",
+                    *(["-c:v", "libx265", "-preset", "medium", "-crf", str(crf), "-tag:v", "hvc1", "-pix_fmt", "yuv420p",
+                       "-x265-params", "colorprim=bt709:transfer=bt709:colormatrix=bt709:keyint=60:min-keyint=30:log-level=error"] if hevc else
+                      ["-c:v", "libx264", "-preset", "medium", "-crf", str(crf), "-profile:v", "high", "-level", "5.2"]),
                     "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
                     "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-movflags", "+faststart", "-t", f"{C.duration():.3f}", str(out)], check=True)
     print(out)
@@ -101,4 +103,4 @@ if __name__ == "__main__":
     if cmd == "all":
         cues(); subprocess.run([sys.executable, "-I", str(HERE / "mix.py")], check=True); caps(); compose(crf)  # noqa: E702
     else:
-        {"cues": cues, "caps": caps, "compose": lambda: compose(crf)}[cmd]()
+        {"cues": cues, "caps": caps, "compose": lambda: compose(crf, "--hevc" in sys.argv)}[cmd]()
