@@ -3,8 +3,8 @@
   python3 -I cut.py ; python3 -I overlay.py
   npx hyperframes render overlay --format webm -o build/overlay_2160.webm   (proxy env vars)
   python3 -I build.py cues ; python3 -I mix.py ; python3 -I build.py compose [--crf N]   -> renders/nikita11_4k.mp4
-Picture: the takes are variable frame rate (600/19 fps); cut from the raw 4K and resampled to a steady 30 fps; the
-Nikita 6 grade on her picture only (captions untouched). H.264 CRF 15 (33 s reel).
+Picture: the takes are variable frame rate (600/19 fps); cut from the raw 4K and resampled to a steady 30 fps; her colour
+untouched (no grade: the Nikita 6 grade washed her skin out on this bright footage). H.264 CRF 15 (33 s reel).
 """
 
 import json
@@ -17,8 +17,7 @@ import cut as C  # noqa: E402
 import overlay as O  # noqa: E402
 
 HERE = C.HERE
-GRADE = ("curves=master='0/0 0.2/0.30 0.5/0.66 0.8/0.89 1/1',eq=contrast=1.03:saturation=1.04,"
-         "colorbalance=rm=-0.03:bm=0.03")
+GRADE = "null"  # user, 25 Nov: the Nikita 6 grade made her look "EXTREMELY WHITE" on this bright footage -> no grade
 
 
 def cues():

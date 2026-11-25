@@ -269,7 +269,10 @@ of "Open the X" / "you don't open" / "you <verb>" / verb) -> `build.py cues|comp
   green pill as she says it (76 px, long ones 54 px so they stay on one line); 6 progress dots. Dropped from the board:
   device tiles and the WRONG stamp. Hook on frame 1 = big crossed-out OPEN (Anton) + "6 galtiyan jo sab karte hain";
   quiz "Open the tap 🚰" + "✅ ____ the tap" + "Answer comment karo" (she says "tab"; read as the water tap).
-- Red #FF4D4D / green #1FBF6A / yellow #FFD43B / ink; Nikita 6 grade; -14.1 LUFS; 33 s H.264 CRF 15 = 127 MiB.
+- Red #FF4D4D / green #1FBF6A / yellow #FFD43B / ink; -14.1 LUFS; 33 s H.264 CRF 15 = 127 MiB.
+- User, 25 Nov: "You have made her look EXTREMELY WHITE" -- the Nikita 6 grade (midtone lift 0.5 -> 0.66) washed out her
+  skin on this already-bright footage; delivered with NO grade. RULE: never apply a grade by default. Only grade when the
+  footage is visibly dark or the user asks, and always compare her face side by side with the raw before rendering.
 
 ## Working rules (from the guide)
 
