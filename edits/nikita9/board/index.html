@@ -1,0 +1,85 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Nikita 9 style board -- "Office Chat": 5 (+1 bonus) office English sentences for people scared to speak up at work.
+   Each situation is a yellow sticky note on the wall beside her head (Hinglish, handwritten); the English sentence is
+   a work-chat message typed out at chest level as she says it, sent with blue ticks and a 👍 from the manager.
+   Hook: a message typed and deleted (the fear); quiz: an empty message box with a blinking cursor + "Comment karo".
+   Palette (warm lamp wall, black cardigan, checked shirt): ink #16171B, white, sticky yellow #FFE45C,
+   indigo #5E5CE6, tick blue #34B7F1, green #2FBF71. Bricolage 800 titles, Plus Jakarta Sans chat, Caveat notes.
+   States: 0.5 hook, 1.5 sentence 2 (delay), 2.5 bonus, 3.5 quiz. */
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.4); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+/* sticky note */
+.note { left: 110px; top: 290px; width: 290px; min-height: 250px; box-sizing: border-box; padding: 22px 22px 26px; background: var(--y);
+  transform: rotate(-4deg); box-shadow: 0 18px 30px rgba(0,0,0,.3); border-radius: 4px 4px 22px 4px; }
+.note::before { content: ""; position: absolute; left: 95px; top: -16px; width: 100px; height: 32px; background: rgba(255,255,255,.55); transform: rotate(3deg); }
+.note .n { display: inline-block; padding: 6px 12px; border-radius: 10px; background: var(--ink); color: var(--y); font: 800 22px/1 PJS; letter-spacing: 2px; }
+.note .h { margin-top: 12px; font: 700 50px/1.02 Cav; color: var(--ink); }
+.note.bonus .n { background: var(--ind); color: #fff; }
+/* chat card */
+.chat { left: 90px; top: 1090px; width: 900px; box-sizing: border-box; padding: 22px 28px 20px; border-radius: 30px; background: #fff;
+  box-shadow: 0 22px 50px rgba(0,0,0,.35); }
+.hd { display: flex; align-items: center; gap: 14px; font: 700 24px/1 PJS; color: #8A8C96; }
+.av { width: 46px; height: 46px; border-radius: 50%; background: var(--ind); color: #fff; font: 800 18px/46px PJS; text-align: center; }
+.hd b { color: var(--ink); font-weight: 800; }
+.msg { margin-top: 14px; font: 800 48px/1.18 PJS; color: var(--ink); }
+.msg .k { padding: 0 8px 2px; margin: 0 -2px; border-radius: 12px; background: #E8E7FF; color: var(--ind); }
+.ft { margin-top: 10px; text-align: right; font: 700 22px/1 PJS; color: #9A9CA6; }
+.ft i { font-style: normal; color: var(--tick); font-weight: 800; letter-spacing: -4px; margin-left: 6px; }
+.react { left: 110px; top: 0; padding: 8px 16px; border-radius: 26px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.25); font: 800 30px/1 PJS; color: var(--ink); }
+/* hook */
+.hook { left: 0; top: 270px; width: 1080px; }
+.typing { left: 90px; top: 1150px; width: 900px; height: 120px; box-sizing: border-box; padding: 0 30px; border-radius: 60px; background: #fff;
+  display: flex; align-items: center; box-shadow: 0 22px 50px rgba(0,0,0,.35); font: 700 44px/1 PJS; color: var(--ink); }
+.typing .del { color: #C8C9D0; text-decoration: line-through; text-decoration-color: #FF5A5F; text-decoration-thickness: 4px; }
+.caret { display: inline-block; width: 4px; height: 50px; background: var(--ind); margin-left: 6px; }
+.send { margin-left: auto; width: 78px; height: 78px; border-radius: 50%; background: #D9DAE0; color: #fff; text-align: center; font: 800 38px/78px PJS; }
+.send.on { background: var(--ind); }
+.fear { left: 130px; top: 1295px; width: 820px; box-sizing: border-box; padding: 18px 24px; border-radius: 26px; background: rgba(22,23,27,.82); text-align: center; font: 800 48px/1.15 Brico; color: #fff; }
+.fear em { font-style: normal; color: var(--y); }
+.label { left: 90px; top: 1030px; padding: 10px 18px; border-radius: 14px; background: rgba(22,23,27,.85); color: #fff; font: 700 26px/1 PJS; }
+.title { left: 0; top: 1395px; width: 1080px; text-align: center; font: 800 58px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.title em { font-style: normal; color: var(--y); }
+.cta { left: 0; top: 1300px; width: 1080px; text-align: center; font: 700 80px/1 Cav; color: #fff; text-shadow: var(--sh); }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+ <!-- hook: the fear -->
+ <div class="st" id="s1">
+  <div class="abs note" style="top:300px"><span class="n">OFFICE MEETING</span><div class="h">Idea hai... par English ka darr 😶</div></div>
+  <div class="abs label">💬 Team chat</div>
+  <div class="abs typing"><span class="del">I think we sho</span><span class="caret"></span><span class="send">➤</span></div>
+  <div class="abs fear">Idea hai, par <em>English</em> ke darr se<br>chup rehte ho? 🤐</div></div>
+ <!-- sentence 2: delay -->
+ <div class="st" id="s2">
+  <div class="abs note"><span class="n">02 / 05</span><div class="h">Kaam mein thoda delay ho raha hai 😬</div></div>
+  <div class="abs chat"><div class="hd"><span class="av">You</span><b>You</b> → Manager · 10:42 AM</div>
+   <div class="msg">There might be a <span class="k">slight delay</span>.&nbsp;I will <span class="k">keep you posted</span>.</div>
+   <div class="ft">Sent<i>✓✓</i></div></div>
+  <div class="abs react" style="top:1060px;left:800px">👍 1</div></div>
+ <!-- bonus -->
+ <div class="st" id="s3">
+  <div class="abs note bonus"><span class="n">BONUS 🎁</span><div class="h">Mere paas ek idea hai 💡</div></div>
+  <div class="abs chat"><div class="hd"><span class="av">You</span><b>You</b> → Team · 11:05 AM</div>
+   <div class="msg">I have a <span class="k">suggestion</span> that we could <span class="k">consider</span>.</div>
+   <div class="ft">Sent<i>✓✓</i></div></div>
+  <div class="abs react" style="top:1060px;left:760px">🔥 3 · 👏 2</div></div>
+ <!-- quiz -->
+ <div class="st" id="s4">
+  <div class="abs note" style="transform:rotate(3deg)"><span class="n">YOUR TURN ✍️</span><div class="h">Kal office nahi jaana, chhutti chahiye 🏖️</div></div>
+  <div class="abs label">💬 Message to Manager</div>
+  <div class="abs typing"><span style="color:#B5B6BE">Type in English...</span><span class="caret"></span><span class="send on">➤</span></div>
+  <div class="abs cta">Comment karo 👇</div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#s1","#s2","#s3","#s4"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>
