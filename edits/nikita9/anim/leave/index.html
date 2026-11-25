@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71; --red: #FF5A5F; --mut: #8A8C96; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #101116; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #101116; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #2A2A52 0%, #1A1A30 48%, #101116 100%); font-family: PJS; color: #fff; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 60px; top: 300px; width: 960px; text-align: center; font: 800 70px/1.12 Brico; color: #fff; }
+.top em { font-style: normal; display: inline-block; padding: 0 14px; border-radius: 14px; background: var(--y); color: var(--ink); }
+.top2 { left: 60px; top: 470px; width: 960px; text-align: center; font: 700 56px/1.1 Cav; color: var(--y); }
+.card { border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.lbl { font: 800 24px/1 PJS; letter-spacing: 2px; color: var(--mut); }
+.pill { display: inline-block; padding: 10px 18px; border-radius: 18px; font: 800 28px/1 PJS; }
+
+.mon { left: 120px; top: 640px; width: 840px; padding: 28px 30px; }
+.mg { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 18px; }
+.mg div { height: 76px; border-radius: 14px; background: #F2F2F7; font: 800 28px/76px PJS; color: var(--ink); text-align: center; }
+.mg .h { background: none; height: 30px; font: 800 18px/30px PJS; color: var(--mut); }
+.mg .today { background: var(--ind); color: #fff; } .mg .tom { background: #FFE1E2; }
+.circ { left: 0; top: 0; width: 100px; height: 100px; border-radius: 50%; border: 6px solid var(--red); }
+.lv { left: 0; top: 0; padding: 12px 20px; border-radius: 16px; background: var(--y); color: var(--ink); font: 800 32px/1 PJS; transform: rotate(-6deg);
+  box-shadow: 0 12px 26px rgba(0,0,0,.35); }
+.comp { left: 90px; top: 1360px; width: 900px; height: 116px; border-radius: 58px; background: #fff; display: flex; align-items: center; padding: 0 30px;
+  font: 700 42px/1 PJS; color: #B5B6BE; box-shadow: 0 22px 50px rgba(0,0,0,.45); }
+.comp i { display: inline-block; width: 4px; height: 48px; background: var(--ind); margin-left: 6px; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4.600" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Kal office nahi jaana… <em>chhutti</em> chahiye 🏖️</div><div id="vis" style="position:absolute;inset:0;transform:translateY(60px) scale(1.07);transform-origin:50% 36%"><div class="abs card mon" id="mn"><div class="lbl">NOVEMBER</div><div class="mg"><div class="h">M</div><div class="h">T</div><div class="h">W</div><div class="h">T</div><div class="h">F</div><div class="h">S</div><div class="h">S</div><div id="dx0"></div><div id="dx1"></div><div id="d1">1</div><div id="d2">2</div><div id="d3">3</div><div id="d4">4</div><div id="d5">5</div><div id="d6">6</div><div id="d7">7</div><div id="d8">8</div><div id="d9">9</div><div id="d10">10</div><div id="d11">11</div><div class="today" id="d12">12</div><div class="tom" id="d13">13</div><div id="d14">14</div><div id="d15">15</div><div id="d16">16</div><div id="d17">17</div><div id="d18">18</div><div id="d19">19</div><div id="d20">20</div><div id="d21">21</div><div id="d22">22</div><div id="d23">23</div><div id="d24">24</div><div id="d25">25</div><div id="d26">26</div><div id="d27">27</div><div id="d28">28</div><div id="d29">29</div><div id="d30">30</div></div></div><div class="abs circ" id="cc" style="left:151px;top:910px"></div><div class="abs lv" id="lv" style="left:250px;top:1010px">🏖️ Leave tomorrow (13th)?</div><div class="abs comp" id="cm" style="top:1300px">Type in English…<i id="cr"></i></div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.04, duration: 4.600, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.0);tl.set("#tp", {opacity: 1, y: 0}, 0);tl.fromTo("#mn", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.1);tl.fromTo("#cc", {opacity: 0, scale: 1.6}, {opacity: 1, scale: 1, duration: 0.4, ease: "power3.out"}, 1.15);tl.fromTo("#lv", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 1.75);tl.fromTo("#cm", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 2.53);tl.fromTo("#cr", {opacity: 1}, {opacity: 0, duration: 0.35, yoyo: true, repeat: 7, ease: "steps(1)"}, 2.76);
+  window.__timelines["main"] = tl;
+</script></body></html>

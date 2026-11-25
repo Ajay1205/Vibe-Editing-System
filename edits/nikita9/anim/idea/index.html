@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71; --red: #FF5A5F; --mut: #8A8C96; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #101116; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #101116; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #2A2A52 0%, #1A1A30 48%, #101116 100%); font-family: PJS; color: #fff; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 60px; top: 300px; width: 960px; text-align: center; font: 800 70px/1.12 Brico; color: #fff; }
+.top em { font-style: normal; display: inline-block; padding: 0 14px; border-radius: 14px; background: var(--y); color: var(--ink); }
+.top2 { left: 60px; top: 470px; width: 960px; text-align: center; font: 700 56px/1.1 Cav; color: var(--y); }
+.card { border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.lbl { font: 800 24px/1 PJS; letter-spacing: 2px; color: var(--mut); }
+.pill { display: inline-block; padding: 10px 18px; border-radius: 18px; font: 800 28px/1 PJS; }
+
+.wb { left: 100px; top: 640px; width: 880px; height: 760px; padding: 30px; }
+.bulb { left: 430px; top: 760px; width: 220px; height: 220px; border-radius: 50%; background: #EDEDF3; font: 120px/220px sans-serif; text-align: center; }
+.glow { left: 380px; top: 710px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,228,92,.85), rgba(255,228,92,0) 70%); }
+.stk { left: 330px; top: 1030px; width: 420px; padding: 22px 26px; background: var(--y); color: var(--ink); border-radius: 4px 4px 20px 4px;
+  transform: rotate(-3deg); box-shadow: 0 16px 30px rgba(0,0,0,.35); font: 700 54px/1 Cav; }
+.stk small { display: block; font: 800 20px/1 PJS; letter-spacing: 2px; margin-bottom: 8px; }
+.vote { left: 260px; top: 1240px; width: 560px; display: flex; gap: 14px; justify-content: center; }
+.vote span { padding: 12px 18px; border-radius: 22px; background: #EDEDF3; color: var(--ink); font: 800 30px/1 PJS; }
+.ok2 { left: 0; top: 1460px; width: 1080px; text-align: center; font: 800 40px/1 PJS; color: #fff; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4.980" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Mere paas ek <em>idea</em> hai 💡</div><div id="vis" style="position:absolute;inset:0;transform:translateY(60px) scale(1.07);transform-origin:50% 36%"><div class="abs card wb" id="wb"><div class="lbl">TEAM BOARD · IDEAS</div></div><div class="abs glow" id="gl"></div><div class="abs bulb" id="bb">💡</div><div class="abs stk" id="sk"><small>SUGGESTION</small>Automate the weekly report?</div><div class="abs vote" id="vt"><span>👍 <b id="vc">0</b></span><span id="v2">🔥 3</span><span id="v3">👏 2</span></div><div class="abs ok2" id="ok">Team: <span style="color:var(--y)">“Let’s consider it!”</span></div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.04, duration: 4.980, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.0);tl.set("#tp", {opacity: 1, y: 0}, 0);tl.fromTo("#wb", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.1);tl.fromTo("#bb", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 0.4);tl.fromTo("#gl", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.5}, 0.9);tl.to("#bb", {backgroundColor: "#FFF3B0", duration: 0.3}, 0.9);tl.fromTo("#sk", {opacity: 0, y: -120, rotation: -15}, {opacity: 1, y: 0, rotation: -3, duration: 0.5, ease: "back.out(1.6)"}, 1.49);tl.fromTo("#vt span", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3, stagger: 0.12, ease: "back.out(2)"}, 2.39);tl.set("#vc", {innerHTML: "1"}, 2.77);tl.set("#vc", {innerHTML: "2"}, 2.95);tl.set("#vc", {innerHTML: "3"}, 3.13);tl.set("#vc", {innerHTML: "4"}, 3.31);tl.set("#vc", {innerHTML: "5"}, 3.49);tl.fromTo("#ok", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 3.49);
+  window.__timelines["main"] = tl;
+</script></body></html>

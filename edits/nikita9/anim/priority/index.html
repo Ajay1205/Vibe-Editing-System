@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71; --red: #FF5A5F; --mut: #8A8C96; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #101116; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #101116; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #2A2A52 0%, #1A1A30 48%, #101116 100%); font-family: PJS; color: #fff; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 60px; top: 300px; width: 960px; text-align: center; font: 800 70px/1.12 Brico; color: #fff; }
+.top em { font-style: normal; display: inline-block; padding: 0 14px; border-radius: 14px; background: var(--y); color: var(--ink); }
+.top2 { left: 60px; top: 470px; width: 960px; text-align: center; font: 700 56px/1.1 Cav; color: var(--y); }
+.card { border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.lbl { font: 800 24px/1 PJS; letter-spacing: 2px; color: var(--mut); }
+.pill { display: inline-block; padding: 10px 18px; border-radius: 18px; font: 800 28px/1 PJS; }
+
+.tc { left: 0; top: 0; width: 360px; padding: 18px 22px; border-radius: 20px; background: #fff; color: var(--ink); box-shadow: 0 16px 34px rgba(0,0,0,.45);
+  font: 800 30px/1.1 PJS; }
+.tc span { display: block; margin-top: 8px; font: 700 20px/1 PJS; color: var(--mut); }
+.num { position: absolute; left: -26px; top: -22px; width: 52px; height: 52px; border-radius: 50%; background: var(--ind); color: #fff; font: 800 28px/52px PJS;
+  text-align: center; opacity: 0; }
+.hi { position: absolute; right: 14px; top: 14px; padding: 6px 10px; border-radius: 10px; background: var(--red); color: #fff; font: 800 18px/1 PJS; opacity: 0; }
+.qm { left: 0; top: 860px; width: 1080px; text-align: center; font: 800 220px/1 Brico; color: rgba(255,228,92,.9); }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="5.760" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Bahut saare tasks… <em>pehle</em> kaunsa? 🤯</div><div id="vis" style="position:absolute;inset:0;transform:translateY(60px) scale(1.07);transform-origin:50% 36%"><div class="abs tc" id="t0" style="left:130px;top:700px;transform:rotate(-9deg)"><div class="num" id="n0">1</div><div class=hi id=hi>HIGH</div>Client report 📊<span>Due today</span></div><div class="abs tc" id="t1" style="left:560px;top:760px;transform:rotate(7deg)"><div class="num" id="n1">2</div>Team meeting 👥<span>11 AM</span></div><div class="abs tc" id="t2" style="left:200px;top:1030px;transform:rotate(5deg)"><div class="num" id="n2">3</div>Emails ✉️<span>23 unread</span></div><div class="abs tc" id="t3" style="left:590px;top:1090px;transform:rotate(-6deg)"><div class="num" id="n3">4</div>Budget sheet 📈<span>Due Friday</span></div><div class="abs tc" id="t4" style="left:360px;top:1330px;transform:rotate(4deg)"><div class="num" id="n4">5</div>Slides 🖥️<span>Next week</span></div><div class="abs qm" id="qm">?</div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.04, duration: 5.760, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.0);tl.set("#tp", {opacity: 1, y: 0}, 0);tl.fromTo("#t0", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 0.15);tl.to("#t0", {x: 10, duration: 0.09, yoyo: true, repeat: 7, ease: "sine.inOut"}, 0.90);tl.fromTo("#t1", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 0.27);tl.to("#t1", {x: -10, duration: 0.09, yoyo: true, repeat: 7, ease: "sine.inOut"}, 0.93);tl.fromTo("#t2", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 0.39);tl.to("#t2", {x: 10, duration: 0.09, yoyo: true, repeat: 7, ease: "sine.inOut"}, 0.96);tl.fromTo("#t3", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 0.51);tl.to("#t3", {x: -10, duration: 0.09, yoyo: true, repeat: 7, ease: "sine.inOut"}, 0.99);tl.fromTo("#t4", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)"}, 0.63);tl.to("#t4", {x: 10, duration: 0.09, yoyo: true, repeat: 7, ease: "sine.inOut"}, 1.02);tl.fromTo("#qm", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)"}, 1.0);tl.to("#qm", {opacity: 0, scale: 1.4, duration: 0.3}, 2.78);tl.to("#t0", {x: 230, y: -40, rotation: 0, duration: 0.6, ease: "power3.inOut"}, 2.88);tl.to("#n0", {opacity: 1, duration: 0.2}, 3.48);tl.to("#t1", {x: -200, y: 40, rotation: 0, duration: 0.6, ease: "power3.inOut"}, 2.94);tl.to("#n1", {opacity: 1, duration: 0.2}, 3.56);tl.to("#t2", {x: 160, y: -90, rotation: 0, duration: 0.6, ease: "power3.inOut"}, 3.00);tl.to("#n2", {opacity: 1, duration: 0.2}, 3.64);tl.to("#t3", {x: -230, y: -10, rotation: 0, duration: 0.6, ease: "power3.inOut"}, 3.06);tl.to("#n3", {opacity: 1, duration: 0.2}, 3.72);tl.to("#t4", {x: 0, y: -110, rotation: 0, duration: 0.6, ease: "power3.inOut"}, 3.12);tl.to("#n4", {opacity: 1, duration: 0.2}, 3.80);tl.fromTo("#hi", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(3)"}, 3.98);
+  window.__timelines["main"] = tl;
+</script></body></html>

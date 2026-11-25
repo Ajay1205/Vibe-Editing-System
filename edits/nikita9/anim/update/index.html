@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71; --red: #FF5A5F; --mut: #8A8C96; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #101116; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #101116; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #2A2A52 0%, #1A1A30 48%, #101116 100%); font-family: PJS; color: #fff; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 60px; top: 300px; width: 960px; text-align: center; font: 800 70px/1.12 Brico; color: #fff; }
+.top em { font-style: normal; display: inline-block; padding: 0 14px; border-radius: 14px; background: var(--y); color: var(--ink); }
+.top2 { left: 60px; top: 470px; width: 960px; text-align: center; font: 700 56px/1.1 Cav; color: var(--y); }
+.card { border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.lbl { font: 800 24px/1 PJS; letter-spacing: 2px; color: var(--mut); }
+.pill { display: inline-block; padding: 10px 18px; border-radius: 18px; font: 800 28px/1 PJS; }
+
+.board { left: 90px; top: 640px; width: 900px; height: 640px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.col { border-radius: 24px; background: rgba(255,255,255,.07); padding: 18px 14px; }
+.col h4 { margin: 0 0 14px; font: 800 24px/1 PJS; letter-spacing: 2px; color: #B9BAD6; }
+.task { left: 0; top: 0; width: 272px; padding: 18px; border-radius: 20px; background: #fff; color: var(--ink); box-shadow: 0 16px 34px rgba(0,0,0,.4); }
+.task b { display: block; font: 800 25px/1.15 PJS; padding-right: 66px; } .task span { display: block; margin-top: 10px; font: 700 20px/1 PJS; color: var(--mut); }
+.ring { }
+.msgf { left: 220px; top: 1340px; width: 640px; padding: 20px 26px; border-radius: 26px 26px 26px 6px; background: #fff; color: var(--ink);
+  font: 800 34px/1.2 PJS; box-shadow: 0 20px 44px rgba(0,0,0,.45); }
+.msgf small { display: block; font: 700 22px/1 PJS; color: var(--mut); margin-bottom: 8px; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="3.200" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Boss ko task ka <em>update</em> dena hai 📋</div><div id="vis" style="position:absolute;inset:0;transform:translateY(60px) scale(1.07);transform-origin:50% 36%"><div class="abs board"><div class="col"><h4>TO DO</h4></div><div class="col"><h4>IN PROGRESS</h4></div><div class="col"><h4>DONE</h4></div></div><div class="abs task" id="tk" style="left:107px;top:720px"><b>Client report 📊</b><span>Due: Friday</span><svg class="ring" width="70" height="70" viewBox="0 0 70 70" style="position:absolute;right:14px;top:14px"><circle cx="35" cy="35" r="28" fill="none" stroke="#E6E6EF" stroke-width="8"/><circle id="rg" cx="35" cy="35" r="28" fill="none" stroke="#5E5CE6" stroke-width="8" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="176" transform="rotate(-90 35 35)"/></svg></div><div class="abs" id="pc" style="left:420px;top:900px;font:800 44px/1 PJS;color:#fff">0%</div><div class="abs msgf" id="mf"><small>You → Manager</small>Quick update 📋 report is 60% done</div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.04, duration: 3.200, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.0);tl.set("#tp", {opacity: 1, y: 0}, 0);tl.fromTo(".board .col", {opacity: 0, y: 30}, {opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: "power3.out"}, 0.1);tl.fromTo("#tk", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 0.35);tl.to("#tk", {x: 305, duration: 0.6, ease: "power3.inOut"}, 0.90);tl.to("#rg", {strokeDashoffset: 70, duration: 0.8, ease: "power2.out"}, 1.44);tl.fromTo("#mf", {opacity: 0, x: -80, scale: 0.9}, {opacity: 1, x: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 1.98);tl.set("#pc", {opacity: 0}, 0);
+  window.__timelines["main"] = tl;
+</script></body></html>

@@ -1,0 +1,251 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.4); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; }
+.clip { position: absolute; inset: 0; } .layer { position: absolute; inset: 0; }
+.layer > div { position: absolute; }
+.w { display: inline-block; }
+.note { left: 110px; top: 290px; width: 290px; min-height: 240px; box-sizing: border-box; padding: 22px 22px 26px; background: var(--y);
+  transform: rotate(var(--r)); box-shadow: 0 18px 30px rgba(0,0,0,.3); border-radius: 4px 4px 22px 4px; opacity: 0; }
+.note::before { content: ""; position: absolute; left: 95px; top: -16px; width: 100px; height: 32px; background: rgba(255,255,255,.55); transform: rotate(3deg); }
+.note .n { display: inline-block; padding: 6px 12px; border-radius: 10px; background: var(--ink); color: var(--y); font: 800 22px/1 PJS; letter-spacing: 2px; }
+.note .h { margin-top: 12px; font: 700 50px/1.02 Cav; color: var(--ink); }
+.note.bonus .n { background: var(--ind); color: #fff; }
+.chat { left: 90px; top: 1090px; width: 900px; box-sizing: border-box; padding: 22px 28px 20px; border-radius: 30px; background: #fff; box-shadow: 0 22px 50px rgba(0,0,0,.35); }
+.hd { display: flex; align-items: center; gap: 14px; font: 700 24px/1 PJS; color: #8A8C96; }
+.av { width: 46px; height: 46px; border-radius: 50%; background: var(--ind); color: #fff; font: 800 18px/46px PJS; text-align: center; }
+.hd b { color: var(--ink); font-weight: 800; }
+.msg { margin-top: 14px; font: 800 48px/1.2 PJS; color: var(--ink); }
+.msg .k { padding: 0 6px 2px; border-radius: 12px; }
+.ft { margin-top: 8px; text-align: right; font: 700 22px/1 PJS; color: #9A9CA6; }
+.ft i { font-style: normal; font-weight: 800; letter-spacing: -4px; margin-left: 6px; }
+.react { left: 760px; top: 1058px; padding: 8px 16px; border-radius: 26px; background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.25); font: 800 30px/1 PJS; color: var(--ink); }
+.chips { left: 90px; top: 1430px; width: 900px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.chip { display: inline-block; padding: 12px 20px; border-radius: 20px; background: rgba(22,23,27,.86); color: #fff; font: 700 34px/1 PJS; }
+.chip b { color: var(--y); font-weight: 800; }
+.label { left: 90px; top: 1030px; padding: 10px 18px; border-radius: 14px; background: rgba(22,23,27,.85); color: #fff; font: 700 26px/1 PJS; }
+.typing { left: 90px; top: 1150px; width: 900px; height: 120px; box-sizing: border-box; padding: 0 30px; border-radius: 60px; background: #fff;
+  display: flex; align-items: center; box-shadow: 0 22px 50px rgba(0,0,0,.35); font: 700 44px/1 PJS; color: var(--ink); }
+.typing .del { text-decoration: line-through; text-decoration-thickness: 4px; white-space: pre; }
+.caret { display: inline-block; width: 4px; height: 50px; background: var(--ind); margin-left: 6px; }
+.send { margin-left: auto; width: 78px; height: 78px; border-radius: 50%; background: #D9DAE0; color: #fff; text-align: center; font: 800 38px/78px PJS; }
+.send.on { background: var(--ind); }
+.pill { left: 130px; top: 1150px; width: 820px; box-sizing: border-box; padding: 18px 24px; border-radius: 26px; background: rgba(22,23,27,.84);
+  text-align: center; font: 800 50px/1.15 Brico; color: #fff; }
+.pill em { font-style: normal; color: var(--y); }
+.pill.low { top: 1300px; font-size: 46px; }
+.tagc { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1060px; padding: 10px 20px; border-radius: 18px; background: var(--y); color: var(--ink); font: 800 28px/1 PJS; letter-spacing: 1px; }
+.tagc.big { top: 1100px; font-size: 44px; padding: 16px 28px; background: var(--ind); color: #fff; }
+.title { left: 0; top: 1120px; width: 1080px; text-align: center; font: 800 64px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.title em { font-style: normal; color: var(--y); }
+.minis { left: 150px; top: 1240px; width: 780px; display: flex; gap: 18px; justify-content: center; }
+.mini { width: 104px; height: 96px; border-radius: 4px 4px 14px 4px; background: var(--y); color: var(--ink); font: 800 34px/96px PJS; text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,.3); }
+.mini.q { background: var(--ind); color: #fff; font-size: 44px; }
+.conf { left: 0; top: 1380px; width: 1080px; text-align: center; font: 700 72px/1 Cav; color: #fff; text-shadow: var(--sh); }
+.cta { left: 0; top: 1310px; width: 1080px; text-align: center; font: 700 84px/1 Cav; color: #fff; text-shadow: var(--sh); }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="81.233" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="hk" class="clip" data-start="0.000" data-duration="11.933" data-track-index="1"><div class="layer"><div class="note" id="hkn" style="--r:-4deg;opacity:1"><span class="n">OFFICE MEETING</span><div class="h">Idea hai… par English ka darr 😶</div></div>
+      <div class="tagc" id="hkt">💼 Corporate employees ke liye</div>
+      <div class="pill" id="hk1">Office mein English bolne se <em>darr</em> lagta hai? 😰</div>
+      <div class="label" id="hkl">💬 Team chat</div>
+      <div class="typing" id="hkb"><span class="del" id="hkd"><span id="hc0">I</span><span id="hc1"> </span><span id="hc2">t</span><span id="hc3">h</span><span id="hc4">i</span><span id="hc5">n</span><span id="hc6">k</span><span id="hc7"> </span><span id="hc8">w</span><span id="hc9">e</span><span id="hc10"> </span><span id="hc11">s</span><span id="hc12">h</span><span id="hc13">o</span></span><span class="caret" id="hkc"></span><span class="send">➤</span></div>
+      <div class="pill low" id="hk2">Idea hai, par <em>English</em> ke darr se chup rehte ho? 🤐</div></div></div>
+<div id="in" class="clip" data-start="11.933" data-duration="5.467" data-track-index="2"><div class="layer"><div class="title" id="it"><em>5</em> OFFICE SENTENCES 💼</div>
+      <div class="minis"><div class="mini" id="mn0">01</div><div class="mini" id="mn1">02</div><div class="mini" id="mn2">03</div><div class="mini" id="mn3">04</div><div class="mini" id="mn4">05</div><div class="mini q" id="mn5">🎁</div></div><div class="conf" id="ic">Confidently bolo 💪</div></div></div>
+<div id="s1" class="clip" data-start="17.490" data-duration="8.067" data-track-index="3"><div class="layer"><div class="note" id="s1n" style="--r:3deg"><span class="n">01 / 05</span><div class="h">Boss ko task ka update dena hai 📋</div></div>
+          <div class="chat" id="s1k"><div class="hd"><span class="av">You</span><b>You</b> → Manager · 10:42 AM</div>
+            <div class="msg"><span class="w" id="s1w0">I</span> <span class="w" id="s1w1">wanted</span> <span class="w" id="s1w2">to</span> <span class="w" id="s1w3">give</span> <span class="w" id="s1w4">you</span> <span class="w" id="s1w5">a</span> <span class="k"><span class="w" id="s1w6">quick</span> <span class="w" id="s1w7">update</span></span> <span class="w" id="s1w8">about</span> <span class="w" id="s1w9">the</span> <span class="w" id="s1w10">task.</span></div><div class="ft" id="s1f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s1r">👍 1</div>
+          <div class="chips"><span class="chip" id="s1c0"><b>quick update</b> = chhota sa update</span></div></div></div>
+<div id="s2" class="clip" data-start="24.857" data-duration="9.730" data-track-index="3"><div class="layer"><div class="note" id="s2n" style="--r:-4deg"><span class="n">02 / 05</span><div class="h">Kaam mein thoda delay ho raha hai 😬</div></div>
+          <div class="chat" id="s2k"><div class="hd"><span class="av">You</span><b>You</b> → Manager · 11:15 AM</div>
+            <div class="msg"><span class="w" id="s2w0">There</span> <span class="w" id="s2w1">might</span> <span class="w" id="s2w2">be</span> <span class="w" id="s2w3">a</span> <span class="k"><span class="w" id="s2w4">slight</span> <span class="w" id="s2w5">delay.</span></span> <span class="w" id="s2w6">I</span> <span class="w" id="s2w7">will</span> <span class="k"><span class="w" id="s2w8">keep</span> <span class="w" id="s2w9">you</span> <span class="w" id="s2w10">posted.</span></span></div><div class="ft" id="s2f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s2r">👍 1</div>
+          <div class="chips"><span class="chip" id="s2c0"><b>slight</b> = thoda sa</span><span class="chip" id="s2c1"><b>keep you posted</b> = update deta rahunga</span></div></div></div>
+<div id="s3" class="clip" data-start="33.887" data-duration="8.103" data-track-index="3"><div class="layer"><div class="note" id="s3n" style="--r:3deg"><span class="n">03 / 05</span><div class="h">Doubt hai, help chahiye 🙋</div></div>
+          <div class="chat" id="s3k"><div class="hd"><span class="av">You</span><b>You</b> → Teammate · 12:03 PM</div>
+            <div class="msg"><span class="k"><span class="w" id="s3w0">Could</span> <span class="w" id="s3w1">you</span> <span class="w" id="s3w2">please</span></span> <span class="w" id="s3w3">help</span> <span class="w" id="s3w4">me</span> <span class="w" id="s3w5">with</span> <span class="w" id="s3w6">this</span> <span class="w" id="s3w7">task?</span></div><div class="ft" id="s3f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s3r">🙌 1</div>
+          <div class="chips"><span class="chip" id="s3c0"><b>Could you please…</b> = polite request 🙏</span></div></div></div>
+<div id="s4" class="clip" data-start="41.290" data-duration="6.430" data-track-index="3"><div class="layer"><div class="note" id="s4n" style="--r:-4deg"><span class="n">04 / 05</span><div class="h">Task poora ho gaya ✅</div></div>
+          <div class="chat" id="s4k"><div class="hd"><span class="av">You</span><b>You</b> → Manager · 4:30 PM</div>
+            <div class="msg"><span class="w" id="s4w0">I</span> <span class="w" id="s4w1">have</span> <span class="k"><span class="w" id="s4w2">completed</span></span> <span class="w" id="s4w3">the</span> <span class="w" id="s4w4">task.</span></div><div class="ft" id="s4f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s4r">🎉 3</div>
+          <div class="chips"><span class="chip" id="s4c0"><b>completed</b> = poora kar liya</span></div></div></div>
+<div id="s5" class="clip" data-start="47.020" data-duration="10.980" data-track-index="3"><div class="layer"><div class="note" id="s5n" style="--r:3deg"><span class="n">05 / 05</span><div class="h">Bahut saare tasks… pehle kaunsa? 🤯</div></div>
+          <div class="chat" id="s5k"><div class="hd"><span class="av">You</span><b>You</b> → Manager · 9:20 AM</div>
+            <div class="msg"><span class="w" id="s5w0">Which</span> <span class="w" id="s5w1">task</span> <span class="w" id="s5w2">should</span> <span class="w" id="s5w3">I</span> <span class="k"><span class="w" id="s5w4">prioritize</span></span> <span class="w" id="s5w5">first?</span></div><div class="ft" id="s5f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s5r">👀 1</div>
+          <div class="chips"><span class="chip" id="s5c0"><b>prioritize</b> = pehle kya karna hai</span></div></div></div>
+<div id="s6" class="clip" data-start="57.300" data-duration="11.067" data-track-index="3"><div class="layer"><div class="note bonus" id="s6n" style="--r:-4deg"><span class="n">BONUS 🎁</span><div class="h">Mere paas ek idea hai 💡</div></div>
+          <div class="chat" id="s6k"><div class="hd"><span class="av">You</span><b>You</b> → Team · 11:05 AM</div>
+            <div class="msg"><span class="w" id="s6w0">I</span> <span class="w" id="s6w1">have</span> <span class="w" id="s6w2">a</span> <span class="k"><span class="w" id="s6w3">suggestion</span></span> <span class="w" id="s6w4">that</span> <span class="w" id="s6w5">we</span> <span class="w" id="s6w6">could</span> <span class="k"><span class="w" id="s6w7">consider.</span></span></div><div class="ft" id="s6f">Sent<i>✓✓</i></div></div>
+          <div class="react" id="s6r">🔥 3 · 👏 2</div>
+          <div class="chips"><span class="chip" id="s6c0"><b>suggestion</b> = sujhaav</span><span class="chip" id="s6c1"><b>consider</b> = soch sakte hain</span></div></div></div>
+<div id="qz" class="clip" data-start="67.667" data-duration="13.767" data-track-index="4"><div class="layer"><div class="tagc big" id="q1">YOUR TURN ✍️</div>
+      <div class="pill" id="q2">English mein <em>translate</em> karke comment karo 👇</div>
+      <div class="note" id="qn" style="--r:3deg"><span class="n">SITUATION 🧩</span><div class="h">Kal office nahi jaana, chhutti chahiye 🏖️</div></div>
+      <div class="label" id="ql">💬 Message to Manager</div>
+      <div class="typing" id="qb"><span style="color:#B5B6BE">Type in English…</span><span class="caret" id="qc"></span><span class="send on">➤</span></div>
+      <div class="cta" id="qt">Comment karo 👇</div></div></div>
+</div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#hkt", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 0.78);
+tl.fromTo("#hk1 em", {color: "#FFFFFF"}, {color: "#FFE45C", duration: 0.2}, 4.03);
+tl.to("#hk1, #hkt", {opacity: 0, y: -12, duration: 0.2}, 6.43);
+tl.fromTo("#hkl, #hkb", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 6.53);
+tl.fromTo("#hc0", {display: "none"}, {display: "inline", duration: 0.01}, 6.780);
+tl.fromTo("#hc1", {display: "none"}, {display: "inline", duration: 0.01}, 6.904);
+tl.fromTo("#hc2", {display: "none"}, {display: "inline", duration: 0.01}, 7.029);
+tl.fromTo("#hc3", {display: "none"}, {display: "inline", duration: 0.01}, 7.153);
+tl.fromTo("#hc4", {display: "none"}, {display: "inline", duration: 0.01}, 7.277);
+tl.fromTo("#hc5", {display: "none"}, {display: "inline", duration: 0.01}, 7.401);
+tl.fromTo("#hc6", {display: "none"}, {display: "inline", duration: 0.01}, 7.526);
+tl.fromTo("#hc7", {display: "none"}, {display: "inline", duration: 0.01}, 7.650);
+tl.fromTo("#hc8", {display: "none"}, {display: "inline", duration: 0.01}, 7.774);
+tl.fromTo("#hc9", {display: "none"}, {display: "inline", duration: 0.01}, 7.899);
+tl.fromTo("#hc10", {display: "none"}, {display: "inline", duration: 0.01}, 8.023);
+tl.fromTo("#hc11", {display: "none"}, {display: "inline", duration: 0.01}, 8.147);
+tl.fromTo("#hc12", {display: "none"}, {display: "inline", duration: 0.01}, 8.271);
+tl.fromTo("#hc13", {display: "none"}, {display: "inline", duration: 0.01}, 8.396);
+tl.fromTo("#hkd", {textDecorationColor: "rgba(255,90,95,0)", color: "#16171B"}, {textDecorationColor: "rgba(255,90,95,1)", color: "#C8C9D0", duration: 0.25}, 9.4);
+tl.to("#hkb", {x: 10, duration: 0.05, yoyo: true, repeat: 5, ease: "none"}, 9.6);
+tl.to("#hkd", {opacity: 0, duration: 0.3}, 10.56);
+tl.fromTo("#hk2", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 10.66);
+tl.to("#hk .clip, #hkt, #hkl, #hkb, #hk2", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 11.763);
+tl.to("#hkn", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 11.673);
+tl.fromTo("#it", {opacity: 0, scale: 1.4}, {opacity: 1, scale: 1, duration: 0.35, ease: "power3.out"}, 12.353);
+tl.fromTo("#mn0", {opacity: 0, y: -50, rotation: 12}, {opacity: 1, y: 0, rotation: 3, duration: 0.35, ease: "back.out(2)"}, 13.253);
+tl.fromTo("#mn1", {opacity: 0, y: -50, rotation: -12}, {opacity: 1, y: 0, rotation: -3, duration: 0.35, ease: "back.out(2)"}, 13.373);
+tl.fromTo("#mn2", {opacity: 0, y: -50, rotation: 12}, {opacity: 1, y: 0, rotation: 3, duration: 0.35, ease: "back.out(2)"}, 13.493);
+tl.fromTo("#mn3", {opacity: 0, y: -50, rotation: -12}, {opacity: 1, y: 0, rotation: -3, duration: 0.35, ease: "back.out(2)"}, 13.613);
+tl.fromTo("#mn4", {opacity: 0, y: -50, rotation: 12}, {opacity: 1, y: 0, rotation: 3, duration: 0.35, ease: "back.out(2)"}, 13.733);
+tl.fromTo("#mn5", {opacity: 0, scale: 0.3}, {opacity: 1, scale: 1, rotation: 6, duration: 0.4, ease: "back.out(3)"}, 15.153);
+tl.fromTo("#ic", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 15.673);
+tl.to("#in .layer > div", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 17.230);
+tl.fromTo("#s1n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 17.569999999999997);
+tl.fromTo("#s1k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 21.04);
+tl.fromTo("#s1w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 21.33);
+tl.fromTo("#s1w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 21.57);
+tl.fromTo("#s1w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 21.97);
+tl.fromTo("#s1w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 22.31);
+tl.fromTo("#s1w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 22.45);
+tl.fromTo("#s1w5", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 22.75);
+tl.fromTo("#s1w6", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 23.01);
+tl.fromTo("#s1w7", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 23.23);
+tl.fromTo("#s1w8", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 23.67);
+tl.fromTo("#s1w9", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 24.01);
+tl.fromTo("#s1w10", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 24.31);
+tl.fromTo("#s1k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 24.45);
+tl.fromTo("#s1f", {opacity: 0}, {opacity: 1, duration: 0.2}, 24.52);
+tl.fromTo("#s1f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 24.72);
+tl.fromTo("#s1r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 24.67);
+tl.fromTo("#s1c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 24.570);
+tl.to("#s1n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 24.647);
+tl.to("#s1k, #s1r, #s1 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 25.387);
+tl.fromTo("#s2n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 24.936999999999998);
+tl.fromTo("#s2k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 29.717);
+tl.fromTo("#s2w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 30.007);
+tl.fromTo("#s2w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 30.227);
+tl.fromTo("#s2w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 30.527);
+tl.fromTo("#s2w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 30.767);
+tl.fromTo("#s2w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 30.947);
+tl.fromTo("#s2w5", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 31.167);
+tl.fromTo("#s2w6", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 31.787);
+tl.fromTo("#s2w7", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 32.027);
+tl.fromTo("#s2w8", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 32.267);
+tl.fromTo("#s2w9", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 32.467);
+tl.fromTo("#s2w10", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 32.707);
+tl.fromTo("#s2k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 32.847);
+tl.fromTo("#s2f", {opacity: 0}, {opacity: 1, duration: 0.2}, 32.917);
+tl.fromTo("#s2f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 33.117);
+tl.fromTo("#s2r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 33.067);
+tl.fromTo("#s2c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 32.967);
+tl.fromTo("#s2c1", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 33.167);
+tl.to("#s2n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 33.677);
+tl.to("#s2k, #s2r, #s2 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 34.417);
+tl.fromTo("#s3n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 33.967);
+tl.fromTo("#s3k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 38.517);
+tl.fromTo("#s3w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 38.807);
+tl.fromTo("#s3w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 38.927);
+tl.fromTo("#s3w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 39.247);
+tl.fromTo("#s3w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 39.627);
+tl.fromTo("#s3w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 39.827);
+tl.fromTo("#s3w5", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 40.007);
+tl.fromTo("#s3w6", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 40.207);
+tl.fromTo("#s3w7", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 40.427);
+tl.fromTo("#s3k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 40.567);
+tl.fromTo("#s3f", {opacity: 0}, {opacity: 1, duration: 0.2}, 40.637);
+tl.fromTo("#s3f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 40.837);
+tl.fromTo("#s3r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 40.787);
+tl.fromTo("#s3c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 40.687);
+tl.to("#s3n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 41.080);
+tl.to("#s3k, #s3r, #s3 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 41.820);
+tl.fromTo("#s4n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 41.37);
+tl.fromTo("#s4k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 44.34);
+tl.fromTo("#s4w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 44.63);
+tl.fromTo("#s4w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 44.81);
+tl.fromTo("#s4w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 45.21);
+tl.fromTo("#s4w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 45.71);
+tl.fromTo("#s4w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 46.01);
+tl.fromTo("#s4k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 46.15);
+tl.fromTo("#s4f", {opacity: 0}, {opacity: 1, duration: 0.2}, 46.22);
+tl.fromTo("#s4f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 46.42);
+tl.fromTo("#s4r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 46.37);
+tl.fromTo("#s4c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 46.270);
+tl.to("#s4n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 46.810);
+tl.to("#s4k, #s4r, #s4 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 47.550);
+tl.fromTo("#s5n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 47.1);
+tl.fromTo("#s5k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 54.28);
+tl.fromTo("#s5w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 54.57);
+tl.fromTo("#s5w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 54.85);
+tl.fromTo("#s5w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 55.31);
+tl.fromTo("#s5w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 55.61);
+tl.fromTo("#s5w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 55.85);
+tl.fromTo("#s5w5", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 56.27);
+tl.fromTo("#s5k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 56.41);
+tl.fromTo("#s5f", {opacity: 0}, {opacity: 1, duration: 0.2}, 56.48);
+tl.fromTo("#s5f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 56.68);
+tl.fromTo("#s5r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 56.63);
+tl.fromTo("#s5c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 56.530);
+tl.to("#s5n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 57.090);
+tl.to("#s5k, #s5r, #s5 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 57.830);
+tl.fromTo("#s6n", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 57.379999999999995);
+tl.fromTo("#s6k", {opacity: 0, y: 40, scale: 0.95}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)"}, 64.3);
+tl.fromTo("#s6w0", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 64.59);
+tl.fromTo("#s6w1", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 65.05);
+tl.fromTo("#s6w2", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 65.31);
+tl.fromTo("#s6w3", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 65.53);
+tl.fromTo("#s6w4", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 65.95);
+tl.fromTo("#s6w5", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 66.49);
+tl.fromTo("#s6w6", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 66.73);
+tl.fromTo("#s6w7", {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.18, ease: "power2.out"}, 66.93);
+tl.fromTo("#s6k .k", {backgroundColor: "rgba(232,231,255,0)", color: "#16171B"}, {backgroundColor: "rgba(232,231,255,1)", color: "#5E5CE6", duration: 0.25}, 67.07);
+tl.fromTo("#s6f", {opacity: 0}, {opacity: 1, duration: 0.2}, 67.14);
+tl.fromTo("#s6f i", {color: "#B8BAC4"}, {color: "#34B7F1", duration: 0.2}, 67.34);
+tl.fromTo("#s6r", {opacity: 0, scale: 0.3, y: 20}, {opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(3)"}, 67.29);
+tl.fromTo("#s6c0", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 67.190);
+tl.fromTo("#s6c1", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 67.390);
+tl.to("#s6n", {opacity: 0, y: 90, rotation: 12, duration: 0.25, ease: "power2.in"}, 67.457);
+tl.to("#s6k, #s6r, #s6 .chips", {opacity: 0, y: -10, duration: 0.16, ease: "power2.in"}, 68.197);
+tl.fromTo("#q1", {opacity: 0, scale: 0.4}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)"}, 68.797);
+tl.fromTo("#q2", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 71.577);
+tl.to("#q1, #q2", {opacity: 0, y: -12, duration: 0.2}, 74.307);
+tl.fromTo("#qn", {opacity: 0, y: -60, rotation: -14, scale: 1.15}, {opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)"}, 74.457);
+tl.fromTo("#ql, #qb", {opacity: 0, y: 18, filter: "blur(10px)"}, {opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out"}, 76.637);
+tl.fromTo("#qc", {opacity: 1}, {opacity: 0, duration: 0.35, yoyo: true, repeat: 13, ease: "steps(1)"}, 76.837);
+tl.fromTo("#qt", {opacity: 0, scale: 0.6}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 78.997);
+tl.to("#qt", {scale: 1.07, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut"}, 79.597);
+  window.__timelines["main"] = tl;
+</script></body></html>

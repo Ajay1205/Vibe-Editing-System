@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+@font-face { font-family: PJS; src: url(fonts/pjs500.woff2); font-weight: 500; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --ink: #16171B; --y: #FFE45C; --ind: #5E5CE6; --tick: #34B7F1; --grn: #2FBF71; --red: #FF5A5F; --mut: #8A8C96; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #101116; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; background: #101116; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 62%, #2A2A52 0%, #1A1A30 48%, #101116 100%); font-family: PJS; color: #fff; }
+#cam { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.abs { position: absolute; }
+.top { left: 60px; top: 300px; width: 960px; text-align: center; font: 800 70px/1.12 Brico; color: #fff; }
+.top em { font-style: normal; display: inline-block; padding: 0 14px; border-radius: 14px; background: var(--y); color: var(--ink); }
+.top2 { left: 60px; top: 470px; width: 960px; text-align: center; font: 700 56px/1.1 Cav; color: var(--y); }
+.card { border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 34px 80px rgba(0,0,0,.5); }
+.lbl { font: 800 24px/1 PJS; letter-spacing: 2px; color: var(--mut); }
+.pill { display: inline-block; padding: 10px 18px; border-radius: 18px; font: 800 28px/1 PJS; }
+
+.doc { left: 120px; top: 640px; width: 840px; height: 760px; padding: 34px; }
+.ln { height: 22px; border-radius: 11px; background: #E7E7EF; margin: 0 0 24px; }
+.bad { position: relative; background: #FFE1E2; }
+.q { left: 0; top: 0; width: 64px; height: 64px; border-radius: 50%; background: var(--red); color: #fff; font: 800 40px/64px PJS; text-align: center; }
+.ok { left: 0; top: 0; width: 64px; height: 64px; border-radius: 50%; background: var(--grn); color: #fff; font: 800 38px/64px PJS; text-align: center; }
+.cur { left: 0; top: 0; }
+.cur span { position: absolute; left: 30px; top: 30px; padding: 8px 14px; border-radius: 12px; font: 800 22px/1 PJS; color: #fff; white-space: nowrap; }
+.hlt { left: 154px; top: 0; height: 40px; border-radius: 10px; background: rgba(94,92,230,.25); transform-origin: 0 50%; }
+
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4.180" data-width="2160" data-height="3840" data-fps="30">
+<div id="stage"><div id="cam">
+<div class="abs top" id="tp">Kaam mein <em>doubt</em> hai… help chahiye 🙋</div><div id="vis" style="position:absolute;inset:0;transform:translateY(60px) scale(1.07);transform-origin:50% 36%"><div class="abs card doc" id="dc"><div class="lbl" style="margin-bottom:26px">TASK · Q3 BUDGET SHEET</div><div class="ln" style="width:92%"></div><div class="ln" style="width:78%"></div><div class="ln" style="width:85%"></div><div class="ln bad" style="width:70%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:60%"></div><div class="ln" style="width:82%"></div><div class="ln" style="width:74%"></div><div class="ln" style="width:90%"></div></div><div class="abs hlt" id="hl" style="top:820px;width:540px"></div><div class="abs q" id="qq" style="left:880px;top:808px">?</div><div class="abs ok" id="ok" style="left:880px;top:808px">✓</div><svg class="abs cur" id="c1" style="left:640px;top:880px" width="200" height="80" viewBox="0 0 200 80"><path d="M4 4 L4 44 L16 33 L26 54 L34 50 L24 30 L40 30 Z" fill="#5E5CE6" stroke="#fff" stroke-width="3"/></svg><div class="abs" id="c1l" style="left:674px;top:914px;padding:8px 14px;border-radius:12px;background:#5E5CE6;font:800 22px/1 PJS;color:#fff">You</div><svg class="abs cur" id="c2" style="left:980px;top:1300px" width="200" height="80" viewBox="0 0 200 80"><path d="M4 4 L4 44 L16 33 L26 54 L34 50 L24 30 L40 30 Z" fill="#2FBF71" stroke="#fff" stroke-width="3"/></svg><div class="abs" id="c2l" style="left:1014px;top:1334px;padding:8px 14px;border-radius:12px;background:#2FBF71;font:800 22px/1 PJS;color:#fff">Teammate</div><div class="abs" id="sv" style="left:0;top:1440px;width:1080px;text-align:center;font:800 40px/1 PJS;color:#fff">🤝 Teammate joined · <span style="color:var(--grn)">solved</span></div></div>
+</div></div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#cam", {scale: 1.0}, {scale: 1.04, duration: 4.180, ease: "none"}, 0);
+  tl.fromTo("#tp", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.0);tl.set("#tp", {opacity: 1, y: 0}, 0);tl.fromTo("#dc", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 0.1);tl.fromTo("#qq", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 0.5);tl.fromTo("#c1, #c1l", {opacity: 0}, {opacity: 1, duration: 0.3}, 0.6);tl.to("#qq", {scale: 1.15, duration: 0.25, yoyo: true, repeat: 3}, 0.9);tl.fromTo("#c2, #c2l", {opacity: 0, x: 200, y: 200}, {opacity: 1, x: -380, y: -440, duration: 0.9, ease: "power3.inOut"}, 1.46);tl.fromTo("#hl", {scaleX: 0, opacity: 1}, {scaleX: 1, duration: 0.5, ease: "power2.out"}, 2.42);tl.to("#qq", {opacity: 0, scale: 0.4, duration: 0.2}, 2.93);tl.fromTo("#ok", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)"}, 3.01);tl.to(".bad", {backgroundColor: "#DDF5E7", duration: 0.3}, 3.01);tl.fromTo("#sv", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.45, ease: "power3.out"}, 3.09);
+  window.__timelines["main"] = tl;
+</script></body></html>
