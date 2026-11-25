@@ -237,6 +237,24 @@ Seven single-line takes (SDR 4K30). `cut.py` -> `keys.py` -> `overlay.py` -> `bu
 - Size: 80.6 s was 558 MiB as H.264 CRF 15 and 409 MiB as HEVC CRF 16; delivered HEVC CRF 17 (353 MiB, one file).
   For long reels (> ~70 s) go straight to `--hevc --crf 17`.
 
+## Nikita 9 "Office Chat" (`edits/nikita9`, 5 + 1 bonus office sentences, two versions, 25 Nov)
+
+Seven takes (SDR 4K30). `cut.py` -> `keys.py` -> `overlay.py` -> `scenes_plan.py` + `anim/make_scenes.py render` ->
+`build.py cues|compose <v>` + `mix.py` (N9_VERSION). V1 = captions only; V2 = V1 + an animated scene during each
+situation (user: "version 2 with animations related EXACTLY to those sentences"), hard cuts, ending 0.12 s before her
+English line so she is on screen with the chat card when she says it.
+- Her head sits high in the frame: situation = yellow sticky note on the wall LEFT of her head (Caveat Hinglish,
+  numbered 01/05..05/05, "BONUS 🎁" because she says 5 but teaches 6); English = a work-chat message at chest level typed
+  word by word, key phrases on an indigo highlight, Sent ✓✓ + reaction, then meaning chips ("slight = thoda sa") for an
+  explanatory edit; each card holds READ_HOLD 0.7 s into the next situation. Hook = "darr" pill + a message typed and
+  struck out; quiz = message box + "Comment karo". Ink / sticky yellow #FFE45C / indigo #5E5CE6; Bricolage, Plus Jakarta,
+  Caveat. Nikita 6 grade on her picture only.
+- Scenes (grown-up flat office UI, no characters): video-call grid with your tile muted + lock, Kanban card moving to
+  In Progress with a progress ring, deadline flag sliding +1 day + bell updates, teammate cursor fixing a "?" line,
+  checklist + COMPLETED stamp, scattered tasks sorted 1-5 with HIGH flag, idea bulb + suggestion sticky + votes,
+  calendar with tomorrow circled "Leave?" + empty message box. Visual wrapper scaled 1.07 (1.16 clipped wide scenes).
+- Mix: Nikita's voice is louder: loudnorm -13.1, master -0.3 dB -> -14.0 LUFS. 81 s at HEVC CRF 17: V1 294 MiB, V2 181 MiB.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
