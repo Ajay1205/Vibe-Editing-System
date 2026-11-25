@@ -176,6 +176,11 @@ Built from the user's reference (a full Hindi -> English list over the speaker),
 - Nikita 8 (`edits/nikita8`, positive feelings) reused this style: 8 bigger rows, her example sentence and a Follow tap
   below the list. A translate-app card (one word at a time, `build_v1_translate.py`) and a sticker-card idea were
   rejected: with a word list the user wants every word to STAY on screen so viewers can read and write them down.
+- Nikita 10 (`edits/nikita10`, "Positive Words", 8 words, 25 Nov; user: "the style is similar to feelings in english"):
+  copied from nikita8/build.py (words + onsets, `EXAMPLE` = her closing "practice kijiye" line, Follow tap). The whole
+  list and "Guess before I say it!" are on screen from frame 1 (hook + cover). Hindi pills 44 px, longest row 37 px so it
+  clears the frame edge. Her raw clip ended inside an extra syllable: cut on her last word (CLIP_OUT) and hold the last
+  frame HOLD 1.2 s (tpad) for the tap. Voice loudnorm -13.1 + 0.4 dB -> -14.1 LUFS.
 
 ## Approved style: Manisha 7 "Pick One" quiz (`edits/manisha7`, fill in the blank + options + comment CTA)
 
