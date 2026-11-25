@@ -1,0 +1,77 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Nikita 11 style board -- "Stop Saying OPEN": six everyday mistakes. Above her head the wrong phrase gets a red
+   strike and an "✕ WRONG" stamp; at chest level the right phrase lands on a white card with the verb on a green
+   pill, and a device tile beside it acts the verb out (TV screen lights up, phone lock opens, gift ribbon unties...).
+   Progress dots 1-6 at the top. Hook: a huge "OPEN" with six objects, all crossed out. Quiz: "Open the tap" + "?" card.
+   Palette from the footage (black/white striped shirt, warm wall, the yellow-blue plant): ink #111216, white,
+   wrong red #FF4D4D, right green #1FBF6A, accent yellow #FFD43B. Anton (OPEN stamp), Bricolage 800, Plus Jakarta Sans.
+   States: 0.5 hook, 1.5 TV, 2.5 mobile, 3.5 quiz. */
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+:root { --ink: #111216; --red: #FF4D4D; --grn: #1FBF6A; --y: #FFD43B; --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.4); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+.dots { left: 0; top: 268px; width: 1080px; display: flex; justify-content: center; gap: 12px; }
+.dots i { width: 46px; height: 12px; border-radius: 6px; background: rgba(17,18,22,.35); }
+.dots i.on { background: var(--grn); } .dots i.cur { background: var(--y); width: 70px; }
+.wrong { left: 0; top: 320px; width: 1080px; text-align: center; font: 800 66px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.wrong .x { position: relative; display: inline-block; color: #FFD2D2; }
+.wrong .x::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 9px; border-radius: 5px; background: var(--red); transform: rotate(-6deg); }
+.stamp { left: 690px; top: 410px; padding: 8px 18px; border: 6px solid var(--red); border-radius: 14px; color: var(--red); font: 400 46px/1 Anton;
+  letter-spacing: 2px; transform: rotate(-10deg); background: rgba(255,255,255,.92); }
+.tile { left: 110px; top: 1120px; width: 230px; height: 230px; border-radius: 34px; background: var(--ink); box-shadow: 0 20px 44px rgba(0,0,0,.35);
+  display: flex; align-items: center; justify-content: center; }
+.right { left: 360px; top: 1150px; width: 610px; padding: 26px 28px; border-radius: 30px; background: #fff; box-shadow: 0 20px 44px rgba(0,0,0,.3);
+  font: 800 58px/1.12 Brico; color: var(--ink); }
+.right small { display: block; font: 800 26px/1 PJS; letter-spacing: 3px; color: var(--grn); margin-bottom: 12px; }
+.right .v { display: inline-block; padding: 0 14px 4px; border-radius: 16px; background: var(--grn); color: #fff; }
+.hook1 { left: 0; top: 300px; width: 1080px; text-align: center; font: 800 52px/1.1 Brico; color: #fff; text-shadow: var(--sh); }
+.big { left: 0; top: 380px; width: 1080px; text-align: center; font: 400 190px/1 Anton; color: #fff; letter-spacing: 6px; text-shadow: var(--sh); }
+.big span { position: relative; display: inline-block; }
+.big span::after { content: ""; position: absolute; left: -20px; right: -20px; top: 48%; height: 22px; border-radius: 11px; background: var(--red); transform: rotate(-8deg); }
+.objs { left: 90px; top: 1150px; width: 900px; display: flex; justify-content: center; gap: 14px; }
+.objs span { width: 130px; height: 130px; border-radius: 28px; background: rgba(17,18,22,.88); font: 64px/130px sans-serif; text-align: center; position: relative; }
+.objs span::after { content: "✕"; position: absolute; right: -8px; top: -10px; width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: #fff; font: 800 26px/44px PJS; }
+.sub { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1310px; padding: 14px 26px; border-radius: 22px; background: rgba(17,18,22,.85); font: 800 44px/1.2 Brico; color: #fff; }
+.sub em { font-style: normal; color: var(--y); }
+.q { left: 110px; top: 1120px; width: 860px; padding: 26px; border-radius: 30px; background: #fff; text-align: center; font: 800 58px/1.1 Brico; color: var(--ink);
+  box-shadow: 0 20px 44px rgba(0,0,0,.3); }
+.q .b { display: inline-block; width: 170px; height: 60px; vertical-align: -10px; border-radius: 16px; border: 5px dashed var(--grn); background: rgba(31,191,106,.12); }
+.cta { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1290px; padding: 16px 28px; border-radius: 24px; background: rgba(17,18,22,.85); font: 800 52px/1 Brico; color: #fff; }
+.cta em { font-style: normal; color: var(--y); }
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="tv" viewBox="0 0 160 130"><rect x="8" y="8" width="144" height="92" rx="12" fill="#2A2C33" stroke="#fff" stroke-width="6"/><rect id="scr" x="18" y="18" width="124" height="72" rx="6" fill="#FFD43B"/><path d="M60 122 h40 M80 100 v22" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="132" cy="80" r="5" fill="#1FBF6A"/></symbol>
+ <symbol id="ph" viewBox="0 0 120 170"><rect x="22" y="6" width="76" height="158" rx="14" fill="#2A2C33" stroke="#fff" stroke-width="6"/><rect x="30" y="20" width="60" height="122" rx="6" fill="#5B8CFF"/><path d="M48 80 v-12 a12 12 0 0 1 24 0" fill="none" stroke="#fff" stroke-width="6" transform="rotate(-25 72 68)"/><rect x="44" y="78" width="32" height="26" rx="6" fill="#fff"/></symbol>
+</defs></svg>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+ <div class="st" id="s1">
+  <div class="abs hook1">Har cheez ko "OPEN" bolte ho? 🤔</div>
+  <div class="abs big"><span>OPEN</span></div>
+  <div class="abs objs"><span>📺</span><span>❄️</span><span>💻</span><span>📱</span><span>🎁</span><span>📦</span></div>
+  <div class="abs sub">6 galtiyan jo <em>sab</em> karte hain 👇</div></div>
+ <div class="st" id="s2">
+  <div class="abs dots"><i class="cur"></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="abs wrong">❌ <span class="x">Open</span> the TV</div><div class="abs stamp">WRONG</div>
+  <div class="abs tile"><svg width="180" height="146"><use href="#tv"/></svg></div>
+  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Turn on</span> the TV</div></div>
+ <div class="st" id="s3">
+  <div class="abs dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i></div>
+  <div class="abs wrong">❌ <span class="x">Open</span> the mobile</div><div class="abs stamp">WRONG</div>
+  <div class="abs tile"><svg width="130" height="184"><use href="#ph"/></svg></div>
+  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Unlock</span> your mobile</div></div>
+ <div class="st" id="s4">
+  <div class="abs hook1" style="top:320px">YOUR TURN ✍️</div>
+  <div class="abs wrong" style="top:410px">❌ <span class="x">Open</span> the tap 🚰</div>
+  <div class="abs q">✅ <span class="b"></span> the tap</div>
+  <div class="abs cta">Answer <em>comment</em> karo 👇</div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#s1","#s2","#s3","#s4"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>
