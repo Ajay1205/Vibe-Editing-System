@@ -68,8 +68,7 @@ html, body { background: transparent !important; }
 <script>
   const tl = gsap.timeline({ paused: true });
   tl.set("#main .emo, #ex, #ex .ee, #fol, #hand", {opacity: 0}, 0);
-  tl.fromTo("#main .ttl, #main .cnt", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 0);
-  tl.fromTo("#main .row", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.3, stagger: 0.03, ease: "power3.out"}, 0.05);
+  tl.fromTo("#main .row .hi > span", {scale: 1.08}, {scale: 1, duration: 0.4, stagger: 0.03, ease: "power2.out"}, 0);
   tl.fromTo("#gs", {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)"}, 0.3);
   tl.to("#gs", {opacity: 0, duration: 0.25}, 2.480);
   tl.set("#r0", {attr: {class: "row on"}}, 0.090);tl.fromTo("#r0 .hi > span", {scale: 1.25}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 0.090);tl.to("#r0 .en", {filter: "blur(0px)", opacity: 1, duration: 0.18}, 2.540);tl.fromTo("#r0 .en", {scale: 1.35}, {scale: 1, duration: 0.35, ease: "back.out(2.6)", transformOrigin: "0% 50%", immediateRender: false}, 2.540);tl.fromTo("#r0 .emo", {opacity: 0, scale: 0.2, rotation: -30}, {opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(3)", immediateRender: false}, 2.630);tl.set("#cn", {textContent: "01"}, 2.580);tl.fromTo("#main .cnt", {scale: 1.25}, {scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false}, 2.580);

@@ -148,8 +148,8 @@ def overlay():
            '<div class="fol" id="fol"><span id="fb">👉 Follow for daily English</span></div><div class="hand" id="hand">👆</div>'
            '</div></div>')
     js = ['tl.set("#main .emo, #ex, #ex .ee, #fol, #hand", {opacity: 0}, 0);',
-          'tl.fromTo("#main .ttl, #main .cnt", {opacity: 0, y: -20}, {opacity: 1, y: 0, duration: 0.35}, 0);',
-          'tl.fromTo("#main .row", {opacity: 0, x: -40}, {opacity: 1, x: 0, duration: 0.3, stagger: 0.03, ease: "power3.out"}, 0.05);',
+          # the whole list (title, counter, every Hindi word) is readable on frame 1: it is the hook and the cover image
+          'tl.fromTo("#main .row .hi > span", {scale: 1.08}, {scale: 1, duration: 0.4, stagger: 0.03, ease: "power2.out"}, 0);',
           'tl.fromTo("#gs", {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)"}, 0.3);',
           f'tl.to("#gs", {{opacity: 0, duration: 0.25}}, {WORDS[0][4] - 0.1:.3f});']
     for k, (hi, en, emo, ht, et) in enumerate(WORDS):
