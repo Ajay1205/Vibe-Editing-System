@@ -118,7 +118,7 @@ N7_BOARD = HERE.parent / "nikita7" / "board" / "index.html"
 EXTRA_CSS = """
 .list { top: 372px; }
 .row { height: 112px; }
-.hi > span { font-size: 50px; }
+.hi > span { font-size: 44px; }
 .en { font-size: 80px; }
 .save { top: 1300px; }
 .exl { left: 0; top: 1296px; width: 1080px; text-align: center; }
@@ -137,7 +137,7 @@ EXTRA_CSS = """
 def overlay():
     board = N7_BOARD.read_text(encoding="utf-8")
     css = re.search(r"<style>(.*?)</style>", board, re.S).group(1) + EXTRA_CSS
-    rows = "".join(f'<div class="row" id="r{k}"><span class="hi"><span>{hi}</span></span><span class="ar">→</span>'
+    rows = "".join(f'<div class="row" id="r{k}"><span class="hi"><span{' style="font-size:37px"' if len(hi) > 14 else ""}>{hi}</span></span><span class="ar">→</span>'
                    f'<span class="en hid">{en}</span><span class="emo">{emo}</span></div>'
                    for k, (hi, en, emo, _, _) in enumerate(WORDS))
     els = (f'<div id="main" class="clip" data-start="0" data-duration="{DUR:.3f}" data-track-index="1"><div class="p">'
@@ -150,7 +150,7 @@ def overlay():
     js = ['tl.set("#main .emo, #ex, #ex .ee, #fol, #hand", {opacity: 0}, 0);',
           # the whole list (title, counter, every Hindi word) is readable on frame 1: it is the hook and the cover image
           'tl.fromTo("#main .row .hi > span", {scale: 1.08}, {scale: 1, duration: 0.4, stagger: 0.03, ease: "power2.out"}, 0);',
-          'tl.fromTo("#gs", {opacity: 0, scale: 0.8}, {opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)"}, 0.3);',
+          'tl.fromTo("#gs", {scale: 1.12}, {scale: 1, duration: 0.4, ease: "back.out(2)"}, 0);',  # on screen from frame 1
           f'tl.to("#gs", {{opacity: 0, duration: 0.25}}, {WORDS[0][4] - 0.1:.3f});']
     for k, (hi, en, emo, ht, et) in enumerate(WORDS):
         h, e, r = max(ht, 0.05), et, f"#r{k}"
