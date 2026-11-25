@@ -260,6 +260,17 @@ English line so she is on screen with the chat card when she says it.
   calendar with tomorrow circled "Leave?" + empty message box. Visual wrapper scaled 1.07 (1.16 clipped wide scenes).
 - Mix: Nikita's voice is louder: loudnorm -13.1, master -0.3 dB -> -14.0 LUFS. 81 s at HEVC CRF 17: V1 294 MiB, V2 181 MiB.
 
+## Nikita 11 "Stop Saying OPEN" (`edits/nikita11`, 6 wrong -> right verbs + quiz, 25 Nov)
+
+Three takes (SDR 4K, variable frame rate 600/19 fps -> fps=30 in compose). `cut.py` -> `overlay.py` (ITEMS with onsets
+of "Open the X" / "you don't open" / "you <verb>" / verb) -> `build.py cues|compose` + `mix.py`.
+- User: "a little simple editing, don't strip it down to nothing" + bigger fonts. Kept: wrong phrase above her head
+  (Bricolage 88 px, 74 px for long ones), red strike + ❌ on "you don't open"; white card at chest with the right verb on a
+  green pill as she says it (76 px, long ones 54 px so they stay on one line); 6 progress dots. Dropped from the board:
+  device tiles and the WRONG stamp. Hook on frame 1 = big crossed-out OPEN (Anton) + "6 galtiyan jo sab karte hain";
+  quiz "Open the tap 🚰" + "✅ ____ the tap" + "Answer comment karo" (she says "tab"; read as the water tap).
+- Red #FF4D4D / green #1FBF6A / yellow #FFD43B / ink; Nikita 6 grade; -14.1 LUFS; 33 s H.264 CRF 15 = 127 MiB.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
