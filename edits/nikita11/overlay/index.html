@@ -1,0 +1,135 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs800.woff2); font-weight: 800; }
+@font-face { font-family: PJS; src: url(fonts/pjs700.woff2); font-weight: 700; }
+:root { --ink: #111216; --red: #FF4D4D; --grn: #1FBF6A; --y: #FFD43B; --sh: 0 2px 3px rgba(0,0,0,.45), 0 8px 26px rgba(0,0,0,.4); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 2160px; height: 3840px; overflow: hidden; }
+#stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; transform: scale(2); transform-origin: 0 0; }
+.clip { position: absolute; inset: 0; } .layer { position: absolute; inset: 0; }
+.layer > div { position: absolute; }
+.dots { left: 0; top: 268px; width: 1080px; display: flex; justify-content: center; gap: 12px; }
+.dots i { width: 52px; height: 14px; border-radius: 7px; background: rgba(17,18,22,.35); }
+.wrong { left: 0; top: 330px; width: 1080px; text-align: center; font: 800 88px/1.05 Brico; color: #fff; text-shadow: var(--sh); }
+.wrong.long { font-size: 74px; }
+.wrong .o { position: relative; display: inline-block; --s: 0; }
+.wrong .o::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 10px; border-radius: 5px; background: var(--red);
+  transform: rotate(-6deg) scaleX(var(--s)); transform-origin: 0 50%; }
+.wrong .o.struck { color: #FFC4C4; --s: 1; }
+.xm { display: inline-block; }
+.right { left: 110px; top: 1130px; width: 860px; box-sizing: border-box; text-align: center; padding: 28px; border-radius: 30px; background: #fff;
+  box-shadow: 0 20px 44px rgba(0,0,0,.3); font: 800 76px/1.1 Brico; color: var(--ink); }
+.right.long { font-size: 54px; left: 90px; width: 900px; padding: 28px 20px; }
+.right small { display: block; font: 800 30px/1 PJS; letter-spacing: 3px; color: var(--grn); margin-bottom: 12px; }
+.right .v { display: inline-block; padding: 0 14px 4px; border-radius: 16px; }
+.bigo { left: 0; top: 1060px; width: 1080px; text-align: center; font: 400 220px/1 Anton; color: #fff; letter-spacing: 6px; text-shadow: var(--sh); }
+.bigo span { position: relative; display: inline-block; }
+.bigo span::after { content: ""; position: absolute; left: -20px; right: -20px; top: 48%; height: 22px; border-radius: 11px; background: var(--red); transform: rotate(-8deg); }
+.pill { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1310px; padding: 14px 26px; border-radius: 22px; background: rgba(17,18,22,.85);
+  font: 800 56px/1.2 Brico; color: #fff; }
+.pill em { font-style: normal; color: var(--y); }
+.pill.cta { top: 1320px; font-size: 60px; }
+.turn { left: 0; top: 300px; width: 1080px; text-align: center; font: 800 60px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.q { left: 110px; top: 1120px; width: 860px; box-sizing: border-box; padding: 28px; border-radius: 30px; background: #fff; text-align: center; font: 800 76px/1.1 Brico;
+  color: var(--ink); box-shadow: 0 20px 44px rgba(0,0,0,.3); }
+.q .b { display: inline-block; width: 210px; height: 76px; vertical-align: -10px; border-radius: 16px; border: 5px dashed var(--grn); background: rgba(31,191,106,.12); }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="32.900" data-width="2160" data-height="3840" data-fps="30"><div id="stage">
+<div id="hk" class="clip" data-start="0.000" data-duration="2.730" data-track-index="1"><div class="layer"><div class="bigo" id="bo"><span>OPEN</span></div><div class="pill" id="gp">6 galtiyan jo <em>sab</em> karte hain 👇</div></div></div>
+<div id="dots" class="clip" data-start="0.000" data-duration="27.283" data-track-index="2"><div class="layer"><div class="dots"><i id="d0"></i><i id="d1"></i><i id="d2"></i><i id="d3"></i><i id="d4"></i><i id="d5"></i></div></div></div>
+<div id="i0" class="clip" data-start="0.010" data-duration="4.990" data-track-index="3"><div class="layer">
+          <div class="wrong" id="w0"><span class="xm" id="x0">❌</span> <span class="o" id="o0">Open</span> the TV</div>
+          <div class="right" id="r0"><small>✅ SAY THIS</small><span class="v" id="v0">Turn on</span> the TV&nbsp;📺</div></div></div>
+<div id="i1" class="clip" data-start="4.600" data-duration="5.140" data-track-index="3"><div class="layer">
+          <div class="wrong" id="w1"><span class="xm" id="x1">❌</span> <span class="o" id="o1">Open</span> the AC</div>
+          <div class="right" id="r1"><small>✅ SAY THIS</small><span class="v" id="v1">Turn on</span> the AC&nbsp;❄️</div></div></div>
+<div id="i2" class="clip" data-start="9.340" data-duration="5.003" data-track-index="3"><div class="layer">
+          <div class="wrong long" id="w2"><span class="xm" id="x2">❌</span> <span class="o" id="o2">Open</span> the computer</div>
+          <div class="right long" id="r2"><small>✅ SAY THIS</small><span class="v" id="v2">Switch on</span> the computer&nbsp;💻</div></div></div>
+<div id="i3" class="clip" data-start="13.943" data-duration="4.870" data-track-index="3"><div class="layer">
+          <div class="wrong long" id="w3"><span class="xm" id="x3">❌</span> <span class="o" id="o3">Open</span> the mobile</div>
+          <div class="right long" id="r3"><small>✅ SAY THIS</small><span class="v" id="v3">Unlock</span> your mobile&nbsp;📱</div></div></div>
+<div id="i4" class="clip" data-start="18.413" data-duration="4.610" data-track-index="3"><div class="layer">
+          <div class="wrong" id="w4"><span class="xm" id="x4">❌</span> <span class="o" id="o4">Open</span> the gift</div>
+          <div class="right" id="r4"><small>✅ SAY THIS</small><span class="v" id="v4">Unwrap</span> the gift&nbsp;🎁</div></div></div>
+<div id="i5" class="clip" data-start="22.623" data-duration="5.060" data-track-index="3"><div class="layer">
+          <div class="wrong long" id="w5"><span class="xm" id="x5">❌</span> <span class="o" id="o5">Open</span> the parcel</div>
+          <div class="right long" id="r5"><small>✅ SAY THIS</small><span class="v" id="v5">Unpack</span> the parcel&nbsp;📦</div></div></div>
+<div id="qz" class="clip" data-start="27.283" data-duration="5.717" data-track-index="4"><div class="layer"><div class="turn" id="qt">YOUR TURN ✍️</div>
+      <div class="wrong" id="qw" style="top:410px"><span class="xm">❌</span> <span class="o struck">Open</span> the tap 🚰</div>
+      <div class="q" id="qc">✅ <span class="b" id="qb"></span> the tap</div><div class="pill cta" id="qa">Answer <em>comment</em> karo 👇</div></div></div>
+</div></div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#bo span", {scale: 1.1}, {scale: 1, duration: 0.5, ease: "power3.out"}, 0);
+tl.to("#bo, #gp", {opacity: 0, y: 20, duration: 0.2}, 2.530);
+tl.to("#d0", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 0.04);
+tl.to("#d0", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 3.240);
+tl.to("#d1", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 4.63);
+tl.to("#d1", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 7.940);
+tl.to("#d2", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 9.37);
+tl.to("#d2", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 12.580);
+tl.to("#d3", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 13.973);
+tl.to("#d3", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 17.183);
+tl.to("#d4", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 18.443);
+tl.to("#d4", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 21.463);
+tl.to("#d5", {backgroundColor: "#FFD43B", width: 70, duration: 0.25}, 22.653);
+tl.to("#d5", {backgroundColor: "#1FBF6A", width: 52, duration: 0.25}, 25.813);
+tl.to("#dots .dots", {opacity: 0, duration: 0.2}, 27.083);
+tl.fromTo("#w0", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 0.010);
+tl.set("#x0", {opacity: 0}, 0.010);
+tl.fromTo("#x0", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 1.510);
+tl.fromTo("#o0", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 1.510);
+tl.fromTo("#r0", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 2.730);
+tl.fromTo("#v0", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 3.200);
+tl.fromTo("#v0", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 3.200);
+tl.to("#w0, #r0", {opacity: 0, y: -12, duration: 0.18}, 4.810);
+tl.fromTo("#w1", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 4.600);
+tl.set("#x1", {opacity: 0}, 4.600);
+tl.fromTo("#x1", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 6.090);
+tl.fromTo("#o1", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 6.090);
+tl.fromTo("#r1", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 7.450);
+tl.fromTo("#v1", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 7.900);
+tl.fromTo("#v1", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 7.900);
+tl.to("#w1, #r1", {opacity: 0, y: -12, duration: 0.18}, 9.550);
+tl.fromTo("#w2", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 9.340);
+tl.set("#x2", {opacity: 0}, 9.340);
+tl.fromTo("#x2", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 10.870);
+tl.fromTo("#o2", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 10.870);
+tl.fromTo("#r2", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 12.150);
+tl.fromTo("#v2", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 12.540);
+tl.fromTo("#v2", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 12.540);
+tl.to("#w2, #r2", {opacity: 0, y: -12, duration: 0.18}, 14.153);
+tl.fromTo("#w3", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 13.943);
+tl.set("#x3", {opacity: 0}, 13.943);
+tl.fromTo("#x3", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 15.313);
+tl.fromTo("#o3", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 15.313);
+tl.fromTo("#r3", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 16.753);
+tl.fromTo("#v3", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 17.143);
+tl.fromTo("#v3", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 17.143);
+tl.to("#w3, #r3", {opacity: 0, y: -12, duration: 0.18}, 18.623);
+tl.fromTo("#w4", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 18.413);
+tl.set("#x4", {opacity: 0}, 18.413);
+tl.fromTo("#x4", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 19.693);
+tl.fromTo("#o4", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 19.693);
+tl.fromTo("#r4", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 20.953);
+tl.fromTo("#v4", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 21.423);
+tl.fromTo("#v4", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 21.423);
+tl.to("#w4, #r4", {opacity: 0, y: -12, duration: 0.18}, 22.833);
+tl.fromTo("#w5", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 22.623);
+tl.set("#x5", {opacity: 0}, 22.623);
+tl.fromTo("#x5", {opacity: 0, scale: 2}, {opacity: 1, scale: 1, duration: 0.25, ease: "power3.in"}, 23.963);
+tl.fromTo("#o5", {"--s": 0, color: "#FFFFFF"}, {"--s": 1, color: "#FFC4C4", duration: 0.3, ease: "power2.out"}, 23.963);
+tl.fromTo("#r5", {opacity: 0, y: 40, scale: 0.94}, {opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)"}, 25.223);
+tl.fromTo("#v5", {backgroundColor: "rgba(31,191,106,0)", color: "#111216"}, {backgroundColor: "rgba(31,191,106,1)", color: "#FFFFFF", duration: 0.2}, 25.773);
+tl.fromTo("#v5", {scale: 1}, {scale: 1.12, duration: 0.15, yoyo: true, repeat: 1}, 25.773);
+tl.to("#w5, #r5", {opacity: 0, y: -12, duration: 0.18}, 27.493);
+tl.fromTo("#qt", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 27.333);
+tl.fromTo("#qw", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 27.573);
+tl.fromTo("#qc", {opacity: 0, y: 40}, {opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.8)"}, 28.573);
+tl.fromTo("#qb", {scale: 1}, {scale: 1.08, duration: 0.4, yoyo: true, repeat: 9, ease: "sine.inOut"}, 28.973);
+tl.fromTo("#qa", {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.4)"}, 30.533);
+  window.__timelines["main"] = tl;
+</script></body></html>

@@ -16,21 +16,21 @@ html, body { margin: 0; background: transparent; }
 #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
 .abs { position: absolute; } .st { opacity: 0; }
 .dots { left: 0; top: 268px; width: 1080px; display: flex; justify-content: center; gap: 12px; }
-.dots i { width: 46px; height: 12px; border-radius: 6px; background: rgba(17,18,22,.35); }
+.dots i { width: 52px; height: 14px; border-radius: 6px; background: rgba(17,18,22,.35); }
 .dots i.on { background: var(--grn); } .dots i.cur { background: var(--y); width: 70px; }
-.wrong { left: 0; top: 320px; width: 1080px; text-align: center; font: 800 66px/1 Brico; color: #fff; text-shadow: var(--sh); }
+.wrong { left: 0; top: 330px; width: 1080px; text-align: center; font: 800 88px/1.05 Brico; color: #fff; text-shadow: var(--sh); }
 .wrong .x { position: relative; display: inline-block; color: #FFD2D2; }
 .wrong .x::after { content: ""; position: absolute; left: -8px; right: -8px; top: 50%; height: 9px; border-radius: 5px; background: var(--red); transform: rotate(-6deg); }
 .stamp { left: 690px; top: 410px; padding: 8px 18px; border: 6px solid var(--red); border-radius: 14px; color: var(--red); font: 400 46px/1 Anton;
   letter-spacing: 2px; transform: rotate(-10deg); background: rgba(255,255,255,.92); }
 .tile { left: 110px; top: 1120px; width: 230px; height: 230px; border-radius: 34px; background: var(--ink); box-shadow: 0 20px 44px rgba(0,0,0,.35);
   display: flex; align-items: center; justify-content: center; }
-.right { left: 360px; top: 1150px; width: 610px; padding: 26px 28px; border-radius: 30px; background: #fff; box-shadow: 0 20px 44px rgba(0,0,0,.3);
-  font: 800 58px/1.12 Brico; color: var(--ink); }
-.right small { display: block; font: 800 26px/1 PJS; letter-spacing: 3px; color: var(--grn); margin-bottom: 12px; }
+.right { left: 110px; top: 1130px; width: 860px; text-align: center; padding: 28px 28px; border-radius: 30px; background: #fff; box-shadow: 0 20px 44px rgba(0,0,0,.3);
+  font: 800 76px/1.1 Brico; color: var(--ink); }
+.right small { display: block; font: 800 30px/1 PJS; letter-spacing: 3px; color: var(--grn); margin-bottom: 12px; }
 .right .v { display: inline-block; padding: 0 14px 4px; border-radius: 16px; background: var(--grn); color: #fff; }
-.hook1 { left: 0; top: 300px; width: 1080px; text-align: center; font: 800 52px/1.1 Brico; color: #fff; text-shadow: var(--sh); }
-.big { left: 0; top: 380px; width: 1080px; text-align: center; font: 400 190px/1 Anton; color: #fff; letter-spacing: 6px; text-shadow: var(--sh); }
+.hook1 { left: 0; top: 290px; width: 1080px; text-align: center; font: 800 60px/1.1 Brico; color: #fff; text-shadow: var(--sh); }
+.big { left: 0; top: 380px; width: 1080px; text-align: center; font: 400 220px/1 Anton; color: #fff; letter-spacing: 6px; text-shadow: var(--sh); }
 .big span { position: relative; display: inline-block; }
 .big span::after { content: ""; position: absolute; left: -20px; right: -20px; top: 48%; height: 22px; border-radius: 11px; background: var(--red); transform: rotate(-8deg); }
 .objs { left: 90px; top: 1150px; width: 900px; display: flex; justify-content: center; gap: 14px; }
@@ -38,10 +38,10 @@ html, body { margin: 0; background: transparent; }
 .objs span::after { content: "✕"; position: absolute; right: -8px; top: -10px; width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: #fff; font: 800 26px/44px PJS; }
 .sub { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1310px; padding: 14px 26px; border-radius: 22px; background: rgba(17,18,22,.85); font: 800 44px/1.2 Brico; color: #fff; }
 .sub em { font-style: normal; color: var(--y); }
-.q { left: 110px; top: 1120px; width: 860px; padding: 26px; border-radius: 30px; background: #fff; text-align: center; font: 800 58px/1.1 Brico; color: var(--ink);
+.q { left: 110px; top: 1120px; width: 860px; padding: 28px; border-radius: 30px; background: #fff; text-align: center; font: 800 76px/1.1 Brico; color: var(--ink);
   box-shadow: 0 20px 44px rgba(0,0,0,.3); }
-.q .b { display: inline-block; width: 170px; height: 60px; vertical-align: -10px; border-radius: 16px; border: 5px dashed var(--grn); background: rgba(31,191,106,.12); }
-.cta { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1290px; padding: 16px 28px; border-radius: 24px; background: rgba(17,18,22,.85); font: 800 52px/1 Brico; color: #fff; }
+.q .b { display: inline-block; width: 210px; height: 76px; vertical-align: -10px; border-radius: 16px; border: 5px dashed var(--grn); background: rgba(31,191,106,.12); }
+.cta { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1320px; padding: 16px 28px; border-radius: 24px; background: rgba(17,18,22,.85); font: 800 52px/1 Brico; color: #fff; }
 .cta em { font-style: normal; color: var(--y); }
 </style></head><body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -52,21 +52,19 @@ html, body { margin: 0; background: transparent; }
  <div class="st" id="s1">
   <div class="abs hook1">Har cheez ko "OPEN" bolte ho? 🤔</div>
   <div class="abs big"><span>OPEN</span></div>
-  <div class="abs objs"><span>📺</span><span>❄️</span><span>💻</span><span>📱</span><span>🎁</span><span>📦</span></div>
-  <div class="abs sub">6 galtiyan jo <em>sab</em> karte hain 👇</div></div>
+  
+  <div class="abs sub" style="top:1150px;font-size:56px">6 galtiyan jo <em>sab</em> karte hain 👇</div></div>
  <div class="st" id="s2">
   <div class="abs dots"><i class="cur"></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="abs wrong">❌ <span class="x">Open</span> the TV</div><div class="abs stamp">WRONG</div>
-  <div class="abs tile"><svg width="180" height="146"><use href="#tv"/></svg></div>
-  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Turn on</span> the TV</div></div>
+  <div class="abs wrong">❌ <span class="x">Open</span> the TV</div>
+  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Turn on</span> the TV 📺</div></div>
  <div class="st" id="s3">
   <div class="abs dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i></div>
-  <div class="abs wrong">❌ <span class="x">Open</span> the mobile</div><div class="abs stamp">WRONG</div>
-  <div class="abs tile"><svg width="130" height="184"><use href="#ph"/></svg></div>
-  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Unlock</span> your mobile</div></div>
+  <div class="abs wrong">❌ <span class="x">Open</span> the mobile</div>
+  <div class="abs right"><small>✅ SAY THIS</small><span class="v">Unlock</span> your mobile 📱</div></div>
  <div class="st" id="s4">
   <div class="abs hook1" style="top:320px">YOUR TURN ✍️</div>
-  <div class="abs wrong" style="top:410px">❌ <span class="x">Open</span> the tap 🚰</div>
+  <div class="abs wrong" style="top:400px">❌ <span class="x">Open</span> the tap 🚰</div>
   <div class="abs q">✅ <span class="b"></span> the tap</div>
   <div class="abs cta">Answer <em>comment</em> karo 👇</div></div>
 </div>
