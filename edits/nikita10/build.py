@@ -24,9 +24,23 @@ FPS = 30
 K4 = "--4k" in sys.argv
 RES = 2160 if K4 else 1080
 CLIP_IN, CLIP_OUT = 0.0, 31.65  # source seconds: from her first word to the end of "kijiye"
+# user, 26 Nov: "where she says celebrate karna, it stays silent with a long pause" -- 2 s of silence (10.95-12.93)
+# before "hausla badhana"; cut 11.25-12.85 so the gap is ~0.6 s like the others (the cut sits in silence)
+SEGS = [(CLIP_IN, 11.25), (12.85, CLIP_OUT)]
+SEGF = [round((b - a) * FPS) for a, b in SEGS]
 HOLD = 1.2  # last frame held for the Follow tap
-CLIP = round((CLIP_OUT - CLIP_IN) * FPS) / FPS
+CLIP = sum(SEGF) / FPS
 DUR = CLIP + HOLD
+
+
+def out(t):
+    """Source time -> output time (after the cut)."""
+    t0 = 0.0
+    for (a, b), n in zip(SEGS, SEGF):
+        if t <= b + 1e-6:
+            return round(t0 + max(0.0, t - a), 3)
+        t0 += n / FPS
+    return round(t0, 3)
 
 # (Hindi, English, emoji, Hindi onset, English onset) -- onsets measured on the audio energy
 WORDS = [
@@ -40,7 +54,10 @@ WORDS = [
     ("अभ्यास करना", "Practice", "📚", 26.64, 28.50),
 ]
 EXAMPLE = {"hi": "अब आप…", "hi_t": 29.70, "en_t": 30.62, "en": '<b>Practice</b> these words! ✍️'}
-FOLLOW_T, TAP_T = 31.35, 32.15
+FOLLOW_T, TAP_T = 31.35, 32.15  # in source time
+WORDS = [(hi, en, emo, out(ht), out(et)) for hi, en, emo, ht, et in WORDS]
+EXAMPLE = dict(EXAMPLE, hi_t=out(EXAMPLE["hi_t"]), en_t=out(EXAMPLE["en_t"]))
+FOLLOW_T, TAP_T = out(FOLLOW_T), out(31.65) + (TAP_T - 31.65)
 
 
 # --------------------------------------------------------------------------------------------- sound
@@ -72,8 +89,14 @@ def decode(path, start=None, dur=None):
 def sfx():
     BUILD.mkdir(exist_ok=True)
     n = int(DUR * SR)
-    voice = decode(RAW, CLIP_IN, CLIP)[:int(CLIP * SR)]
-    voice[-int(0.03 * SR):] *= np.linspace(1, 0, int(0.03 * SR))  # end on "kijiye", nothing of the clipped syllable after it
+    parts = []
+    for (a, b), nf in zip(SEGS, SEGF):
+        x = decode(RAW, a, nf / FPS)[:int(round(nf / FPS * SR))]
+        f = int(0.006 * SR) if b != CLIP_OUT else int(0.03 * SR)  # end on "kijiye", nothing of the clipped syllable after it
+        x[:int(0.006 * SR)] *= np.linspace(0, 1, int(0.006 * SR))
+        x[-f:] *= np.linspace(1, 0, f)
+        parts.append(x)
+    voice = np.concatenate(parts)
     voice = np.pad(voice, (0, n - len(voice)))
     bed = np.zeros_like(voice)
 
@@ -216,19 +239,20 @@ def hdr():
     """Her iPhone HLG video untouched (trimmed, scaled); captions converted into HLG / BT.2020, colour and alpha
     separately, +1.8 stops and more saturated so they pop (Nikita 7 learning)."""
     w, h = (2160, 3840) if K4 else (1080, 1920)
-    n = round(CLIP * FPS)
-    graph = (f"[0:v]fps={FPS},scale={w}:{h}:flags=lanczos,format=yuv420p10le,trim=end_frame={n},setpts=PTS-STARTPTS,"
-             f"tpad=stop_mode=clone:stop_duration={HOLD}[b];"
-             "[1:v]format=yuva420p,split[c][a];[a]alphaextract,format=gray10le[al];"
+    k = len(SEGS)
+    graph = "".join(f"[{i}:v]fps={FPS},scale={w}:{h}:flags=lanczos,format=yuv420p10le,trim=end_frame={nf},setpts=PTS-STARTPTS[s{i}];"
+                    for i, nf in enumerate(SEGF))
+    graph += ("".join(f"[s{i}]" for i in range(k)) + f"concat=n={k}:v=1:a=0,tpad=stop_mode=clone:stop_duration={HOLD}[b];"
+             f"[{k}:v]format=yuva420p,split[c][a];[a]alphaextract,format=gray10le[al];"
              "[c]format=yuv420p,eq=saturation=1.5,zscale=tin=bt709:pin=bt709:min=bt709:rin=tv:t=linear:p=bt709:m=gbr:npl=203,"
              "format=gbrpf32le,exposure=exposure=1.8,zscale=tin=linear:pin=bt709:min=gbr:t=arib-std-b67:p=bt2020:"
              "m=bt2020nc:r=tv:npl=203,format=yuv444p10le[cc];[cc][al]alphamerge[o];"
              "[b][o]overlay=0:0:format=yuv444p10,format=yuv420p10le[v]")
     out = HERE / "renders" / ("nikita10_final_4k_HDR.mp4" if K4 else "nikita10_preview_1080p_HDR.mp4")
     out.parent.mkdir(exist_ok=True)
-    subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", "-ss", f"{CLIP_IN:.3f}", "-t", f"{CLIP + 0.2:.3f}", "-i", str(RAW),
+    subprocess.run(["ffmpeg", "-v", "error", "-stats", "-y", *sum((["-ss", f"{a:.3f}", "-t", f"{nf / FPS + 0.2:.3f}", "-i", str(RAW)] for (a, b), nf in zip(SEGS, SEGF)), []),
                     "-c:v", "libvpx-vp9", "-i", str(BUILD / f"overlay_{RES}.webm"), "-i", str(BUILD / "mix.wav"),
-                    "-filter_complex", graph, "-map", "[v]", "-map", "2:a", "-c:v", "libx265",
+                    "-filter_complex", graph, "-map", "[v]", "-map", f"{k + 1}:a", "-c:v", "libx265",
                     "-preset", "medium" if K4 else "fast", "-crf", "16" if K4 else "20", "-tag:v", "hvc1",
                     "-x265-params", "colorprim=bt2020:transfer=arib-std-b67:colormatrix=bt2020nc:range=limited:open-gop=0:keyint=60:min-keyint=30:log-level=error",
                     "-color_primaries", "bt2020", "-color_trc", "arib-std-b67", "-colorspace", "bt2020nc",
