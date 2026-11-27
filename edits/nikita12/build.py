@@ -16,6 +16,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cut as C  # noqa: E402
 
 HERE = C.HERE
+# user, 27 Nov: "nikita is looking a bit dark, just adjust that too" -- a GENTLE midtone lift only (the Nikita 6 curve made
+# her look "extremely white" in Nikita 11); compared side by side with the raw on her face before rendering
+GRADE = "eq=gamma=1.10:saturation=1.03"
 
 
 def cues():
@@ -48,7 +51,7 @@ def compose(v, crf=17):
         parts.append(f"[{i}:v]fps={C.FPS},{crop}setsar=1,format=yuv420p,trim=end_frame={e['n']},setpts=PTS-STARTPTS[v{i}]")
     k = len(segs)
     fc = (";".join(parts) + ";" + "".join(f"[v{i}]" for i in range(k)) +
-          f"concat=n={k}:v=1:a=0,tpad=stop_mode=clone:stop_duration={C.TAIL},format=yuv420p[b];"
+          f"concat=n={k}:v=1:a=0,tpad=stop_mode=clone:stop_duration={C.TAIL},{GRADE},format=yuv420p[b];"
           f"[{k}:v]format=yuva420p[o];[b][o]overlay=0:0:format=yuv420,format=yuv420p[v]")
     out = HERE / "renders" / f"nikita12_{v}_4k.mp4"
     out.parent.mkdir(exist_ok=True)
