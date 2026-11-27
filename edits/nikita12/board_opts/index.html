@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Nikita 12 -- three alternative directions after "I am not liking the design" (board v1 = Keep Driving).
+   A "Reel Subtitles": classic motivational-reel captions, 2-4 words at a time, big bold white at lower-chest height,
+     the power word in yellow and slightly bigger, nothing else on screen.
+   B "Big Statements": huge stacked ANTON words in the space above her head, one word boxed in yellow; the key line of
+     each section only.
+   C "Handwritten Notes": warm marker-style handwriting on the wall, words underlined / circled as she says them,
+     like a coach writing on a whiteboard. */
+@font-face { font-family: Anton; src: url(fonts/anton.woff2); }
+@font-face { font-family: Brico; src: url(fonts/brico800.woff2); font-weight: 800; }
+@font-face { font-family: Pop; src: url(fonts/pop800.woff2); font-weight: 800; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+/* A */
+.sub { left: 60px; top: 1180px; width: 960px; text-align: center; font: 800 92px/1.08 Pop; color: #fff; text-transform: uppercase;
+  -webkit-text-stroke: 10px #000; paint-order: stroke fill; text-shadow: 0 8px 22px rgba(0,0,0,.5); }
+.sub em { font-style: normal; color: #FFE135; font-size: 110px; }
+.sub2 { left: 60px; top: 1400px; width: 960px; text-align: center; font: 800 46px/1 Pop; color: #fff; -webkit-text-stroke: 6px #000; paint-order: stroke fill; }
+/* B */
+.bs { left: 70px; top: 280px; width: 800px; font: 400 128px/0.98 Anton; color: #fff; text-transform: uppercase; text-shadow: 0 8px 24px rgba(0,0,0,.45); }
+.bs span { display: inline-block; padding: 0 16px; background: #FFE135; color: #111; transform: rotate(-2deg); }
+.bs small { display: block; font: 400 60px/1.1 Anton; color: #FFE135; letter-spacing: 2px; margin-top: 10px; }
+/* C */
+.hw { left: 70px; top: 300px; width: 800px; font: 700 96px/1.05 Cav; color: #fff; text-shadow: 0 3px 4px rgba(0,0,0,.5), 0 10px 28px rgba(0,0,0,.45); }
+.hw u { text-decoration: none; position: relative; color: #FFD45C; }
+.hw u::after { content: ""; position: absolute; left: -6px; right: -6px; bottom: 2px; height: 14px; border-radius: 8px; background: #FF6B6B; opacity: .85; z-index: -1; transform: rotate(-2deg); }
+.circ { border: 6px solid #FF6B6B; border-radius: 50%; }
+.lab { left: 0; top: 140px; width: 1080px; text-align: center; font: 800 44px/1 Brico; color: #fff; }
+.lab span { display: inline-block; padding: 12px 26px; border-radius: 30px; background: #111; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1080" data-height="1920" data-fps="30">
+ <div class="st" id="a1"><div class="abs lab"><span>A · Reel Subtitles</span></div>
+  <div class="abs sub">Galti ho gayi <em>toh?</em> 😰</div></div>
+ <div class="st" id="a2"><div class="abs lab"><span>A · Reel Subtitles</span></div>
+  <div class="abs sub">English bolna <em>mat chhodo</em> 💪</div></div>
+ <div class="st" id="b1"><div class="abs lab"><span>B · Big Statements</span></div>
+  <div class="abs bs">Log kya<br><span>sochenge?</span><small>— isi darr se English chhod dete hain</small></div></div>
+ <div class="st" id="b2"><div class="abs lab"><span>B · Big Statements</span></div>
+  <div class="abs bs">Gaddhe aate hain,<br><span>gaadi</span> nahi rukti 🚗</div></div>
+ <div class="st" id="c1"><div class="abs lab"><span>C · Handwritten Notes</span></div>
+  <div class="abs hw">Bachche <u>galti</u> se<br>nahi darte… 👶</div></div>
+ <div class="st" id="c2"><div class="abs lab"><span>C · Handwritten Notes</span></div>
+  <div class="abs hw">Galtiyon se <u>daro mat</u>,<br>galtiyon se <u>seekho</u> 💪</div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#a1","#a2","#b1","#b2","#c1","#c2"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>

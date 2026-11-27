@@ -40,3 +40,7 @@ edits/*/board_*/style_board*.png
 edits/*/overlay/*/snaps/
 edits/*/overlay/*/meta.json
 edits/*/anim/*/snaps/
+edits/*/board_opts/snaps/
+edits/*/board_opts/vendor/
+edits/*/board_opts/.hyperframes/
+edits/*/board_opts/*.png
