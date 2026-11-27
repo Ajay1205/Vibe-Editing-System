@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8"><script src="vendor/gsap.min.js"></script>
+<style>
+/* Nikita 12 style board -- "Keep Driving": a motivational reel (kids learn English fast because they don't fear
+   mistakes; adults stop because of "log kya sochenge"; her pothole analogy). Big emotional kinetic type above her head
+   (one gold power word per line), Caveat for the inner voice. Fear thoughts float around her head as grey bubbles
+   ("Galti ho gayi toh? 😰", "Log kya sochenge? 🙊") and later get swept away. Her road analogy becomes a road strip at
+   desk level: a car drives over potholes labelled MISTAKES / JUDGEMENT and keeps going to "Fluent English 🏁".
+   Ending: a quote card. Warm golden light-leak transitions. Her colour untouched (no grade).
+   Palette (warm lamp, white striped shirt): deep navy #14213D, gold #FFC145, white, fear grey #9AA0AC, coral #FF6B6B,
+   growth mint #5ED3A0. Playfair Display Black (power lines), Poppins (labels), Caveat (inner voice).
+   States: 0.5 hook (kids vs adults), 1.5 fear bubbles, 2.5 road, 3.5 ending quote. */
+@font-face { font-family: PF; src: url(fonts/pf900.woff2); font-weight: 900; }
+@font-face { font-family: PF; src: url(fonts/pf900i.woff2); font-weight: 900; font-style: italic; }
+@font-face { font-family: Pop; src: url(fonts/pop800.woff2); font-weight: 800; }
+@font-face { font-family: Pop; src: url(fonts/pop600.woff2); font-weight: 600; }
+@font-face { font-family: Cav; src: url(fonts/cav700.woff2); font-weight: 700; }
+:root { --navy: #14213D; --gold: #FFC145; --grey: #9AA0AC; --coral: #FF6B6B; --mint: #5ED3A0;
+  --sh: 0 2px 3px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.45); }
+html, body { margin: 0; background: transparent; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+.abs { position: absolute; } .st { opacity: 0; }
+.pw { left: 70px; top: 290px; width: 800px; text-align: center; font: 900 74px/1.06 PF; color: #fff; text-shadow: var(--sh); }
+.pw em { font-style: italic; color: var(--gold); }
+.inner { left: 0; right: 0; margin: 0 auto; width: fit-content; padding: 10px 28px 14px; border-radius: 24px; background: rgba(20,33,61,.82); font: 700 62px/1.1 Cav; color: #fff; }
+/* hook: kids vs adults */
+.vs { left: 90px; top: 470px; width: 780px; display: flex; gap: 20px; }
+.vs div { flex: 1; padding: 20px 10px; border-radius: 26px; text-align: center; color: #fff; font: 800 34px/1.15 Pop; box-shadow: 0 16px 34px rgba(0,0,0,.3); }
+.vs .k { background: rgba(94,211,160,.92); color: var(--navy); }
+.vs .a { background: rgba(20,33,61,.9); }
+.vs b { display: block; font-size: 54px; margin-bottom: 6px; }
+/* fear bubbles */
+.bub { padding: 16px 24px; border-radius: 30px 30px 30px 8px; background: rgba(240,241,245,.94); color: #3A3F4B; font: 800 34px/1.1 Pop;
+  box-shadow: 0 14px 30px rgba(0,0,0,.28); white-space: nowrap; }
+.bub.r { border-radius: 30px 30px 8px 30px; }
+/* road */
+.road { left: 60px; top: 1330px; width: 960px; height: 170px; border-radius: 30px; background: linear-gradient(#3A3F4B, #2A2E38); overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.lane { position: absolute; left: 0; top: 80px; width: 960px; height: 8px; background: repeating-linear-gradient(90deg, #FFC145 0 50px, transparent 50px 90px); }
+.hole { position: absolute; top: 96px; width: 110px; height: 34px; border-radius: 50%; background: #15171C; }
+.hlab { position: absolute; top: 20px; padding: 6px 12px; border-radius: 12px; background: var(--coral); color: #fff; font: 800 22px/1 Pop; letter-spacing: 1px; }
+.car { position: absolute; left: 610px; top: 40px; font: 90px/1 sans-serif; transform: scaleX(-1); }
+.flag { position: absolute; right: 16px; top: 18px; padding: 10px 14px; border-radius: 14px; background: var(--mint); color: var(--navy); font: 800 24px/1.1 Pop; text-align: center; }
+/* quote */
+.quote { left: 70px; top: 290px; width: 800px; padding: 40px 44px; border-radius: 34px; background: rgba(20,33,61,.9); text-align: center;
+  box-shadow: 0 20px 44px rgba(0,0,0,.35); }
+.quote .q1 { font: 900 64px/1.1 PF; color: #fff; } .quote .q1 em { color: var(--gold); font-style: italic; }
+.quote .q2 { margin-top: 18px; font: 700 50px/1.1 Cav; color: var(--mint); }
+.fol { left: 0; right: 0; margin: 0 auto; width: fit-content; top: 1340px; padding: 16px 30px; border-radius: 40px; background: var(--gold); color: var(--navy); font: 800 40px/1 Pop; }
+</style></head><body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="4" data-width="1080" data-height="1920" data-fps="30">
+ <div class="st" id="s1">
+  <div class="abs pw">Bachche <em>itni jaldi</em> English kaise seekh jaate hain? 🤔</div>
+  <div class="abs vs" style="top:560px"><div class="k"><b>👶 ⚡</b>Bachche<br>bina soche bolte</div><div class="a"><b>🧑 🐢</b>Hum adults<br>sochte reh jaate</div></div></div>
+ <div class="st" id="s2">
+  <div class="abs pw">Aur hum <em>kya</em> sochte hain?</div>
+  <div class="abs bub" style="left:80px;top:470px">Galti ho gayi toh? 😰</div>
+  <div class="abs bub r" style="left:520px;top:560px">Log kya sochenge? 🙊</div>
+  <div class="abs bub" style="left:120px;top:650px">Judge kar liya toh? 😶</div>
+  <div class="abs inner" style="top:1330px">…aur English chhod dete hain 💔</div></div>
+ <div class="st" id="s3">
+  <div class="abs pw">Gaddon ki wajah se <em>gaadi</em> chalana nahi chhodte 🚗</div>
+  <div class="abs road"><div class="lane"></div>
+   <div class="hole" style="left:150px"></div><div class="hlab" style="left:140px">MISTAKES</div>
+   <div class="hole" style="left:400px"></div><div class="hlab" style="left:380px">JUDGEMENT</div>
+   <div class="car">🚗</div><div class="flag">Fluent<br>English 🏁</div></div>
+  <div class="abs inner" style="top:1220px">Toh English bolna kyun chhodein? 💪</div></div>
+ <div class="st" id="s4">
+  <div class="abs quote"><div class="q1">Galtiyon se <em>daro mat,</em><br>galtiyon se <em>seekho</em> 💪</div><div class="q2">Keep speaking. Keep growing. 🌱</div></div>
+  <div class="abs fol">👉 Follow for daily English</div></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  ["#s1","#s2","#s3","#s4"].forEach((s, i) => { tl.set(s, {opacity: 1}, i); tl.set(s, {opacity: 0}, i + 0.999); });
+  window.__timelines["main"] = tl;
+</script></body></html>
