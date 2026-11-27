@@ -274,6 +274,20 @@ of "Open the X" / "you don't open" / "you <verb>" / verb) -> `build.py cues|comp
   skin on this already-bright footage; delivered with NO grade. RULE: never apply a grade by default. Only grade when the
   footage is visibly dark or the user asks, and always compare her face side by side with the raw before rendering.
 
+## Nikita 12 motivational (`edits/nikita12`, "kids learn English fast because they don't fear mistakes", 27 Nov)
+
+Nine takes, two alternates (take 2 over 1, takes 5+6 over 4). `cut.py` -> `overlay.py v1|v2` -> `build.py cues|compose <v>`.
+- The first board ("Keep Driving": fear bubbles, pothole road, quote card) was rejected ("not liking the design");
+  of three directions (board_opts: A reel subtitles, B big statements, C handwritten) C was rejected, user torn A/B ->
+  COMBINED: A subtitles through the whole reel (Poppins 800 caps, black outline, power word yellow, chest height) +
+  B big ANTON statements above her head at 5 key moments, one word boxed yellow, hook readable on frame 1.
+- Statements must contain the point ("BACHCHE ITNI JALDI KAISE?" was rejected: "there is no English in it") ->
+  "BACHCHE ENGLISH JALDI KYUN SEEKHTE HAIN? 🤔". Never write "gaddhe" in Roman script (reads as "gadhe").
+- Two versions: v1 Hinglish in Roman script; v2 "Hindi as in words written in Hindi language" = Devanagari with English
+  words kept in English (Mukta 800 from nikita7/board/fonts). Motivational reel: no music, whoosh on cuts, soft bass
+  hit on each statement, chime at the end. Light lift only (eq gamma 1.10, sat 1.03) after "looking a bit dark".
+  69 s HEVC CRF 17: 179 / 182 MiB.
+
 ## Working rules (from the guide)
 
 - NEW video with a new design: first send the user a style-board IMAGE (3-4 real frames of the speaker with the new
